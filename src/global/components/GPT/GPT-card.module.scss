@@ -1,0 +1,176 @@
+@import '../../base/variables';
+@import '../../base/root';
+.bubble {
+  // width: 100px;
+  // height: 100px;
+  // border-radius: 50%;
+  // background-color: #2b2a2a;
+  // position: absolute;
+  // top: 55vh;
+  // left: 50vw;
+
+}
+
+.chat {
+  position: relative;
+  background-color: #101010;
+  transform-origin: bottom right;
+  transition: transform 0.5s;
+  text-align: left;
+  z-index: 30;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+
+
+.toolbar--bottom {
+  position: relative;
+  width: 100%;
+  display: flex;
+  border: none;
+  align-items: center;
+  padding: 8px;
+  justify-content: center;
+  flex-direction: row;
+}
+
+
+.toolbar-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  z-index: 20;
+  background-color: #101010;
+  border-bottom: 1px solid #55555589;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+
+
+
+
+.toolbar--center {
+  color: whitesmoke;
+  font-size: .75rem;
+}
+
+
+
+.chat-container {
+  width: 100%;
+  height: 100vh;
+  border-radius: 10px;
+
+}
+
+
+.bottom--toolbar {
+
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 48px;
+
+
+}
+
+.bubble--container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: scroll;
+  z-index: 100;
+  padding: 1vh;
+  // height:10vh;
+  justify-content: flex-end;
+  /* Add scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: #aaa #262626;
+
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #aaa #111111;
+}
+
+/* Style the scrollbar track */
+.bubble--container::-webkit-scrollbar-track {
+  background-color: #262626;
+}
+
+/* Style the scrollbar thumb */
+.bubble--container::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 20px;
+}
+
+/* For Firefox */
+.bubble--container::-moz-scrollbar-track {
+  background-color: #262626;
+}
+
+.bubble--container::-moz-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 20px;
+}
+
+
+
+.suggestion-container {
+  position: relative;
+  /* align-items: center; */
+  width: 100%;
+  border-radius: 10px;
+  overflow-y: scroll;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  /* align-items: center; */
+
+}
+
+
+
+.bubble__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #2b2a2a;
+}
+
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #92909081;
+  margin: 10px 0;
+}
+
+.button-holder {
+
+  padding: 8px;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  align-items: right;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 100%;
+
+
+}

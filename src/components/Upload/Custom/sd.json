@@ -1,0 +1,150 @@
+{
+  "templateName": "custom template",
+  "templateLayout": {
+    "533b0aff-5e10-45e4-9592-b7e5c296b0b2": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " woah i want to create a new bot son with all these different fiel",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ds ",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "23",
+          "attributes": {
+            "fieldId": "844e2cfb-4cb8-43bf-94cd-ce6fea02fb82",
+            "componentType": "formField",
+            "inputtype": "undefined"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        }
+      ]
+    ],
+    "c05793be-ec5c-4c24-9913-4518d3ed2960": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " 23",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "23",
+          "attributes": {
+            "fieldId": "d11d6d68-bf8b-44c0-9d50-9c193cef3744",
+            "componentType": "formField",
+            "inputtype": "range"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        }
+      ]
+    ]
+  },
+  "blocks": [
+    {
+      "blockName": "create a new bot",
+      "id": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+      "fields": {
+        "844e2cfb-4cb8-43bf-94cd-ce6fea02fb82": {
+          "name": "23",
+          "value": [
+            {
+              "name": "number",
+              "value": "23",
+              "inputType": "number"
+            }
+          ],
+          "fieldId": "844e2cfb-4cb8-43bf-94cd-ce6fea02fb82"
+        }
+      },
+      "blobContainer": {
+        "blobId": "eda34a8b-3454-402f-a7cf-842028645a98",
+        "blobName": "parent__365a99d4-b315-4cef-bafc-d92831827577",
+        "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+        "owner": "parent__a0bd6104-f994-48bd-a671-a86000ab0956",
+        "content": "",
+        "ownerName": "parent__365a99d4-b315-4cef-bafc-d92831827577",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+            "templateParent": "Template__parent__365a99d4-b315-4cef-bafc-d92831827577"
+          },
+          {
+            "parentBlockId": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+            "templateParent": "Template__parent__365a99d4-b315-4cef-bafc-d92831827577"
+          }
+        ]
+      }
+    },
+    {
+      "blockName": "",
+      "id": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+      "fields": {
+        "d11d6d68-bf8b-44c0-9d50-9c193cef3744": {
+          "name": "23",
+          "value": [
+            {
+              "name": "range",
+              "value": "",
+              "inputType": "range"
+            }
+          ],
+          "fieldId": "d11d6d68-bf8b-44c0-9d50-9c193cef3744"
+        }
+      },
+      "blobContainer": {
+        "blobId": "eda34a8b-3454-402f-a7cf-842028645a98",
+        "blobName": "parent__365a99d4-b315-4cef-bafc-d92831827577",
+        "parentBlockId": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+        "owner": "parent__a0bd6104-f994-48bd-a671-a86000ab0956",
+        "content": "",
+        "ownerName": "parent__365a99d4-b315-4cef-bafc-d92831827577",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+            "templateParent": "Template__parent__365a99d4-b315-4cef-bafc-d92831827577"
+          },
+          {
+            "parentBlockId": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+            "templateParent": "Template__parent__365a99d4-b315-4cef-bafc-d92831827577"
+          }
+        ]
+      }
+    }
+  ]
+}

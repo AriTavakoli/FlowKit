@@ -1,0 +1,60 @@
+  {"templateName": "custom template",
+  "templateLayout": {
+    "602e1b7e-2bd7-42e5-b039-103e6414a622": [
+      [
+        {
+          "type": "P",
+          "textContent": " custom block with custom ",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "Field",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "12ce3835-fcdf-4cd4-8507-17a89d3449e7",
+            "functionality": "someFunctionality"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        }
+      ]
+    ]
+  },
+  "blocks": [
+    {
+      "blockName": "custom block",
+      "id": "602e1b7e-2bd7-42e5-b039-103e6414a622",
+      "fields": {
+        "12ce3835-fcdf-4cd4-8507-17a89d3449e7": {
+          "name": "Field",
+          "value": [
+            {
+              "name": "text",
+              "value": "32",
+              "inputType": "text"
+            }
+          ],
+          "fieldId": "12ce3835-fcdf-4cd4-8507-17a89d3449e7"
+        }
+      },
+      "blobContainer": {
+        "blobId": "470b81e2-d054-441d-9eca-6c13939f8fc0",
+        "blobName": "parent__95e610f8-720c-4caf-b100-1af0510f36eb",
+        "parentBlockId": "602e1b7e-2bd7-42e5-b039-103e6414a622",
+        "owner": "parent__55adecfc-58e0-4472-89db-a5391fd18812",
+        "content": "",
+        "ownerName": "parent__95e610f8-720c-4caf-b100-1af0510f36eb",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "602e1b7e-2bd7-42e5-b039-103e6414a622",
+            "templateParent": "Template__parent__95e610f8-720c-4caf-b100-1af0510f36eb"
+          }
+        ]
+      }
+    }
+  ]
+}

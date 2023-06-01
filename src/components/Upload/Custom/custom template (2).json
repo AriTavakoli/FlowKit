@@ -1,0 +1,69 @@
+{
+  "templateName": "custom template",
+  "templateLayout": {
+    "533b0aff-5e10-45e4-9592-b7e5c296b0b2": [
+      [
+        {
+          "type": "P",
+          "textContent": " woah i want to create a new bot son with all these different fiel",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " ds ",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "23",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "844e2cfb-4cb8-43bf-94cd-ce6fea02fb82",
+            "functionality": "someFunctionality",
+            "inputtype": "undefined"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        }
+      ]
+    ]
+  },
+  "blocks": [
+    {
+      "blockName": "create a new bot",
+      "id": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+      "fields": {
+        "844e2cfb-4cb8-43bf-94cd-ce6fea02fb82": {
+          "name": "23",
+          "value": [
+            {
+              "name": "number",
+              "value": "23",
+              "inputType": "number"
+            }
+          ],
+          "fieldId": "844e2cfb-4cb8-43bf-94cd-ce6fea02fb82"
+        }
+      },
+      "blobContainer": {
+        "blobId": "a3b71580-631e-476b-af55-0c37e20388f2",
+        "blobName": "parent__0bf86088-08c7-464e-a157-2e8e81e2b073",
+        "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+        "owner": "parent__fe7afcb3-9492-4ae3-adc8-bdac413c2bd6",
+        "content": "",
+        "ownerName": "parent__0bf86088-08c7-464e-a157-2e8e81e2b073",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+            "templateParent": "Template__parent__0bf86088-08c7-464e-a157-2e8e81e2b073"
+          }
+        ]
+      }
+    }
+  ]
+}

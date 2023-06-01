@@ -1,0 +1,27 @@
+.query{
+
+  &__container {
+    display: flex;
+    width: 100%;
+    justify-content: left;
+    align-items: center;
+    gap: 16px;
+    flex-direction: row;
+
+
+
+  }
+
+  &__input {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  &__text {
+    color: rgb(173, 173, 173);
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+}
+

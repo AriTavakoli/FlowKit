@@ -1,0 +1,42 @@
+.LiveGPT {
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+
+
+  }
+
+  &__live {
+    width: 50%;
+    // padding-right: 40px;
+    height: 100vh;
+    background-image: -webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%);
+    background-size: 48px 48px;
+    min-height: calc(100vh - 49px);
+    z-index: 0;
+
+  }
+
+  &__GPT {
+    width: 50%;
+    height: 100vh;
+
+  }
+
+
+
+
+}
+
+
+.SizeControl__wrapper {
+  height: 100vh;
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+}

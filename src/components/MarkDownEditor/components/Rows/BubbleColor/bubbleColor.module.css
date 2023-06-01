@@ -1,0 +1,21 @@
+.bubble__container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+  padding-right: 10px;
+}
+.bubble__text {
+  color: rgb(173, 173, 173);
+  font-size: 12px;
+  font-weight: 400;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.bubble__overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}/*# sourceMappingURL=bubbleColor.module.css.map */

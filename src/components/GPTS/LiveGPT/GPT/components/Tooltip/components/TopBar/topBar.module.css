@@ -1,0 +1,14 @@
+.topBar__container {
+  display: flex;
+  position: relative;
+  top: 0%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  z-index: 20;
+  background-color: #101010;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(85, 85, 85, 0.537254902);
+}/*# sourceMappingURL=topBar.module.css.map */

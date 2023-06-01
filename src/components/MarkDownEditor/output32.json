@@ -1,0 +1,127 @@
+{
+  "templateName": "Reactcodequery",
+  "templateLayout": {
+    "a": [
+      [
+        {
+          "type": "P",
+          "textContent": "I'mlookingfor",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "React",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "b",
+            "functionality": "someFunctionality",
+            "inputtype": "text",
+            "value": ""
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "codeexamplesthatuse",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "hooks",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "c",
+            "functionality": "someFunctionality",
+            "inputtype": "text",
+            "value": ""
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "Here'smyquestion:",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "HowcanIusetheuseStatehooktoupdatethestateofacomponent?",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "d",
+            "functionality": "someFunctionality",
+            "inputtype": "text",
+            "value": ""
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "Thanks!",
+          "attributes": {}
+        }
+      ]
+    ]
+  },
+  "blocks": [
+    {
+      "blockName": "Reactcodequery",
+      "id": "a",
+      "fields": {
+        "b": {
+          "name": "React",
+          "value": [
+            {
+              "name": "text",
+              "value": "",
+              "inputType": "text"
+            }
+          ],
+          "fieldId": "b"
+        },
+        "c": {
+          "name": "hooks",
+          "value": [
+            {
+              "name": "text",
+              "value": "",
+              "inputType": "text"
+            }
+          ],
+          "fieldId": "c"
+        },
+        "d": {
+          "name": "HowcanIusetheuseStatehooktoupdatethestateofacomponent?",
+          "value": [
+            {
+              "name": "text",
+              "value": "",
+              "inputType": "text"
+            }
+          ],
+          "fieldId": "d"
+        }
+      },
+      "blobContainer": {
+        "blobId": "e",
+        "blobName": "f",
+        "parentBlockId": "a",
+        "owner": "g",
+        "content": "",
+        "ownerName": "f",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "a",
+            "templateParent": "Template_f"
+          }
+        ]
+      }
+    }
+  ]
+}

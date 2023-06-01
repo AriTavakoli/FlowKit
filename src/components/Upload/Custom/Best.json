@@ -1,0 +1,178 @@
+{
+  "templateName": "Best",
+  "templateLayout": {
+    "317df275-f620-460e-a863-7e1363e63418": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " Can you give me ",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "color",
+          "attributes": {
+            "fieldId": "903df9db-9ce5-4b68-ab39-a3ce2119142f",
+            "componentType": "formField",
+            "inputtype": "undefined"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "colors that are a cool gradie",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " nt?",
+          "attributes": {}
+        }
+      ]
+    ],
+    "fed401d0-d4ee-43cd-83d8-d58f129ba895": [
+      [
+        {
+          "type": "P",
+          "textContent": " I want you to give me all my answers in html format . I w",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " ant you to wrap my any color you give me like this ",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " <color color = 'color you choose'>",
+          "attributes": {}
+        }
+      ]
+    ],
+    "013959ca-66c8-4b7c-ba14-a5c8f9866cfa": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        }
+      ]
+    ]
+  },
+  "blocks": [
+    {
+      "blockName": "Colors",
+      "id": "317df275-f620-460e-a863-7e1363e63418",
+      "fields": {
+        "903df9db-9ce5-4b68-ab39-a3ce2119142f": {
+          "name": "color",
+          "value": [
+            {
+              "name": "text",
+              "value": "",
+              "inputType": "text"
+            }
+          ],
+          "fieldId": "903df9db-9ce5-4b68-ab39-a3ce2119142f"
+        }
+      },
+      "blobContainer": {
+        "blobId": "ad59b8bc-5649-4d38-bef1-a507b6cbef2a",
+        "blobName": "parent__edb27085-e135-4b6c-846e-cb34b7adeb27",
+        "parentBlockId": "317df275-f620-460e-a863-7e1363e63418",
+        "owner": "parent__d090d069-f6fd-4a5d-8380-19b2e2d9fdfb",
+        "content": "",
+        "ownerName": "parent__edb27085-e135-4b6c-846e-cb34b7adeb27",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "317df275-f620-460e-a863-7e1363e63418",
+            "templateParent": "Template__parent__edb27085-e135-4b6c-846e-cb34b7adeb27"
+          },
+          {
+            "parentBlockId": "fed401d0-d4ee-43cd-83d8-d58f129ba895",
+            "templateParent": "Template__parent__edb27085-e135-4b6c-846e-cb34b7adeb27"
+          },
+          {
+            "parentBlockId": "013959ca-66c8-4b7c-ba14-a5c8f9866cfa",
+            "templateParent": "Template__parent__edb27085-e135-4b6c-846e-cb34b7adeb27"
+          }
+        ]
+      }
+    },
+    {
+      "blockName": "HtmlContext",
+      "id": "fed401d0-d4ee-43cd-83d8-d58f129ba895",
+      "fields": {},
+      "blobContainer": {
+        "blobId": "ad59b8bc-5649-4d38-bef1-a507b6cbef2a",
+        "blobName": "parent__edb27085-e135-4b6c-846e-cb34b7adeb27",
+        "parentBlockId": "fed401d0-d4ee-43cd-83d8-d58f129ba895",
+        "owner": "parent__d090d069-f6fd-4a5d-8380-19b2e2d9fdfb",
+        "content": "",
+        "ownerName": "parent__edb27085-e135-4b6c-846e-cb34b7adeb27",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "317df275-f620-460e-a863-7e1363e63418",
+            "templateParent": "Template__parent__edb27085-e135-4b6c-846e-cb34b7adeb27"
+          },
+          {
+            "parentBlockId": "fed401d0-d4ee-43cd-83d8-d58f129ba895",
+            "templateParent": "Template__parent__edb27085-e135-4b6c-846e-cb34b7adeb27"
+          },
+          {
+            "parentBlockId": "013959ca-66c8-4b7c-ba14-a5c8f9866cfa",
+            "templateParent": "Template__parent__edb27085-e135-4b6c-846e-cb34b7adeb27"
+          }
+        ]
+      }
+    },
+    {
+      "blockName": "",
+      "id": "013959ca-66c8-4b7c-ba14-a5c8f9866cfa",
+      "fields": {},
+      "blobContainer": {
+        "blobId": "ad59b8bc-5649-4d38-bef1-a507b6cbef2a",
+        "blobName": "parent__edb27085-e135-4b6c-846e-cb34b7adeb27",
+        "parentBlockId": "013959ca-66c8-4b7c-ba14-a5c8f9866cfa",
+        "owner": "parent__d090d069-f6fd-4a5d-8380-19b2e2d9fdfb",
+        "content": "",
+        "ownerName": "parent__edb27085-e135-4b6c-846e-cb34b7adeb27",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "317df275-f620-460e-a863-7e1363e63418",
+            "templateParent": "Template__parent__edb27085-e135-4b6c-846e-cb34b7adeb27"
+          },
+          {
+            "parentBlockId": "fed401d0-d4ee-43cd-83d8-d58f129ba895",
+            "templateParent": "Template__parent__edb27085-e135-4b6c-846e-cb34b7adeb27"
+          },
+          {
+            "parentBlockId": "013959ca-66c8-4b7c-ba14-a5c8f9866cfa",
+            "templateParent": "Template__parent__edb27085-e135-4b6c-846e-cb34b7adeb27"
+          }
+        ]
+      }
+    }
+  ],
+  "templateColor": "#64a689"
+}

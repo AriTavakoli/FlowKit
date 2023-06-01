@@ -1,0 +1,93 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": false,
+    "jsx": "react",
+    "types": [
+      "jest",
+      "@types/jest",
+      "@types/node"
+    ],
+    "sourceMap": false,
+    "paths": {
+      "@public/*": [
+        "public/*"
+      ],
+      "@Global/*": [
+        "src/global/*"
+      ],
+      "@Context/*": [
+        "src/components/Context/*"
+      ],
+      "@src/*": [
+        "src/*"
+      ],
+      "@SearchHeader/*": [
+        "src/components/SearchHeader/*"
+      ],
+      "@Hooks/*": [
+        "src/components/hooks/*"
+      ],
+      "@Utils/*": [
+        "src/Utils/*"
+      ],
+      "@IconWrapper/*": [
+        "src/components/IconWrapper/*"
+      ],
+      "@Assets/*": [
+        "src/assets/*"
+      ],
+      "@Features/*": [
+        "src/components/Webflow/Features/*"
+      ],
+      "@CodeEditor/*": [
+        "src/components/CodeEditor/*"
+      ],
+      "@Mocks/*": [
+        "Mocks/*"
+      ],
+      "@Types/*": [
+        "src/types/*"
+      ],
+      "@Utils/*: ": [
+        "src/Utils/*"
+      ]
+    },
+    "baseUrl": "./",
+    "outDir": "build"
+  },
+  "resolve": {
+    "extensions": [
+      ".js",
+      ".jsx",
+      ".json",
+      ".ts",
+      ".tsx",
+      ".scss"
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "src/types/typings.d.ts"
+  ],
+  "exclude": [
+    "build",
+    "node_modules",
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}

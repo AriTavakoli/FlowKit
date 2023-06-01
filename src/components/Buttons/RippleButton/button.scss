@@ -1,0 +1,373 @@
+// @import "../../global/base/base";
+
+
+
+/**
+ * Object: Divider
+ * --------------------------------------------------
+ */
+
+.o-divider {
+  border: 0;
+  margin: 20px;
+  height: 1px;
+  background: #656D78;
+}
+
+/**
+ * Component: Button
+ * --------------------------------------------------
+ */
+
+.c-button {
+  -webkit-appearance: none;
+  position: relative;
+  display: inline-block;
+  // padding: 8px 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  vertical-align: middle;
+  overflow: visible;
+  color: #fff;
+  font: inherit;
+  font-size: 10px;
+  line-height: 20px;
+  font-weight: 400;
+  max-width: 90px;
+  text-align: center;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 0;
+  // border-radius: 40px;
+  user-select: none;
+  // box-shadow: 2px 2px 0 0 darken(#434A54, 5%);
+  transition: all .3s ease;
+  // @include whiteBoxShadow;
+
+
+  &:hover,
+  &:focus {
+    outline: 0;
+    text-decoration: none;
+    transition: all .3s ease;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+
+  &--rounded {
+    border-radius: 100px;
+    padding: 4px 8px;
+
+    &.custom {
+      height: 24px;
+
+    }
+  }
+
+
+  &--square {
+    border-radius: 6px;
+    // padding: 12px 12px;
+  }
+
+
+
+}
+
+@mixin button-selected($background-color, ) {
+  &.is-selected {
+    background-color: $background-color;
+  }
+}
+
+.c-button--outline-red {
+  color: #cba8a2;
+  border: 1px solid #E9573F;
+  background: transparent;
+
+  &:hover {
+    color: #fff;
+    background: #E9573F;
+  }
+
+  @include button-selected(#E9573F); // apply mixin
+
+
+}
+
+.c-button--outline-rainbow {
+  border: 1px solid linear-gradient(to right, #FFB64D, #FF8F4D, #AE00FF, #0050FF, #00D5FF, #00FFD4, #FF005C);
+  color: #cba8a2;
+  transition: all 0.3s ease;
+  background: transparent;
+
+  &:hover {
+    background: #fff;
+    color: #FF005C;
+  }
+
+  @include button-selected(#FFB64D);
+}
+
+
+
+.c-button--outline-orange {
+  color: #ff9c2b;
+  border: 1px solid #f8a64898;
+  background: transparent;
+
+  &:hover {
+    border-color: #ffbf28bc;
+
+    // background: #505050;
+  }
+
+  @include button-selected(#a56e383e); // apply mixin
+}
+
+
+.c-button--outline-grey {
+  color: #363535;
+  border: 1px solid #89898953;
+  background: transparent;
+
+  &:hover {
+    border-color: #6d6d6d;
+    background: #25212156;
+  }
+
+  @include button-selected(#4746466c);
+}
+
+
+.c-button--outline-green {
+  color:  #3dcd8a;
+  border: 1px solid #a2dc63ab;
+  background: transparent;
+
+  &:hover {
+    border-color: #5d5d5c;
+    background: #25212156;
+  }
+
+  @include button-selected(#8bc1522d);
+}
+
+
+
+
+.c-button--outline-none {
+  color: #8bc15200;
+  // border: 1px solid #8bc15200;
+  // background: #7878781f;
+
+  &:hover {
+    // border-color: #5d5d5c;
+    // background: #8cc152;
+  }
+
+  @include button-selected(#7878782d);
+}
+
+
+
+.c-button--outline-blue {
+  color: #4A89DC;
+  border: 1px solid #4a89dc76;
+  background: transparent;
+
+  &:hover {
+    border-color: #4a89dcd3;
+    // background: #4A89DC;
+  }
+
+  @include button-selected(hsla(214, 68%, 58%, 0.196));
+}
+
+
+
+.c-button--outline-purple {
+  color: #967adc83;
+  border: 1px solid #967adc91;
+  background: transparent;
+
+  &:hover {
+    border-color: #967ADC;
+  }
+
+  @include button-selected(hsla(257, 36%, 64%, 0.196));
+}
+
+
+
+/**
+ * Mixin: Button Modifier
+ * --------------------------------------------------
+ */
+
+@mixin button-modifier($color, $class) {
+  .c-button--#{$class} {
+    background: $color;
+
+    // text-shadow: 2px 2px 0 darken($color, 10%);
+    &:hover {
+      // background: darken($color, 5%);
+    }
+  }
+}
+
+;
+
+/**
+ * Component: Button
+ * Modifier: Purple
+ * --------------------------------------------------
+ */
+
+@include button-modifier(#967ADC, "purple");
+
+/**
+ * Component: Button
+ * Modifier: Blue
+ * --------------------------------------------------
+ */
+
+@include button-modifier(#4A89DC, "blue");
+
+/**
+ * Component: Button
+ * Modifier: Red
+ * --------------------------------------------------
+ */
+
+@include button-modifier(#E9573F, "red");
+
+
+/**
+  * Component: Button
+  * Modifier: green
+  * --------------------------------------------------
+  */
+
+@include button-modifier(#8bc152, "green");
+
+/**
+  * Component: Button
+  * Modifier: Rainbow
+  * --------------------------------------------------
+  */
+
+@include button-modifier(#fff, "rainbow");
+
+
+
+
+
+/**
+ * Utility: Ripple
+ * --------------------------------------------------
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.c-ripple {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+
+  &--rounded {
+    border-radius: 100px;
+  }
+
+  &--square {
+    border-radius: 0px;
+
+  }
+
+
+}
+
+
+
+
+.c-ripple__circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .25);
+
+  .c-ripple.is-active & {
+    animation: a-ripple .4s ease-in;
+  }
+}
+
+
+.c-ripple__rounded {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border-radius: 0px;
+  background: rgba(255, 255, 255, .25);
+
+  .c-ripple.is-active & {
+    animation: a-ripple .4s ease-in;
+  }
+}
+
+
+/**
+ * Animation: Ripple
+ * --------------------------------------------------
+ */
+
+@keyframes a-ripple {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: .5;
+  }
+
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    opacity: 0;
+  }
+}

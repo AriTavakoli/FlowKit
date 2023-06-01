@@ -1,0 +1,31 @@
+.bubble {
+
+  &__container {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    justify-content: flex-start;
+    align-items: center;
+    grid-row-gap: 16px;
+    grid-column-gap: 16px;
+    overflow: auto;
+    padding-right: 10px
+  }
+
+  &__text {
+    color: rgb(173, 173, 173);
+    font-size: 12px;
+    font-weight: 400;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  &__overflow{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+
+
+}

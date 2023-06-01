@@ -1,0 +1,347 @@
+// @import 'global'
+
+
+.inputManager {
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 60px;
+    margin-top: 60px;
+  }
+
+  &__titleName {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 20px;
+  }
+
+
+}
+
+.fieldRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 100%;
+  color: wheat;
+}
+
+
+.inputManager {
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 60px;
+    margin-top: 60px;
+  }
+
+  &__titleName {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 20px;
+  }
+
+}
+
+.fieldRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 100%;
+  color: wheat;
+}
+
+
+
+
+.Variable {
+
+  &__container {
+
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: auto;
+    color: rgb(190, 190, 189);
+    background-color: rgba(25, 25, 25, 1);
+    gap: 16px;
+    z-index: 400000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hide {
+    display: none;
+  }
+
+  &__variableBox {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 6.87377px;
+    border-radius: 8px;
+
+  }
+
+  &__row {
+    display: flex;
+    width: 35vw;
+    max-width: 500px;
+    height: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+    border-style: solid;
+    border-width: 0.926647px;
+    border-color: rgba(237, 237, 237, 0.26);
+    border-radius: 7.41317px;
+
+  }
+
+  &__topBar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-style: solid;
+    border-color: rgba(168, 157, 157, 0.19);
+    border-width: 0px 0px 1.85329px;
+    box-shadow: rgba(53, 53, 53, 0.33) 1.71844px 1.71844px 6.87377px;
+    padding: 12px;
+    background-color: rgb(22, 21, 21);
+    border-top-left-radius: 4.46795px;
+    border-top-right-radius: 4.46795px;
+    cursor : pointer;
+
+
+  }
+
+  &__input {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 4px;
+    background-color: rgb(22, 21, 21);
+    color: rgb(190, 190, 189);
+    border: .5px solid #535556;
+    border-radius: 4px;
+  }
+
+
+  &__body {
+    display: grid;
+    width: 100%;
+    height: auto;
+    grid-auto-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .Block:local-styles {
+    grid-column-start: span 2;
+    grid-column-end: span 2;
+    grid-row-start: span 1;
+    grid-row-end: span 1;
+  }
+
+}
+
+
+.Value {
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 100%;
+    position: relative;
+    background-color: rgba(25, 25, 25, 1);
+    color: rgb(190, 190, 189);
+  }
+
+  &__dropDown{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    border-radius: 4px;
+    border-color: rgba(168, 157, 157, 0.19);
+    background-color: rgba(25, 25, 25, 1);
+    color: rgb(190, 190, 189);
+  }
+
+
+  &__valueBox {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 6.87377px;
+    grid-column: 1 / -1;
+    input {
+      background-color: #1f1f1f;
+      border-radius: 3px;
+      padding: 2px;
+      border: .5px solid #535556;
+      display: inline-block;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+      color: #fff;
+    }
+  }
+
+  &__p {
+    overflow : hidden;
+    white-space: nowrap;
+    border-radius: 2px;
+    padding: 6px 8px;
+    max-width: 200px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+  }
+
+  &__text {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 6.87377px;
+    background-color: rgb(22, 21, 21);
+    border-bottom-left-radius: 4.46795px;
+    border-bottom-right-radius: 4.46795px;
+
+    input {
+      background-color: #1f1f1f;
+      border-radius: 3px;
+      padding: 2px;
+      border: .5px solid #535556;
+      display: inline-block;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+      color: #fff;
+    }
+
+  }
+
+  &__image {
+    display: flex;
+    height:50px;
+    width: 100%;
+    background-color: rgb(201, 201, 201);
+  }
+
+
+  &__number {
+    background-color: black;
+
+    input {
+      background-color: black;
+      color: white;
+    }
+  }
+
+
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+.block {
+  background-color: rgba(31, 31, 31, 1);
+  width: 100%;
+  border-radius: 8px;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-style: solid;
+  border-color: rgba(189, 190, 189, 0.198);
+  border-width: .5px;
+  overflow: auto;
+  border-radius: 8px;
+
+
+  &__topBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 8px;
+    margin-bottom: 8px;
+    background-color: rgba(22, 21, 21, 1);
+
+  }
+
+  &__input {
+    flex: 1;
+    border: 1px solid rgba(189, 190, 189, 0);
+    border-radius: 8px;
+    // padding: 8px;
+    outline: none;
+    font-size: 1rem;
+    //  margin-left: 0.5rem;
+    color: whitesmoke;
+    background-color: rgba(208, 69, 69, 0);
+  }
+  &__container {
+    padding : 12px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:8px;
+    justify-content: center;
+
+  }
+  &__buttonContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+    width: 100%;
+  }
+
+
+}

@@ -1,0 +1,64 @@
+.treeContainer {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.tree {
+  list-style-type: none;
+  padding-left: 16px;
+}
+
+.tree.root {
+  padding-left: 0;
+}
+
+.tree li {
+  position: relative;
+}
+
+.tree .label {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.tree .class {
+  color: #aaa;
+}
+
+.tree .arrow {
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border: solid #aaa;
+  border-width: 0 1px 1px 0;
+  cursor: pointer;
+}
+
+.tree .arrow-down {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.tree .codeParent {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.tree .sd {
+  border-radius: 4px;
+  padding: 8px;
+  height: auto;
+  background-color: #f8f8f8;
+}
+
+.tree .new-class {
+  border: 1px solid #333;
+}

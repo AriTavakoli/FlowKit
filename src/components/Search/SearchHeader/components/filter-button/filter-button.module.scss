@@ -1,0 +1,101 @@
+.filter-container {
+  width: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.sd {
+  background-color: rgb(52, 51, 51);
+}
+
+.filter-available {
+  background-color: rgb(33, 33, 33);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding-left: 5px;
+  justify-content: left;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.filter-selected {
+  background-color: #7e7e7e;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: left;
+}
+
+.filter-selected button {
+  background-color: rgb(44, 44, 44);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-items: center;
+  justify-content: space-between;
+  border: 1px solid white;
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 5px;
+  font-size: 10px;
+  transition: all 0.3s ease;
+  gap: 5px;
+}
+
+.filter-button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.filter-button button {
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0;
+
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* .filter-holder {
+
+  padding-left: 20px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+
+} */
+
+
+
+.horizontal-divider {
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

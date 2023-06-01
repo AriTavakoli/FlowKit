@@ -1,0 +1,32 @@
+$background-color: #28282853;
+
+
+.control__container {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  background-color: $background-color;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ffffff28;
+  border-radius: 4px;
+}
+
+.verticalDivider {
+  width: 1px;
+  height: 24px;
+  background-color: #ffffff28;
+  z-index: 29;
+}
+
+.button__container {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  background-color: $background-color;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}

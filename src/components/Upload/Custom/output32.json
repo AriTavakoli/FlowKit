@@ -1,0 +1,132 @@
+{
+  "templateName": "Output 32 22 2323 test",
+  "templateLayout": {
+    "8f8416d5-da59-476d-8cdb-9b7ac34d38b0": [
+      [
+        {
+          "type": "P",
+          "textContent": " I want ",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "32",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "244cb7bc-d98a-4d3c-9e1a-9bfd7e0a80ab",
+            "functionality": "someFunctionality",
+            "inputtype": "range",
+            "value": "64"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "and then 30 ",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "22",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "8e1e5a59-bc15-431c-8604-184f38dc3aa9",
+            "functionality": "someFunctionality",
+            "inputtype": "range",
+            "value": "74"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "asd asd",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "2323",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "25f4fc75-bb44-4491-97a5-35d8335d7294",
+            "functionality": "someFunctionality",
+            "inputtype": "text",
+            "value": ""
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        }
+      ]
+    ]
+  },
+  "blocks": [
+    {
+      "blockName": "Output  ",
+      "id": "8f8416d5-da59-476d-8cdb-9b7ac34d38b0",
+      "fields": {
+        "244cb7bc-d98a-4d3c-9e1a-9bfd7e0a80ab": {
+          "name": "32",
+          "value": [
+            {
+              "name": "range",
+              "value": "64",
+              "inputType": "range"
+            }
+          ],
+          "fieldId": "244cb7bc-d98a-4d3c-9e1a-9bfd7e0a80ab"
+        },
+        "8e1e5a59-bc15-431c-8604-184f38dc3aa9": {
+          "name": "22",
+          "value": [
+            {
+              "name": "range",
+              "value": "74",
+              "inputType": "range"
+            }
+          ],
+          "fieldId": "8e1e5a59-bc15-431c-8604-184f38dc3aa9"
+        },
+        "25f4fc75-bb44-4491-97a5-35d8335d7294": {
+          "name": "2323",
+          "value": [
+            {
+              "name": "text",
+              "value": "",
+              "inputType": "text"
+            }
+          ],
+          "fieldId": "25f4fc75-bb44-4491-97a5-35d8335d7294"
+        }
+      },
+      "blobContainer": {
+        "blobId": "35cadf9c-c261-44f1-a231-d3665776aec2",
+        "blobName": "parent__2d4af584-fec5-48b6-a2e4-3aa561e2d1f7",
+        "parentBlockId": "8f8416d5-da59-476d-8cdb-9b7ac34d38b0",
+        "owner": "parent__89c24fa7-ff3d-404c-940c-8f3fdcbcdba1",
+        "content": "",
+        "ownerName": "parent__2d4af584-fec5-48b6-a2e4-3aa561e2d1f7",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "8f8416d5-da59-476d-8cdb-9b7ac34d38b0",
+            "templateParent": "Template__parent__2d4af584-fec5-48b6-a2e4-3aa561e2d1f7"
+          }
+        ]
+      }
+    }
+  ]
+}

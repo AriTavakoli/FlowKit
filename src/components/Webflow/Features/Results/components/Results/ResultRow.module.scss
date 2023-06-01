@@ -1,0 +1,53 @@
+.media-query {
+
+
+
+  border-radius: 4px;
+  background-color: hsl(0, 0%, 9%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
+  transition: background-color 0.2s ease-in;
+  border: 1px solid hsl(0, 0%, 20%);
+  transition: border-color 0.2s ease-in;
+}
+
+
+.selected {
+  margin-top: -24px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 100%;
+  margin-bottom: 24px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.border {
+  padding: 0px;
+}
+pre.border {
+  padding: 0;
+  margin: 0;
+}
+
+pre.border code {
+  padding: 0;
+  margin: 0;
+}
+
+.codeEditor {
+  width: 80vw;
+}
+
+.codeSnippet {
+
+  width: 100%;
+  margin-bottom: 20px;
+}

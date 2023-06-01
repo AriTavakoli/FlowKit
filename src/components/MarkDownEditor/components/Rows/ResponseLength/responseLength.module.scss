@@ -1,0 +1,20 @@
+.response{
+
+  &__container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-direction: row;
+  }
+
+  &__text {
+    color: rgb(173, 173, 173);
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+
+}
+

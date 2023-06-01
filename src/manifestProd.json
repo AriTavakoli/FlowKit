@@ -1,0 +1,74 @@
+{
+  "manifest_version": 3,
+  "name": "Webflow Preview",
+  "description": "Webflow Preview",
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.bundle.js"
+  },
+  "permissions": [
+    "*://webflow.com/*",
+    "*://example.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "declarativeWebRequest",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "host_permissions": [
+    "*://webflow.com/design/*",
+    "*://*.webflow.com/*",
+    "*://web.dev/*",
+    "*://example.com/*",
+    "https://*.openai.com/"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icon-128.png"
+  },
+
+  "content_scripts": [
+    {
+
+      "matches": [
+        "*://webflow.com/design/*",
+        "*://web.dev/*"
+
+      ],
+      "js": [
+        "contentScript.bundle.js"
+      ]
+    }
+
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icon-34.png",
+        "Sprite.svg"
+      ],
+      "matches": []
+    },
+    {
+      "resources": [
+        "workerBundle.js"
+      ],
+      "matches": [
+        "*://webflow.com/*",
+        "*://*.webflow.com/*",
+        "*://web.dev/*",
+        "*://*.web.dev/*"
+      ]
+    }
+  ]
+
+}

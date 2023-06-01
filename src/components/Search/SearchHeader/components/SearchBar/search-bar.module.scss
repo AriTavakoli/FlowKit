@@ -1,0 +1,121 @@
+.search-bar-container {
+  // border-top-left-radius: 20px;
+  // border-top-right-radius: 20px;
+
+  background-color: #2b2b2b;
+  flex: 1 1 0%;
+  // position: fixed;
+  width: 100%;
+}
+
+
+.search-bar {
+  border-style: initial;
+  align-items: center;
+  background-color: #2b2b2b;
+  padding-top: 4px;
+  height: 60px;
+  justify-content: center;
+  padding-bottom: 2px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-width: 0px;
+  // border-radius: 20px;
+  border-color: 'initial';
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+
+}
+
+.search-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  width: 24px;
+}
+
+
+.filter-holder {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all ease;
+}
+
+
+.overflow{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all ease;
+  overflow-x: auto;
+
+}
+
+
+.search-bar-input {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: none;
+  line-height: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: 8px;
+  margin-right: 8px;
+  height: 35px;
+  font-size: 13px;
+  border-radius: 20px;
+  color: rgb(235, 235, 235);
+  background: #181818;
+  border-width: 1px;
+  border-color: rgb(33, 33, 33);
+  box-sizing: border-box;
+  font-family: inherit;
+  outline: 0px;
+}
+
+.ex-icon {
+  position: relative;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  color: rgb(239, 239, 239)
+}
+
+
+.settings-icon.active {
+  animation: toggle-color 0.3s ease-in-out forwards;
+}
+
+@keyframes toggle-color {
+  0% {
+    fill: #333;
+  }
+
+  100% {
+    fill: #1e90ff;
+  }
+}
+
+.settings-icon {
+  fill: #333;
+  /* default color */
+  transition: fill 0.3s ease-in-out;
+}

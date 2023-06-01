@@ -1,0 +1,164 @@
+.Tabs {
+  position: relative;
+  display: inline-block;
+  margin-top: -12px;
+  background-color: #181818;
+  margin-left: 8px;
+  flex-wrap: nowrap;
+}
+
+
+.Tabs__c{
+  display: flex;
+  flex-direction: row;
+
+}
+
+
+
+
+.Tabs-outer-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.Tabs-scroll-btn {
+  cursor: pointer;
+  color: #ffffff;
+  border: none;
+  padding-right: 8px;
+  font-size: 1.2em;
+  padding: 0.5em;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap:4px;
+}
+
+.Tabs-scroll-btn--right {
+  cursor: pointer;
+  color: #ffffff;
+  border: none;
+  font-size: 1.2em;
+  padding: 0.5em;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap:4px;
+  z-index: 20;
+}
+
+.Tabs-container {
+  flex-grow: 1;
+  padding-left: 4px;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-top: 20px;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+
+.Add__controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+
+
+.Tabs-fade-left,
+.Tabs-fade-right {
+  position: absolute;
+  top: 10;
+  height: 20px;
+  width: 28px; /* Adjust the width to change the fade length */
+  pointer-events: none;
+  z-index: 10;
+}
+
+.Tabs-fade-left {
+  left: 50px;
+  background-image: linear-gradient(to right, rgba(24, 24, 24, 1), rgba(24, 24, 24, 0));
+}
+
+.Tabs-fade-right {
+  right: 70px;
+  background-image: linear-gradient(to left, rgba(24, 24, 24, 1), rgba(24, 24, 24, 0));
+}
+
+.Tabs {
+  display: inline-flex;
+  background-color: #181818;
+  flex-wrap: nowrap;
+}
+
+
+
+
+.Tabs__Tab {
+  display: inline-block;
+  padding: 1em;
+  padding-bottom: 5px;
+  background: hsla(0, 0%, 0%, 0);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.Tabs__TabAlt {
+  display: inline-block;
+  padding: 2em;
+  background: hsl(0, 0%, 93%);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.Tabs__Underline-Container {
+  /* border-bottom: 3px solid rgb(11, 11, 11); */
+
+}
+
+.Tabs__Tab:hover,
+.Tabs__Tab--active {
+  background: rgba(255, 105, 180, 0);
+  color: white;
+}
+
+.Tabs__Underline {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border-bottom: 3px solid;
+  transition: left 0.3s ease-out, width 0.3s ease-out;
+  z-index: 100;
+}
+
+.Tabs__UnderlineWhole {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border-bottom: 3px solid rgb(9, 9, 9);
+  transition: left 0.3s ease-out, width 0.3s ease-out;
+
+}

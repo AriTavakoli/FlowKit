@@ -1,0 +1,17 @@
+.query__container {
+  display: flex;
+  width: 100%;
+  justify-content: left;
+  align-items: center;
+  gap: 16px;
+  flex-direction: row;
+}
+.query__input {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.query__text {
+  color: rgb(173, 173, 173);
+  font-size: 12px;
+  font-weight: 400;
+}/*# sourceMappingURL=query.module.css.map */

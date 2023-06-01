@@ -1,0 +1,72 @@
+.bem {
+  display: inline-flex;
+  width: fit-content;
+  height: 50px;
+  white-space: nowrap;
+  gap: 12px;
+  padding: 8px;
+  justify-content: space-between;
+  border-style: solid;
+  align-items: center;
+  border-width: 1px;
+  border-color: rgba(112, 112, 112, 0.341);
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: rgba(39, 39, 39, 0.305);
+  color: rgb(230, 230, 230);
+  margin-bottom: 12px;
+}
+
+.text-block-6 {
+  color: white;
+  align-self: center;
+  flex: 1 1 0%;
+  font-size: 12px;
+  text-align: center;
+}
+.text-block-7 {
+  color: white;
+  align-self: center;
+  flex: 1 1 0%;
+  font-size: 12px;
+  text-align: center;
+}
+
+.query {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(57, 51, 59, 0.497);
+  border-radius: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border: 1px solid rgba(191, 119, 209, 0.297);
+}
+
+.answer {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(57, 51, 59, 0.497);
+  border-radius: 8px;
+  border: 1px solid rgba(89, 164, 207, 0.297);
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.divider {
+  width: 1px;
+  height: 16px;
+  background-color: rgba(238, 238, 238, 0.397);
+}

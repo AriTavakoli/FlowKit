@@ -1,0 +1,11 @@
+.multiSelect__container {
+  display: flex;
+  position: relative;
+  top: 0%;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  height: auto;
+  z-index: 20;
+}/*# sourceMappingURL=multiSelect.module.css.map */

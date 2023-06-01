@@ -1,0 +1,59 @@
+.sideBar {
+
+  color: aliceblue;
+
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    width: 50%;
+    box-sizing: border-box;
+    position: absolute;
+    background-color: rgb(21, 21, 21);
+    z-index: 5000;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-right: 1px;
+    border-right-style: solid;
+    border-right-color: rgb(51, 51, 51);
+  }
+
+  &__topBar {
+    display: flex;
+    position: relative;
+    top: 0%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    z-index: 20;
+    margin-bottom: 8px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  .p {
+    color: aliceblue;
+  }
+
+
+
+
+}

@@ -1,0 +1,19 @@
+
+.AddNode {
+
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+    padding : 4px;
+    background-color: rgb(21, 21, 21);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom: 1px solid rgb(244, 244, 244);
+    flex-direction: row;
+    z-index: 40000;
+  }
+
+}

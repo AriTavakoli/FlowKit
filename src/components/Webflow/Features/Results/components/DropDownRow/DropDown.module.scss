@@ -1,0 +1,110 @@
+.dropdown-row {
+  outline: 0px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  /* padding: 12px; */
+  box-sizing: border-box;
+  background-color: #202020;
+  flex-shrink: 0;
+  color: white;
+  border-top: 1px solid rgb(54, 54, 54);
+  box-sizing: border-box;
+  padding-bottom: 10px;
+}
+
+
+.dropdown-item-skeleton {
+  width: 100%;
+}
+
+.dropdown-row-skeleton {
+  z-index: 1000;
+  border-color: aliceblue;
+  margin-bottom: 10px;
+  height: 30px;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position:relative;
+  box-sizing: border-box;
+  border-style: none;
+  border-width: 1px;
+  border-color: rgb(0, 0, 0);
+  background-color: #181818;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 30px;
+  max-height: 800px;
+  overflow-y: auto;
+
+
+}
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(171, 171, 171);
+  height: 10px;
+
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(171, 171, 171);
+  border-radius: 30px;
+  height: 10px;
+
+}
+
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.dropdown-row-selected :hover {
+  background-color: rgb(126, 126, 126);
+  transition: background-color 0.1s ease-in
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  flex-shrink: 0;
+  color: white;
+  margin-right: 5px;
+}
+
+.dropdown-row-selected {
+  background-color: rgb(126, 126, 126);
+  transition: background-color 0.1s ease-in;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  flex-shrink: 0;
+  color: white;
+  margin-right: 5px;
+}
+
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-style: none;
+  border-width: 1px;
+  border-color: rgb(33, 33, 33);
+  border-radius: 3px;
+}

@@ -1,0 +1,126 @@
+.storage {
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    max-width: calc(100% - 8px);
+    background-color: #414141;
+
+  }
+
+  &__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 4px;
+    max-width: calc(100% - 8px);
+
+  }
+
+  &__itemBody {
+    font-size: 8px;
+  }
+
+  &__title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    &.faded {
+      opacity: 0.3;
+    }
+
+
+  }
+
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    padding: 4px;
+    cursor: pointer;
+    align-items: center;
+    height: 100%;
+    color: #e1e1e1;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 1px solid #222;
+
+
+    h3 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: bold;
+      color: #e1e1e1;
+      text-transform: capitalize;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+
+    p {
+      margin: 0.5rem 0 0 0;
+      font-size: 8px;
+      color: #c6c6c6;
+      text-transform: capitalize;
+    }
+
+    &.active {
+      background-color: #007bff;
+      color: #fff;
+
+      h3:hover {
+        color: #fff;
+      }
+    }
+
+    input {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      background-color: #222;
+      color: #e1e1e1;
+
+
+      &:focus {}
+    }
+
+    .edit-icon {
+      font-size: 1.2rem;
+      color: #e1e1e1;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+  }
+
+}
+
+
+.fade {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  height: 100%;
+  width: 100%;
+
+}
+
+.fadeWrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}

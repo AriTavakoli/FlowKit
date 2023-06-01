@@ -1,0 +1,114 @@
+$background-color: #3F51B5;
+$fab-color: #2e2b2c;
+
+.round {
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 15px;
+  bottom: 0px;
+  cursor: pointer;
+  font-size: 2em;
+  z-index: 1000;
+}
+
+.fab {
+  transition: all 300ms ease-in-out;
+  width: 56px;
+  height: 56px;
+  background-color: $fab-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 30px;
+  bottom: 0px;
+  user-select: none;
+  cursor: pointer;
+  color: white;
+  font-size: 2em;
+  z-index: 1000;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, .16), 0px 3px 10px rgba(0, 0, 0, .16);
+}
+
+.fab i {
+  transition: all 300ms ease-in-out;
+  will-change: transform;
+}
+
+.inner-fabs .fab {
+  width: 40px;
+  height: 40px;
+  right: 38px;
+  bottom: 10px;
+  font-size: 1.5em;
+  will-change: bottom;
+  visibility: hidden;
+  opacity: 0;
+}
+
+
+.inner-fabs.show .fab {
+  opacity: 0;
+  animation: fadeIn 500ms forwards; // Increase animation duration
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); // Add custom easing function
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@for $i from 0 through 20 {
+  .inner-fabs.show .fab {
+    &.custom-child-#{$i} {
+      visibility: visible;
+      right: #{$i * 50 + 80}px;
+      animation-delay: #{$i * 35}ms;
+    }
+  }
+}
+.inner-fabs.show + .fab i {
+  transform: rotate(135deg);
+}
+
+.fab:before {
+  content: attr(data-tooltip);
+  transition: opacity 150ms cubic-bezier(.4, 0, 1, 1);
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+  color: #ececec;
+  right: 50%;
+  top: -10px;
+  transform: translateY(-100%) translateX(50%);
+  background-color: rgba(70, 70, 70, .9);
+  font-size: .5em;
+  line-height: 1em;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 2px;
+  padding: 6px 8px;
+  max-width: 200px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.inner-fabs.show .fab:hover:before {
+  content: attr(data-tooltip);
+  visibility: visible;
+  opacity: 1;
+}

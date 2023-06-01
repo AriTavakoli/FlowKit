@@ -1,0 +1,315 @@
+{
+  "templateName": "custom template",
+  "templateLayout": {
+    "533b0aff-5e10-45e4-9592-b7e5c296b0b2": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " woah i want to create a new bot son with all these different fiel",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ds ",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "23",
+          "attributes": {
+            "fieldId": "844e2cfb-4cb8-43bf-94cd-ce6fea02fb82",
+            "componentType": "formField",
+            "inputtype": "undefined"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        }
+      ]
+    ],
+    "c05793be-ec5c-4c24-9913-4518d3ed2960": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " 23",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "23",
+          "attributes": {
+            "fieldId": "d11d6d68-bf8b-44c0-9d50-9c193cef3744",
+            "componentType": "formField",
+            "inputtype": "range"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        }
+      ]
+    ],
+    "e6fadb30-1347-41f5-90d0-2a2bce312ab0": [
+      [
+        {
+          "type": "P",
+          "textContent": " asdasdasdd",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "32",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "5d4f7b51-59c1-4ba4-a2f7-1b44fb33796a",
+            "functionality": "someFunctionality",
+            "inputtype": "undefined"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        }
+      ]
+    ],
+    "df0255a2-a7fd-436a-94e6-af6ea3bc451c": [
+      [
+        {
+          "type": "P",
+          "textContent": " asdasd",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "32",
+          "attributes": {
+            "componentType": "formField",
+            "fieldId": "1750b9a8-d1c0-49f4-9936-df973c78e100",
+            "functionality": "someFunctionality",
+            "inputtype": "undefined"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": "",
+          "attributes": {}
+        }
+      ]
+    ]
+  },
+  "blocks": [
+    {
+      "blockName": "create a new bot",
+      "id": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+      "fields": {
+        "844e2cfb-4cb8-43bf-94cd-ce6fea02fb82": {
+          "name": "23",
+          "value": [
+            {
+              "name": "number",
+              "value": "23",
+              "inputType": "number"
+            }
+          ],
+          "fieldId": "844e2cfb-4cb8-43bf-94cd-ce6fea02fb82"
+        }
+      },
+      "blobContainer": {
+        "blobId": "4bf75621-a5e8-462e-b9ae-d94032eec15f",
+        "blobName": "parent__68b1abc1-5300-43ab-94f1-d25a44437c77",
+        "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+        "owner": "parent__ab654c60-5cd5-462a-9a79-d024428da45c",
+        "content": "",
+        "ownerName": "parent__68b1abc1-5300-43ab-94f1-d25a44437c77",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "e6fadb30-1347-41f5-90d0-2a2bce312ab0",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "df0255a2-a7fd-436a-94e6-af6ea3bc451c",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          }
+        ]
+      }
+    },
+    {
+      "blockName": "",
+      "id": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+      "fields": {
+        "d11d6d68-bf8b-44c0-9d50-9c193cef3744": {
+          "name": "23",
+          "value": [
+            {
+              "name": "range",
+              "value": "",
+              "inputType": "range"
+            }
+          ],
+          "fieldId": "d11d6d68-bf8b-44c0-9d50-9c193cef3744"
+        }
+      },
+      "blobContainer": {
+        "blobId": "4bf75621-a5e8-462e-b9ae-d94032eec15f",
+        "blobName": "parent__68b1abc1-5300-43ab-94f1-d25a44437c77",
+        "parentBlockId": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+        "owner": "parent__ab654c60-5cd5-462a-9a79-d024428da45c",
+        "content": "",
+        "ownerName": "parent__68b1abc1-5300-43ab-94f1-d25a44437c77",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "e6fadb30-1347-41f5-90d0-2a2bce312ab0",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "df0255a2-a7fd-436a-94e6-af6ea3bc451c",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          }
+        ]
+      }
+    },
+    {
+      "blockName": "",
+      "id": "e6fadb30-1347-41f5-90d0-2a2bce312ab0",
+      "fields": {
+        "5d4f7b51-59c1-4ba4-a2f7-1b44fb33796a": {
+          "name": "32",
+          "value": [
+            {
+              "name": "range",
+              "value": "",
+              "inputType": "range"
+            }
+          ],
+          "fieldId": "5d4f7b51-59c1-4ba4-a2f7-1b44fb33796a"
+        }
+      },
+      "blobContainer": {
+        "blobId": "4bf75621-a5e8-462e-b9ae-d94032eec15f",
+        "blobName": "parent__68b1abc1-5300-43ab-94f1-d25a44437c77",
+        "parentBlockId": "e6fadb30-1347-41f5-90d0-2a2bce312ab0",
+        "owner": "parent__ab654c60-5cd5-462a-9a79-d024428da45c",
+        "content": "",
+        "ownerName": "parent__68b1abc1-5300-43ab-94f1-d25a44437c77",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "e6fadb30-1347-41f5-90d0-2a2bce312ab0",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "df0255a2-a7fd-436a-94e6-af6ea3bc451c",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          }
+        ]
+      }
+    },
+    {
+      "blockName": "",
+      "id": "df0255a2-a7fd-436a-94e6-af6ea3bc451c",
+      "fields": {
+        "1750b9a8-d1c0-49f4-9936-df973c78e100": {
+          "name": "32",
+          "value": [
+            {
+              "name": "range",
+              "value": "",
+              "inputType": "range"
+            }
+          ],
+          "fieldId": "1750b9a8-d1c0-49f4-9936-df973c78e100"
+        }
+      },
+      "blobContainer": {
+        "blobId": "4bf75621-a5e8-462e-b9ae-d94032eec15f",
+        "blobName": "parent__68b1abc1-5300-43ab-94f1-d25a44437c77",
+        "parentBlockId": "df0255a2-a7fd-436a-94e6-af6ea3bc451c",
+        "owner": "parent__ab654c60-5cd5-462a-9a79-d024428da45c",
+        "content": "",
+        "ownerName": "parent__68b1abc1-5300-43ab-94f1-d25a44437c77",
+        "allTemplateChildren": [
+          {
+            "parentBlockId": "533b0aff-5e10-45e4-9592-b7e5c296b0b2",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "c05793be-ec5c-4c24-9913-4518d3ed2960",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "e6fadb30-1347-41f5-90d0-2a2bce312ab0",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          },
+          {
+            "parentBlockId": "df0255a2-a7fd-436a-94e6-af6ea3bc451c",
+            "templateParent": "Template__parent__68b1abc1-5300-43ab-94f1-d25a44437c77"
+          }
+        ]
+      }
+    }
+  ]
+}
