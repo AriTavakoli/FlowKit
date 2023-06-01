@@ -1,7 +1,7 @@
 import React from 'react';
-import { DotsIcon, ClockIcon, CheckIcon } from '@iconicicons/react';
 import TabItem, { TabItemProps } from './TabItem';
 import './TabGroup.css';
+import Icon from '@src/components/IconWrapper/Icon';
 
 export type FilterOption = 'all' | 'pending' | 'completed';
 
@@ -18,7 +18,7 @@ function TabGroup({ activeFilter, onFilterChange }: TabGroupProps) {
   const tabItems: ExtendedTabItemProps[] = [
     {
       filterId: 'all',
-      LeadingIcon: <DotsIcon />,
+      LeadingIcon: <Icon id = "grid" size = {16} />,
       label: 'All',
       ariaLabel: 'Show all tasks',
       active: activeFilter === 'all',
@@ -26,7 +26,7 @@ function TabGroup({ activeFilter, onFilterChange }: TabGroupProps) {
     },
     {
       filterId: 'pending',
-      LeadingIcon: <ClockIcon />,
+      LeadingIcon: <Icon id = "" size = {16} />,
       label: 'Pending',
       ariaLabel: 'Show pending tasks',
       active: activeFilter === 'pending',
@@ -34,7 +34,7 @@ function TabGroup({ activeFilter, onFilterChange }: TabGroupProps) {
     },
     {
       filterId: 'completed',
-      LeadingIcon: <CheckIcon />,
+      LeadingIcon:<Icon id = "check" size = {16} />,
       label: 'Completed',
       ariaLabel: 'Show completed tasks',
       active: activeFilter === 'completed',

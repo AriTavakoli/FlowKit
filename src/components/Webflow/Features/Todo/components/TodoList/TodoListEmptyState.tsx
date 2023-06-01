@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { FilterOption } from 'components/TabGroup/TabGroup';;
 import './TodoListEmptyState.css';
 
@@ -17,17 +16,17 @@ type EmptyStateSlotData = {
 
 const emptyStateSlotData: EmptyStateSlotData = {
   all: {
-    illustration: '(^-^*)',
+    illustration: '',
     heading: 'It seems empty in here',
     details: 'There are no tasks to show for now. Consider adding some...',
   },
   pending: {
-    illustration: '(≧∇≦)ﾉ',
+    illustration: '',
     heading: 'Hooray! No pending tasks',
     details: 'You don\'t have any pending tasks for now. Enjoy :)',
   },
   completed: {
-    illustration: '(´･ω･`)?',
+    illustration: '',
     heading: 'Hmmm. I don\'t see any completed tasks',
     details: 'It seems you have not completed any tasks so far...',
   },
@@ -35,7 +34,7 @@ const emptyStateSlotData: EmptyStateSlotData = {
 
 function TodoListEmptyState({ filterOption }: TodoListEmptyStateProps) {
   return (
-    <motion.div
+    <div
       key={filterOption}
       className="todo-list-empty-state-root"
       animate={{
@@ -59,7 +58,7 @@ function TodoListEmptyState({ filterOption }: TodoListEmptyStateProps) {
       <p className="todo-list-empty-state-details">
         {emptyStateSlotData[filterOption].details}
       </p>
-    </motion.div>
+    </div>
   )
 }
 

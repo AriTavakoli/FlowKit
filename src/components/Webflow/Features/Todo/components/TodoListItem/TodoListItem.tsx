@@ -1,9 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { TodoItem } from 'utils/types';
-import { EditIcon, TrashIcon } from '@iconicicons/react';
 import TodoListItemActionButton, { TodoListItemActionButtonProps } from './TodoListItemActionButton';
 import './TodoListItem.css';
+import Icon from '@src/components/IconWrapper/Icon';
 
 interface TodoListItemProps {
   todoItem: TodoItem;
@@ -17,13 +16,13 @@ function TodoListItem({ todoItem, onDelete, onEdit, onToggleCompletion }: TodoLi
     {
       title: 'Edit Item',
       ariaLabel: `Edit Item "${todoItem.todo}"`,
-      Icon: <EditIcon />,
+      Icon: <Icon id="edit" />,
       onClick: onEdit,
     },
     {
       title: 'Delete Item',
       ariaLabel: `Delete Item "${todoItem.todo}"`,
-      Icon: <TrashIcon />,
+      Icon: < Icon id="trash" size={16} color="white" />,
       onClick: onDelete,
     },
   ];
@@ -59,7 +58,7 @@ function TodoListItem({ todoItem, onDelete, onEdit, onToggleCompletion }: TodoLi
           className="todo-list-item-label"
           htmlFor={`checkbox-${todoItem.id}`}
         >
-          { todoItem.todo }
+          {todoItem.todo}
         </label>
       </div>
 
