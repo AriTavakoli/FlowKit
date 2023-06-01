@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { PlusIcon } from '@iconicicons/react';
 import createToast, { dismiss} from '@src/components/Webflow/Features/Todo/utils/toast';
 import useTodo from '@src/components/Webflow/Features/Todo/hooks/useTodo';
 import './AddTodoBox.css';
-
+import Icon from '@src/components/IconWrapper/Icon';
 
 /**
  * Renders an input group to add todo items
@@ -80,7 +79,7 @@ function AddTodoBox() {
           disabled={(todoText.trim()).length === 0}
           onClick={onSubmit}
         >
-          <PlusIcon />
+          <Icon id = "plus" size = {16} color = "white"></Icon>
         </button>
       </div>
     </div>
