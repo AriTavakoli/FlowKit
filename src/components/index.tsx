@@ -1,13 +1,12 @@
 //@ts-nocheck
-import styles from './Search.module.scss';
-import { TabParent } from './Tabs/tabs-index';
-import React, { lazy, Suspense } from 'react';
 import { GlobalProvider } from '@Context/Global/GlobalProvider';
-import StatusBar from './StatusBar/statusBar-index';
-import { useEffect, useState } from 'react';
+import SearchProvider from '@Context/SearchProvider';
 import FeatureFlagOps from '@src/Utils/LocalStorage/FeatureFlags';
 import { FeatureFlags } from '@Types/Settings/settings.types';
-import SearchProvider from '@Context/SearchProvider';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
+import styles from './Search.module.scss';
+import StatusBar from './StatusBar/statusBar-index';
+import { TabParent } from './Tabs/tabs-index';
 
 
 const TreeView = React.lazy(() => import(/* webpackChunkName: "TreeView" */ '@src/components/Webflow/Features/TreeView/Treeview'));
