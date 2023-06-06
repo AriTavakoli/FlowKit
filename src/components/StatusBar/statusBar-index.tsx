@@ -74,7 +74,7 @@ const StatusBar: React.FC<StatusBarProps> = ({ options }) => {
         <RippleButton callBack={() => { handlePrintLocalStorage() }} padding='4px'>
           <Icon id="drop" size={iconSize} color="grey"></Icon>
         </RippleButton>
-        <RippleButton callBack={() => { resizePopupWindow(800, 600) }} padding='4px'>
+        <RippleButton callBack={() => { resizePopupWindow(1260, 750) }} padding='4px'>
           <Icon id="expandHorizontal" size={iconSize} color="grey"></Icon>
         </RippleButton>
         <RippleButton callBack={() => { resizePopupWindow(400, 600) }} >
