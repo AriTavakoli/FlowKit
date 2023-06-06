@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useState, memo, useTransition, useRef } from 'react';
 import Tabs from './Tabs';
 import Icon from '../IconWrapper/Icon';

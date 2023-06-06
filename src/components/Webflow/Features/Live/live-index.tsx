@@ -1,7 +1,6 @@
 //@ts-nocheck
 import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './Live.module.scss'
-
 import cssbeautify from 'cssbeautify';
 import nord from 'react-syntax-highlighter/dist/cjs/styles/hljs/nord';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';

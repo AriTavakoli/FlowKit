@@ -8,7 +8,14 @@
   },
   "permissions": [
     "*://webflow.com/*",
+    "*://example.com/*",
     "webRequest",
+    "webRequestBlocking",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "declarativeWebRequest",
+    "tabs",
+    "activeTab",
     "storage"
   ],
   "options_ui": {
@@ -30,6 +37,7 @@
     {
       "matches": [
         "*://webflow.com/design/*"
+
       ],
       "js": [
         "contentScript.bundle.js"
