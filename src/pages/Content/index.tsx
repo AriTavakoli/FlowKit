@@ -392,7 +392,7 @@ const App = () => {
 
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center' , flexDirection : 'column'}}>
       <button onClick={() => { CreateTab() }}>Create Tab</button>
     </div>
   );
