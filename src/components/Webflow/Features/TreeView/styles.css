@@ -27,7 +27,8 @@
 }
 
 .className__container {
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -36,9 +37,33 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   position: relative;
+  padding-bottom: 4px;
+
+}
+.className__container::-webkit-scrollbar {
+  width: 4px;
+  padding-top: 4px;
+  height: 1px;
 }
 
+.className__container::-webkit-scrollbar-thumb {
+  background-color: #2a2a2a;
+  border-radius: 2px;
+}
 
+.className__container::-webkit-scrollbar-track {
+  background-color: #1f1f1f;
+}
+
+/* Apply thin scrollbar to Firefox */
+.className__container {
+  scrollbar-width: thin;
+}
+
+.className__container::-moz-scrollbar {
+  width: 4px;
+  height: 4px;
+}
 
 
 .copy {
@@ -250,9 +275,10 @@
   content: "\25B6";
   color: linear-gradient(to bottom, rgb(149, 71, 194), rgba(47, 137, 185, 0)) 1;
   display: inline-block;
-  margin-right: 6px;
+  margin-right: 0px;
   margin-left: -3px;
   font-size: 0.7em;
+  padding-left: 0px;
   /* set the font-size to 80% of the parent font-size */
 }
 

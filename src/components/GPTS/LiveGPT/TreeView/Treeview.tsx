@@ -180,7 +180,7 @@ export default function LiveTree({ controlPosition }) {
     <div className="treeContainer">
 
 
-      <div className="controlOutput" style={{ right: controlPosition, top: '60px', zIndex: '100' }}>
+      <div className="controlOutput" style={{ right: controlPosition, top: '40px', zIndex: '100' }}>
         <RippleButton padding="4px">
           <Icon id="clipboard" size={16} color="white" transitionId="check" onClick={() => { copyCssToClipboard(currentNodeAnalysisRef.current.cssData) }} />
         </RippleButton>

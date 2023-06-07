@@ -14,6 +14,8 @@ import StorageOps from '@src/Utils/LocalStorage/StorageOps';
 import Block from './components/Block';
 import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
 import AddTabForm from './components/AddTabForm/AddTabForm';
+import Dropdown from '@src/components/Util/DropDown/DropDown';
+import WorkspaceDropDown from './components/WorkspaceDropDown/WorkspaceDropDown';
 
 function TabContent({ content, onUpload, initialState, tabKey }) {
 
@@ -39,11 +41,9 @@ function TabContent({ content, onUpload, initialState, tabKey }) {
     }
     onUpload(newData);
   }
-
   const handleDeleteBlock = (blockId) => {
-    dispatch({ type: 'DELETE_BLOCK', payload: { tabKey: initialState.tabs.find(tab => tab.active === true).key, blockId } });
+    dispatch({ type: 'DELETE_BLOCK', payload: { tabKey: tabKey, blockId } });
   };
-
 
   return (
     <div className={styles.app}>
@@ -72,6 +72,9 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   //   console.log('%cinitialState', 'color: lightblue; font-size: 84px', initialState);
   // }, [initialState]);
 
+  const [workspaces, setWorkspaces] = useState([]);
+
+
   const {
     workspaceData
   } = useWorkspaceContext();
@@ -85,13 +88,13 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   const isMounted = useRef(false);
 
   const dispatch = useWorkspaceDispatch();
-  const [tabs, setTabs] = useState(Array.isArray(workspaceData.tabs) ? workspaceData.tabs : []);
+  const [tabs, setTabs] = useState(Array.isArray(workspaceData?.tabs) ? workspaceData.tabs : []);
 
   const deleteTab = (tabKey) => {
     dispatch({ type: 'DELETE_TAB', payload: { key: tabKey } });
   };
 
-  const [workSpaceName, setWorkSpaceName] = useState(workspaceData.workSpaceName);
+  const [workSpaceName, setWorkSpaceName] = useState(workspaceData?.workSpaceName || '');
 
   const [blockInfo, setBlockInfo] = useState({
     name: '',
@@ -282,13 +285,20 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   };
 
 
+
+
   useEffect(() => {
     StorageOps.getAllWorkSpaces(workSpaceName)
       .then((data) => {
         if (data && typeof data === 'object' && Object.keys(data).length > 1) {
-          let currentWorkSpace = data[Object.keys(data)[1]].tabs
+          const workspaceOptions = Object.keys(data).map(key => {
+            return { label: key, value: data[key] };
+          });
+          setWorkspaces(workspaceOptions);
+          console.log('%cdata', 'color: lightblue; font-size: 44px', data);
+          let currentWorkSpace = data[Object.keys(data)[0]].workSpaceName
+          console.log('currentWorkSpace', currentWorkSpace);
           dispatch({ type: 'SET_WORKSPACE', payload: data['WorkSpace 1'] });
-          // handleFileUpload(data.undefined);
         } else {
           console.error('No data available or data is not an object');
         }
@@ -296,6 +306,11 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
       .catch(error => console.error('Error:', error));
   }, []);
 
+  const handleWorkspaceChange = (selectedWorkspace) => {
+    const { value } = selectedWorkspace;
+    // assuming value contains the tab data
+    dispatch({ type: 'SET_WORKSPACE', payload: value });
+  };
 
 
   const handleButtonClick = () => {
@@ -305,8 +320,23 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   };
 
 
+const deleteWorkspace = async (workSpaceId) => {
+  // Show a confirmation dialog before deleting the workspace
+  const confirmDelete = window.confirm('Are you sure you want to delete this workspace?');
+
+  if (confirmDelete) {
+    StorageOps.removeWorkspaceFromStorageByName(workSpaceId)
+    .then(() => {
+      // Clear workspace state
+      // dispatch({ type: 'CLEAR_WORKSPACE' });
+    })
+    .catch(err => console.log(err));
+  }
+};
+
+
   return (
-    <div style={styles}>
+    <>
       <div className={styles['WorkspaceName__wrapper']}>
         <input
           type="text"
@@ -316,9 +346,22 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
           value={workspaceData.name}
           onChange={handleWorkspaceNameChange}
         />
-        <RippleButton shape="square" padding='4px' callBack={handleButtonClick}>
+        <WorkspaceDropDown
+          options={workspaces}
+          label={workspaceData.name}
+          onChange={handleWorkspaceChange}
+          customStyles={styles}
+          icon={true}
+        />
+        <RippleButton shape="square" padding='6px' callBack={handleButtonClick} outlineColor='grey' >
           <Icon id='upload' size={16} color="white" />
         </RippleButton>
+
+        <RippleButton shape="square" padding='6px' callBack={() => {deleteWorkspace(workspaceData.name)}} outlineColor='grey' >
+          <Icon id='trash' size={16} color="white" />
+        </RippleButton>
+
+
         <input ref={fileInputRef} type="file" onChange={handleFileUpload} style={{ display: 'none' }} />
       </div>
 
@@ -367,10 +410,37 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
         />
       )}
 
-    </div>
+    </>
   );
 };
 
 
 
+const WorkspaceList = () => {
+  const [workspaces, setWorkspaces] = useState([]);
 
+  useEffect(() => {
+    StorageOps.getAllWorkSpaces()
+      .then((data) => {
+        if (data && typeof data === 'object' && Object.keys(data).length > 0) {
+          setWorkspaces(Object.keys(data));
+        } else {
+          console.error('No data available or data is not an object');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
+
+  return (
+    <div>
+      <h1>Available Workspaces</h1>
+      <ul>
+        {workspaces.map(workspace => (
+          <li key={workspace}>{workspace}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default WorkspaceList;

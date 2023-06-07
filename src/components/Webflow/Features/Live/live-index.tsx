@@ -207,7 +207,7 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
       {isOpen && (
         <>
           <div className="mediaQueryButtons">
-            <Icon id="rightSubArrow" size={24}></Icon>
+            {currentCssString && <Icon id="rightSubArrow" size={24}></Icon>}
             {renderMediaQueryButtons()}
           </div>
 
