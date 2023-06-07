@@ -7,11 +7,11 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import styles from './Search.module.scss';
 import StatusBar from './StatusBar/statusBar-index';
 import { TabParent } from './Tabs/tabs-index';
-
+import StatusBarModal from './StatusBar/components/Modal/StatusBarModal';
 
 const TreeView = React.lazy(() => import(/* webpackChunkName: "TreeView" */ '@src/components/Webflow/Features/TreeView/Treeview'));
 const TODOAPP = lazy(() => import(/* webpackChunkName: "TODOAPP" */'@src/components/Webflow/Features/Todo/App'));
-const SearchResults = lazy (() => import(/* webpackChunkName: "Search" */'./Webflow/Features/Results/SearchResults'));
+const SearchResults = lazy(() => import(/* webpackChunkName: "Search" */'./Webflow/Features/Results/SearchResults'));
 const EditorMain = lazy(() => import(/* webpackChunkName: "EditorMain" */'@src/components/MarkDownEditor/markdown-index'));
 const GPT = lazy(() => import(/* webpackChunkName: "GPT" */'./GPTS/GPT/GPT-index'));
 const Tava = lazy(() => import(/* webpackChunkName: "Tava" */'./GPTS/LiveGPT/liveGPT-index'));
@@ -33,6 +33,10 @@ const App = ({ styleSheet, css }) => {
     componentLibrary: true,
     ideaExplorer: true,
   });
+
+  const [activeModal, setActiveModal] = useState<'timer' | 'calculator' | null>(null);
+  const [showModal, setShowModal] = useState(false);
+
 
   const statusBarOptions = {
     activation: 'click', // or 'hover'
@@ -94,7 +98,10 @@ const App = ({ styleSheet, css }) => {
               </Suspense>
             )}
           </TabParent>
-          <StatusBar message="Example Message" options={statusBarOptions} />
+          <StatusBar message="Example Message" options={statusBarOptions} setActiveModal={setActiveModal} showModal={showModal} setShowModal={setShowModal} />
+
+          {activeModal && <StatusBarModal featureType={activeModal} showModal={showModal} setShowModal={setShowModal} />}
+
         </GlobalProvider>
       </div>
     </>

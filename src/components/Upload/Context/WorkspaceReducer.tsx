@@ -14,6 +14,9 @@ export type WorkspaceAction =
   | { type: "SET_WORKSPACE"; payload: any }
   | { type: "CHANGE_WORKSPACE_NAME"; payload: "default" }
   | { type: "APPEND_BLOCK"; payload: any }
+  | { type: "SWITCH_WORKSPACE"; payload: any }
+  | { type: "CHANGE_WORKSPACE"; payload: any }
+  | { type: "CLEAR_WORKSPACE"; payload: any }
 
 const initialState = {
   workspaceName: "default",
@@ -76,6 +79,19 @@ const WorkspaceReducer = (state = initialState, action: WorkspaceAction) => {
         ),
       };
 
+
+    case 'CLEAR_WORKSPACE':
+      return {
+        ...state,
+        workSpaceName: '',
+        tabs: []
+      };
+
+    case 'CHANGE_WORKSPACE':
+      return {
+        ...state,
+        workspaceName: action.payload.workspaceName,
+      };
     case 'DELETE_TAB':
       return { ...state, tabs: state.tabs.filter((tab) => tab.key !== action.payload.key) };
 
@@ -94,32 +110,32 @@ const WorkspaceReducer = (state = initialState, action: WorkspaceAction) => {
       }
 
 
-    case "ADD_BLOCK_TO_TAB":
-      console.log(action.payload, 'action.payload');
-      return {
-        ...state,
-        tabs: state.tabs.map((tab) =>
-          tab.key === action.payload.tabKey
-            ? {
-              ...tab,
-              content: {
-                ...tab.content,
-                blocks: [
-                  ...tab.content.blocks,
-                  {
-                    blockName: action.payload.blockName,
-                    id: uuid(),
-                    description: action.payload.description,
-                    jsonDataKey: action.payload.jsonDataKey,
-                    tokens: action.payload.tokens,
-                    fileFormat: action.payload.fileFormat,
-                  },
-                ],
-              },
-            }
-            : tab
-        ),
-      };
+      case "ADD_BLOCK_TO_TAB":
+        console.log(action.payload, 'action.payload');
+        return {
+          ...state,
+          tabs: state.tabs.map((tab) =>
+            tab.key === action.payload.tabKey
+              ? {
+                ...tab,
+                content: {
+                  ...tab.content,
+                  blocks: [
+                    ...(tab.content?.blocks || []),
+                    {
+                      blockName: action.payload.blockName,
+                      id: uuid(),
+                      description: action.payload.description,
+                      jsonDataKey: action.payload.jsonDataKey,
+                      tokens: action.payload.tokens,
+                      fileFormat: action.payload.fileFormat,
+                    },
+                  ],
+                },
+              }
+              : tab
+          ),
+        };
     case 'UPDATE_BLOCK':
       return {
         ...state,
@@ -137,15 +153,23 @@ const WorkspaceReducer = (state = initialState, action: WorkspaceAction) => {
         ),
       };
 
-    case 'DELETE_BLOCK':
+    case 'DELETE_BLOCK': {
+      const { tabKey, blockId } = action.payload;
       return {
         ...state,
-        tabs: state.tabs.map((tab) =>
-          tab.key === action.payload.tabKey
-            ? { ...tab, content: { blocks: tab.content.blocks.filter((block) => block.id !== action.payload.blockId) } }
-            : tab
-        ),
+        tabs: state.tabs.map(tab =>
+          tab.key === tabKey ? {
+            ...tab,
+            content: {
+              ...tab.content,
+              blocks: tab.content.blocks.filter(block => block.id !== blockId)
+            }
+          } : tab
+        )
       };
+    }
+
+
 
     case 'UPDATE_BLOCK_JSON_DATA_KEY':
       return {

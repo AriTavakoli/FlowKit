@@ -8,7 +8,25 @@ const WorkspaceDispatchContext = createContext<Dispatch<any> | undefined>(undefi
 
 export function WorskpaceProvider({ children, initialData }) {
 
-  const [workSpaces, setWorkSpaces] = useState([]);
+  const [workspaces, setWorkspaces] = useState([]);
+  const [currentWorkspace, setCurrentWorkspace] = useState(null);
+
+  const workspaceContextDefaultValue = {
+    workspaces: {},
+    currentWorkspaceName: 'Workspace 1',
+    // ...
+  };
+
+
+  // useEffect(() => {
+  //   // Here, we're assuming that "getAllWorkspaces" returns an array of workspace names
+  //   (async () => {
+  //     const workspacesFromStorage = await StorageOps.getAllWorkSpaces();
+  //     console.log('%cworkspacesFromStorage', 'color: lightblue; font-size: 14px', workspacesFromStorage);
+  //     setWorkspaces(workspacesFromStorage);
+  //     setCurrentWorkspace(workspacesFromStorage[1]); // Use the first workspace by default
+  //   })()
+  // }, []);
 
 
   useEffect(() => {
@@ -30,6 +48,11 @@ export function WorskpaceProvider({ children, initialData }) {
 
   const ctx = {
     workspaceData,
+    workspaces,
+    currentWorkspace,
+    setWorkspaces,
+    setCurrentWorkspace,
+    workspaceContextDefaultValue,
   };
 
   return (

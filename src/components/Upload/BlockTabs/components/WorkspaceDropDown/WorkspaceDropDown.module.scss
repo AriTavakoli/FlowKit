@@ -16,6 +16,13 @@
   gap: 8px;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }
 
 .dropdown-menu {
@@ -34,6 +41,7 @@
   min-width: 100px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 6000;
+
 }
 
 .icon__container{

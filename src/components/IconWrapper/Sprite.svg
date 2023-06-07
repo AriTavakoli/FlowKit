@@ -75,6 +75,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
 
+    <symbol viewBox="0 0 24 24" id="pause">
+      <path fill="none" stroke="currentColor" stroke-width="1.5"
+        d="M6 18.4V5.6a.6.6 0 0 1 .6-.6h2.8a.6.6 0 0 1 .6.6v12.8a.6.6 0 0 1-.6.6H6.6a.6.6 0 0 1-.6-.6Zm8 0V5.6a.6.6 0 0 1 .6-.6h2.8a.6.6 0 0 1 .6.6v12.8a.6.6 0 0 1-.6.6h-2.8a.6.6 0 0 1-.6-.6Z" />
+    </symbol>
+
 
     <symbol viewBox="0 0 24 24" id="gear">
       <path fill="currentColor"
@@ -108,6 +113,12 @@
       </g>
     </symbol>
 
+    <symbol viewBox="0 0 24 24" id="switch">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M7.72 21.78a.75.75 0 0 0 1.06-1.06L5.56 17.5h14.69a.75.75 0 0 0 0-1.5H5.56l3.22-3.22a.75.75 0 1 0-1.06-1.06l-4.5 4.5a.75.75 0 0 0 0 1.06l4.5 4.5Zm8.56-9.5a.75.75 0 1 1-1.06-1.06L18.44 8H3.75a.75.75 0 0 1 0-1.5h14.69l-3.22-3.22a.75.75 0 0 1 1.06-1.06l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5Z" />
+      </svg>
+    </symbol>
 
     <symbol viewBox="0 0 256 256" id="tree">
       <path fill="currentColor"
@@ -121,6 +132,7 @@
       </svg>
     </symbol>
 
+
     <symbol viewBox="0 0 256 256" id="microPhoneOn">
       <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
         <path fill="currentColor"
@@ -128,6 +140,12 @@
       </svg>
     </symbol>
 
+    <symbol viewBox="0 0 256 256" id="clock">
+      <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+        <path fill="currentColor"
+          d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24Zm0 192a88 88 0 1 1 88-88a88.1 88.1 0 0 1-88 88Zm64-88a8 8 0 0 1-8 8h-56a8 8 0 0 1-8-8V72a8 8 0 0 1 16 0v48h48a8 8 0 0 1 8 8Z" />
+      </svg>
+    </symbol>
 
     <symbol viewBox="0 0 24 24" id="rightSubArrow">
       <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -165,9 +183,9 @@
 
 
     <symbol viewBox="0 0 24 24" id="expandLeft">
-        <path fill="currentColor" fill-rule="evenodd"
-          d="M18.028 9.964a.75.75 0 0 0-.75-.75h-2.492V6.722a.75.75 0 0 0-1.5 0v3.242c0 .415.335.75.75.75h3.242a.75.75 0 0 0 .75-.75Zm-3.992 8.064a.75.75 0 0 0 .75-.75v-2.493h2.492a.75.75 0 0 0 0-1.5h-3.242a.75.75 0 0 0-.75.75v3.243c0 .414.335.75.75.75Zm-4.072 0a.75.75 0 0 1-.75-.75v-2.493H6.722a.75.75 0 0 1 0-1.5h3.242a.75.75 0 0 1 .75.75v3.243a.75.75 0 0 1-.75.75ZM5.972 9.964a.75.75 0 0 1 .75-.75h2.492V6.722a.75.75 0 0 1 1.5 0v3.242a.75.75 0 0 1-.75.75H6.722a.75.75 0 0 1-.75-.75Z"
-          clip-rule="evenodd" />
+      <path fill="currentColor" fill-rule="evenodd"
+        d="M18.028 9.964a.75.75 0 0 0-.75-.75h-2.492V6.722a.75.75 0 0 0-1.5 0v3.242c0 .415.335.75.75.75h3.242a.75.75 0 0 0 .75-.75Zm-3.992 8.064a.75.75 0 0 0 .75-.75v-2.493h2.492a.75.75 0 0 0 0-1.5h-3.242a.75.75 0 0 0-.75.75v3.243c0 .414.335.75.75.75Zm-4.072 0a.75.75 0 0 1-.75-.75v-2.493H6.722a.75.75 0 0 1 0-1.5h3.242a.75.75 0 0 1 .75.75v3.243a.75.75 0 0 1-.75.75ZM5.972 9.964a.75.75 0 0 1 .75-.75h2.492V6.722a.75.75 0 0 1 1.5 0v3.242a.75.75 0 0 1-.75.75H6.722a.75.75 0 0 1-.75-.75Z"
+        clip-rule="evenodd" />
     </symbol>
 
 
@@ -187,6 +205,7 @@
       <path fill="currentColor"
         d="M18 13v7H4V6h5.02c.05-.71.22-1.38.48-2H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5l-2-2zm-1.5 5h-11l2.75-3.53l1.96 2.36l2.75-3.54zm2.8-9.11c.44-.7.7-1.51.7-2.39C20 4.01 17.99 2 15.5 2S11 4.01 11 6.5s2.01 4.5 4.49 4.5c.88 0 1.7-.26 2.39-.7L21 13.42L22.42 12L19.3 8.89zM15.5 9a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5z" />
     </symbol>
+
 
     <symbol viewBox="0 0 24 24" id="download">
       <path fill="currentColor"
@@ -630,9 +649,6 @@
 
     <symbol viewBox="0 0 24 24" id="clipboard">
 
-      <!-- <path d="M13 7H7V5H13V7Z" fill="currentColor" /> -->
-      <!-- <path d="M13 11H7V9H13V11Z" fill="currentColor" /> -->
-      <!-- <path d="M7 15H13V13H7V15Z" fill="currentColor" /> -->
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
