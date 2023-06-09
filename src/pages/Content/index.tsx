@@ -71,7 +71,7 @@ const App = () => {
       if (websiteData) {
         console.log(websiteData, 'websiteData');
 
-        const response = await chrome.runtime.sendMessage({ type: 'websiteData', payload : websiteData });
+        const response = await chrome.runtime.sendMessage({ type: 'websiteData', payload: websiteData });
 
         console.log(response);
       }
@@ -215,8 +215,8 @@ const App = () => {
           const jsonData = await exporter.fetchJson(data.status.data.url)
 
 
-            console.log('%cparsed', 'color: lightblue; font-size: 24px', jsonData);
-            setWebsiteData(jsonData)
+          console.log('%cparsed', 'color: lightblue; font-size: 24px', jsonData);
+          setWebsiteData(jsonData)
 
 
 
@@ -331,6 +331,40 @@ const App = () => {
 
   }
 
+
+  const ButtonComponent = () => {
+    return (
+      <>
+        <div onClick={() => { CreateTab() }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="button top symbols" data-automation-id="left-sidebar-symbols-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" d="m179.9 388l-76.16-132l76.16 132zm0 0h152.21l76.15-132l-76.15-132H179.9l-76.16 132l76.16 132zm-76.16-132l76.16-132l-76.16 132z"/><path fill="currentColor" d="M496 256L376 48H239.74l-43.84 76h136.21l76.15 132l-76.15 132H195.9l43.84 76H376l120-208z"/><path fill="currentColor" d="m179.9 388l-76.16-132l76.16-132l43.84-76H136L16 256l120 208h87.74l-43.84-76z"/></svg>
+          </div>
+
+      </>)
+  };
+
+  // Inside your App component
+  useEffect(() => {
+    const observer = new MutationObserver((mutationsList, observer) => {
+      for (let mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          const leftSidebarElement = document.querySelector('.left-sidebar-links');
+          if (leftSidebarElement) {
+            const buttonContainer = document.createElement('div');
+            leftSidebarElement.appendChild(buttonContainer);
+
+            const buttonRoot = ReactDOM.createRoot(buttonContainer);
+            buttonRoot.render(<ButtonComponent />);
+            observer.disconnect();
+            break;
+          }
+        }
+      }
+    });
+
+    observer.observe(document, { childList: true, subtree: true });
+  }, []);
+
+
   function elementToString(element) {
     // Create a temporary div element
     var tempDiv = document.createElement('div');
@@ -392,8 +426,7 @@ const App = () => {
 
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' , flexDirection : 'column'}}>
-      <button onClick={() => { CreateTab() }}>Create Tab</button>
+    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
     </div>
   );
 };

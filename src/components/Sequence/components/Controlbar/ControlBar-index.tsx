@@ -14,7 +14,7 @@ const TreeControlBar = ({
   setSiblingSeperation,
   loadTreeDataFromFile,
 }) => {
-  const [isExtended, setIsExtended] = useState(true);
+  const [isExtended, setIsExtended] = useState(false);
   const fileInputRef = useRef();
 
   const onFileIconClick = () => {

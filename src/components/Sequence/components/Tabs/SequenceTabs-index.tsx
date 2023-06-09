@@ -1,20 +1,11 @@
-import React, { useState, memo, useRef } from 'react';
-import BubbleTabs from './BubbleTabs';
 import Icon from '@src/components/IconWrapper/Icon';
-import { useEffect } from 'react';
-import { SkeletonRow } from '@src/components/Webflow/Features/Results/components/Loading/Skeleton';
-import { useGlobalContext } from '@Context/Global/GlobalProvider';
+import React, { memo, useRef, useState } from 'react';
 import SequenceTabs from './SequenceTabs';
 
 
 const TabContent = memo(({ content }) => <div>{content}</div>);
 
 export const SequenceTabsParent = (props) => {
-
-
-  const [refsSet, setRefsSet] = useState(false); // New state to track if refs are set
-
-
 
 
   const aTabRef = useRef(null);
@@ -46,9 +37,8 @@ export const SequenceTabsParent = (props) => {
 
   const tabList = React.useMemo(() => [
     { key: "aTab", icon: "drop", flag: "treeView" },
-    { key: "bTab", icon: "webflow", flag: "webflow" },
-    { key: "cTab", icon: "info", flag: "searchResults" },
-    { key: "dTab", icon: "idea", flag: "todoApp" },
+    { key: "bTab", icon: "info", flag: "searchResults" },
+    { key: "cTab", icon: "idea", flag: "todoApp" },
   ], []);
 
 

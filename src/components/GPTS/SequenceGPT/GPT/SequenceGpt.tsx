@@ -1,23 +1,21 @@
+import { useWebflowGptContext } from "@Context/Ai/WebflowGPTProvider";
 import { useGlobalContext } from "@Context/Global/GlobalProvider";
+import "@Global/styles/kitStyles.scss";
+import StorageOps from "@src/Utils/LocalStorage/StorageOps";
 import RippleButton from "@src/components/Buttons/RippleButton/rippleButton-index";
 import Icon from "@src/components/IconWrapper/Icon";
-import StorageOps from "@src/Utils/LocalStorage/StorageOps";
+import Dropdown from "@src/components/Util/DropDown/DropDown";
 import { TriggerMode } from "@src/config/config";
 import React, { useEffect, useState } from "react";
 import { useSequenceGpt } from "./Context/SequenceGptContext";
+import BubbleSet from "./components/BubbleSets/BubbleSet-index";
+import { BubbleTabParent } from "./components/BubbleTabs/BubbleTabs-index";
 import Controls from "./components/Controls/controls-index";
-import NodeBubbleGroup from "./components/GptButtons/FilterPromptsBubbles/NodeBubbleGroup";
 import SequenceGPTCard from "./components/Prompt/SequenceGPTCard";
 import { QueryStatus } from "./components/Prompt/SequenceGPTQuery";
 import Storage from "./components/Storage/storage-index";
 import FilterPrompts from "./components/Tooltip/FilterPrompts/filterPrompts-index";
 import Frag from "./components/frag";
-import "@Global/styles/kitStyles.scss";
-import Dropdown from "@src/components/Util/DropDown/DropDown";
-import { useWebflowGptContext } from "@Context/Ai/WebflowGPTProvider";
-import { BubbleTabParent } from "./components/BubbleTabs/BubbleTabs-index";
-import BubbleSet from "./components/BubbleSets/BubbleSet-index";
-import { SequenceTabsParent } from "./components/Tabs/SequenceTabs-index";
 
 export default function SequenceGpt({ sequenceRef }) {
 
@@ -105,7 +103,7 @@ export default function SequenceGpt({ sequenceRef }) {
   return (
     <>
       <div className="chat-container">
-        <div className="chat">
+        <div className="chat" >
           {showStorage && <Storage setShowStorage={setShowStorage} />}
 
           {/* TOP BAR */}
@@ -186,18 +184,18 @@ export default function SequenceGpt({ sequenceRef }) {
 
             <BubbleTabParent>
               <BubbleSet
+                sequenceRef={sequenceRef}
                 accessType={'currentNode'}
                 setShowActiveTemplates={setShowActiveTemplates}
                 setShowTemplateGenerator={setShowTemplateGenerator}
-                sequenceRef={sequenceRef}
                 handleQuery={handleQuery}
                 sequenceId={sequenceId}
                 switchTab={switchTab} />
               <BubbleSet
+                sequenceRef={sequenceRef}
                 accessType={'default'}
                 setShowActiveTemplates={setShowActiveTemplates}
                 setShowTemplateGenerator={setShowTemplateGenerator}
-                sequenceRef={sequenceRef}
                 handleQuery={handleQuery}
                 sequenceId={sequenceId}
                 switchTab={switchTab} />

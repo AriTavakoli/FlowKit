@@ -9,7 +9,7 @@ import FieldsModal from '../../FieldsModal/fieldsModal-index';
 // import MDEditor, { selectWord } from "@uiw/react-md-editor";
 
 
-const BubbleGroup = ({ handleQuery, accessType }) => {
+const BubbleGroup = ({ handleQuery, accessType, sequenceRef }) => {
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
 
   const [storageUpdate, setStorageUpdate] = useState(0);
@@ -70,6 +70,7 @@ const BubbleGroup = ({ handleQuery, accessType }) => {
         {/* Pass selectedBubbleData to CustomComponent */}
         {selectedButtonIndex === index && isVisible && (
           <FieldsModal
+            sequenceRef={sequenceRef}
             data={selectedBubbleData}
             templateData={data}
             handleQuery={handleQuery}

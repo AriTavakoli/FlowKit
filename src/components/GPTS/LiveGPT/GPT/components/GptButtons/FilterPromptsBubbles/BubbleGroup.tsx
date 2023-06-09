@@ -1,11 +1,8 @@
-import QueryBubble from '@src/components/Buttons/RippleButton/QueryBubble';
-import QueryGenerator from '@src/Utils/Queries/QueryGenerator';
 import StorageOps from '@src/Utils/LocalStorage/StorageOps';
+import QueryGenerator from '@src/Utils/Queries/QueryGenerator';
+import QueryBubble from '@src/components/Buttons/RippleButton/QueryBubble';
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './filterBubble.module.scss';
-import { useRef } from 'react';
-import useOnClickOutside from '@src/components/hooks/useOnClickOutside';
-import FieldsModal from '../../FieldsModal/fieldsModal-index';
 // import MDEditor, { selectWord } from "@uiw/react-md-editor";
 
 
@@ -79,13 +76,7 @@ const BubbleGroup = ({ handleQuery, accessType }) => {
       <>
         {/* Pass selectedBubbleData to CustomComponent */}
         {selectedButtonIndex === index && isVisible && (
-          <FieldsModal
-            data={selectedBubbleData}
-            templateData={data}
-            handleQuery={handleQuery}
-            setIsVisible={setIsVisible}
-            isVisible={isVisible}
-          />
+
         )}
         <div
           onClick={() => {

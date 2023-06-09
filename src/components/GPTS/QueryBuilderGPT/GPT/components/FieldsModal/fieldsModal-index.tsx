@@ -1,16 +1,12 @@
-import useOnClickOutside from "@src/components/hooks/useOnClickOutside";
-import { useBlob } from "@src/components/MarkDownEditor/components/CustomBlock/context/BlobContext";
-import { useTemplate } from "@src/components/MarkDownEditor/components/CustomBlock/context/TemplateContext";
-import React, { useEffect, useRef, useState } from "react";
-import QueryBubble from "@src/components/Buttons/RippleButton/QueryBubble";
-import styles from './fieldModal.module.scss'
-import RippleButton from "@src/components/Buttons/RippleButton/rippleButton-index";
-import Icon from "@src/components/IconWrapper/Icon";
-import PanelResizer from "@src/components/GPTS/LiveGPT/PanelResizer/panelResizer-index";
 import { useWebflowGptContext } from "@Context/Ai/WebflowGPTProvider";
+import RippleButton from "@src/components/Buttons/RippleButton/rippleButton-index";
 import { NodeAnalysis } from "@src/components/GPTS/LiveGPT/classes/NodeAnalysis";
-
-const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible }) => {
+import Icon from "@src/components/IconWrapper/Icon";
+import useOnClickOutside from "@src/components/hooks/useOnClickOutside";
+import React, { useEffect, useRef, useState } from "react";
+import styles from './fieldModal.module.scss';
+import { useSequenceController } from "@src/components/Sequence/Context/SequenceContext";
+const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible, sequenceRef }) => {
   const [inputValues, setInputValues] = useState({});
   const [previewContent, setPreviewContent] = useState('');
   const [copyIcon, setCopyIcon] = useState('clipboard');
@@ -22,6 +18,11 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible 
 
   console.log('%cdata', 'color: lightblue; font-size: 14px', data);
 
+
+  const {
+    getOutputVar,
+    sequenceController,
+  } = useSequenceController()
 
 
   const handleCopy = () => {
@@ -52,10 +53,25 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible 
           case 'DIV':
             const fieldId = element.attributes?.fieldId;
 
-            // Check for inputType 'webflow' and set value to the corresponding value
-            const webflowField = element.fieldInfo.find(
-              (field) => field.inputType === 'webflow'
+            const sequenceOutput = element.fieldInfo?.find(
+              (field) => field.inputType === 'sequenceOutput'
             );
+
+            if (sequenceOutput) {
+              // Set the default value for inputType 'sequenceOutput'
+              const defaultValue = 'SequenceOutput';
+              if (!inputValues[fieldId]) {
+                setInputValues((prev) => ({ ...prev, [fieldId]: defaultValue }));
+              }
+              return `<span class="${styles['Field__highlightedInput']}">${inputValues[fieldId] || defaultValue}</span>`;
+            }
+
+
+            // Check for inputType 'webflow' and set value to the corresponding value
+            const webflowField = element.fieldInfo && Array.isArray(element.fieldInfo)
+            ? element.fieldInfo.find((field) => field.inputType === 'webflow')
+            : null;
+
 
             if (webflowField) {
               // Set the default value for inputType 'webflow'
@@ -137,12 +153,21 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible 
 
             // Check for inputType 'webflow' and set value to '10'
 
-            const webflowField = element.fieldInfo[0].inputType === 'webflow'
-            console.log(webflowField, 'webflowField');
-
-            console.log('%celement.fieldInfo[0].inputTyp', 'color: lightblue; font-size: 14px', element.fieldInfo[0].inputType);
+            const sequenceOutputField = element.fieldInfo?.[0]?.inputType === 'sequenceOutput'
+            const webflowField = element.fieldInfo?.[0]?.inputType === 'webflow'
 
 
+            if (sequenceOutputField) {
+              // Set the default value for inputType 'sequenceOutput'
+              const defaultValue = getOutputVar(sequenceRef.getParentId());
+
+              console.log('%cdefaultValusssssssssse', 'color: orange; font-size: 44px', defaultValue);
+
+              if (!inputValues[fieldId]) {
+                setInputValues((prev) => ({ ...prev, [fieldId]: defaultValue }));
+              }
+              return defaultValue;
+            }
             if (webflowField) {
               // Set the default value for inputType 'webflow'
               const defaultValue = new NodeAnalysis(currentNodeAnalysisRef.current, true).minify()

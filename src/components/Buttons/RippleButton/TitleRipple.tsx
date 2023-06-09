@@ -29,7 +29,7 @@ interface ButtonProps {
 
 function TitleRipple({ color, children, shape, dot, dotColor, outlineColor, selected, callBack, custom, field }: ButtonProps) {
   const [ripple, setRipple] = useState(false);
-  console.log('%c  field', 'color: lightblue; font-size: 14px',   field);
+  console.log('%c  field', 'color: lightblue; font-size: 14px', field);
 
   const parent = useRef(null)
   const handleClick = (event) => {
@@ -49,7 +49,7 @@ function TitleRipple({ color, children, shape, dot, dotColor, outlineColor, sele
   }, [parent])
 
 
-  if (field.name === "" || field.inputType === "" ) {
+  if (field.name === "" || field.inputType === "") {
     outlineColor = 'grey';
     dot = true;
     dotColor = 'blue';
@@ -59,7 +59,7 @@ function TitleRipple({ color, children, shape, dot, dotColor, outlineColor, sele
 
   if (Array.isArray(field.value)) {
 
-   let inputType = field.value[0].inputType
+    let inputType = field.value[0].inputType
 
     switch (inputType) {
       case 'range':
@@ -76,6 +76,21 @@ function TitleRipple({ color, children, shape, dot, dotColor, outlineColor, sele
         shape = 'rounded';
         break;
 
+      case 'textarea':
+        outlineColor = 'purple';
+        dot = true
+        dotColor = 'purple';
+        shape = 'rounded';
+        break;
+
+
+      case 'sequenceOutput':
+        outlineColor = 'green';
+        dot = true
+        dotColor = 'green';
+        shape = 'rounded';
+        break;
+
       case 'text':
         outlineColor = 'blue';
         dot = true
@@ -89,35 +104,49 @@ function TitleRipple({ color, children, shape, dot, dotColor, outlineColor, sele
   } else {
 
 
-      switch (field.inputType) {
-        case 'range':
-          outlineColor = 'orange';
-          dot = true
-          dotColor = 'orange';
-          shape = 'rounded';
-          break;
+    switch (field.inputType) {
+      case 'range':
+        outlineColor = 'orange';
+        dot = true
+        dotColor = 'orange';
+        shape = 'rounded';
+        break;
 
-        case 'number':
-          outlineColor = 'purple';
-          dot = true
-          dotColor = 'purple';
-          shape = 'rounded';
-          break;
+      case 'number':
+        outlineColor = 'purple';
+        dot = true
+        dotColor = 'purple';
+        shape = 'rounded';
+        break;
 
-        case 'text':
-          outlineColor = 'blue';
-          dot = true
-          dotColor = 'blue';
-          shape = 'rounded';
-          break;
+      case 'textarea':
+        outlineColor = 'purple';
+        dot = true
+        dotColor = 'purple';
+        shape = 'rounded';
+        break;
 
-        default:
-          outlineColor = 'blue';
-          dot = true
-          dotColor = 'blue';
-          shape = 'rounded';
-          break;
-      }
+      case 'sequenceOutput':
+        outlineColor = 'green';
+        dot = true
+        dotColor = 'green';
+        shape = 'rounded';
+        break;
+
+      case 'text':
+        outlineColor = 'blue';
+        dot = true
+        dotColor = 'blue';
+        shape = 'rounded';
+        break;
+
+      default:
+        outlineColor = 'blue';
+        dot = true
+        dotColor = 'blue';
+        shape = 'rounded';
+        break;
+    }
 
 
   }

@@ -156,14 +156,14 @@ element.style {
 
   &__container {
     width: 100%;
-    padding-left: 49px;
+    // padding-left: 49px;
     display: flex;
     flex-direction: column;
     position: relative;
-    border-left: #ebecee;
-    border-image: linear-gradient(to bottom, rgb(140, 61, 185), rgba(47, 137, 185, 0)) 1;
-    border-left-style: solid;
-    border-left-width: 1px;
+    // border-left: #ebecee;
+    // border-image: linear-gradient(to bottom, rgb(140, 61, 185), rgba(47, 137, 185, 0)) 1;
+    // border-left-style: solid;
+    // border-left-width: 1px;
     align-items: flex-start;
     justify-content: center;
     gap: 60px;
