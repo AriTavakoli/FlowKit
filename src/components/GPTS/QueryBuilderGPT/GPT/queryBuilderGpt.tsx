@@ -153,7 +153,7 @@ export default function QueryBuilderGpt({ sequenceRef, executeCurrentSequence })
 
           {/* Suggestion Container */}
 
-          <div className="suggestion-container">
+          <div className="suggestion-container" >
             <div className="chat-gpt-container gpt-dark">
               <div className="chat-gpt-card gpt-dark">
                 <ChatGPTCard
@@ -182,7 +182,7 @@ export default function QueryBuilderGpt({ sequenceRef, executeCurrentSequence })
             <div className="divider"></div>
 
             <div className="bubble__container">
-              <BubbleGroup accessType='cssTemplate' handleQuery={handleQuery} />
+              <BubbleGroup accessType='cssTemplate' handleQuery={handleQuery} sequenceRef={sequenceRef}/>
               <div className={'editAdd'}>
                 <div
                   onClick={() => {

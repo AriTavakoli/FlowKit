@@ -1,13 +1,9 @@
-import QueryBubble from '@src/components/Buttons/RippleButton/QueryBubble';
-import QueryGenerator from '@src/Utils/Queries/QueryGenerator';
 import StorageOps from '@src/Utils/LocalStorage/StorageOps';
+import QueryGenerator from '@src/Utils/Queries/QueryGenerator';
+import QueryBubble from '@src/components/Buttons/RippleButton/QueryBubble';
+import FieldsModal from '@src/components/GPTS/LiveGPT/GPT/components/FieldsModal/fieldsModal-index';
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './filterBubble.module.scss';
-import { useRef } from 'react';
-import useOnClickOutside from '@src/components/hooks/useOnClickOutside';
-import SequenceFieldsModal from '../../FieldsModal/SequenceFieldsModal';
-import NodeTemplateStorage from '@src/components/Sequence/classes/NodeTemplateStorage';
-import FieldsModal from '@src/components/GPTS/LiveGPT/GPT/components/FieldsModal/fieldsModal-index';
 // import MDEditor, { selectWord } from "@uiw/react-md-editor";
 
 
@@ -54,7 +50,7 @@ const NodeBubbleGroup = ({ handleQuery, accessType, sequenceRef }) => {
 
     })();
 
-  }, [storageUpdate,accessType]);
+  }, [storageUpdate, accessType]);
 
 
   useEffect(() => {

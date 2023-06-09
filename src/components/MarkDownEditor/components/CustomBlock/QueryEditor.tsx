@@ -319,7 +319,8 @@ export default function QueryEditor({ onFileChange, fileInput }) {
 
           <br />
           <div className={styles.app}>
-            <div className={styles["block__container"]} style={{ borderImage: `linear-gradient(to bottom, ${currentCodeAccent}, rgba(136, 167, 184, 0.219)) 1` }}>
+            {/* <div className={styles["block__container"]} style={{ borderImage: `linear-gradient(to bottom, ${currentCodeAccent}, rgba(136, 167, 184, 0.219)) 1` }}> */}
+            <div className={styles["block__container"]} >
               {blocks.map((block: Block, index: number) => {
                 const isActive = activeBlocks.includes(block.id);
                 return (
@@ -331,7 +332,7 @@ export default function QueryEditor({ onFileChange, fileInput }) {
                     dragHandleSelector=".dragHandle"
 
                   >
-                    <div className={styles['line']} style={{ background: `linear-gradient(to right , ${currentCodeAccent},  #8d8c8e65)` }} />
+                    {/* <div className={styles['line']} style={{ background: `linear-gradient(to right , ${currentCodeAccent},  #8d8c8e65)` }} /> */}
                     <div key={block.id}>
                       <>
                         <div
@@ -486,7 +487,7 @@ const UploadButton = ({ onFileChange, fileInput }) => (
         style={{ display: 'none' }}
       />
 
-      <Icon id="upload" size={20} color="darkgrey"></Icon>
+      <Icon id="upload" size={18} color="darkgrey"></Icon>
     </RippleButton>
   </>
 );

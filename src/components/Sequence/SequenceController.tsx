@@ -222,24 +222,7 @@ const SequenceControllerComponent = () => {
               handleAddChildSequence={handleAddChildSequence}
               handleAddChildSequenceFromIdea={handleAddChildSequenceFromIdea}
             />
-            <LiveGptProvider>
-              <WebflowGptProvider>
-                <Webflow
-                  nodeDatum={nodeDatum}
-                  toggleNode={toggleNode}
-                  currentSequence={currentSequence}
-                  sequenceController={sequenceController}
-                  handleSetCurrentSequence={handleSetCurrentSequence}
-                  executeCurrentSequence={executeCurrentSequence}
-                  handleUpdateTreeData={handleUpdateTreeData}
-                  handleAddPathOption={handleAddPathOption}
-                  setTreeData={setTreeData}
-                  nodeStyle={nodeStyle}
-                  handleAddChildSequence={handleAddChildSequence}
-                  handleAddChildSequenceFromIdea={handleAddChildSequenceFromIdea}
-                />
-              </WebflowGptProvider>
-            </LiveGptProvider>
+
             <NodeInfo
               nodeDatum={nodeDatum}
               toggleNode={toggleNode}

@@ -77,9 +77,7 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
         <RippleButton callBack={() => { resizePopupWindow(1260, 750) }} padding='4px'>
           <Icon id="expandHorizontal" size={iconSize} color="grey"></Icon>
         </RippleButton>
-        <RippleButton callBack={() => { resizePopupWindow(400, 600) }} >
-          <Icon id="toolbar-left" size={iconSize} color="grey"></Icon>
-        </RippleButton>
+
         <RippleButton callBack={() => { setActiveModal('timer'); setShowModal(!showModal) }} padding='4px'>
           <Icon id="clock" size={iconSize} color="grey"></Icon>
         </RippleButton>
@@ -89,7 +87,7 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
         </RippleButton>
 
         <RippleButton callBack={() => { openOptionsPage() }} padding='4px'>
-          <Icon id="settings" size={iconSize} color="grey"></Icon>
+          <Icon id="settings" size={iconSize} color="grey" ></Icon>
         </RippleButton>
 
 

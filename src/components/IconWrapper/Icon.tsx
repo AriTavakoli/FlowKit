@@ -36,6 +36,9 @@ const Icon: FunctionComponent<IconProps> = React.memo(({ onClick, id, padding, t
   const url = sprite + `#${currentId}`;
   const loaded = usePreload(url);
 
+  const [currentColor, setCurrentColor] = useState(props.color);
+
+
   const iconStyle = {
     padding: padding || undefined,
     zIndex: 1000,
@@ -56,10 +59,13 @@ const Icon: FunctionComponent<IconProps> = React.memo(({ onClick, id, padding, t
   return loaded ? (
     <svg
       {...props}
+      color={currentColor}
       style={iconStyle}
       width={props.size}
       onClick={handleClick}
       height={props.size}
+      onMouseEnter={() => { setCurrentColor(props.color2) }}
+      onMouseLeave={() => { setCurrentColor(props.color) }}
     >
       <use xlinkHref={url} />
     </svg>

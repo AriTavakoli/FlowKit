@@ -107,6 +107,13 @@ function VariableRipple({ color, children, shape, dot, dotColor, outlineColor, s
         break;
 
 
+      case 'textarea':
+        outlineColor = 'purple';
+        dot = true
+        dotColor = 'purple';
+        shape = 'rounded';
+        break;
+
       case 'text':
         outlineColor = 'purple';
         dot = true
@@ -115,9 +122,9 @@ function VariableRipple({ color, children, shape, dot, dotColor, outlineColor, s
         break;
 
       case 'sequenceOutput':
-        outlineColor = 'purple';
+        outlineColor = 'green';
         dot = true
-        dotColor = 'purple';
+        dotColor = 'green';
         shape = 'rounded';
         break;
 
@@ -153,6 +160,13 @@ function VariableRipple({ color, children, shape, dot, dotColor, outlineColor, s
         dotColor = 'green';
         shape = 'rounded';
         break;
+      case 'sequenceOutput':
+        outlineColor = 'green';
+        dot = true
+        dotColor = 'green';
+        shape = 'rounded';
+        break;
+
 
 
       case 'number':
@@ -161,6 +175,14 @@ function VariableRipple({ color, children, shape, dot, dotColor, outlineColor, s
         dotColor = 'purple';
         shape = 'rounded';
         break;
+
+      case 'textarea':
+        outlineColor = 'purple';
+        dot = true
+        dotColor = 'purple';
+        shape = 'rounded';
+        break;
+
 
       case 'text':
         outlineColor = 'blue';

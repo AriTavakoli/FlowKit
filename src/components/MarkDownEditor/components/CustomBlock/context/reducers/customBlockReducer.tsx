@@ -91,6 +91,8 @@ const customBlockReducer = (state: Block[], action: BlockAction) => {
       let fieldId = action.payload.fieldId;
       let inputType = action.payload.inputType;
 
+      console.log('%cinputType', 'color: orange; font-size: 44px', inputType);
+
       return state.map((block) =>
         block.id === action.payload.blockId
           ? {

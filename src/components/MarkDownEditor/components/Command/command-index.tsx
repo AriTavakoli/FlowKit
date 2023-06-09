@@ -114,8 +114,26 @@ function Command({ editableRowRef, onCommandSelected, status, onClose }) {
 
   const items = [
     {
+      label: "textArea",
+      action: () => editableRowRef.current.runItSon('textarea'),
+    },
+    {
+      label: "File",
+      action: () => editableRowRef.current.runItSon('file'),
+    },
+
+    {
+      label: "image",
+      action: () => editableRowRef.current.runItSon('image'),
+    },
+    {
       label: "Webflow",
       action: () => editableRowRef.current.runItSon('webflow'),
+    },
+
+    {
+      label: "TreeOutput",
+      action: () => editableRowRef.current.runItSon('sequenceOutput'),
     },
     {
       label: "Number",

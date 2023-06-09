@@ -419,7 +419,7 @@
   /* color: linear-gradient(to bottom, rgb(149, 71, 194), rgba(47, 137, 185, 0)) 1; */
   display: inline-block;
   margin-right: 6px;
-  margin-left: -3px;
+  margin-left: 0px;
   font-size: 0.7em;
   /* set the font-size to 80% of the parent font-size */
 }

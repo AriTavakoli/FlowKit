@@ -18,7 +18,9 @@ export function useSequenceLoader(sequenceController, treeData, setTreeData) {
       mapSequence: serializedMapSequence,
     }
 
-    console.log('%cjsonData', 'color: lightblue; font-size: 14px', jsonData);
+
+
+    console.log('%cjsonData', 'color: lightblue; font-size: 44px', jsonData);
 
     const blob = new Blob([JSON.stringify(jsonData)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -26,7 +28,8 @@ export function useSequenceLoader(sequenceController, treeData, setTreeData) {
     const link = document.createElement("a");
     link.href = url;
     link.download = "sequences.json";
-    downloadFile ? link.click() : null;
+    console.log(link);
+    link.click()
 
     URL.revokeObjectURL(url);
   };
@@ -117,59 +120,59 @@ export function useSequenceLoader(sequenceController, treeData, setTreeData) {
   };
 
 
-    const loadTreeDataFromFile = (e) => {
-      const file = e.target.files[0];
+  const loadTreeDataFromFile = (e) => {
+    const file = e.target.files[0];
 
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const jsonData = event.target.result;
-          const loadedData = JSON.parse(jsonData);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const jsonData = event.target.result;
+        const loadedData = JSON.parse(jsonData);
 
-          // Extract treeData and mapSequence from the loaded data
-          const { treeData, mapSequence } = loadedData;
+        // Extract treeData and mapSequence from the loaded data
+        const { treeData, mapSequence } = loadedData;
 
-          // Add the sequences to the SequenceController
-          const addSequencesToController = (node) => {
-            // Skip the root node, as it does not have an associated sequence
-            if (node.id !== 'root' && node.sequence) {
-              const sequence = deserializeSequences(node.sequence);
-              sequenceController.addSequence(sequence);
-            }
+        // Add the sequences to the SequenceController
+        const addSequencesToController = (node) => {
+          // Skip the root node, as it does not have an associated sequence
+          if (node.id !== 'root' && node.sequence) {
+            const sequence = deserializeSequences(node.sequence);
+            sequenceController.addSequence(sequence);
+          }
 
-            if (node.children) {
-              node.children.forEach(addSequencesToController);
-            }
-          };
-          addSequencesToController(treeData);
+          if (node.children) {
+            node.children.forEach(addSequencesToController);
+          }
+        };
+        addSequencesToController(treeData);
 
-          // Update the treeData state
-          setTreeData(treeData);
+        // Update the treeData state
+        setTreeData(treeData);
 
-          // Update the mapSequence in the SequenceController
-          if (mapSequence) {
-            const deserializedMap = new Map(mapSequence.map(({ key, value }) => [key, value]));
-            sequenceController.setMapSequence(deserializedMap);
+        // Update the mapSequence in the SequenceController
+        if (mapSequence) {
+          const deserializedMap = new Map(mapSequence.map(({ key, value }) => [key, value]));
+          sequenceController.setMapSequence(deserializedMap);
 
-            // Populate sequencePaths for each sequence using mapSequence
-            for (const { key, value } of mapSequence) {
-              const sequence = sequenceController.getSequenceById(key);
-              if (sequence && value.sequencePaths && typeof value.sequencePaths === 'object') {
-                for (const pathKey in value.sequencePaths) {
-                  const sequencePathData = value.sequencePaths[pathKey];
-                  const sequencePath = deserializeSequencePath(sequencePathData);
-                  sequence.addSequencePath(sequencePath);
-                }
+          // Populate sequencePaths for each sequence using mapSequence
+          for (const { key, value } of mapSequence) {
+            const sequence = sequenceController.getSequenceById(key);
+            if (sequence && value.sequencePaths && typeof value.sequencePaths === 'object') {
+              for (const pathKey in value.sequencePaths) {
+                const sequencePathData = value.sequencePaths[pathKey];
+                const sequencePath = deserializeSequencePath(sequencePathData);
+                sequence.addSequencePath(sequencePath);
               }
             }
           }
-        };
-        reader.readAsText(file);
-      }
-    };
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
 
 
-    return { saveTreeDataToFile, loadTreeDataFromFile, saveAppState }
+  return { saveTreeDataToFile, loadTreeDataFromFile, saveAppState }
 
 
-  }
+}
