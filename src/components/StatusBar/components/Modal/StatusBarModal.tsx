@@ -5,6 +5,8 @@ import PomodoroTimer from '../Timer/Timer';
 import Icon from '@src/components/IconWrapper/Icon';
 import { Calculator } from 'lucide-react';
 import PxToRemCalculator from '../Calculator/Calculator';
+import { SketchPicker } from 'react-color';
+
 interface ModalProps {
   featureType: 'timer' | 'calculator';
 }
@@ -23,6 +25,7 @@ const StatusBarModal: React.FC<ModalProps> = ({ featureType, setActiveModal, sho
 
   useOnClickOutside(modalRef, () => setShowModal(false));
 
+  const [color, setColor] = useState('#fff');
 
 
   useEffect(() => {
@@ -48,7 +51,12 @@ const StatusBarModal: React.FC<ModalProps> = ({ featureType, setActiveModal, sho
             <PxToRemCalculator></PxToRemCalculator>
           </div>
         );
-
+        break;
+      case 'colorPicker':
+        <SketchPicker
+          color={color}
+          onChangeComplete={newColor => setColor(newColor.hex)}
+        />
         break;
       default:
         setModalContent(<div>Unknown Feature</div>);

@@ -7,6 +7,7 @@ import AddNode from '../../../Buttons/AddNode/AddNode';
 import { useState, useEffect } from 'react';
 import { SearchIcon } from '@primer/octicons-react';
 import styles from './Explorer.module.scss'
+import ErrorBoundary from '../../../SequencePathExplorer/ErrorBoundary';
 
 
 export default function Explorer(
@@ -52,18 +53,19 @@ export default function Explorer(
           <text x={-25} y={5} fill="black" />
 
           <SequenceGptProvider>
-          <SequencePathBubbles currentSequence={currentSequence} handleAddChildSequenceFromIdea={handleAddChildSequenceFromIdea} nodeId={nodeDatum.id} />
-
-            <SequencePathGenerator
-              sequenceRef={currentSequence}
-              sequenceController={sequenceController}
-              nodeId={nodeDatum.id}
-              handleTreeDataUpdate={handleUpdateTreeData}
-              setTreeData={setTreeData}
-              trigger={triggered}
-              handleAddChildSequence={handleAddChildSequence}
-              handleAddPathOption={handleAddPathOption}
-            />
+            <SequencePathBubbles currentSequence={currentSequence} handleAddChildSequenceFromIdea={handleAddChildSequenceFromIdea} nodeId={nodeDatum.id} />
+            <ErrorBoundary>
+              <SequencePathGenerator
+                sequenceRef={currentSequence}
+                sequenceController={sequenceController}
+                nodeId={nodeDatum.id}
+                handleTreeDataUpdate={handleUpdateTreeData}
+                setTreeData={setTreeData}
+                trigger={triggered}
+                handleAddChildSequence={handleAddChildSequence}
+                handleAddPathOption={handleAddPathOption}
+              />
+            </ErrorBoundary>
 
           </SequenceGptProvider>
 

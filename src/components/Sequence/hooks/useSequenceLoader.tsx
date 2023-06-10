@@ -20,6 +20,7 @@ export function useSequenceLoader(sequenceController, treeData, setTreeData) {
 
 
 
+    console.log('%cjsonData', 'color: lightblue; font-size: 44px', sequenceController, treeData, );
     console.log('%cjsonData', 'color: lightblue; font-size: 44px', jsonData);
 
     const blob = new Blob([JSON.stringify(jsonData)], { type: "application/json" });
@@ -56,11 +57,15 @@ export function useSequenceLoader(sequenceController, treeData, setTreeData) {
 
     const jsonNode = {
       id: node.id,
-      name: node.name,
-      description: node.description,
-      processName: node.processName,
-      sequence: sequence || null, // Add the sequence object or null if not found
+      name: node.name || null,
+      description: node.description || null,
+      processName: node.processName || null,
+      outputVar: node.sequence?.outputVar || null,
+      sequence: sequence,
     };
+
+
+    console.log('%c Node', 'color: orange; font-size: 44px', node);
 
     // Add children and sequencePaths attributes if they exist
     if (node.children) {

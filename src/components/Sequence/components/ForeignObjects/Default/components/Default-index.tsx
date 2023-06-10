@@ -39,7 +39,7 @@ export default function Default(
           alignItems: 'center',
           justifyContent: 'space-around',
           width: '100%',
-          height: '100%',
+          height: '700px',
           background: '#f0f0f0',
           borderRadius: '12px',
           // padding: '10px',

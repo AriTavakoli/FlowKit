@@ -113,9 +113,13 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
 
       // Only render buttons for media queries with a value
       if (hasValue) {
+        // Add a condition to change the style of the selected media query
+        const isSelected = mediaQuery === selectedMediaQuery;
+        const buttonStyle = isSelected ? { borderColor: '#8f8f8f59' } : {};
+
         return (
-          <div onClick={() => setSelectedMediaQuery(mediaQuery)} className='mediaQueryText' >
-            <span >{mediaQuery.replace('screen and ', '').replace('max-width: ', '').replace(/\(/g, '').replace(/\)/g, '') }</span>
+          <div onClick={() => setSelectedMediaQuery(mediaQuery)} className='mediaQueryText' style={buttonStyle}>
+            <span >{mediaQuery.replace('screen and ', '').replace('max-width: ', '').replace(/\(/g, '').replace(/\)/g, '')}</span>
           </div>
         );
       }
@@ -195,6 +199,7 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
   };
 
 
+
   return (
     <>
       <div className="code__topBar" onClick={toggleDropdown}>
@@ -206,12 +211,13 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
 
       {isOpen && (
         <>
-          <div className="mediaQueryButtons">
-            {currentCssString && <Icon id="rightSubArrow" size={24}></Icon>}
-            {renderMediaQueryButtons()}
-          </div>
 
           <div className="css__container">
+            <div className="mediaQueryContainer">
+              {renderMediaQueryButtons()}
+
+            </div>
+
             <div className="css__container--inner" ref={syntaxHighlighterRef}>
               <div class="copy" onClick={handleIconClick}>
                 <Icon id={iconId} size={12} color="white" transitionId='check'></Icon>
@@ -219,7 +225,6 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
 
               {loadingNewStyleSheet ?
                 <SkeletonCode lineHeight={syntaxLineHeight} /> :
-
 
                 <SyntaxHighlighter
                   language={'css'}

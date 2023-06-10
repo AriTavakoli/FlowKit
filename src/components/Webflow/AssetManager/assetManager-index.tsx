@@ -2,7 +2,7 @@ import { Image, WebsiteData } from "@Types/ExportedWebsiteAssets/ExportedAssets"
 import React, { useEffect, useState } from "react";
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
 import CustomSpinner from "../utilComponents/CustomSpinner/customSpinner-index";
-import AssetDownloader from "./components/assetDownloader-index";
+import AssetDownloader from "./components/AssetDownloader";
 
 
 // AssetManager is the parent component for the AssetDownloader component.
@@ -63,7 +63,9 @@ function AssetManager() {
 
   return (
     <div>
-      {imageData && <AssetDownloader images={imageData as Image[]} />}
+      {imageData && <AssetDownloader images={imageData as Image[]}  websiteData={websiteData as WebsiteData}
+
+      />}
     </div>
   )
 

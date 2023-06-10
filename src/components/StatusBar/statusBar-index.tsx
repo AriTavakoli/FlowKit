@@ -86,6 +86,7 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
           <Icon id="calculator" size={iconSize} color="grey"></Icon>
         </RippleButton>
 
+
         <RippleButton callBack={() => { openOptionsPage() }} padding='4px'>
           <Icon id="settings" size={iconSize} color="grey" ></Icon>
         </RippleButton>

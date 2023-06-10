@@ -320,19 +320,19 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   };
 
 
-const deleteWorkspace = async (workSpaceId) => {
-  // Show a confirmation dialog before deleting the workspace
-  const confirmDelete = window.confirm('Are you sure you want to delete this workspace?');
+  const deleteWorkspace = async (workSpaceId) => {
+    // Show a confirmation dialog before deleting the workspace
+    const confirmDelete = window.confirm('Are you sure you want to delete this workspace?');
 
-  if (confirmDelete) {
-    StorageOps.removeWorkspaceFromStorageByName(workSpaceId)
-    .then(() => {
-      // Clear workspace state
-      // dispatch({ type: 'CLEAR_WORKSPACE' });
-    })
-    .catch(err => console.log(err));
-  }
-};
+    if (confirmDelete) {
+      StorageOps.removeWorkspaceFromStorageByName(workSpaceId)
+        .then(() => {
+          // Clear workspace state
+          // dispatch({ type: 'CLEAR_WORKSPACE' });
+        })
+        .catch(err => console.log(err));
+    }
+  };
 
 
   return (
@@ -353,13 +353,10 @@ const deleteWorkspace = async (workSpaceId) => {
           customStyles={styles}
           icon={true}
         />
-        <RippleButton shape="square" padding='6px' callBack={handleButtonClick} outlineColor='grey' >
-          <Icon id='upload' size={16} color="white" />
+        <RippleButton outlineColor="grey" shape='square' padding='6px' callBack={() => saveWorkspace(workspaceData)}>
+          <Icon id="save" size={16} color="grey" />
         </RippleButton>
 
-        <RippleButton shape="square" padding='6px' callBack={() => {deleteWorkspace(workspaceData.name)}} outlineColor='grey' >
-          <Icon id='trash' size={16} color="white" />
-        </RippleButton>
 
 
         <input ref={fileInputRef} type="file" onChange={handleFileUpload} style={{ display: 'none' }} />
@@ -370,7 +367,7 @@ const deleteWorkspace = async (workSpaceId) => {
         active={active}
         onChange={handleTabChange}
         addButton={<RippleButton padding='4px' callBack={() => setShowForm(!showForm)}><Icon id="add" size={16} color="white" /></RippleButton>}
-        saveButton={<RippleButton padding='4px' callBack={() => saveWorkspace(workspaceData)}><Icon id="save" size={16} color="white" /></RippleButton>}
+        // saveButton={}
         uploadButton={<RippleButton padding='4px' callBack={() => document.getElementById('fileUpload').click()}><Icon id="upload" size={16} color="white" /></RippleButton>}
         editButton={<RippleButton padding='4px' callBack={() => setIsEditEnabled(!isEditEnabled)}><Icon id="edit" size={16} color="white" /></RippleButton>}
       >
@@ -409,6 +406,20 @@ const deleteWorkspace = async (workSpaceId) => {
           initialState={initialState}
         />
       )}
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: '12px', gap: '8px' }} >
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center',  gap: '8px'  }}>
+          <span> Upload Workspace </span>
+          <RippleButton shape="square" padding="6px" callBack={handleButtonClick} outlineColor='grey' >
+            <Icon id='upload' size={16} color="grey" />
+          </RippleButton>
+        </div>
+
+
+        <RippleButton shape="square" padding='6px' callBack={() => { deleteWorkspace(workspaceData.name) }} outlineColor='grey' >
+          <Icon id='trash' size={16} color="grey" />
+        </RippleButton>
+      </div>
+
 
     </>
   );
