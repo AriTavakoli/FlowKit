@@ -12,7 +12,7 @@ import Trigger from "../Buttons/Triggers/Trigger-index";
 import styles from './SequencePath.module.scss'
 import SequencePathBubbles from "../SequencePathBubbles";
 import PathControls from "@src/components/GPTS/SequenceGPT/GPT/components/Controls/PathControls-index";
-
+import ErrorBoundary from "./ErrorBoundary";
 
 
 const SequencePathGenerator = memo(({ sequenceRef, nodeId, handleAddChildSequence, sequenceController, ideas, node, handleAddPathOption }) => {

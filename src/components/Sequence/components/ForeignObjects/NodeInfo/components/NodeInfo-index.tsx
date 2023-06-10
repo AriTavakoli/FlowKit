@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AddNode from '../../../Buttons/AddNode/AddNode';
 import SequencePathBubbles from '../../../SequencePathBubbles';
 import styles from './NodeInfo.module.scss'
-
+import ReactMarkdown from 'react-markdown'
+import rehypeHighlight from 'rehype-highlight'
 export default function NodeInfo(
   { nodeDatum,
     toggleNode,
@@ -23,6 +24,29 @@ export default function NodeInfo(
 
 
   const parentRef = useRef(null);
+
+  const [name, setName] = useState(nodeDatum.name);
+  const [processName, setProcessName] = useState(nodeDatum.processName);
+  const [description, setDescription] = useState(nodeDatum.description);
+  const [pathSuggestions, setPathSuggestions] = useState(nodeDatum.pathSuggestions);
+  const [pathOptions, setPathOptions] = useState(nodeDatum.pathOptions);
+  const [outputVar, setOutputVar] = useState(nodeDatum.outputVar);
+
+  useEffect(() => {
+    setName(nodeDatum.name);
+    setProcessName(nodeDatum.processName);
+    setDescription(nodeDatum.description);
+    setPathSuggestions(nodeDatum.pathSuggestions);
+    setPathOptions(nodeDatum.pathOptions);
+    setOutputVar(nodeDatum.outputVar);
+  }, [nodeDatum]);
+
+
+  useEffect(() => {
+    console.log('%c currentSequence', 'color: lightblue; font-size: 64px', currentSequence);
+  }, [nodeDatum]);
+
+
 
   return (
     <div ref={parentRef}>
@@ -46,8 +70,32 @@ export default function NodeInfo(
         </text>
 
 
-        {/* Update button and input fields for name and process name */}
+
         <div className={styles['NodeInfo__container']}>
+          <div className={styles['NodeInfo__label']}>Name</div>
+          <input className={styles['NodeInfo__input']} type="text" value={name} onChange={e => setName(e.target.value)} id={`name-${nodeDatum.id}`} />
+
+          <div className={styles['NodeInfo__label']}>Process Name</div>
+          <input className={styles['NodeInfo__input']} type="text" value={processName} onChange={e => setProcessName(e.target.value)} id={`processName-${nodeDatum.id}`} />
+
+          <div className={styles['NodeInfo__label']}>Description</div>
+          <textarea className={styles['NodeInfo__input']} value={description} onChange={e => setDescription(e.target.value)} id={`description-${nodeDatum.id}`} />
+
+          <div className={styles['NodeInfo__label']}>Path Suggestions</div>
+          <input className={styles['NodeInfo__input']} type="text" value={pathSuggestions} onChange={e => setPathSuggestions(e.target.value)} id={`pathSuggestions-${nodeDatum.id}`} />
+
+          <div className={styles['NodeInfo__label']}>Path Options</div>
+          <input className={styles['NodeInfo__input']} type="text" value={pathOptions} onChange={e => setPathOptions(e.target.value)} id={`pathOptions-${nodeDatum.id}`} />
+
+          <div className={styles['NodeInfo__label']}>Output Variable</div>
+          <input className={styles['NodeInfo__input']} type="text" value={nodeDatum.sequence?.outputVar} onChange={e => setOutputVar(e.target.value)} id={`outputVar-${nodeDatum.id}`} />
+          {/* <div className={styles['NodeInfo__label']}>{nodeDatum.sequence.outputVar}</div> */}
+
+          <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
+            {nodeDatum.sequence?.outputVar  || currentSequence.outputVar || 'No output variable'}
+          </ReactMarkdown>
+          {/* Update button and input fields for name and process name */}
+          {/* <div className={styles['NodeInfo__container']}>
           <div className={styles['NodeInfo__label']}>Name</div>
           <input className={styles['NodeInfo__input']} type="text" defaultValue={nodeDatum.name} id={`name-${nodeDatum.id}`} />
           <div className={styles['NodeInfo__label']}>Process Name</div>
@@ -58,6 +106,10 @@ export default function NodeInfo(
           <input className={styles['NodeInfo__input']} type="text" defaultValue={nodeDatum.pathSuggestions} id={`pathSuggestions-${nodeDatum.id}`} />
           <div className={styles['NodeInfo__label']}>Path Options</div>
           <input className={styles['NodeInfo__input']} type="text" defaultValue={nodeDatum.pathOptions} id={`pathOptions-${nodeDatum.id}`} />
+
+          <div className={styles['NodeInfo__label']}>Path Options</div>
+          <input className={styles['NodeInfo__input']} type="text" defaultValue={nodeDatum.outputVar} id={`outputVar-${nodeDatum.id}`} /> */}
+
           <button
             onClick={() =>
               handleUpdateSequence(
@@ -67,6 +119,7 @@ export default function NodeInfo(
                 document.getElementById(`description-${nodeDatum.id}`).value,
                 document.getElementById(`pathSuggestions-${nodeDatum.id}`).value,
                 document.getElementById(`pathOptions-${nodeDatum.id}`).value,
+                document.getElementById(`outputVar-${nodeDatum.id}`).value,
               )
             }
           >
