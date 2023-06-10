@@ -5,14 +5,11 @@ import StorageOps from '@src/Utils/LocalStorage/StorageOps';
 import CustomSpinner from '@src/components/Util/CustomSpinner/customSpinner-index';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import styles from '../assetManager.module.scss';
-import { extractImageUrls, formatBytes } from '../utils/asset-Utils';
-import noPreview from './no-preview.jpg';
+// import styles from '../assetManager.module.scss';
 import { useGlobalContext } from '@Context/Global/GlobalProvider';
-import './AssetDownloader.scss'
 
 
-const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
+const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
 
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<String>('');
@@ -80,13 +77,8 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
     image.fileName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // get the currently selected nodes corresponding information.
-  useEffect(() => {
-    StorageOps.getNodeAnalysis().then((res) => {
-      const imageUrls = extractImageUrls(res.nodeAnalysis.htmlRepresentation);
-      setImageUrls(imageUrls);
-    })
-  }, []);
+
+
 
   useEffect(() => {
     // Urls that are selected on the editor be selected in the asset manager.
@@ -183,102 +175,9 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
   return (
     <>
 
-
-      <div className={styles["Asset__container"]}>
-
-
-        <div className={styles['search-bar-container']}>
-          <div className={styles['search-bar']}>
-
-            <div className={styles['search-icon-container']}>
-              <Icon id="search" size={18} color={"white"} />
-            </div>
-
-            <div className={styles['filter-holder']}>
-              <div className={styles['overflow']}>
-              </div>
-              <input
-                className={styles['search-bar-input']}
-                onChange={handleSearchChange}
-                value={searchTerm}
-                placeholder="Find anything..."
-              ></input>
-            </div>
-
-          </div>
-        </div>
+      <MyComponent websiteData={websiteData} clickColor={"red"} hoverColor = {"blue"}></MyComponent>
 
 
-        {/* Asset Control Bar that allows the user to download the selected items or all of them items */}
-
-        <div className={styles["Asset__controlBar"]}>
-          <span > Download All </span>
-          <RippleButton callBack={() => handleDownloadAll()} shape="square" outlineColor='grey' padding='4px'>
-            <Icon id="download" size={16} color="white"></Icon>
-          </RippleButton>
-
-          <span > Download Selected </span>
-          <RippleButton callBack={() => handleSelectedDownloads()} shape="square" outlineColor='grey' padding='4px'>
-            <Icon id="download" size={16} color="white"></Icon>
-          </RippleButton>
-        </div>
-
-
-
-        {/* filtered Images from the search results  */}
-
-        <div className={styles["Asset__row"]}>
-
-          {filteredImages.map((image, index) => (
-            <div
-              key={index}
-              className={`${styles["Asset__item"]} ${selectedImages.includes(index)
-                ? styles["Asset__item--selected"]
-                : ""
-                }`}
-              onClick={() => toggleImageSelection(index)}
-              style={selectedImages.includes(index) ? { borderColor: currentCodeAccent } : {}}
-            >
-              <div className={styles["Image__thumbNail"]}>
-                <img
-                  src={image.thumbUrl ? image.thumbUrl : image.cdnUrl}
-                  alt={image.name}
-                  className={styles["Image__image"]}
-                />
-
-                {/*  show a check mark for the images that are selected with a green border */}
-                {selectedImages.includes(index) && (
-                  <div style={{ backgroundColor: currentCodeAccent }} className={styles["Image__selected"]} >
-                    <Icon id="check" size={16} color="white" />
-                  </div>
-                )}
-              </div>
-
-
-              <div className={styles["Image__details"]}>
-                <div className={styles["image-metadata"]}>
-                  <p className={styles["Image__title"]} title={image.origFileName}>
-                    {highlightSearchTerm(image.origFileName, searchTerm as string)}
-                  </p>
-                  <p>{formatBytes(image.size)}</p>
-                  <p>{image.mimeType}</p>
-                </div>
-                <div className={styles["download-section"]}>
-                  <div className={styles["progress-bar"]}>
-                    <div
-                      className={styles["progress-bar__inner"]}
-                      style={{ width: `${downloadProgress[index]}%` }}
-                    ></div>
-                  </div>
-                  <RippleButton callBack={() => handleDownload(image.cdnUrl, index)}>
-                    <Icon id="download" size={16}></Icon>
-                  </RippleButton>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </>
   );
 
@@ -415,12 +314,17 @@ const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
     });
 
     return () => {
-      iframe.contentWindow.removeEventListener('mousemove', updateHoverTooltip);
-      iframe.contentWindow.removeEventListener('click', updateClickTooltip);
-      iframe.contentWindow.removeEventListener('mouseout', () => {
-        hoverTooltip.style.display = 'none';
-      });
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.removeEventListener('mousemove', updateHoverTooltip);
+        iframe.contentWindow.removeEventListener('click', updateClickTooltip);
+        iframe.contentWindow.removeEventListener('mouseout', () => {
+          if(hoverTooltip) {
+            hoverTooltip.style.display = 'none';
+          }
+        });
+      }
     };
+
   }, [websiteData]);
 
   return (
@@ -445,6 +349,6 @@ const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
 
 
 
-export default AssetDownloader;
+export default StyleGuideReference;
 
 
