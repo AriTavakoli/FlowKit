@@ -1,32 +1,17 @@
-import { SequenceGptProvider } from '@src/components/SequenceGPT/GPT/Context/SequenceGptContext';
-import SequenceExplorer from '@src/components/SequenceGPT/SequenceGpt';
 import StorageOps from '@src/Utils/LocalStorage/StorageOps';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tree from 'react-d3-tree';
-import toast from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
-import TemplateExample from '../CustomBlock/context/classes/fragments/example';
+import { useSequenceController } from './Context/SequenceContext';
 import './Sequence.scss';
 import SequencePath from './classes/SequencePath';
-import SequencePathBubbles from './components/SequencePathBubbles';
-import SequencePathGenerator from './components/SequencePathExplorer/SequencePaths';
-import { useCenteredTree } from './hooks/useCenteredTree';
-import { useSequenceController } from './Context/SequenceContext';
+import TreeControlBar from './components/Controlbar/ControlBar-index';
+import Default from './components/ForeignObjects/Default/components/Default-index';
+import Explorer from './components/ForeignObjects/Explorer/components/Explorer-index';
+import NodeInfo from './components/ForeignObjects/NodeInfo/components/NodeInfo-index';
+import { SequenceTabsParent } from './components/Tabs/SequenceTabs-index';
 import { useSequenceLoader } from './hooks/useSequenceLoader';
 import { useSequenceOperations } from './hooks/useSequenceOperations';
-import AddNode from './components/Buttons/AddNode/AddNode';
-import TogglingComponent from './components/Test';
-import SequenceForm from './components/SequenceForm';
-import { SequenceTabsParent } from './components/Tabs/SequenceTabs-index';
-import Explorer from './components/ForeignObjects/Explorer/components/Explorer-index';
-import Default from './components/ForeignObjects/Default/components/Default-index';
-import MinimapDemo from './components/MiniMap/MiniMap';
-import MiniMap from './components/MiniMap/MiniMap';
-import TreeControlBar from './components/Controlbar/ControlBar-index';
-import NodeInfo from './components/ForeignObjects/NodeInfo/components/NodeInfo-index';
-import Webflow from './components/ForeignObjects/Webflow/components/Webflow-index';
-import { WebflowGptProvider } from '@Context/Ai/WebflowGPTProvider';
-import { LiveGptProvider } from '../GPTS/LiveGPT/GPT/Context/LiveGptContext';
 
 
 
@@ -39,6 +24,7 @@ type TreeNode = {
 };
 
 const SequenceControllerComponent = () => {
+
   const {
     sequenceController,
     printInfo,
@@ -209,6 +195,7 @@ const SequenceControllerComponent = () => {
         <foreignObject {...foreignObjectProps} x={-350} y={20} width={700} height={600} style={{ transform: inverted ? "scaleY(-1)" : "none", overflow: 'visible', nodeStyle }} >
           <SequenceTabsParent>
             <Default
+
               nodeDatum={nodeDatum}
               toggleNode={toggleNode}
               currentSequence={currentSequence}
@@ -322,7 +309,6 @@ const SequenceControllerComponent = () => {
           }}
         >
           <Tree
-
             data={treeData}
             enableLegacyTransitions
             translate={{ x: 500, y: 50 }}
