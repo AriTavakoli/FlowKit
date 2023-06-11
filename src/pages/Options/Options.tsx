@@ -263,7 +263,7 @@ const FeatureFlagToggleButtons = ({ featureName, onFeatureToggle, featureFlags }
 };
 const ParentComponent = () => {
   const [featureFlags, setFeatureFlags] = useState({
-    treeView: false,
+    StyleGuide: false,
     searchResults: false,
     todoApp: false,
     editorMain: false,

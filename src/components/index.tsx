@@ -9,7 +9,7 @@ import StatusBar from './StatusBar/statusBar-index';
 import { TabParent } from './Tabs/tabs-index';
 import StatusBarModal from './StatusBar/components/Modal/StatusBarModal';
 
-const TreeView = React.lazy(() => import(/* webpackChunkName: "TreeView" */ '@src/components/Webflow/Features/TreeView/Treeview'));
+const StyleGuide = lazy(() => import(/* webpackChunkName: "StyleGuide" */'./StyleGuide/StyleGuide-index'));
 const TODOAPP = lazy(() => import(/* webpackChunkName: "TODOAPP" */'@src/components/Webflow/Features/Todo/App'));
 const SearchResults = lazy(() => import(/* webpackChunkName: "Search" */'./Webflow/Features/Results/SearchResults'));
 const EditorMain = lazy(() => import(/* webpackChunkName: "EditorMain" */'@src/components/MarkDownEditor/markdown-index'));
@@ -23,11 +23,12 @@ const IdeaExplorer = lazy(() => import(/* webpackChunkName: "IdeaExplorer" */'./
 const App = ({ styleSheet, css }) => {
 
   const [featureFlags, setFeatureFlags] = useState<FeatureFlags>({
-    treeView: true,
+
     searchResults: true,
     todoApp: true,
     editorMain: true,
     gpt: true,
+    StyleGuide: true,
     liveGPT: true,
     assetManager: true,
     componentLibrary: true,
@@ -57,11 +58,18 @@ const App = ({ styleSheet, css }) => {
       <div className={styles['SearchContainer']}>
         <GlobalProvider>
           <TabParent featureFlags={featureFlags}>
-            {featureFlags.treeView && (
-              <Suspense fallback={<div>Loading TreeView...</div>}>
-                <TreeView data={css} />
+            {featureFlags.StyleGuide && (
+              <Suspense fallback={<div>Loading StyleGuide</div>}>
+                <StyleGuide></StyleGuide>
               </Suspense>
             )}
+
+            {featureFlags.StyleGuide && (
+              <Suspense fallback={<div>Loading StyleGuide</div>}>
+                <StyleGuide></StyleGuide>
+              </Suspense>
+            )}
+
             {featureFlags.searchResults && (
               <SearchProvider>
                 <SearchResults styleSheet={styleSheet} />
@@ -87,6 +95,8 @@ const App = ({ styleSheet, css }) => {
                 <Tava></Tava>
               </Suspense>
             )}
+
+
             {featureFlags.assetManager && (
               <Suspense fallback={<div>Loading AssetManager</div>}>
                 <AssetManager></AssetManager>

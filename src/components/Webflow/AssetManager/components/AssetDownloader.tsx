@@ -183,7 +183,6 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
   return (
     <>
 
-      <MyComponent websiteData={websiteData} clickColor={"red"} hoverColor = {"blue"}></MyComponent>
 
       <div className={styles["Asset__container"]}>
 

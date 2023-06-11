@@ -43,6 +43,10 @@ export default class StorageOps {
           this.accessType = 'template';
           break;
 
+        case 'StyleGuidePage':
+          this.accessType = 'StyleGuidePage';
+          break;
+
         case 'nodeTemplates':
           this.accessType = 'nodeTemplates';
           break;
@@ -107,6 +111,25 @@ export default class StorageOps {
         console.log('nodeAnalysis saved');
         resolve('saved');
       });
+    });
+  }
+
+  static async addStyleGuidePageData(styleGuidePageData: any) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.set({ styleGuidePageData }, () => {
+        console.log('styleGuidePageData saved');
+        resolve('saved');
+      });
+    });
+  }
+
+  static async getStyleGuidePageData() {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['styleGuidePageData'], (result) => {
+        console.log('styleGuidePageData:', result);
+        resolve(result);
+      }
+      );
     });
   }
 
@@ -183,6 +206,27 @@ export default class StorageOps {
     });
   }
 
+  static async setFavoritePages(favoritePages: any) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.set({ favoritePages }, () => {
+        console.log('Favorite Pages saved');
+        resolve('saved');
+      });
+    });
+  }
+
+  static async getFavoritePages() {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['favoritePages'], (result) => {
+        console.log('favoritePages:', result.favoritePages);
+        if (result.favoritePages) {
+          resolve(result.favoritePages);
+        } else {
+          resolve([]); // If there are no favorite pages, resolve with an empty array
+        }
+      });
+    });
+  }
 
 
 
@@ -207,6 +251,21 @@ export default class StorageOps {
                 console.log('template', template);
               });
             });
+          case 'StyleGuidePage':
+            return new Promise((resolve, reject) => {
+
+              chrome.storage.local.get([this.accessType], (result) => {
+                let styleGuidePage = result[this.accessType];
+                styleGuidePage = { ...styleGuidePage, [this.itemKey]: this.payload };
+                chrome.storage.local.set({ [this.accessType]: styleGuidePage }, () => {
+                  console.log(`Added |${this.itemKey}| with access type |${this.accessType}| in storage with value |${this.payload}|`);
+                  resolve('success');
+                });
+                console.log('styleGuidePage', styleGuidePage);
+              });
+
+            });
+
 
           case 'webflowComponent':
             return new Promise((resolve, reject) => {

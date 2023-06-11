@@ -52,7 +52,9 @@ export const TabParent = (props) => {
   const childrenArray = React.Children.toArray(props.children);
 
   const tabList = [
-    { key: "aTab", icon: "drop", flag: "treeView" },
+    { key: "aTab", icon: "drop", flag: "StyleGuide" },
+    { key: "StyleTab", icon: "drop", flag: "StyleGuide" },
+
     { key: "bTab", icon: "search", flag: "searchResults" },
     { key: "cTab", icon: "todo", flag: "todoApp" },
     { key: "dTab", icon: "builder", flag: "editorMain" },
