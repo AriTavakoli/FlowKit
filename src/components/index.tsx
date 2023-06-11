@@ -9,15 +9,6 @@ import StatusBar from './StatusBar/statusBar-index';
 import { TabParent } from './Tabs/tabs-index';
 import StatusBarModal from './StatusBar/components/Modal/StatusBarModal';
 
-const StyleGuide = lazy(() => import(/* webpackChunkName: "StyleGuide" */'./StyleGuide/StyleGuide-index'));
-const TODOAPP = lazy(() => import(/* webpackChunkName: "TODOAPP" */'@src/components/Webflow/Features/Todo/App'));
-const SearchResults = lazy(() => import(/* webpackChunkName: "Search" */'./Webflow/Features/Results/SearchResults'));
-const EditorMain = lazy(() => import(/* webpackChunkName: "EditorMain" */'@src/components/MarkDownEditor/markdown-index'));
-const GPT = lazy(() => import(/* webpackChunkName: "GPT" */'./GPTS/GPT/GPT-index'));
-const Tava = lazy(() => import(/* webpackChunkName: "Tava" */'./GPTS/LiveGPT/liveGPT-index'));
-const AssetManager = lazy(() => import(/* webpackChunkName: "AssetManager" */'./Webflow/AssetManager/assetManager-index'));
-const IdeaExplorer = lazy(() => import(/* webpackChunkName: "IdeaExplorer" */'./SplitScreens/IdeaExplorer/IdeaExplorer'));
-
 
 
 const App = ({ styleSheet, css }) => {
@@ -34,6 +25,57 @@ const App = ({ styleSheet, css }) => {
     componentLibrary: true,
     ideaExplorer: true,
   });
+
+  const tabConfig = [
+    {
+      key: 'aTab',
+      icon: 'drop',
+      flag: 'StyleGuide',
+      component: lazy(() => import(/* webpackChunkName: "StyleGuide" */'./StyleGuide/StyleGuide-index')),
+    },
+    {
+      key: 'bTab',
+      icon: 'search',
+      flag: 'searchResults',
+      component: lazy(() => import(/* webpackChunkName: "Search" */'./Webflow/Features/Results/SearchResults')),
+    },
+    {
+      key: 'cTab',
+      icon: 'todo',
+      flag: 'todoApp',
+      component: lazy(() => import(/* webpackChunkName: "TODOAPP" */'@src/components/Webflow/Features/Todo/App')),
+    },
+    {
+      key: 'dTab',
+      icon: 'builder',
+      flag: 'editorMain',
+      component: lazy(() => import(/* webpackChunkName: "EditorMain" */'@src/components/MarkDownEditor/markdown-index')),
+    },
+    {
+      key: 'eTab',
+      icon: 'component',
+      flag: 'liveGPT',
+      component: lazy(() => import(/* webpackChunkName: "Tava" */'./GPTS/LiveGPT/liveGPT-index')),
+    },
+    {
+      key: 'fTab',
+      icon : 'tree',
+      flag: 'ideaExplorer',
+      component: lazy(() => import(/* webpackChunkName: "IdeaExplorer" */'./SplitScreens/IdeaExplorer/IdeaExplorer')),
+    },
+    {
+      key: 'gTab',
+      icon: 'assetManager',
+      flag: 'assetManager',
+      component: lazy(() => import(/* webpackChunkName: "AssetManager" */'./Webflow/AssetManager/assetManager-index')),
+    },
+  ];
+
+
+
+
+
+
 
   const [activeModal, setActiveModal] = useState<'timer' | 'calculator' | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -53,60 +95,20 @@ const App = ({ styleSheet, css }) => {
     });
   }, []);
 
+
+
   return (
     <>
       <div className={styles['SearchContainer']}>
         <GlobalProvider>
-          <TabParent featureFlags={featureFlags}>
-            {featureFlags.StyleGuide && (
-              <Suspense fallback={<div>Loading StyleGuide</div>}>
-                <StyleGuide></StyleGuide>
-              </Suspense>
-            )}
-
-            {featureFlags.StyleGuide && (
-              <Suspense fallback={<div>Loading StyleGuide</div>}>
-                <StyleGuide></StyleGuide>
-              </Suspense>
-            )}
-
-            {featureFlags.searchResults && (
-              <SearchProvider>
-                <SearchResults styleSheet={styleSheet} />
-              </SearchProvider>
-            )}
-            {featureFlags.todoApp && (
-              <Suspense fallback={<div>Loading TODOAPP...</div>}>
-                <TODOAPP />
-              </Suspense>
-            )}
-            {featureFlags.editorMain && (
-              <Suspense fallback={<div>Loading EditorMain...</div>}>
-                <EditorMain />
-              </Suspense>
-            )}
-            {featureFlags.gpt && (
-              <Suspense fallback={<div>Loading GPT...</div>}>
-                <GPT />
-              </Suspense>
-            )}
-            {featureFlags.liveGPT && (
-              <Suspense fallback={<div>Loading AssetManager</div>}>
-                <Tava></Tava>
-              </Suspense>
-            )}
-
-
-            {featureFlags.assetManager && (
-              <Suspense fallback={<div>Loading AssetManager</div>}>
-                <AssetManager></AssetManager>
-              </Suspense>
-            )}
-            {featureFlags.ideaExplorer && (
-              <Suspense fallback={<div>Loading idea Explorer</div>}>
-                <IdeaExplorer></IdeaExplorer>
-              </Suspense>
-            )}
+          <TabParent featureFlags={featureFlags} tabConfig={tabConfig}>
+            {tabConfig.map(tab => (
+              featureFlags[tab.flag] && (
+                <Suspense fallback={<div>Loading {tab.flag}...</div>}>
+                  <tab.component />
+                </Suspense>
+              )
+            ))}
           </TabParent>
           <StatusBar message="Example Message" options={statusBarOptions} setActiveModal={setActiveModal} showModal={showModal} setShowModal={setShowModal} />
 
