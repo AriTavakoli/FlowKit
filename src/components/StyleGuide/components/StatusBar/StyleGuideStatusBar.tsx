@@ -1,14 +1,12 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
 import '@Global/index.scss';
-import RippleButton from '../Buttons/RippleButton/rippleButton-index';
-import Icon from '../IconWrapper/Icon';
-import Browser from "webextension-polyfill";
-import MessageFactory from '@src/Utils/MessageFactory';
-import useStatusBarActions from './hooks/useStatusBarActions';
-import useOnClickOutside from '../hooks/useOnClickOutside';
-import StorageOps from '../../Utils/LocalStorage/StorageOps';
-import StatusBarModal from './components/Modal/StatusBarModal';
-import styles from './StatusBar.module.scss';
+import StorageOps from '@src/Utils/LocalStorage/StorageOps';
+import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
+import Icon from '@src/components/IconWrapper/Icon';
+import useStatusBarActions from '@src/components/StatusBar/hooks/useStatusBarActions';
+import useOnClickOutside from '@src/components/hooks/useOnClickOutside';
+
+import React, { useEffect, useRef, useState } from 'react';
+
 interface StatusBarProps {
   options: {
     activation: 'click' | 'hover';
@@ -16,7 +14,7 @@ interface StatusBarProps {
   }
 }
 
-const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowModal, showModal, showStatusBar }) => {
+const StyleGuideStatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowModal, showModal, showStatusBar }) => {
   const [visible, setVisible] = useState(false);
 
   const { activateLiveColorPicker, resizePopupWindow, openOptionsPage } = useStatusBarActions();
@@ -66,7 +64,7 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
 
   return (
 
-    <div className={`status-bar ${visible ? 'visible' : 'hidden'}`} style={{ zIndex: '100000000000000001' }}>
+    <div className={`status-bar ${visible ? 'visible' : 'visible'}`} style={{ zIndex: '100000000000000001' }}>
       <div className="statusBar__container" ref={barRef}>
         <RippleButton callBack={() => { resizePopupWindow(400, 600); }} padding='4px' >
           <Icon id="expand" size={iconSize} color="grey"></Icon>
@@ -99,4 +97,4 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
   );
 };
 
-export default StatusBar;
+export default StyleGuideStatusBar;

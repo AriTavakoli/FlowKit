@@ -8,9 +8,8 @@ import styles from './Search.module.scss';
 import StatusBar from './StatusBar/statusBar-index';
 import { TabParent } from './Tabs/tabs-index';
 import StatusBarModal from './StatusBar/components/Modal/StatusBarModal';
-import StyleGuide from './StyleGuide/StyleGuide-index';
 
-
+const StyleGuide = lazy(() => import(/* webpackChunkName: "StyleGuide" */'./StyleGuide/StyleGuide-index'));
 const TODOAPP = lazy(() => import(/* webpackChunkName: "TODOAPP" */'@src/components/Webflow/Features/Todo/App'));
 const SearchResults = lazy(() => import(/* webpackChunkName: "Search" */'./Webflow/Features/Results/SearchResults'));
 const EditorMain = lazy(() => import(/* webpackChunkName: "EditorMain" */'@src/components/MarkDownEditor/markdown-index'));
@@ -59,6 +58,12 @@ const App = ({ styleSheet, css }) => {
       <div className={styles['SearchContainer']}>
         <GlobalProvider>
           <TabParent featureFlags={featureFlags}>
+            {featureFlags.StyleGuide && (
+              <Suspense fallback={<div>Loading StyleGuide</div>}>
+                <StyleGuide></StyleGuide>
+              </Suspense>
+            )}
+
             {featureFlags.StyleGuide && (
               <Suspense fallback={<div>Loading StyleGuide</div>}>
                 <StyleGuide></StyleGuide>

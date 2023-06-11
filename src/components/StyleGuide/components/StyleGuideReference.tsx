@@ -1,29 +1,51 @@
-import { AssetDownloaderProps } from '@Types/ExportedWebsiteAssets/ExportedAssets';
-import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
-import Icon from '@src/components/IconWrapper/Icon';
-import StorageOps from '@src/Utils/LocalStorage/StorageOps';
-import CustomSpinner from '@src/components/Util/CustomSpinner/customSpinner-index';
-import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
-// import styles from '../assetManager.module.scss';
 import { useGlobalContext } from '@Context/Global/GlobalProvider';
+import { AssetDownloaderProps } from '@Types/ExportedWebsiteAssets/ExportedAssets';
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './StyleGuide.module.scss';
 
 
 const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
-
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [searchTerm, setSearchTerm] = useState<String>('');
-  const [downloadProgress, setDownloadProgress] = useState<Record<number, number>>({});
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
-  const [currentCodeAccent, setCurrentCodeAccent] = useState<string>('');
   const [html, setHtml] = useState<string>('');
   const [css, setCss] = useState<string>('');
+  const [currentCodeAccent, setCurrentCodeAccent] = useState<string>('');
+  const [activeModal, setActiveModal] = useState<'timer' | 'calculator' | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPageIndex, setSelectedPageIndex] = useState<number>(0);
+  const [hoverColor, setHoverColor] = useState('#0000FF'); // Default blue
+  const [clickColor, setClickColor] = useState('#00FF00'); // Default green
+
+  // Update these color state when color pickers change
+  const handleHoverColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHoverColor(event.target.value);
+  };
+
+  const handleClickColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setClickColor(event.target.value);
+  };
+
+  const [initialized, setInitialized] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (websiteData && !initialized) {
+      const styleGuideIndex = websiteData.websiteData.websiteData['data'].pages.findIndex(page => page.page.title === 'StyleGuide');
+      if (styleGuideIndex !== -1) {
+        setSelectedPageIndex(styleGuideIndex);
+      }
+      setInitialized(true);
+    }
+  }, [websiteData, initialized]);
+
+
+  const statusBarOptions = {
+    activation: 'click', // or 'hover'
+    deactivation: 'click', // or 'timeout'
+  };
 
 
   const {
     retrieveSetting
   } = useGlobalContext();
-
 
   useEffect(() => {
     const fetchColorValue = async () => {
@@ -38,158 +60,75 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
   }, [retrieveSetting]);
 
   useEffect(() => {
-
     if (websiteData) {
       console.log('%cwebsiteData', 'color: orange; font-size: 64px', websiteData);
       console.log('%cwebsiteData', 'color: orange; font-size: 64px',);
       console.log('%c data', 'color: orange; font-size: 64px', websiteData.websiteData['data']);
       setHtml(websiteData.websiteData.websiteData['data'].pages[0].html);
       setCss(websiteData.websiteData.websiteData['data'].css);
-
     }
-
   }, [websiteData]);
 
   useEffect(() => {
     console.log('%chtml ,css ', 'color: lightblue; font-size: 74px', html, css);
   }, [html, css]);
 
-
   useEffect(() => {
-    StorageOps.watchForStorageUpdate().then((res) => {
-      console.log('res', res);
-      if (res) {
-        const images = res?.websiteData?.websiteData?.data?.images;
-        if (images) {
-          setImageUrls(images);
-
-        }
+    if (websiteData) {
+      const numOfPages = websiteData.websiteData.websiteData['data'].pages.length;
+      if (selectedPageIndex >= numOfPages) {
+        setSelectedPageIndex(numOfPages - 1);
       }
-    });
-  }, []);
-
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const filteredImages = images.filter((image) =>
-    image.fileName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-
-
-
-  useEffect(() => {
-    // Urls that are selected on the editor be selected in the asset manager.
-    if (imageUrls.length > 0) {
-      const selectedImagesByURL = images
-        .map((image, index) => (imageUrls.includes(image.cdnUrl) ? index : -1))
-        .filter((index) => index !== -1);
-
-      setSelectedImages(selectedImagesByURL);
     }
-  }, [imageUrls]);
+  }, [websiteData, selectedPageIndex]);
 
-
-
-  const handleSelectedDownloads = () => {
-    selectedImages.forEach((index) => {
-      handleDownload(images[index].cdnUrl, index);
-    });
-  };
-
-
-  const toggleImageSelection = (index: any) => {
-    if (selectedImages.includes(index)) {
-      setSelectedImages(selectedImages.filter((i) => i !== index));
-    } else {
-      setSelectedImages([...selectedImages, index]);
-    }
-  };
-
-  const handleDownload = async (url: string | undefined, index: any) => {
-    if (!url) {
-      console.error('URL is undefined');
-      return;
-    }
-
-    try {
-      const response = await axios.get(url, {
-        responseType: 'blob',
-        onDownloadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          if (loaded && total) {
-            setDownloadProgress((prevProgress) => ({
-              ...prevProgress,
-              [index]: 0,
-            }));
-          } else {
-            alert('Download failed')
-          }
-        },
-      });
-
-      // Create a blob URL and trigger the download
-      const blobUrl = URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.setAttribute('download', url.split('/').pop());
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (error) {
-      console.error('Download failed:', error);
-    }
-  };
-
-  const handleDownloadAll = () => {
-    images.forEach((image, index) => {
-      handleDownload(image.cdnUrl, index);
-    });
-  };
-
-
-  if (images.length === 0) {
-    return (<CustomSpinner></CustomSpinner>)
-  }
-
-
-  const highlightSearchTerm = (text: string, searchTerm: string) => {
-    const parts = text.split(new RegExp(`(${searchTerm})`, 'gi'));
-    return (
-      <>
-        {parts.map((part, index) =>
-          part.toLowerCase() === searchTerm.toLowerCase() ? (
-            <span key={index} className={styles["Image__highlighted"]}>
-              {part}
-            </span>
-          ) : (
-            <span key={index}>{part}</span>
-          )
-        )}
-      </>
-    );
+  const handlePageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedPageIndex(Number(event.target.value));
   };
 
   return (
     <>
 
-      <MyComponent websiteData={websiteData} clickColor={"red"} hoverColor = {"blue"}></MyComponent>
+      <div style={{ position: 'fixed', top: '10px', right: '20px', zIndex: '9999' }}>
+        <label>Hover color:</label>
+        <input type="color" value={hoverColor} onChange={handleHoverColorChange} />
 
+        <label>Click color:</label>
+        <input type="color" value={clickColor} onChange={handleClickColorChange} />
+        <select
+        value={selectedPageIndex}
+        onChange={handlePageChange}
+
+      >
+        {websiteData && websiteData.websiteData.websiteData['data'].pages.map((page, index) => {
+          console.log('%cpage', 'color: lightblue; font-size: 44px', page);
+          return (
+            <option key={index} value={index}>
+              {page.page.title}
+            </option>
+          )
+        })}
+      </select>
+
+      </div>
+
+
+      <StyleGuideFrame websiteData={websiteData} selectedPageIndex={selectedPageIndex} clickColor={"lightblue"} hoverColor={"blue"}></StyleGuideFrame>
+      <div className={styles['StatusBar']} style={{ position: 'fixed', bottom: 0, height: '50px', width: '100vw', backgroundColor: 'transparent', zIndex: '4500000000000000000000000' }} />
 
     </>
   );
-
 };
 
-const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
+
+const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColor }) => {
+
   const iframeRef = useRef(null);
 
   useEffect(() => {
     const iframe = iframeRef.current;
     const doc = iframe.contentDocument;
-    const html = websiteData.websiteData.websiteData['data'].pages[0].html;
+    const html = websiteData.websiteData.websiteData['data'].pages[selectedPageIndex].html;
     const css = websiteData.websiteData.websiteData['data'].css;
 
     const tooltipCss = `
@@ -211,13 +150,9 @@ const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
         color: ${hoverColor};
         padding-left: 0;
       }
-
-
       .hover-highlighted {
         outline: 1px solid ${hoverColor}; /* Red color for hovered elements */
-
       }
-
       .click-highlighted {
         outline: 1px solid ${clickColor}; /* Green color for clicked elements */
       }
@@ -239,6 +174,11 @@ const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
       </html>
     `);
     doc.close();
+
+
+    doc.addEventListener('mousemove', function (e) {
+      window.parent.postMessage({ mouseX: e.clientX, mouseY: e.clientY }, '*');
+    });
 
     // Create the hover tooltip element
     const hoverTooltip = doc.createElement('div');
@@ -262,12 +202,10 @@ const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
 
       targetElement.classList.add('hover-highlighted');
       hoveredElement = targetElement;
-
       const boundingRect = targetElement.getBoundingClientRect();
 
       // Exclude 'hover-highlighted' and 'click-highlighted' class names from tooltip
       const classNames = targetElement.className.split(' ').filter(name => name !== 'hover-highlighted' && name !== 'click-highlighted').join(' ');
-
       hoverTooltip.style.display = 'block';
       hoverTooltip.textContent = classNames;
       hoverTooltip.style.left = `${boundingRect.left + iframe.contentWindow.pageXOffset}px`;
@@ -285,7 +223,6 @@ const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
       clickedElement = targetElement;
 
       const boundingRect = targetElement.getBoundingClientRect();
-
       // Exclude 'hover-highlighted' and 'click-highlighted' class names from tooltip
       const classNames = targetElement.className.split(' ').filter(name => name !== 'hover-highlighted' && name !== 'click-highlighted').join(' ');
 
@@ -294,7 +231,6 @@ const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
       clickTooltip.style.justifyContent = 'center';
       clickTooltip.style.flexDirection = 'row';
       clickTooltip.style.gap = '4px';
-
       // Set white-space to preserve spaces
       clickTooltip.style.whiteSpace = 'pre-wrap';
 
@@ -318,25 +254,27 @@ const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
         iframe.contentWindow.removeEventListener('mousemove', updateHoverTooltip);
         iframe.contentWindow.removeEventListener('click', updateClickTooltip);
         iframe.contentWindow.removeEventListener('mouseout', () => {
-          if(hoverTooltip) {
+          if (hoverTooltip) {
             hoverTooltip.style.display = 'none';
           }
         });
       }
     };
 
-  }, [websiteData]);
+  }, [websiteData, selectedPageIndex]);
 
   return (
-    <iframe
-      ref={iframeRef}
-      title="My iframe"
-      style={{
-        width: '100%',
-        height: '100vh',
-        border: 0
-      }}
-    />
+    <>
+      <iframe
+        ref={iframeRef}
+        title="My iframe"
+        style={{
+          width: '100%',
+          height: 'calc(100vh - 50px)', // Subtracting the height of the StatusBar div
+          border: 0
+        }}
+      />
+    </>
   );
 };
 
