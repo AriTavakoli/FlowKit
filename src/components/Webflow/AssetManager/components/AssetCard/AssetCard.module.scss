@@ -1,3 +1,5 @@
+
+
 .Asset {
   &__container {
     display: flex;
@@ -12,7 +14,6 @@
 
   &__rowView {
     display: flex;
-    flex-direction: column;
     width: 100%;
     overflow: auto;
     padding-left: 2em;
@@ -31,8 +32,9 @@
     justify-content: center;
     padding-bottom: 10vh;
   }
+
   &__item {
-    width: 80%;
+    width: 100%;
     cursor: pointer;
     display: flex;
     flex-direction: column;

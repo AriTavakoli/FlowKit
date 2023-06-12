@@ -28,6 +28,7 @@ export const TabParent = (props) => {
     }
   };
 
+
   const Skeleton = () => {
     return (
       <div className="dropdown">
@@ -54,7 +55,7 @@ export const TabParent = (props) => {
           </div>
         ))}
       </Tabs>
-      {isPending ? <Skeleton /> : <TabContent content={tabContent[active]} />}
+      <TabContent content={tabContent[active]} />
     </div>
   );
 };

@@ -27,22 +27,22 @@ function SequenceExplorer({ open, sequenceRef, executeCurrentSequence }) {
       <SequenceGptProvider>
         <WebflowGptProvider>
           <div className={styles["LiveGPT__container"]}>
-            <select value={selectedComponent} onChange={handleComponentChange}>
+            {/* <select value={selectedComponent} onChange={handleComponentChange}>
               <option value="LangChain">LangChain</option>
               <option value="SequenceIndex">SequenceIndex</option>
-            </select>
-            {selectedComponent === "LangChain" ? (
+            </select> */}
+            {/* {selectedComponent === "LangChain" ? (
               <LangChain
                 sequenceRef={sequenceRef ? sequenceRef : null}
               />
-            ) : (
+            ) : ( */}
               <SequenceIndex
                 sequenceRef={sequenceRef ? sequenceRef : null}
                 executeCurrentSequence={
                   executeCurrentSequence ? executeCurrentSequence : null
                 }
               />
-            )}
+            {/* )} */}
 
           </div>
         </WebflowGptProvider>
