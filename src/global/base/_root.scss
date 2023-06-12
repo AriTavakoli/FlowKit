@@ -1,5 +1,5 @@
 @import url("https://rsms.me/inter/inter.css");
-@import 'variables';
+@import "variables";
 
 :root {
   --primary-color: #c6c6c6;
@@ -12,14 +12,16 @@
   --min-viewport-width: #{$min-viewport-width};
   --max-viewport-width: #{$max-viewport-width};
 
-
   body {
     font-family: "Inter", sans-serif !important;
     margin: 0;
   }
 
   html {
-    font-size: calc(var(--min-font-size) + (var(--max-font-size) - var(--min-font-size)) * ((100vw - var(--min-viewport-width)) / (var(--max-viewport-width) - var(--min-viewport-width)))) !important;
+    font-size: calc(
+      var(--min-font-size) + (var(--max-font-size) - var(--min-font-size)) *
+        ((100vw - var(--min-viewport-width)) / (var(--max-viewport-width) - var(--min-viewport-width)))
+    ) !important;
   }
 
   h1,
@@ -59,7 +61,7 @@
   }
 
   p {
-    font-size: .75rem;
+    font-size: 0.75rem;
     color: var(--primary-color);
   }
 
@@ -67,9 +69,9 @@
     font-size: 1rem;
     color: var(--primary-color);
   }
-///
+  ///
   code {
-    font-family : monospace;
+    font-family: monospace;
     font-weight: lighter;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -81,14 +83,13 @@
     // border-radius: 12px;
   }
   pre {
-    margin : 0;
+    margin: 0;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    border-top-left-radius: 0px !important;
+    border: 1px solid #716e6e59;
   }
-
-
 }
-
 
 body {
   font-family: "Inter", sans-serif !important;
@@ -97,12 +98,11 @@ body {
 }
 
 html {
-  font-size: calc(var(--min-font-size) + (var(--max-font-size) - var(--min-font-size)) * ((100vw - var(--min-viewport-width)) / (var(--max-viewport-width) - var(--min-viewport-width)))) !important;
+  font-size: calc(
+    var(--min-font-size) + (var(--max-font-size) - var(--min-font-size)) *
+      ((100vw - var(--min-viewport-width)) / (var(--max-viewport-width) - var(--min-viewport-width)))
+  ) !important;
 }
-
-
-
-
 
 /* Reset and global settings */
 *,

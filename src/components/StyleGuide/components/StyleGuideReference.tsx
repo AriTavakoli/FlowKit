@@ -2,7 +2,7 @@ import { useGlobalContext } from '@Context/Global/GlobalProvider';
 import { AssetDownloaderProps } from '@Types/ExportedWebsiteAssets/ExportedAssets';
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './StyleGuide.module.scss';
-
+import Dropdown from '@src/components/Util/DropDown/DropDown';
 
 const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
@@ -14,6 +14,13 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
   const [selectedPageIndex, setSelectedPageIndex] = useState<number>(0);
   const [hoverColor, setHoverColor] = useState('#0000FF'); // Default blue
   const [clickColor, setClickColor] = useState('#00FF00'); // Default green
+
+  const dropdownOptions = websiteData?.websiteData.websiteData['data'].pages.map((page, index) => ({
+    value: index,
+    label: page.page.title,
+    icon: 'none' // use a static icon for all options, or map from data if available
+  }));
+
 
   // Update these color state when color pickers change
   const handleHoverColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,35 +89,29 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
     }
   }, [websiteData, selectedPageIndex]);
 
-  const handlePageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedPageIndex(Number(event.target.value));
+  const handleDropdownChange = (option) => {
+    setSelectedPageIndex(option.value);
   };
 
   return (
     <>
 
-      <div style={{ position: 'fixed', top: '10px', right: '20px', zIndex: '9999' }}>
-        <label>Hover color:</label>
-        <input type="color" value={hoverColor} onChange={handleHoverColorChange} />
+      <div style={{ position: 'fixed', top: '2px', right: '32px', zIndex: '9999' }}>
+        {/* <label>Hover color:</label> */}
+        {/* <input type="color" value={hoverColor} onChange={handleHoverColorChange} />
 
         <label>Click color:</label>
-        <input type="color" value={clickColor} onChange={handleClickColorChange} />
-        <select
-        value={selectedPageIndex}
-        onChange={handlePageChange}
-
-      >
-        {websiteData && websiteData.websiteData.websiteData['data'].pages.map((page, index) => {
-          console.log('%cpage', 'color: lightblue; font-size: 44px', page);
-          return (
-            <option key={index} value={index}>
-              {page.page.title}
-            </option>
-          )
-        })}
-      </select>
+        <input type="color" value={clickColor} onChange={handleClickColorChange} /> */}
+        <Dropdown
+          options={dropdownOptions}
+          label="Select a page"
+          onChange={handleDropdownChange}
+          customStyles={{}}
+          icon={true}
+        />
 
       </div>
+
 
 
       <StyleGuideFrame websiteData={websiteData} selectedPageIndex={selectedPageIndex} clickColor={"lightblue"} hoverColor={"blue"}></StyleGuideFrame>
@@ -226,6 +227,13 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
       // Exclude 'hover-highlighted' and 'click-highlighted' class names from tooltip
       const classNames = targetElement.className.split(' ').filter(name => name !== 'hover-highlighted' && name !== 'click-highlighted').join(' ');
 
+      navigator.clipboard.writeText(classNames).then(function() {
+        console.log('Copying to clipboard was successful!');
+      }, function(err) {
+        console.warn('Could not copy text: ', err);
+      });
+
+
       clickTooltip.style.display = 'flex';
       clickTooltip.style.alignItems = 'center';
       clickTooltip.style.justifyContent = 'center';
@@ -240,6 +248,8 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
       clickTooltip.style.top = `${boundingRect.top + iframe.contentWindow.pageYOffset}px`;
     };
 
+
+
     iframe.contentWindow.addEventListener('mousemove', updateHoverTooltip);
     iframe.contentWindow.addEventListener('click', updateClickTooltip);
     iframe.contentWindow.addEventListener('mouseout', () => {
@@ -248,6 +258,13 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
         hoveredElement.classList.remove('hover-highlighted');
       }
     });
+
+    const options = [
+      { value: 'Default', label: 'Default', icon: 'none' },
+      { value: 'Custom', label: 'Custom', icon: 'info' },
+    ];
+
+
 
     return () => {
       if (iframe && iframe.contentWindow) {
@@ -263,6 +280,7 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
 
   }, [websiteData, selectedPageIndex]);
 
+
   return (
     <>
       <iframe
@@ -270,7 +288,7 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
         title="My iframe"
         style={{
           width: '100%',
-          height: 'calc(100vh - 50px)', // Subtracting the height of the StatusBar div
+          height: 'calc(100vh - 0px)', // Subtracting the height of the StatusBar div
           border: 0
         }}
       />

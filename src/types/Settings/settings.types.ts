@@ -4,7 +4,6 @@ export interface Settings {
   searchResults: boolean;
   todoApp: boolean;
   editorMain: boolean;
-  gpt: boolean;
   liveGPT: boolean;
   assetManager: boolean;
 }
@@ -25,7 +24,6 @@ export interface FeatureFlags {
   searchResults: boolean;
   todoApp: boolean;
   editorMain: boolean;
-  gpt: boolean;
   liveGPT: boolean;
   assetManager: boolean;
   ideaExplorer: boolean;

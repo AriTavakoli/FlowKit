@@ -9,7 +9,6 @@ import { detectSystemColorScheme, getExtensionVersion } from '@src/Utils/gptutil
 import CustomToggleButton from '@src/components/Util/toggle/toggleSwitch'
 import ProviderSelect from './ProviderSelect'
 
-// import '../../base.css'
 import {
   Language,
   TRIGGER_MODE_TEXT,
@@ -18,7 +17,6 @@ import {
   getUserConfig,
   updateUserConfig,
 } from '@src/config/config'
-
 
 
 function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => void }) {
@@ -104,17 +102,13 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
       <ParentComponent />
 
       <div className={styles["Options__colorContainer"]}>
-
         <span className={styles["Options__title"]}>FlowKit Custom Color:</span>
-
         <input
           className={styles["Options__colorPicker"]}
           value={colorValue}
           type="color"
           onChange={(e) => { handleUserSettingsChange({ type: 'accentColor', value: e.target.value }); setColorValue(e.target.value); }}
         />
-
-
       </div>
 
 
@@ -267,7 +261,6 @@ const ParentComponent = () => {
     searchResults: false,
     todoApp: false,
     editorMain: false,
-    gpt: false,
     liveGPT: false,
     assetManager: false,
     ideaExplorer: false,
@@ -282,6 +275,10 @@ const ParentComponent = () => {
       }
     });
   }, []);
+
+
+
+
 
   const handleFeatureSelect = (featureName, selectedValue) => {
     featureFlagOps.updateFeatureFlag(featureName, selectedValue).then(() => {

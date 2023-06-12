@@ -10,6 +10,11 @@ import { extractImageUrls, formatBytes } from '../utils/asset-Utils';
 import noPreview from './no-preview.jpg';
 import { useGlobalContext } from '@Context/Global/GlobalProvider';
 import './AssetDownloader.scss'
+import SearchBar from './SearchBar/SearchBar-index';
+import AssetCard from './AssetCard/AssetCard';
+import { AssetLayout, ControlBar, } from './Layout/AssetLayout';
+import AssetRow from './AssetRow/AssetRow-index';
+
 
 
 const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
@@ -22,6 +27,20 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
   const [html, setHtml] = useState<string>('');
   const [css, setCss] = useState<string>('');
 
+  const [viewType, setViewType] = useState<string>('row');
+  const [filterType, setFilterType] = useState<string>('all');
+
+  // New function to handle view type change
+  const handleViewTypeChange = (newViewType: string) => {
+    setViewType(newViewType);
+  };
+
+  // New function to handle filter type change
+  const handleFilterTypeChange = (newFilterType: string) => {
+    setFilterType(newFilterType);
+  };
+
+  // Update filteredImages logic to take filterType into account
 
   const {
     retrieveSetting
@@ -41,7 +60,6 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
   }, [retrieveSetting]);
 
   useEffect(() => {
-
     if (websiteData) {
       console.log('%cwebsiteData', 'color: orange; font-size: 64px', websiteData);
       console.log('%cwebsiteData', 'color: orange; font-size: 64px',);
@@ -77,7 +95,8 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
   };
 
   const filteredImages = images.filter((image) =>
-    image.fileName.toLowerCase().includes(searchTerm.toLowerCase())
+    (image.fileName.toLowerCase().includes(searchTerm.toLowerCase())) &&
+    (filterType === 'all' || image.mimeType.includes(filterType))
   );
 
   // get the currently selected nodes corresponding information.
@@ -163,284 +182,63 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
   }
 
 
-  const highlightSearchTerm = (text: string, searchTerm: string) => {
-    const parts = text.split(new RegExp(`(${searchTerm})`, 'gi'));
-    return (
-      <>
-        {parts.map((part, index) =>
-          part.toLowerCase() === searchTerm.toLowerCase() ? (
-            <span key={index} className={styles["Image__highlighted"]}>
-              {part}
-            </span>
-          ) : (
-            <span key={index}>{part}</span>
-          )
-        )}
-      </>
-    );
-  };
-
   return (
     <>
 
+      <AssetLayout>
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearchChange={handleSearchChange} />
 
-      <div className={styles["Asset__container"]}>
+        <ControlBar
+          selectedImages={selectedImages}
+          handleSelectedDownloads={handleSelectedDownloads}
+          handleDownloadAll={handleDownloadAll}
+          handleViewTypeChange={handleViewTypeChange}
+          handleFilterTypeChange={handleFilterTypeChange}
+          viewType={viewType}
+          filterType={filterType}
 
+        ></ControlBar>
 
-        <div className={styles['search-bar-container']}>
-          <div className={styles['search-bar']}>
-
-            <div className={styles['search-icon-container']}>
-              <Icon id="search" size={18} color={"white"} />
-            </div>
-
-            <div className={styles['filter-holder']}>
-              <div className={styles['overflow']}>
-              </div>
-              <input
-                className={styles['search-bar-input']}
-                onChange={handleSearchChange}
-                value={searchTerm}
-                placeholder="Find anything..."
-              ></input>
-            </div>
-
-          </div>
-        </div>
-
-
-        {/* Asset Control Bar that allows the user to download the selected items or all of them items */}
-
-        <div className={styles["Asset__controlBar"]}>
-          <span > Download All </span>
-          <RippleButton callBack={() => handleDownloadAll()} shape="square" outlineColor='grey' padding='4px'>
-            <Icon id="download" size={16} color="white"></Icon>
-          </RippleButton>
-
-          <span > Download Selected </span>
-          <RippleButton callBack={() => handleSelectedDownloads()} shape="square" outlineColor='grey' padding='4px'>
-            <Icon id="download" size={16} color="white"></Icon>
-          </RippleButton>
-        </div>
 
 
 
         {/* filtered Images from the search results  */}
 
-        <div className={styles["Asset__row"]}>
+        <div className={` ${viewType === 'row' ? styles["Asset__rowView"] : styles["Asset__columnView"]}`}>
+          {filteredImages.map((image, index) => {
+            return viewType === 'row' ? (
+              <AssetRow
+                key={index}
+                image={image}
+                index={index}
+                selectedImages={selectedImages}
+                currentCodeAccent={currentCodeAccent}
+                toggleImageSelection={toggleImageSelection}
+                searchTerm={searchTerm}
+                downloadProgress={downloadProgress}
+                handleDownload={handleDownload}
+              />
+            ) : (
+              <AssetCard
+                key={index}
+                image={image}
+                index={index}
+                selectedImages={selectedImages}
+                currentCodeAccent={currentCodeAccent}
+                toggleImageSelection={toggleImageSelection}
+                searchTerm={searchTerm}
+                downloadProgress={downloadProgress}
+                handleDownload={handleDownload}
+              />
+            );
+          })}
 
-          {filteredImages.map((image, index) => (
-            <div
-              key={index}
-              className={`${styles["Asset__item"]} ${selectedImages.includes(index)
-                ? styles["Asset__item--selected"]
-                : ""
-                }`}
-              onClick={() => toggleImageSelection(index)}
-              style={selectedImages.includes(index) ? { borderColor: currentCodeAccent } : {}}
-            >
-              <div className={styles["Image__thumbNail"]}>
-                <img
-                  src={image.thumbUrl ? image.thumbUrl : image.cdnUrl}
-                  alt={image.name}
-                  className={styles["Image__image"]}
-                />
-
-                {/*  show a check mark for the images that are selected with a green border */}
-                {selectedImages.includes(index) && (
-                  <div style={{ backgroundColor: currentCodeAccent }} className={styles["Image__selected"]} >
-                    <Icon id="check" size={16} color="white" />
-                  </div>
-                )}
-              </div>
-
-
-              <div className={styles["Image__details"]}>
-                <div className={styles["image-metadata"]}>
-                  <p className={styles["Image__title"]} title={image.origFileName}>
-                    {highlightSearchTerm(image.origFileName, searchTerm as string)}
-                  </p>
-                  <p>{formatBytes(image.size)}</p>
-                  <p>{image.mimeType}</p>
-                </div>
-                <div className={styles["download-section"]}>
-                  <div className={styles["progress-bar"]}>
-                    <div
-                      className={styles["progress-bar__inner"]}
-                      style={{ width: `${downloadProgress[index]}%` }}
-                    ></div>
-                  </div>
-                  <RippleButton callBack={() => handleDownload(image.cdnUrl, index)}>
-                    <Icon id="download" size={16}></Icon>
-                  </RippleButton>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
-      </div>
+      </AssetLayout>
     </>
   );
 
 };
-
-const MyComponent = ({ websiteData, hoverColor, clickColor }) => {
-  const iframeRef = useRef(null);
-
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    const doc = iframe.contentDocument;
-    const html = websiteData.websiteData.websiteData['data'].pages[0].html;
-    const css = websiteData.websiteData.websiteData['data'].css;
-
-    const tooltipCss = `
-      .tooltip {
-        position: absolute;
-        background-color: ${clickColor};
-        color: #fff;
-        padding: 5px;
-        border-radius: 3px;
-        font-size: 12px;
-        z-index: 1000;
-        margin-left: -2px;
-        pointer-events: none;
-        font-family: Manrope, sans-serif;
-        transform: translateY(-100%);
-      }
-      .tooltip.hover-tooltip {
-        background-color: transparent;
-        color: ${hoverColor};
-        padding-left: 0;
-      }
-
-
-      .hover-highlighted {
-        outline: 1px solid ${hoverColor}; /* Red color for hovered elements */
-
-      }
-
-      .click-highlighted {
-        outline: 1px solid ${clickColor}; /* Green color for clicked elements */
-      }
-    `;
-
-    doc.open();
-    doc.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <style>
-          ${css}
-          ${tooltipCss}
-        </style>
-      </head>
-      <body>
-        ${html}
-      </body>
-      </html>
-    `);
-    doc.close();
-
-    // Create the hover tooltip element
-    const hoverTooltip = doc.createElement('div');
-    hoverTooltip.classList.add('tooltip', 'hover-tooltip');
-    doc.body.appendChild(hoverTooltip);
-
-    // Create the click tooltip element
-    const clickTooltip = doc.createElement('div');
-    clickTooltip.classList.add('tooltip', 'click-tooltip');
-    doc.body.appendChild(clickTooltip);
-
-    let hoveredElement;
-    let clickedElement;
-
-    const updateHoverTooltip = (event) => {
-      const targetElement = event.target;
-
-      if (hoveredElement) {
-        hoveredElement.classList.remove('hover-highlighted');
-      }
-
-      targetElement.classList.add('hover-highlighted');
-      hoveredElement = targetElement;
-
-      const boundingRect = targetElement.getBoundingClientRect();
-
-      // Exclude 'hover-highlighted' and 'click-highlighted' class names from tooltip
-      const classNames = targetElement.className.split(' ').filter(name => name !== 'hover-highlighted' && name !== 'click-highlighted').join(' ');
-
-      hoverTooltip.style.display = 'block';
-      hoverTooltip.textContent = classNames;
-      hoverTooltip.style.left = `${boundingRect.left + iframe.contentWindow.pageXOffset}px`;
-      hoverTooltip.style.top = `${boundingRect.top + iframe.contentWindow.pageYOffset}px`;
-    };
-
-    const updateClickTooltip = (event) => {
-      const targetElement = event.target;
-
-      if (clickedElement) {
-        clickedElement.classList.remove('click-highlighted');
-      }
-
-      targetElement.classList.add('click-highlighted');
-      clickedElement = targetElement;
-
-      const boundingRect = targetElement.getBoundingClientRect();
-
-      // Exclude 'hover-highlighted' and 'click-highlighted' class names from tooltip
-      const classNames = targetElement.className.split(' ').filter(name => name !== 'hover-highlighted' && name !== 'click-highlighted').join(' ');
-
-      clickTooltip.style.display = 'flex';
-      clickTooltip.style.alignItems = 'center';
-      clickTooltip.style.justifyContent = 'center';
-      clickTooltip.style.flexDirection = 'row';
-      clickTooltip.style.gap = '4px';
-
-      // Set white-space to preserve spaces
-      clickTooltip.style.whiteSpace = 'pre-wrap';
-
-      clickTooltip.textContent = `${targetElement.tagName.toLowerCase()}   ` + classNames;
-
-      clickTooltip.style.left = `${boundingRect.left + iframe.contentWindow.pageXOffset}px`;
-      clickTooltip.style.top = `${boundingRect.top + iframe.contentWindow.pageYOffset}px`;
-    };
-
-    iframe.contentWindow.addEventListener('mousemove', updateHoverTooltip);
-    iframe.contentWindow.addEventListener('click', updateClickTooltip);
-    iframe.contentWindow.addEventListener('mouseout', () => {
-      hoverTooltip.style.display = 'none';
-      if (hoveredElement) {
-        hoveredElement.classList.remove('hover-highlighted');
-      }
-    });
-
-    return () => {
-      iframe.contentWindow.removeEventListener('mousemove', updateHoverTooltip);
-      iframe.contentWindow.removeEventListener('click', updateClickTooltip);
-      iframe.contentWindow.removeEventListener('mouseout', () => {
-        hoverTooltip.style.display = 'none';
-      });
-    };
-  }, [websiteData]);
-
-  return (
-    <iframe
-      ref={iframeRef}
-      title="My iframe"
-      style={{
-        width: '100%',
-        height: '100vh',
-        border: 0
-      }}
-    />
-  );
-};
-
-
-
-
-
-
 
 
 

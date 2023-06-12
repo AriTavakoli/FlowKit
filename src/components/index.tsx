@@ -14,17 +14,19 @@ import StatusBarModal from './StatusBar/components/Modal/StatusBarModal';
 const App = ({ styleSheet, css }) => {
 
   const [featureFlags, setFeatureFlags] = useState<FeatureFlags>({
-
     searchResults: true,
-    todoApp: true,
+    // todoApp: true,
     editorMain: true,
-    gpt: true,
     StyleGuide: true,
     liveGPT: true,
     assetManager: true,
     componentLibrary: true,
     ideaExplorer: true,
+
   });
+
+  const SearchResults = lazy(() => import(/* webpackChunkName: "SearchResults" */'./Webflow/Features/Results/SearchResults'));
+
 
   const tabConfig = [
     {
@@ -37,14 +39,18 @@ const App = ({ styleSheet, css }) => {
       key: 'bTab',
       icon: 'search',
       flag: 'searchResults',
-      component: lazy(() => import(/* webpackChunkName: "Search" */'./Webflow/Features/Results/SearchResults')),
+      component: () => (
+        <SearchProvider>
+          <SearchResults styleSheet={styleSheet} />
+        </SearchProvider>
+      ),
     },
-    {
-      key: 'cTab',
-      icon: 'todo',
-      flag: 'todoApp',
-      component: lazy(() => import(/* webpackChunkName: "TODOAPP" */'@src/components/Webflow/Features/Todo/App')),
-    },
+    // {
+    //   key: 'cTab',
+    //   icon: 'todo',
+    //   flag: 'todoApp',
+    //   component: lazy(() => import(/* webpackChunkName: "TODOAPP" */'@src/components/Webflow/Features/Todo/App')),
+    // },
     {
       key: 'dTab',
       icon: 'builder',
@@ -59,7 +65,7 @@ const App = ({ styleSheet, css }) => {
     },
     {
       key: 'fTab',
-      icon : 'tree',
+      icon: 'tree',
       flag: 'ideaExplorer',
       component: lazy(() => import(/* webpackChunkName: "IdeaExplorer" */'./SplitScreens/IdeaExplorer/IdeaExplorer')),
     },
@@ -70,9 +76,6 @@ const App = ({ styleSheet, css }) => {
       component: lazy(() => import(/* webpackChunkName: "AssetManager" */'./Webflow/AssetManager/assetManager-index')),
     },
   ];
-
-
-
 
 
 
@@ -90,10 +93,20 @@ const App = ({ styleSheet, css }) => {
     const featureFlagOps = new FeatureFlagOps();
     featureFlagOps.loadFeatureFlags().then((loadedFlags) => {
       if (loadedFlags) {
+        console.log('%cloadedFlags', 'color: orange; font-size: 54px', loadedFlags);
         setFeatureFlags(loadedFlags as FeatureFlags);
+      } else {
+        // Initialize flags when they are not in local storage
+        featureFlagOps.initializeFeatureFlags(tabConfig).then(() => {
+          // Load again after initialization
+          featureFlagOps.loadFeatureFlags().then((initializedFlags) => {
+            setFeatureFlags(initializedFlags as FeatureFlags);
+          });
+        });
       }
     });
   }, []);
+
 
 
 
