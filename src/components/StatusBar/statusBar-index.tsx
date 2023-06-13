@@ -7,6 +7,7 @@ import MessageFactory from '@src/Utils/MessageFactory';
 import useStatusBarActions from './hooks/useStatusBarActions';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import StorageOps from '../../Utils/LocalStorage/StorageOps';
+import { useGlobalContext } from '@Context/Global/GlobalProvider';
 import StatusBarModal from './components/Modal/StatusBarModal';
 import styles from './StatusBar.module.scss';
 interface StatusBarProps {
@@ -20,6 +21,13 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
   const [visible, setVisible] = useState(false);
 
   const { activateLiveColorPicker, resizePopupWindow, openOptionsPage } = useStatusBarActions();
+
+
+  const {
+    theme,
+    setTheme
+  } = useGlobalContext();
+
 
 
 
@@ -61,14 +69,14 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
   }, []);
 
   useOnClickOutside(barRef, () => setVisible(false));
-
-
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+  };
 
   return (
-
-    <div className={`status-bar ${visible ? 'visible' : 'hidden'}`} style={{ zIndex: '100000000000000001' }}>
-      <div className="statusBar__container" ref={barRef}>
-        <RippleButton callBack={() => { resizePopupWindow(400, 600); }} padding='4px' >
+    <div className={`${styles['status-bar']} ${visible ? styles.visible : styles.hidden}`} style={{ zIndex: '100000000000000001' }}>
+      <div className={styles.statusBar__container} ref={barRef}>
+        <RippleButton callBack={() => { resizePopupWindow(400, 600); }} padding='4px'>
           <Icon id="expand" size={iconSize} color="grey"></Icon>
         </RippleButton>
         <RippleButton callBack={() => { handlePrintLocalStorage() }} padding='4px'>
@@ -77,26 +85,22 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
         <RippleButton callBack={() => { resizePopupWindow(1260, 750) }} padding='4px'>
           <Icon id="expandHorizontal" size={iconSize} color="grey"></Icon>
         </RippleButton>
-
         <RippleButton callBack={() => { setActiveModal('timer'); setShowModal(!showModal) }} padding='4px'>
           <Icon id="clock" size={iconSize} color="grey"></Icon>
         </RippleButton>
-
         <RippleButton callBack={() => { setActiveModal('calculator'); setShowModal(!showModal) }} padding='4px'>
           <Icon id="calculator" size={iconSize} color="grey"></Icon>
         </RippleButton>
-
-
         <RippleButton callBack={() => { openOptionsPage() }} padding='4px'>
           <Icon id="settings" size={iconSize} color="grey" ></Icon>
         </RippleButton>
-
-
+        <RippleButton callBack={toggleTheme} padding='4px'>
+          <Icon id="settings" size={iconSize} color="grey" ></Icon>
+        </RippleButton>
       </div>
-      {/* <div onClick={() => { resizePopupWindow(400, 600) }}>resize</div> */}
     </div>
-
   );
 };
+
 
 export default StatusBar;

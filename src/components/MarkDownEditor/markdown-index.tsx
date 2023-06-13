@@ -21,12 +21,12 @@ function EditorMain() {
 
   const [initialData, setInitialData] = useState();
   const fileInput = useRef(null);
+
   const {
-    currentTemplate
+    currentTemplate,
+    theme = 'light', // Set the default theme to 'light'
   } = useGlobalContext();
 
-
-  const [workspaceData, setWorkspaceData] = useState(initialState);
   const dispatch = useWorkspaceDispatch();
   const [queryBuilderModal, setQueryBuilderModal] = useState(false);
 
@@ -47,6 +47,16 @@ function EditorMain() {
   };
 
   const editorRef = useRef(null);
+
+  const themes = {
+    light: {
+      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(105, 105, 105, 0.80), rgba(169, 169, 169, 0.19) 1px, transparent 1px, transparent 100%)`
+    },
+    dark: {
+      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%)`
+    }
+  }
+
 
   useEffect(() => {
     const observer = new ResizeObserver(entries => {
@@ -122,7 +132,7 @@ function EditorMain() {
   return (
 
     <QueryBuilderProvider>
-      <div className="EditorContainer" ref={editorRef}>
+      <div className="EditorContainer" style={themes[theme]} ref={editorRef}>
         {/* <div className="EditorContainer" style = {size ?  {flexBasis: `${100 - size}%`, maxWidth: `${100 - size}%`} : {} }> */}
         {/*  */}
         <div className="Template__container" >

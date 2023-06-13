@@ -1,0 +1,87 @@
+$themes: (
+  light: (
+    primary-bg: #fff,
+    primary2-bg: rgba(255, 255, 255, 1),
+    secondary-bg: #f8f8f8,
+    tertiary-bg: #ccc,
+    primary-text: #000,
+    secondary-text: #545454,
+    track-color : #e5e5e5,
+    thumb-color : #68686889,
+    tertiary-text: #666,
+    link-color: #0000ff,
+    link-hover-color: #ff0000,
+    button-color: #f2f2f2,
+    button-hover-color: #c7c7c7,
+    font-size: 16px,
+    line-height: 1.5,
+    border-color: #e5e5e5,
+    border-color2: #c3c3c3,
+    border-radius: 3px,
+    box-shadow: 6px 10px 30px 0px rgba(0,0,0,0.1),
+    shadow: 0 1px 3px rgba(0, 0, 0, .1),
+    rgba-primary-bg: rgba(255, 255, 255, 0.32),
+    rgba-secondary-bg: rgba(255, 255, 255, 0.19),
+
+
+    fieldsManager-bg: #fff,
+
+
+
+    command-bg: #fff,
+    command-bg2: #f8f8f8,
+    command-text: #000,
+    command-border: #e5e5e5,
+    command-border2: #c3c3c3,
+    command-shadow: 0 1px 3px rgba(0, 0, 0, .1),
+
+
+
+  ),
+
+  dark: (
+    primary-bg: rgb(16, 16, 16),
+    primary2-bg: rgb(25, 25, 25),
+    secondary-bg: #2b2b2b,
+    secondary2-bg: #1b1b1b,
+    tertiary-bg: #666,
+    track-color : #2b2b2b,
+    thumb-color : #68686889,
+    primary-text: #fff,
+    secondary-text: #ccc,
+    tertiary-text: #999,
+    link-color: #33aaff,
+    link-hover-color: #0088ff,
+    button-color: #2b2b2b,
+    button-hover-color: #1b1b1b,
+    font-size: 16px,
+    line-height: 1.5,
+    border-color: #555,
+    border-color2: #333,
+    box-shadow : 0 1px 3px rgba(0, 0, 0, .3),
+    border-radius: 3px,
+    shadow: 0 1px 3px rgba(0, 0, 0, .3),
+    rgba-primary-bg: rgba(16, 16, 16, 0.32),
+    rgba-secondary-bg: rgba(43, 43, 43, 0.19),
+
+
+
+
+    fieldsManager-bg: #0c0c0c,
+
+
+
+    command-bg: #161616,
+    command-bg2: #1b1b1b,
+    command-text: #fff,
+    command-border: #55555534,
+    command-border2: #333,
+    command-shadow: 0 1px 3px rgba(0, 0, 0, .3),
+
+
+
+
+
+
+  )
+);

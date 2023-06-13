@@ -36,7 +36,6 @@ function WorkSpace({ onUpload}) {
   return (
     <>
 
-      <div className="workspace-uploader">
         <BlockTabsParent
           initialState={workspaceData}
           onUpload={onUpload}
@@ -50,7 +49,6 @@ function WorkSpace({ onUpload}) {
           onRequestClose={() => setIsModalOpen(false)}
         />
       </div> */}
-      </div>
 
     </>
   );

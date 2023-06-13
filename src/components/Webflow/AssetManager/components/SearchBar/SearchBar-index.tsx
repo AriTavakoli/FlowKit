@@ -8,7 +8,7 @@ export default function SearchBar({ searchTerm, handleSearchChange}) {
       <div className={styles['search-bar']}>
 
         <div className={styles['search-icon-container']}>
-          <Icon id="search" size={18} color={"white"} />
+          <Icon id="grey" size={18} color={"white"} />
         </div>
 
         <div className={styles['filter-holder']}>

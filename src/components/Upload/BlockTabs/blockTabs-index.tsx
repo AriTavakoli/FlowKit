@@ -16,6 +16,7 @@ import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-inde
 import AddTabForm from './components/AddTabForm/AddTabForm';
 import Dropdown from '@src/components/Util/DropDown/DropDown';
 import WorkspaceDropDown from './components/WorkspaceDropDown/WorkspaceDropDown';
+import FileDrop from './components/UploadButton/FileDrop';
 
 function TabContent({ content, onUpload, initialState, tabKey }) {
 
@@ -337,89 +338,96 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
   return (
     <>
-      <div className={styles['WorkspaceName__wrapper']}>
-        <input
-          type="text"
-          placeholder='Workspace Name'
-          name="workSpaceName"
-          className={styles["WorkspaceName"]}
-          value={workspaceData.name}
-          onChange={handleWorkspaceNameChange}
-        />
-        <WorkspaceDropDown
-          options={workspaces}
-          label={workspaceData.name}
-          onChange={handleWorkspaceChange}
-          customStyles={styles}
-          icon={true}
-        />
-        <RippleButton outlineColor="grey" shape='square' padding='6px' callBack={() => saveWorkspace(workspaceData)}>
-          <Icon id="save" size={16} color="grey" />
-        </RippleButton>
+      <div className={styles["Workspace__wrapper"]}>
+        <div className={styles['WorkspaceName__wrapper']}>
 
-
-
-        <input ref={fileInputRef} type="file" onChange={handleFileUpload} style={{ display: 'none' }} />
-      </div>
-
-
-      <Tabs
-        active={active}
-        onChange={handleTabChange}
-        addButton={<RippleButton padding='4px' callBack={() => setShowForm(!showForm)}><Icon id="add" size={16} color="white" /></RippleButton>}
-        // saveButton={}
-        uploadButton={<RippleButton padding='4px' callBack={() => document.getElementById('fileUpload').click()}><Icon id="upload" size={16} color="white" /></RippleButton>}
-        editButton={<RippleButton padding='4px' callBack={() => setIsEditEnabled(!isEditEnabled)}><Icon id="edit" size={16} color="white" /></RippleButton>}
-      >
-        {Array.isArray(tabs) && tabs.map((tab) => (
-          <div key={tab.key}>
-            {tab.label}
-            {isEditEnabled && (
-              <>
-                <button onClick={() => startEditTab(tab.key)}>Edit</button>
-                <button onClick={() => deleteTab(tab.key)}>Delete</button>
-              </>
-            )}
-          </div>
-        ))}
-      </Tabs>
-
-
-      {showForm && (
-        <AddTabForm
-          setShowForm={setShowForm}
-          newTabLabel={newTabLabel}
-          setNewTabLabel={setNewTabLabel}
-          newTabContent={newTabContent}
-          setNewTabContent={setNewTabContent}
-          addTab={isEditingTab ? updateTab : addTab}
-          isEditing={isEditingTab}
-          currentTab={tabs.find(tab => tab.key === editingTabKey)}
-        />
-      )}
-
-      {workspaceData.tabs.find((tab) => tab.key === active) && (
-        <TabContent
-          tabKey={active}
-          content={workspaceData.tabs.find((tab) => tab.key === active).content}
-          onUpload={onUpload}
-          initialState={initialState}
-        />
-      )}
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: '12px', gap: '8px' }} >
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center',  gap: '8px'  }}>
-          <span> Upload Workspace </span>
-          <RippleButton shape="square" padding="6px" callBack={handleButtonClick} outlineColor='grey' >
-            <Icon id='upload' size={16} color="grey" />
+          <WorkspaceDropDown
+            initialState={initialState}
+            workspaceData={workspaceData}
+            handleWorkspaceNameChange={handleWorkspaceNameChange}
+            options={workspaces}
+            label={workspaceData.name}
+            onChange={handleWorkspaceChange}
+            customStyles={styles}
+            icon={true}
+          />
+          <RippleButton outlineColor="grey" shape='square' padding='12px' callBack={() => saveWorkspace(workspaceData)}>
+            <Icon id="save" size={16} color="grey" />
           </RippleButton>
+          <RippleButton outlineColor="grey" shape='square' padding='12px' callBack={() => setIsEditEnabled(!isEditEnabled)}>
+            <Icon id="edit" size={16} color="grey" />
+          </RippleButton>
+
+
+          <input ref={fileInputRef} type="file" onChange={handleFileUpload} style={{ display: 'none' }} />
         </div>
 
+        <div>
+          <Tabs
+            active={active}
+            onChange={handleTabChange}
+            addButton={<RippleButton padding='4px' outlineColor="grey" shape='square' padding='12px' callBack={() => setShowForm(!showForm)}><Icon id="add" size={16} color="grey" /></RippleButton>}
+            // saveButton={}
+            uploadButton={<RippleButton padding='4px' callBack={() => document.getElementById('fileUpload').click()}><Icon id="upload" size={16} color="grey" /></RippleButton>}
+            editButton={<RippleButton padding='4px' callBack={() => setIsEditEnabled(!isEditEnabled)}><Icon id="edit" size={16} color="grey" /></RippleButton>}
 
-        <RippleButton shape="square" padding='6px' callBack={() => { deleteWorkspace(workspaceData.name) }} outlineColor='grey' >
-          <Icon id='trash' size={16} color="grey" />
-        </RippleButton>
+
+          >
+            {Array.isArray(tabs) && tabs.map((tab) => (
+              <div key={tab.key}>
+                {tab.label}
+                {isEditEnabled && (
+                  <>
+                    <button onClick={() => startEditTab(tab.key)}>Edit</button>
+                    <button onClick={() => deleteTab(tab.key)}>Delete</button>
+                  </>
+                )}
+              </div>
+            ))}
+          </Tabs>
+
+
+          {showForm && (
+            <AddTabForm
+              setShowForm={setShowForm}
+              newTabLabel={newTabLabel}
+              setNewTabLabel={setNewTabLabel}
+              newTabContent={newTabContent}
+              setNewTabContent={setNewTabContent}
+              addTab={isEditingTab ? updateTab : addTab}
+              isEditing={isEditingTab}
+              currentTab={tabs.find(tab => tab.key === editingTabKey)}
+            />
+          )}
+
+          {workspaceData.tabs.find((tab) => tab.key === active) && (
+            <TabContent
+              tabKey={active}
+              content={workspaceData.tabs.find((tab) => tab.key === active).content}
+              onUpload={onUpload}
+              initialState={initialState}
+            />
+          )}
+          <div className={styles['Workspace__bottom--wrapper']} >
+            <div className={styles["Workspace__bottom--wrapperInner"]}>
+
+              <div className={styles["Workspace__upload"]} onClick={handleButtonClick}>
+                <span className={styles['Workspace__name']}> Upload Workspace </span>
+
+                <Icon id='upload' size={20} color="grey" />
+              </div>
+
+
+
+            </div>
+
+
+            <RippleButton shape="square" padding='12px' callBack={() => { deleteWorkspace(workspaceData.name) }} outlineColor='grey' >
+              <Icon id='trash' size={20} color="grey" />
+            </RippleButton>
+          </div>
+        </div>
       </div>
-
 
     </>
   );

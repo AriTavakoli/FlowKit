@@ -51,7 +51,7 @@ export const TabParent = (props) => {
       <Tabs active={active} onChange={handleTabChange} >
         {props.tabConfig.map((tab, index) => props.featureFlags[tab.flag] && (
           <div key={tab.key} ref={tabRefs.current[tab.key]} onClick={() => handleTabChange(tab.key)}>
-            <Icon id={tab.icon} size={16}></Icon>
+            <Icon id={tab.icon} size={16} color="grey" color2="grey"></Icon>
           </div>
         ))}
       </Tabs>

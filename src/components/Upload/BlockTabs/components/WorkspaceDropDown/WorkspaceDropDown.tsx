@@ -1,5 +1,5 @@
 // src/Dropdown.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './WorkspaceDropDown.module.scss'
 import Icon from '@src/components/IconWrapper/Icon';
 
@@ -12,7 +12,7 @@ interface DropdownProps {
   icon?: boolean
 }
 
-const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon }: DropdownProps) => {
+const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon, workspaceData, handleWorkspaceNameChange, initialState, downloadButton, deleteButton }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -27,11 +27,23 @@ const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon }: Dro
   };
 
 
+  useEffect(() => {
+    console.log('%cselectedOption', 'color: lightblue; font-size: 54px', initialState);
+  }, [selectedOption]);
+
 
   return (
     <div className={styles["dropdown"]}>
       <div className={styles["dropdown-button"]} onClick={handleToggle}>
-        {selectedOption ? selectedOption.label : label}
+        <input
+          type="text"
+          placeholder={selectedOption?.label ? selectedOption.label : initialState.tabId}
+          name="workSpaceName"
+          className={`${styles['WorkspaceName']} ${styles['transparent-input']}`}
+          value={workspaceData.name}
+          onChange={handleWorkspaceNameChange}
+        />
+        {/* {selectedOption ? selectedOption.label : label} */}
 
         {icon && <Icon id={'downChevron'} size={20} color="grey" ></Icon>}
       </div>
@@ -50,8 +62,10 @@ const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon }: Dro
                 </div>
 
                 <div className={styles["icon__container"]}>
-                  <Icon id={option.icon} size={16} color="grey" ></Icon>
+                  <Icon id={option.icon} size={24} color="grey" ></Icon>
                 </div>
+
+
               </div>
             </>
           ))}

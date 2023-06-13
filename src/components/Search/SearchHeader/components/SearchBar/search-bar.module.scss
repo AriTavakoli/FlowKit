@@ -1,3 +1,5 @@
+@import "@Theme/_theme.scss";
+
 .search-bar-container {
   // border-top-left-radius: 20px;
   // border-top-right-radius: 20px;
@@ -6,6 +8,8 @@
   flex: 1 1 0%;
   // position: fixed;
   width: 100%;
+  @include theme($light-theme, $dark-theme);
+
 }
 
 
@@ -25,6 +29,7 @@
   display: flex;
   position: relative;
   flex-shrink: 0;
+  @include theme($light-theme, $dark-theme);
 
 }
 

@@ -101,14 +101,14 @@ const Block = ({ block, tabKey, findJsonData, transform, handleDeleteBlock }) =>
       }
       <div className={styles['Block__buttons']}>
         <RippleButton padding='4px' callBack={() => handleDeleteBlock(block.id)}>
-          <Icon id="trash" size={16} color="white" />
+          <Icon id="trash" size={16} color="grey" color2="grey" />
         </RippleButton>
 
         <RippleButton padding='4px' callBack={() => setIsEditing(true)}>
-          <Icon id="edit" size={16} color="white" />
+          <Icon id="edit" size={16} color="grey"  color2="grey"/>
         </RippleButton>
         <RippleButton padding='4px' callBack={() => transform(jsonData)}>
-          <Icon id="add" size={16} color="white" />
+          <Icon id="add" size={16} color="grey"  color2="grey"/>
         </RippleButton>
       </div>
 

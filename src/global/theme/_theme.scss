@@ -1,0 +1,22 @@
+$light-theme: (
+    bg: #fff,
+    text: #000,
+);
+
+$dark-theme: (
+    bg:  #000,
+    text: #fff,
+);
+
+@mixin theme($light-theme, $dark-theme) {
+  &--light {
+      background-color: map-get($light-theme, 'bg');
+      color: map-get($light-theme, 'text');
+  }
+
+  &--dark {
+      background-color: map-get($dark-theme, 'bg');
+      color: map-get($dark-theme, 'text');
+  }
+}
+

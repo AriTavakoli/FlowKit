@@ -8,6 +8,7 @@ import './Newtab.scss';
 import { ChatGptProvider } from '@src/components/GPT/Context/ChatGptContext';
 import StyleGpt from '@src/components/GPT/GPT';
 import MessageFactory from '@src/Utils/MessageFactory';
+import { GlobalProvider } from '@Context/Global/GlobalProvider';
 
 
 const Newtab = () => {
@@ -50,7 +51,9 @@ const Newtab = () => {
 
       <button onClick={createPopup}> woa</button>
       <SearchProvider>
-        <App styleSheet={styleSheet} css={css} ></App>
+        <GlobalProvider>
+          <App styleSheet={styleSheet} css={css} ></App>
+        </GlobalProvider>
       </SearchProvider>
       {/*
       <ChatGptProvider>

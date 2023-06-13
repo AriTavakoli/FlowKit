@@ -1,6 +1,6 @@
+@import "@Theme/_theme.scss";
 
 .Asset {
-
   &__container {
     display: flex;
     flex-direction: column;
@@ -39,7 +39,6 @@
     align-items: center;
     gap: 4px;
     justify-content: flex-start;
-    background-color: rgba(42, 42, 42, 0.7);
     padding: 8px;
     border: 1px solid rgba(82, 82, 82, 0.5);
     backdrop-filter: blur(10px);
@@ -48,6 +47,8 @@
     animation: fadeIn 0.7s ease-out forwards;
     opacity: 0;
     transition: all 0.4s ease-out;
+
+
   }
 
   &__controlBar {
@@ -80,8 +81,6 @@
 }
 
 .Image {
-
-
   &__details {
     display: flex;
     flex-direction: column;
@@ -90,12 +89,11 @@
     gap: 4px;
     padding-left: 8px;
     padding-right: 8px;
-
   }
 
   &__image {
     width: 60px;
-    height:  60px;
+    height: 60px;
     object-fit: scale-down;
     aspect-ratio: 1;
     border-radius: 12px;
@@ -103,7 +101,6 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.4s ease-out;
   }
-
 
   &__selected {
     position: absolute;

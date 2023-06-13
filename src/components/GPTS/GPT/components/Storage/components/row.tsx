@@ -128,7 +128,7 @@ export default function StorageRow({ item, callBack, itemBody, isActive }: Props
             </div>
             <div onClick={handleEdit}>
               <RippleButton shape="square" outlineColor="grey">
-                <Icon id="edit" size={iconSize} color="white"></Icon>
+                <Icon id="edit" size={iconSize} color="grey"></Icon>
               </RippleButton></div>
           </div>
 

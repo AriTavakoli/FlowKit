@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { GlobalProvider } from '@Context/Global/GlobalProvider';
+import { GlobalProvider, useGlobalContext } from '@Context/Global/GlobalProvider';
 import SearchProvider from '@Context/SearchProvider';
 import FeatureFlagOps from '@src/Utils/LocalStorage/FeatureFlags';
 import { FeatureFlags } from '@Types/Settings/settings.types';
@@ -24,6 +24,8 @@ const App = ({ styleSheet, css }) => {
     ideaExplorer: true,
 
   });
+
+  const { theme } = useGlobalContext();
 
   const SearchResults = lazy(() => import(/* webpackChunkName: "SearchResults" */'./Webflow/Features/Results/SearchResults'));
 
@@ -112,22 +114,21 @@ const App = ({ styleSheet, css }) => {
 
   return (
     <>
-      <div className={styles['SearchContainer']}>
-        <GlobalProvider>
-          <TabParent featureFlags={featureFlags} tabConfig={tabConfig}>
-            {tabConfig.map(tab => (
-              featureFlags[tab.flag] && (
-                <Suspense fallback={<div>Loading {tab.flag}...</div>}>
-                  <tab.component />
-                </Suspense>
-              )
-            ))}
-          </TabParent>
-          <StatusBar message="Example Message" options={statusBarOptions} setActiveModal={setActiveModal} showModal={showModal} setShowModal={setShowModal} />
 
-          {activeModal && <StatusBarModal featureType={activeModal} showModal={showModal} setShowModal={setShowModal} />}
+      <div className={`${styles[`SearchContainer`]}`}>
+        <TabParent featureFlags={featureFlags} tabConfig={tabConfig}>
+          {tabConfig.map(tab => (
+            featureFlags[tab.flag] && (
+              <Suspense fallback={<div>Loading {tab.flag}...</div>}>
+                <tab.component />
+              </Suspense>
+            )
+          ))}
+        </TabParent>
+        <StatusBar message="Example Message" options={statusBarOptions} setActiveModal={setActiveModal} showModal={showModal} setShowModal={setShowModal} />
 
-        </GlobalProvider>
+        {activeModal && <StatusBarModal featureType={activeModal} showModal={showModal} setShowModal={setShowModal} />}
+
       </div>
     </>
   )

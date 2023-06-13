@@ -4,6 +4,7 @@ import App from '../../components/index';
 import SearchProvider from '@Context/SearchProvider';
 import parseHTMLString from '@src/components/Webflow/Features/TreeView/Algo';
 import './Popup.css';
+import { GlobalProvider } from '@Context/Global/GlobalProvider';
 
 const Popup = () => {
 
@@ -55,7 +56,11 @@ const Popup = () => {
   return (
     <div className={isIconClickPopup ? "cornerWidget" : ""}>
       <SearchProvider>
-        <App styleSheet={styleSheet} css={css} ></App>
+        <GlobalProvider>
+
+          <App styleSheet={styleSheet} css={css} ></App>
+        </GlobalProvider>
+
       </SearchProvider>
     </div>
   );

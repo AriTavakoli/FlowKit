@@ -7,16 +7,15 @@
   gap: 100px;
   padding-top: 20px;
   width: 100%;
-
 }
 
 .item {
   /* border-bottom: 1px solid rgb(81, 81, 81); */
-  background-color: rgb(31, 31, 31);
+  background-color: var(--primary-bg);
   border-radius: 8px;
   font-size: 10px;
 
-  border: 1px solid rgba(81, 81, 81, 0.56);
+  border: 1px solid var(--border-color2);
 }
 
 .itemBtn {
@@ -28,11 +27,10 @@
   padding: 1rem;
   font-size: 1rem;
   text-align: left;
-  color: #f0f2f5;
+  color: var(--secondary-text);
   background-color: transparent;
   border: none;
   font-size: 12px;
-
 }
 
 .itemBtn:hover {
@@ -40,7 +38,7 @@
 }
 
 .itemBtnExpanded {
-  background-color: rgba(28, 28, 28, 1);
+  background-color: var(--secondary-bg);
   border-radius: 8px;
 }
 
@@ -62,15 +60,21 @@
   transform: rotate(180deg);
 }
 
-
 .accordian__container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
-
+  max-width: 600px;
+  margin: 0 auto;
+  height: 60%;
+  overflow-y: auto;
 }
 
-
+.accordian__item {
+  height: 100px; /* Set a fixed height for the grid items */
+  background-color: #f2f2f2;
+  padding: 1rem;
+}
 .upload_button {
   background-color: rgba(26, 26, 26, 0.365);
   color: white;
@@ -86,11 +90,21 @@
   box-shadow: 0 0 10px 1px rgba(128, 0, 128, 0.316);
   transition: all 0.3s ease;
   border: 1px dashed;
-
 }
 
 .upload_button:hover {
   box-shadow: 0 0 15px 2px rgba(128, 0, 128, 0.7);
+}
+
+.Workspace {
+  &__wrapper {
+    height: 100%;
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap:5vh;
+  }
 }
 
 .WorkspaceName {
@@ -105,21 +119,18 @@
   justify-content: center;
 }
 
-
 .WorkspaceName__wrapper {
-  padding-top: 20px;
   background-color: transparent;
   border: none;
-  color: white;
+  color: --var(primary-text);
   display: flex;
   align-items: center;
   font-size: 12px;
   gap: 8px;
   width: 100%;
   text-align: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
-
 
 .Block__buttons {
   display: flex;
@@ -131,19 +142,53 @@
 .Block__input {
   background-color: transparent;
   border: 1px solid #5d5d5d;
-  color: white;
+  color: --var(--primary-text);
   margin-bottom: 4px;
-
 }
 
-
 .Workspace__upload {
-  padding-top: 20px;
   width: 100%;
   align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  height: 100%;
+  border: 1px dashed var(--border-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+
+
+}
+
+.Workspace__name {
+  font-size: 14px;
+  color : var(--primary-text);
+}
+
+
+.Workspace__bottom--wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 50px;
+  margin-top: 24px;
+
+
+}
+.Workspace__bottom--wrapperInner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
 
 }
