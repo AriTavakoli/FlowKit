@@ -119,7 +119,7 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
 
         return (
           <div onClick={() => setSelectedMediaQuery(mediaQuery)} className='mediaQueryText' style={buttonStyle}>
-            <span >{mediaQuery.replace('screen and ', '').replace('max-width: ', '').replace(/\(/g, '').replace(/\)/g, '')}</span>
+            <span className="mediaQueryContent">{mediaQuery.replace('screen and ', '').replace('max-width: ', '').replace(/\(/g, '').replace(/\)/g, '')}</span>
           </div>
         );
       }

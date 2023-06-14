@@ -16,6 +16,7 @@ export default function LiveTree({ controlPosition }) {
 
   const {
     retrieveSetting,
+    theme = 'light',
   } = useGlobalContext();
 
 
@@ -160,6 +161,14 @@ export default function LiveTree({ controlPosition }) {
   // }, [data]);
 
 
+  const themes = {
+    light: {
+      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(105, 105, 105, 0.80), rgba(169, 169, 169, 0.19) 1px, transparent 1px, transparent 100%)`
+    },
+    dark: {
+      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%)`
+    }
+  }
 
   if (!dataParsed) {
     return <div className="emptyMessage">Please Select an Element on Webflow </div>;
@@ -177,7 +186,7 @@ export default function LiveTree({ controlPosition }) {
 
 
   return (
-    <div className="treeContainer">
+    <div className="treeContainer" style={themes[theme]}>
 
 
       <div className="controlOutput" style={{ right: controlPosition, top: '40px', zIndex: '100' }}>
@@ -344,13 +353,16 @@ function TreeViewNode({ css, passDownCss, node, activeItems, setActiveItems, lev
           />
         )}
         <div className="codeParent" style={{ borderImage: `linear-gradient(to bottom, ${currentCodeAccent}, rgba(136, 167, 184, 0.219)) 1` }}>
-          <div className="code__container" style={{ borderImage: `linear-gradient(to bottom, ${currentCodeAccent}, rgba(136, 167, 184, 0.219)) 1` }}>
-            <Live
-              loadingNewStyleSheet={loadingNewStyleSheet}
-              node={node}
-              cssString={nodeCss}
-              isFirst={level === 0} // this prop is to determine if it's the first element should be open
-            />
+
+          <div className= "code__wrapper" style={{ backgroundImage: `linear-gradient(to bottom, ${currentCodeAccent}, rgba(136, 167, 184, 0.219))` }}>
+            <div className="code__container" >
+              <Live
+                loadingNewStyleSheet={loadingNewStyleSheet}
+                node={node}
+                cssString={nodeCss}
+                isFirst={level === 0} // this prop is to determine if it's the first element should be open
+              />
+            </div>
           </div>
           {/* {node.class && <span className="class">.{node.class}</span>} */}
         </div>

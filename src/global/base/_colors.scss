@@ -24,8 +24,18 @@ $themes: (
     rgba-secondary-bg: rgba(255, 255, 255, 0.19),
 
 
-    fieldsManager-bg: #fff,
+    tab-container : #efefef,
 
+    live-bg: #f3f3f3,
+    live-class: #e4e4e4,
+    live-border: #d4d4d4,
+    live-arrow: #252525a3,
+
+
+
+
+
+    fieldsManager-bg: #fff,
 
 
     command-bg: #fff,
@@ -64,10 +74,15 @@ $themes: (
     rgba-primary-bg: rgba(16, 16, 16, 0.32),
     rgba-secondary-bg: rgba(43, 43, 43, 0.19),
 
+    tab-container : #161616,
+
+    live-bg: #161616,
+    live-class: #161616,
+    live-border:#555555a3,
+    live-arrow: #f2f2f2a3,
 
 
-
-    fieldsManager-bg: #0c0c0c,
+    fieldsManager-bg: #131313,
 
 
 
