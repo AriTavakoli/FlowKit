@@ -1,0 +1,104 @@
+/* src/Dropdown.css */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  // background-color:  var(--primary2-bg);
+}
+
+.dropdown-button {
+  background-color: var(--primary2-bg);
+  color: var(--secondary-text);
+  padding: 4px;
+  border : 1px solid #a8a8a852;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-menu {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  right: 0;
+  color: var(--secondary-text);
+  top : 40px;
+  max-height: 200px;
+  overflow : auto;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  border : 1px solid var(--border-color);
+  background-color:  var(--primary2-bg);
+  min-width: 100px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 6000;
+}
+
+.icon__container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding : 4px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.dropdown-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  border-bottom: 1px solid  var(--border-color);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.dropdown-row:hover {
+  background-color: var(--primary2-bg);
+}
+
+.dropdown-row:last-child {
+  border-bottom: none;
+}
+
+
+.dropdown-item {
+  color: var(--secondary-text);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+  white-space: nowrap;
+  width: 100%;
+  cursor: pointer;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 70%);
+  // -webkit-background-clip: text;
+}
+
+//custom scroll bar
+.dropdown-menu::-webkit-scrollbar {
+  width: 8px;
+  background-color: #2e2e2e;
+  border-radius: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+  background-color: #68686889;
+  border-radius: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+  background-color: #2e2e2e;
+  border-radius: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-corner {
+  background-color: #2e2e2e;
+  border-radius: 8px;
+}

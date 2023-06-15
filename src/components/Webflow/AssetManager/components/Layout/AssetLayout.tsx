@@ -6,6 +6,7 @@ import { useGlobalContext } from '@Context/Global/GlobalProvider'
 import SearchBar from '../SearchBar/SearchBar-index'
 import Dropdown from '@src/components/Util/DropDown/DropDown'
 import { useState } from 'react'
+import FilterDropDown from '../FilterDropDown/FilterDropDown'
 export function AssetLayout({ children }) {
 
   const { theme } = useGlobalContext();
@@ -53,7 +54,20 @@ export function ControlBar({ handleDownloadAll, handleSelectedDownloads, handleV
   return (
     <>
       <div className={styles['Asset__controlBar']}>
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearchChange={handleSearchChange} />
+
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleSearchChange={handleSearchChange}
+          FilterDropDown={<FilterDropDown
+            options={filterOptions}
+            label="Filter"
+            onChange={handleFilterOptionChange}
+            icon={true}
+          />}
+        />
+
+
         <RippleButton callBack={() => handleViewTypeChange('row')} shape="square" outlineColor='grey' padding='4px'>
           <Icon id="rowView" size={16} color="grey"></Icon>
         </RippleButton>
@@ -61,12 +75,12 @@ export function ControlBar({ handleDownloadAll, handleSelectedDownloads, handleV
           <Icon id="columnView" size={16} color="grey"></Icon>
         </RippleButton>
 
-        <Dropdown
+        {/* <Dropdown
           options={filterOptions}
           label="Filter"
           onChange={handleFilterOptionChange}
           icon={true}
-        />
+        /> */}
 
         <Dropdown
           options={downloadOptions}
