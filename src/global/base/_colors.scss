@@ -29,6 +29,14 @@ $themes: (
 
     tab-container: #efefef,
 
+    // Modal Styles
+    modal-bg: #fff,
+    modal-border: #e5e5e5,
+    modal-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
+
+
+
+
     live-bg: #f3f3f3,
     live-class: #e4e4e4,
     live-border: #d4d4d4,
@@ -98,6 +106,10 @@ $themes: (
     fieldsManager-bg: #131313,
 
     divider: #55555589,
+
+    modal-bg:  #161616,
+    modal-border: #55555589,
+    modal-shadow:  0 1px 3px rgba(0, 0, 0, 0.3),
 
     addNode-border: #606060,
     addNode-border-left: #606060,

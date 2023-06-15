@@ -17,13 +17,13 @@
     width: 90%;
     gap: 8px;
     padding: 4px;
-    padding: 4px 12px;
+    padding: 12px 12px;
     border-radius: 8px;
     margin-top: 4px;
     border: 1px solid  var(--border-color);
     color: var(--primary-text);
     box-shadow: var(--box-shadow);
-    background-color: var(--secondary2-bg);
+    background-color: var(--primary-bg);
   }
 
   &__input {

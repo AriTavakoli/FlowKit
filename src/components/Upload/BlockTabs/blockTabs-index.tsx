@@ -1,70 +1,19 @@
-import React, { useState, memo, useTransition, useEffect, useRef } from 'react';
-import Tabs from './Tabs';
+import StorageOps from '@src/Utils/LocalStorage/StorageOps';
+import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
 import Icon from '@src/components/IconWrapper/Icon';
-import { SkeletonRow } from '@src/components/Webflow/Features/Results/components/Loading/Skeleton';
-import { Accordion, AccordionItem as Item } from "@szhsin/react-accordion";
-import styles from './blocks.module.scss'
-import chevronDown from "../chevron-down.svg";
-import output32 from '../Custom/output32.json';
+import { useQueryBuilderContext } from '@src/components/MarkDownEditor/context/QueryBuilderContext';
+import { Accordion } from "@szhsin/react-accordion";
+import React, { useEffect, useRef, useState, useTransition } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useWorkspaceContext, useWorkspaceDispatch } from '../Context/WorkspaceContext';
-import { useQueryBuilderContext } from '@src/components/MarkDownEditor/context/QueryBuilderContext';
 import { deepCloneWithNewIds } from '../utils/DeepClone';
-import StorageOps from '@src/Utils/LocalStorage/StorageOps';
-import Block from './components/Block';
-import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
+import Tabs from './Tabs';
+import styles from './blocks.module.scss';
 import AddTabForm from './components/AddTabForm/AddTabForm';
-import Dropdown from '@src/components/Util/DropDown/DropDown';
+import Block from './components/Block';
 import WorkspaceDropDown from './components/WorkspaceDropDown/WorkspaceDropDown';
-import FileDrop from './components/UploadButton/FileDrop';
+import WorkspaceModal from './components/Modal/WorkspaceModal';
 
-function TabContent({ content, onUpload, initialState, tabKey }) {
-
-  const dispatch = useWorkspaceDispatch();
-  const {
-    workspaceData
-  } = useWorkspaceContext();
-
-
-
-  function findJsonData(jsonDataKey) {
-    const jsonDataItem = initialState.jsonData.find(
-      (item) => item.key === jsonDataKey
-    );
-    return jsonDataItem ? jsonDataItem.payload : null;
-  }
-
-  function transform(data) {
-    const newData = deepCloneWithNewIds(data);
-    if (!newData) {
-      console.error('Unable to transform data:', data);
-      return;
-    }
-    onUpload(newData);
-  }
-  const handleDeleteBlock = (blockId) => {
-    dispatch({ type: 'DELETE_BLOCK', payload: { tabKey: tabKey, blockId } });
-  };
-
-  return (
-    <div className={styles.app}>
-      <Accordion transition transitionTimeout={200}>
-        <div className={styles['accordian__container']}>
-          {(content.blocks || [])?.map((block) => (
-            <Block
-              key={block.id}
-              block={block}
-              tabKey={tabKey}
-              findJsonData={findJsonData}
-              transform={transform}
-              handleDeleteBlock={handleDeleteBlock}
-            />
-          ))}
-        </div>
-      </Accordion>
-    </div>
-  );
-}
 
 
 export const BlockTabsParent = ({ initialState, onUpload }) => {
@@ -95,7 +44,7 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     dispatch({ type: 'DELETE_TAB', payload: { key: tabKey } });
   };
 
-  const [workSpaceName, setWorkSpaceName] = useState(workspaceData?.workSpaceName || '');
+  const [workSpaceName, setWorkSpaceName] = useState(workspaceData?.tabId || '');
 
   const [blockInfo, setBlockInfo] = useState({
     name: '',
@@ -105,6 +54,7 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     fileFormat: '',
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
   const [isEditingTab, setIsEditingTab] = useState(false);
@@ -145,10 +95,10 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
 
   useEffect(() => {
-    if (Array.isArray(workspaceData.tabs)) {
-      setTabs(workspaceData.tabs);
+    if (Array.isArray(workspaceData?.tabs)) {
+      setTabs(workspaceData?.tabs);
     }
-  }, [workspaceData.tabs]);
+  }, [workspaceData]);
 
 
   const handleAddJsonData = (jsonData) => {
@@ -177,6 +127,34 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     setNewBlockTokens("");
     setNewBlockFileFormat("");
   };
+
+  const createWorkspace = async (workspaceName) => {
+
+    console.log('%cworkspaceName', 'color: lightblue; font-size: 44px', workspaceName);
+
+    const newWorkspaceData = {
+      tabId: uuid(),
+      tabs: [{
+        key: uuid(),
+        label: 'Default Tab',
+        description: 'This is a default tab',
+        tabIcon: 'drop', // add your default icon
+        active: true,
+        index: 0,
+        content: {
+          blocks: [], // you can put default blocks here if you want
+        },
+      }],
+      name: workspaceName,
+    };
+
+    await StorageOps.addWorkSpaceToStorage(workspaceName, newWorkspaceData);
+    dispatch({ type: 'SET_WORKSPACE', payload: newWorkspaceData });
+    setWorkSpaceName(workspaceName);
+
+    setWorkspaces([...workspaces, { label: workspaceName, value: newWorkspaceData }]);
+  };
+
 
 
   useEffect(() => {
@@ -324,15 +302,17 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   const deleteWorkspace = async (workSpaceId) => {
     // Show a confirmation dialog before deleting the workspace
     const confirmDelete = window.confirm('Are you sure you want to delete this workspace?');
-
     if (confirmDelete) {
-      StorageOps.removeWorkspaceFromStorageByName(workSpaceId)
+      StorageOps.removeWorkspaceByTabId(workSpaceId)
         .then(() => {
           // Clear workspace state
           // dispatch({ type: 'CLEAR_WORKSPACE' });
         })
         .catch(err => console.log(err));
     }
+
+    dispatch({type: "SET_WORKSPACE", payload: {}})
+
   };
 
 
@@ -341,21 +321,45 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
       <div className={styles["Workspace__wrapper"]}>
         <div className={styles['WorkspaceName__wrapper']}>
 
+
+          {/* <input
+            type="text"
+            placeholder="New workspace name"
+            value={workSpaceName}
+            onChange={handleWorkspaceNameChange}
+          /> */}
+
+          <WorkspaceModal
+            isOpen={isModalOpen}
+            closeModal={() => setIsModalOpen(false)}
+            createWorkspace={createWorkspace}
+          />
+
           <WorkspaceDropDown
             initialState={initialState}
             workspaceData={workspaceData}
             handleWorkspaceNameChange={handleWorkspaceNameChange}
             options={workspaces}
-            label={workspaceData.name}
+            label={workspaceData?.name}
             onChange={handleWorkspaceChange}
             customStyles={styles}
             icon={true}
           />
-          <RippleButton outlineColor="grey" shape='square' padding='12px' callBack={() => saveWorkspace(workspaceData)}>
+          <RippleButton
+            outlineColor="grey"
+            shape='square'
+            padding='12px'
+            callBack={() => saveWorkspace(workspaceData)}>
             <Icon id="save" size={16} color="grey" />
           </RippleButton>
-          <RippleButton outlineColor="grey" shape='square' padding='12px' callBack={() => setIsEditEnabled(!isEditEnabled)}>
-            <Icon id="edit" size={16} color="grey" />
+
+          <RippleButton
+            outlineColor="grey"
+            shape='square'
+            padding='12px'
+            callBack={() => setIsModalOpen(true)}
+          >
+            <Icon id="builder" size={16} color="grey" />
           </RippleButton>
 
 
@@ -398,17 +402,17 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
               setNewTabContent={setNewTabContent}
               addTab={isEditingTab ? updateTab : addTab}
               isEditing={isEditingTab}
-              currentTab={tabs.find(tab => tab.key === editingTabKey)}
+              currentTab={tabs.find(tab => tab?.key === editingTabKey)}
             />
           )}
-            {workspaceData.tabs.find((tab) => tab.key === active) && (
-              <TabContent
-                tabKey={active}
-                content={workspaceData.tabs.find((tab) => tab.key === active).content}
-                onUpload={onUpload}
-                initialState={initialState}
-              />
-            )}
+          {workspaceData?.tabs?.find((tab) => tab?.key === active) && (
+            <TabContent
+              tabKey={active}
+              content={workspaceData.tabs.find((tab) => tab.key === active).content}
+              onUpload={onUpload}
+              initialState={initialState}
+            />
+          )}
         </div>
 
         <div className={styles['Workspace__bottom--wrapper']} >
@@ -424,9 +428,12 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
           </div>
 
+          <RippleButton outlineColor="grey" shape='square' padding='12px' callBack={() => setIsEditEnabled(!isEditEnabled)}>
+            <Icon id="edit" size={16} color="grey" />
+          </RippleButton>
 
-          <RippleButton shape="square" padding='12px' callBack={() => { deleteWorkspace(workspaceData.name) }} outlineColor='grey' >
-            <Icon id='trash' size={20} color="grey" />
+          <RippleButton shape="square" padding='12px' callBack={() => { deleteWorkspace(workspaceData?.tabId) }} outlineColor='grey' >
+            <Icon id='trash' size={16} color="grey" />
           </RippleButton>
         </div>
       </div>
@@ -434,7 +441,6 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     </>
   );
 };
-
 
 
 const WorkspaceList = () => {
@@ -465,3 +471,53 @@ const WorkspaceList = () => {
 };
 
 export default WorkspaceList;
+
+
+function TabContent({ content, onUpload, initialState, tabKey }) {
+
+  const dispatch = useWorkspaceDispatch();
+
+  const {
+    workspaceData
+  } = useWorkspaceContext();
+
+
+
+  function findJsonData(jsonDataKey) {
+    const jsonDataItem = initialState.jsonData.find(
+      (item) => item.key === jsonDataKey
+    );
+    return jsonDataItem ? jsonDataItem.payload : null;
+  }
+
+  function transform(data) {
+    const newData = deepCloneWithNewIds(data);
+    if (!newData) {
+      console.error('Unable to transform data:', data);
+      return;
+    }
+    onUpload(newData);
+  }
+  const handleDeleteBlock = (blockId) => {
+    dispatch({ type: 'DELETE_BLOCK', payload: { tabKey: tabKey, blockId } });
+  };
+
+  return (
+    <div className={styles.app}>
+      <Accordion transition transitionTimeout={200}>
+        <div className={styles['accordian__container']}>
+          {(content.blocks || [])?.map((block) => (
+            <Block
+              key={block.id}
+              block={block}
+              tabKey={tabKey}
+              findJsonData={findJsonData}
+              transform={transform}
+              handleDeleteBlock={handleDeleteBlock}
+            />
+          ))}
+        </div>
+      </Accordion>
+    </div>
+  );
+}

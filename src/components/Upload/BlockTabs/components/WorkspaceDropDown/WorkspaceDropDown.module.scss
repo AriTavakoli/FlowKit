@@ -14,7 +14,7 @@
   cursor: pointer;
   display: flex;
   gap: 8px;
-  height: 45px;
+  height: 42px;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
@@ -42,7 +42,7 @@
   color: var(--primary-text);
   min-width: 100px;
   border : 1px solid var(--border-color);
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0  rgba(0, 0, 0, 0.2);
   z-index: 6000;
 }
 

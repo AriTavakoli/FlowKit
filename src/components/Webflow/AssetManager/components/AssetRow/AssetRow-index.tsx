@@ -73,7 +73,7 @@ export default function AssetRow({
                   style={{ width: `${downloadProgress[index]}%` }}
                 ></div>
               </div>
-              <RippleButton callBack={() => handleDownload(image.cdnUrl, index)}>
+              <RippleButton callBack={() => handleDownload(image.cdnUrl, index)} outlineColor='grey-white'>
                 <Icon id="download" size={24} color = "grey"></Icon>
               </RippleButton>
             </div>

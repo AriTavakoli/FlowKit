@@ -1,0 +1,62 @@
+.Modal {
+  &__wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100000;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    height: 200px;
+    border : 1px solid var(--border-color);
+    background-color: var(--modal-bg);
+  }
+
+  &___header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  &__button--create {
+    background-color: var(--primary-bg);
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+  &__button--close {
+    background-color: var(--primary-bg);
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  &__formWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    height: 100%;
+    gap: 1rem;
+  }
+
+  &__form--block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    height: 100%;
+    gap: 12px;
+  }
+
+
+
+
+}

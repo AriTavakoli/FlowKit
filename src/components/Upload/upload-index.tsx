@@ -1,7 +1,7 @@
 import { useGlobalContext } from '@Context/Global/GlobalProvider';
 import Icon from '@src/components/IconWrapper/Icon';
 import React, { useEffect, useRef, useState } from 'react';
-import { BlockTabsParent } from './BlockTabs/blockTabs-index';
+import { BlockTabsParent } from './BlockTabs/BlockTabs-index';
 import { useWorkspaceContext } from './Context/WorkspaceContext';
 import styles2 from './upload.module.css';
 import { handleWorkspaceFileChange } from './utils/FileUpload';

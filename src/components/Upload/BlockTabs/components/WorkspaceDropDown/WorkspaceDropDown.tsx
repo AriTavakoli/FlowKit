@@ -13,6 +13,7 @@ interface DropdownProps {
 }
 
 const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon, workspaceData, handleWorkspaceNameChange, initialState, downloadButton, deleteButton }: DropdownProps) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -37,10 +38,10 @@ const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon, works
       <div className={styles["dropdown-button"]} onClick={handleToggle}>
         <input
           type="text"
-          placeholder={selectedOption?.label ? selectedOption.label : initialState.tabId}
+          placeholder={selectedOption?.label ? selectedOption.label : initialState?.tabId}
           name="workSpaceName"
           className={`${styles['WorkspaceName']} ${styles['transparent-input']}`}
-          value={workspaceData.name}
+          value={workspaceData?.name}
           onChange={handleWorkspaceNameChange}
         />
         {/* {selectedOption ? selectedOption.label : label} */}

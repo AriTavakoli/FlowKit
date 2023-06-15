@@ -8,6 +8,7 @@ $purple-color: #8f2cb5;
 $orange-color: #ffa500;
 $grey-color: #505050;
 $green-color: #28a745;
+$grey-white-color: #505050;
 
 input[type="color"] {
   border: none;
@@ -136,6 +137,21 @@ $transition: all 0.9s ease-in-out;
       @include bubble-hover($purple-color);
     }
   }
+
+
+
+
+  &__container--grey-white {
+    @include bubble-container;
+    border-color: $grey-white-color;
+
+    &:hover {
+      @include bubble-hover($grey-white-color);
+    }
+  }
+
+
+
 
   @mixin dot($background-color, $border-color) {
     display: flex;

@@ -200,7 +200,9 @@ const WorkspaceReducer = (state = initialState, action: WorkspaceAction) => {
 
       return {
         ...state,
-        jsonData: [...state.jsonData, { key: action.payload.key, payload: action.payload ? action.payload.jsonData : {} }],
+        jsonData: Array.isArray(state.jsonData)
+        ? [...state.jsonData, { key: action.payload.key, payload: action.payload ? action.payload.jsonData : {} }]
+        : [{ key: action.payload.key, payload: action.payload ? action.payload.jsonData : {} }]
       };
 
 

@@ -551,15 +551,37 @@ export default class StorageOps {
       });
     });
 
+  }
 
+
+  static removeWorkspaceByTabId(tabId) {
+
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['workSpaces'], (result) => {
+        let workSpaces = result['workSpaces'] || {};
+        const workSpaceId = Object.keys(workSpaces).find((id) => workSpaces[id].tabId === tabId);
+        if (workSpaceId) {
+          delete workSpaces[workSpaceId];
+          chrome.storage.local.set({ 'workSpaces': workSpaces }, () => {
+            console.log(`Deleted |${workSpaceId}| with access type 'workSpaces' in storage`);
+            resolve('success');
+          });
+        } else {
+          reject(`WorkSpace |${tabId}| not found in 'workSpaces'`);
+        }
+      });
+    });
 
 
   }
+
+
 
   static removeWorkspaceFromStorage(workSpaceId) {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(['workSpaces'], (result) => {
         let workSpaces = result['workSpaces'] || {};
+
         if (workSpaces[workSpaceId]) {
           delete workSpaces[workSpaceId];
           chrome.storage.local.set({ 'workSpaces': workSpaces }, () => {

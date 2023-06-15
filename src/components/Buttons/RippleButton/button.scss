@@ -116,7 +116,18 @@
 
   @include button-selected(#FFB64D);
 }
+.c-button--outline-greyWhite {
+  color: #363535;
+  border: 1px solid #89898953;
+  background: transparent;
 
+  &:hover {
+    border-color: #6d6d6d;
+    background: #25212156;
+  }
+
+  @include button-selected(#4746466c);
+}
 
 
 .c-button--outline-orange {
@@ -268,6 +279,7 @@
 @include button-modifier(#fff, "rainbow");
 
 
+@include button-modifier(#fff, "greyWhite");
 
 
 
