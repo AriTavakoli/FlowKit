@@ -40,6 +40,64 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   const dispatch = useWorkspaceDispatch();
   const [tabs, setTabs] = useState(Array.isArray(workspaceData?.tabs) ? workspaceData.tabs : []);
 
+  const [workspaceId, setWorkspaceId] = useState(null);
+
+  useEffect(() => {
+    // Retrieve the workspace ID from localStorage when the component mounts
+    const recentWorkspace = localStorage.getItem('recentWorkspace');
+
+    if (recentWorkspace) {
+      setWorkspaceId(recentWorkspace);
+    }
+    else {
+      // If there is no saved workspace ID, use a default one
+      setWorkspaceId('defaultWorkspaceId');
+    }
+  }, []);  // Empty array means this effect runs once on mount and not on updates
+
+  useEffect(() => {
+
+
+    console.log('%cworkspaces', 'color: lightblue; font-size: 14px', workspaces);
+    StorageOps.getRecentlyUsedWorkspaceId().then((workspaceId) => {
+      console.log(workspaceId[0]);
+
+      let recentlyUsedWorkspace = findJsonData(workspaces, workspaceId[0]);
+
+      console.log('%crecentlyUsedWorkspace', 'color: lightblue; font-size: 94px', recentlyUsedWorkspace);
+
+
+      if (recentlyUsedWorkspace) {
+
+        handleWorkspaceChange(recentlyUsedWorkspace);
+      }
+
+
+      console.log('%cworkspaceId', 'color: lightblue; font-size: 14px', workspaceId);
+
+    });
+
+    // StorageOps.getWorkspaceByTabId(workspaceId).then((workspace) => {
+    //   console.log('%cworkspace', 'color: lightblue; font-size: 14px', workspace);
+    //   if (workspace) {
+    //     handleWorkspaceChange(workspace);
+    //   }
+    // });
+
+
+
+  }, [workspaces]);
+
+
+  function findJsonData(arr, tabId) {
+    // Use the find() method to locate the object with the matching tabId
+    const matchedObject = arr.find((obj) => obj.value.tabId === tabId);
+
+    // If a match was found, return its jsonData; otherwise, return null
+    return matchedObject ? matchedObject : null;
+  }
+
+
   const deleteTab = (tabKey) => {
     dispatch({ type: 'DELETE_TAB', payload: { key: tabKey } });
   };
@@ -177,25 +235,6 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
 
 
-  const addBlock = () => {
-    const newBlock = {
-      blockName: newBlockName,
-      description: newBlockDescription,
-      jsonDataKey: newBlockJsonDataKey,
-      tokens: newBlockTokens,
-      fileFormat: newBlockFileFormat,
-    };
-
-    dispatch({ type: "ADD_BLOCK_TO_TAB", payload: { tabKey: active, ...newBlock } });
-
-    // Clear the input fields
-    setNewBlockName("");
-    setNewBlockDescription("");
-    setNewBlockJsonDataKey("");
-    setNewBlockTokens("");
-    setNewBlockFileFormat("");
-  };
-
 
   const handleTabChange = (newActiveTab) => {
     if (newActiveTab !== active) {
@@ -218,8 +257,13 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
     setActive(newKey);
     setShowForm(false);
+    setNewTabLabel('');
   };
 
+  function onWorkspaceChange(workspaceId) {
+    // Save the new workspace ID in localStorage
+    localStorage.setItem('recentWorkspace', workspaceId);
+  }
 
   const saveWorkspace = async (workspaceData) => {
     // console.log('%cworkspaceData', 'color: red; font-size: 14px', workspaceData);
@@ -287,6 +331,7 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
   const handleWorkspaceChange = (selectedWorkspace) => {
     const { value } = selectedWorkspace;
+    console.log('%cselectedWorkspace', 'color: lightblue; font-size: 94px', selectedWorkspace, value);
     // assuming value contains the tab data
     dispatch({ type: 'SET_WORKSPACE', payload: value });
   };
@@ -306,13 +351,11 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
       StorageOps.removeWorkspaceByTabId(workSpaceId)
         .then(() => {
           // Clear workspace state
-          // dispatch({ type: 'CLEAR_WORKSPACE' });
+          dispatch({ type: "SET_WORKSPACE", payload: {} })
+
         })
         .catch(err => console.log(err));
     }
-
-    dispatch({type: "SET_WORKSPACE", payload: {}})
-
   };
 
 
@@ -337,6 +380,7 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
           <WorkspaceDropDown
             initialState={initialState}
+            onWorkspaceChange={onWorkspaceChange}
             workspaceData={workspaceData}
             handleWorkspaceNameChange={handleWorkspaceNameChange}
             options={workspaces}
@@ -443,34 +487,6 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 };
 
 
-const WorkspaceList = () => {
-  const [workspaces, setWorkspaces] = useState([]);
-
-  useEffect(() => {
-    StorageOps.getAllWorkSpaces()
-      .then((data) => {
-        if (data && typeof data === 'object' && Object.keys(data).length > 0) {
-          setWorkspaces(Object.keys(data));
-        } else {
-          console.error('No data available or data is not an object');
-        }
-      })
-      .catch(error => console.error('Error:', error));
-  }, []);
-
-  return (
-    <div>
-      <h1>Available Workspaces</h1>
-      <ul>
-        {workspaces.map(workspace => (
-          <li key={workspace}>{workspace}</li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-export default WorkspaceList;
 
 
 function TabContent({ content, onUpload, initialState, tabKey }) {
@@ -521,3 +537,34 @@ function TabContent({ content, onUpload, initialState, tabKey }) {
     </div>
   );
 }
+
+
+
+// const WorkspaceList = () => {
+//   const [workspaces, setWorkspaces] = useState([]);
+
+//   useEffect(() => {
+//     StorageOps.getAllWorkSpaces()
+//       .then((data) => {
+//         if (data && typeof data === 'object' && Object.keys(data).length > 0) {
+//           setWorkspaces(Object.keys(data));
+//         } else {
+//           console.error('No data available or data is not an object');
+//         }
+//       })
+//       .catch(error => console.error('Error:', error));
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1>Available Workspaces</h1>
+//       <ul>
+//         {workspaces.map(workspace => (
+//           <li key={workspace}>{workspace}</li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
+
+// export default WorkspaceList;

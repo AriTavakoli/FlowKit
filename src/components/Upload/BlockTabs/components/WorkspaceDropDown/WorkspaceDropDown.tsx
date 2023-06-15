@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './WorkspaceDropDown.module.scss'
 import Icon from '@src/components/IconWrapper/Icon';
-
+import StorageOps from '@src/Utils/LocalStorage/StorageOps';
 
 interface DropdownProps {
   options: any[]
@@ -12,7 +12,7 @@ interface DropdownProps {
   icon?: boolean
 }
 
-const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon, workspaceData, handleWorkspaceNameChange, initialState, downloadButton, deleteButton }: DropdownProps) => {
+const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon, workspaceData, handleWorkspaceNameChange, initialState, downloadButton, deleteButton, onWorkspaceChange }: DropdownProps) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -25,6 +25,11 @@ const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon, works
     setSelectedOption(option);
     setIsOpen(false);
     onChange(option);
+
+    console.log('%coption', 'color: orange; font-size: 64px', option);
+    console.log(option.tabId, 'option.tabId');
+    StorageOps.addRecentlyUsedWorkspaceId(option.value.tabId);
+
   };
 
 

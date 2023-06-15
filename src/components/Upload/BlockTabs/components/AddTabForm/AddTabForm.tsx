@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import styles from './AddTabForm.module.scss'
 import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
 import Icon from '@src/components/IconWrapper/Icon';
@@ -12,20 +12,26 @@ const AddTabForm = ({ newTabLabel, setNewTabLabel, newTabContent, setNewTabConte
     }
   }, [isEditing, currentTab]);
 
+
   return (
     <div className={styles["AddTabForm__wrapper"]}>
       <input
         className={styles['AddTabForm__input']}
         type="text"
+        placeholder='New Tab Name'
         value={newTabLabel}
         onChange={(e) => setNewTabLabel(e.target.value)}
       />
-      <RippleButton callBack={() => { setShowForm(false) }}>
-        <Icon id="close" size={14} color="grey" />
-      </RippleButton>
-      <RippleButton callBack={addTab}>
-        <Icon id="check" size={20} color="grey" />
-      </RippleButton>
+      <div className= {styles['AddTabForm__buttonWrapper']}>
+
+        <RippleButton callBack={() => { setShowForm(false) }}>
+          <Icon id="close" size={18} color="grey" />
+        </RippleButton>
+        <RippleButton callBack={addTab}>
+          <Icon id="check" size={24} color="grey" />
+        </RippleButton>
+      </div>
+
     </div>
   );
 };
