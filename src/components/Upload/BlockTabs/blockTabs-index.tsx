@@ -23,8 +23,15 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   // }, [initialState]);
 
   const [workspaces, setWorkspaces] = useState([]);
+  const isMounted = useRef(false);
 
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const [isEditingTab, setIsEditingTab] = useState(false);
+  const [editingTabKey, setEditingTabKey] = useState(null);
+  const [isEditEnabled, setIsEditEnabled] = useState(false);
   const {
     workspaceData
   } = useWorkspaceContext();
@@ -34,73 +41,6 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     newBlockJsonData,
     setNewBlockJsonData,
   } = useQueryBuilderContext();
-
-  const isMounted = useRef(false);
-
-  const dispatch = useWorkspaceDispatch();
-  const [tabs, setTabs] = useState(Array.isArray(workspaceData?.tabs) ? workspaceData.tabs : []);
-
-  const [workspaceId, setWorkspaceId] = useState(null);
-
-  useEffect(() => {
-    // Retrieve the workspace ID from localStorage when the component mounts
-    const recentWorkspace = localStorage.getItem('recentWorkspace');
-
-    if (recentWorkspace) {
-      setWorkspaceId(recentWorkspace);
-    }
-    else {
-      // If there is no saved workspace ID, use a default one
-      setWorkspaceId('defaultWorkspaceId');
-    }
-  }, []);  // Empty array means this effect runs once on mount and not on updates
-
-  useEffect(() => {
-
-
-    console.log('%cworkspaces', 'color: lightblue; font-size: 14px', workspaces);
-    StorageOps.getRecentlyUsedWorkspaceId().then((workspaceId) => {
-      console.log(workspaceId[0]);
-
-      let recentlyUsedWorkspace = findJsonData(workspaces, workspaceId[0]);
-
-      console.log('%crecentlyUsedWorkspace', 'color: lightblue; font-size: 94px', recentlyUsedWorkspace);
-
-
-      if (recentlyUsedWorkspace) {
-
-        handleWorkspaceChange(recentlyUsedWorkspace);
-      }
-
-
-      console.log('%cworkspaceId', 'color: lightblue; font-size: 14px', workspaceId);
-
-    });
-
-    // StorageOps.getWorkspaceByTabId(workspaceId).then((workspace) => {
-    //   console.log('%cworkspace', 'color: lightblue; font-size: 14px', workspace);
-    //   if (workspace) {
-    //     handleWorkspaceChange(workspace);
-    //   }
-    // });
-
-
-
-  }, [workspaces]);
-
-
-  function findJsonData(arr, tabId) {
-    // Use the find() method to locate the object with the matching tabId
-    const matchedObject = arr.find((obj) => obj.value.tabId === tabId);
-
-    // If a match was found, return its jsonData; otherwise, return null
-    return matchedObject ? matchedObject : null;
-  }
-
-
-  const deleteTab = (tabKey) => {
-    dispatch({ type: 'DELETE_TAB', payload: { key: tabKey } });
-  };
 
   const [workSpaceName, setWorkSpaceName] = useState(workspaceData?.tabId || '');
 
@@ -112,24 +52,11 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     fileFormat: '',
   });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useWorkspaceDispatch();
 
+  const [tabs, setTabs] = useState(Array.isArray(workspaceData?.tabs) ? workspaceData.tabs : []);
 
-  const [isEditingTab, setIsEditingTab] = useState(false);
-  const [editingTabKey, setEditingTabKey] = useState(null);
-  const [isEditEnabled, setIsEditEnabled] = useState(false);
-
-  const startEditTab = (tabKey) => {
-    setIsEditingTab(true);
-    setEditingTabKey(tabKey);
-    setShowForm(true);
-  };
-
-  const stopEditTab = () => {
-    setIsEditingTab(false);
-    setEditingTabKey(null);
-  };
-
+  const [workspaceId, setWorkspaceId] = useState(null);
   const [newBlockName, setNewBlockName] = useState("");
   const [newBlockDescription, setNewBlockDescription] = useState("");
   const [newBlockJsonDataKey, setNewBlockJsonDataKey] = useState("");
@@ -143,6 +70,54 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   const [showForm, setShowForm] = useState(false);
   const [newTabLabel, setNewTabLabel] = useState('');
   const [newTabContent, setNewTabContent] = useState('');
+
+
+
+
+  useEffect(() => {
+    // Retrieve the workspace ID from localStorage when the component mounts
+    const recentWorkspace = localStorage.getItem('recentWorkspace');
+    if (recentWorkspace) {
+      setWorkspaceId(recentWorkspace);
+    }
+    else {
+      // If there is no saved workspace ID, use a default one
+      setWorkspaceId('defaultWorkspaceId');
+    }
+  }, []);  // Empty array means this effect runs once on mount and not on updates
+
+  useEffect(() => {
+    StorageOps.getRecentlyUsedWorkspaceId().then((workspaceId) => {
+      let recentlyUsedWorkspace = findJsonData(workspaces, workspaceId[0]);
+      if (recentlyUsedWorkspace) handleWorkspaceChange(recentlyUsedWorkspace);
+    });
+
+  }, [workspaces]);
+
+
+  function findJsonData(arr, tabId) {
+    // Use the find() method to locate the object with the matching tabId
+    const matchedObject = arr.find((obj) => obj.value.tabId === tabId);
+    // If a match was found, return its jsonData; otherwise, return null
+    return matchedObject ? matchedObject : null;
+  }
+
+  const deleteTab = (tabKey) => {
+    dispatch({ type: 'DELETE_TAB', payload: { key: tabKey } });
+  };
+
+
+  const startEditTab = (tabKey) => {
+    setIsEditingTab(true);
+    setEditingTabKey(tabKey);
+    setShowForm(true);
+  };
+
+  const stopEditTab = () => {
+    setIsEditingTab(false);
+    setEditingTabKey(null);
+  };
+
 
 
   useEffect(() => {
@@ -336,7 +311,6 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     dispatch({ type: 'SET_WORKSPACE', payload: value });
   };
 
-
   const handleButtonClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -363,14 +337,6 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     <>
       <div className={styles["Workspace__wrapper"]}>
         <div className={styles['WorkspaceName__wrapper']}>
-
-
-          {/* <input
-            type="text"
-            placeholder="New workspace name"
-            value={workSpaceName}
-            onChange={handleWorkspaceNameChange}
-          /> */}
 
           <WorkspaceModal
             isOpen={isModalOpen}
@@ -485,6 +451,15 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     </>
   );
 };
+
+
+
+
+
+
+
+
+
 
 
 

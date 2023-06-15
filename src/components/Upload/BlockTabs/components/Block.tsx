@@ -47,35 +47,36 @@ const Block = ({ block, tabKey, findJsonData, transform, handleDeleteBlock }) =>
 
       {
         isEditing ? (
-          <div>
-            <input
+          <div className= {styles["Block__inputWrapper"]}>
+            <label> Block Description</label>
+            <textarea
               className={styles['Block__input']}
               value={editingInputs.description}
               onChange={(e) =>
                 setEditingInputs({ ...editingInputs, description: e.target.value })
               }
             />
-            <input
+            {/* <input
               className={styles['Block__input']}
               value={editingInputs.jsonDataKey}
               onChange={(e) =>
                 setEditingInputs({ ...editingInputs, jsonDataKey: e.target.value })
-              }
-            />
-            <input
+              } */}
+            {/* /> */}
+            {/* <input
               className={styles['Block__input']}
               value={editingInputs.tokens}
               onChange={(e) =>
                 setEditingInputs({ ...editingInputs, tokens: e.target.value })
               }
-            />
-            <input
+            /> */}
+            {/* <input
               className={styles['Block__input']}
               value={editingInputs.fileFormat}
               onChange={(e) =>
                 setEditingInputs({ ...editingInputs, fileFormat: e.target.value })
               }
-            />
+            /> */}
             <button
               onClick={() => {
                 dispatch({
@@ -91,10 +92,7 @@ const Block = ({ block, tabKey, findJsonData, transform, handleDeleteBlock }) =>
         ) : (
           <div>
             <p>{block.description}</p>
-            <p>
-              Tokens: {block.tokens}{' '}
-              | File Format: {block.fileFormat}
-            </p>
+
 
           </div>
         )
@@ -105,10 +103,10 @@ const Block = ({ block, tabKey, findJsonData, transform, handleDeleteBlock }) =>
         </RippleButton>
 
         <RippleButton padding='4px' callBack={() => setIsEditing(true)}>
-          <Icon id="edit" size={16} color="grey"  color2="grey"/>
+          <Icon id="edit" size={16} color="grey" color2="grey" />
         </RippleButton>
         <RippleButton padding='4px' callBack={() => transform(jsonData)}>
-          <Icon id="add" size={16} color="grey"  color2="grey"/>
+          <Icon id="add" size={16} color="grey" color2="grey" />
         </RippleButton>
       </div>
 
