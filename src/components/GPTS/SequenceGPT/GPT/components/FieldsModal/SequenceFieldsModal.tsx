@@ -256,7 +256,7 @@ const SequenceFieldsModal = ({ data, handleQuery, templateData, setIsVisible, is
             shape="square"
 
           >
-            <Icon id="settings" color="white" size={16} />
+            <Icon id="settings" color="grey" size={16} />
           </RippleButton>
         </div>
 
@@ -264,7 +264,7 @@ const SequenceFieldsModal = ({ data, handleQuery, templateData, setIsVisible, is
 
         {/* Markdown Dropdown select */}
         <RippleButton callBack={() => { setIsVisible(false); }} padding="4px">
-          <Icon id="close" size={12} color="white"></Icon>
+          <Icon id="close" size={12} color="grey"></Icon>
         </RippleButton>
       </div>
 
@@ -306,7 +306,7 @@ const SequenceFieldsModal = ({ data, handleQuery, templateData, setIsVisible, is
           <span className={styles["Launch__text"]}>Go</span>
 
           <RippleButton shape="square " color="grey">
-            <Icon id="launch" size={20} color="white"></Icon>
+            <Icon id="launch" size={20} color="grey"></Icon>
           </RippleButton>
         </div>
       </div>

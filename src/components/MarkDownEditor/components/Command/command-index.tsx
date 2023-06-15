@@ -188,7 +188,7 @@ function Command({ editableRowRef, onCommandSelected, status, onClose }) {
         <div className={styles['search-bar']}>
 
           <div className={styles['search-icon-container']}>
-            <Icon id="search" size={18} color={"grey"} />
+            <Icon id="search" size={18} color="grey" />
           </div>
 
           <div className={styles['filter-holder']}>

@@ -71,7 +71,7 @@ const VoiceInputModal: React.FC<VoiceInputModalProps> = ({ isOpen, onRequestClos
       <div style={modalContentStyle}>
         <h2>Voice Input</h2>
         <p>{transcript}</p>
-        <Icon id="microPhone" size={16} color="white" />
+        <Icon id="microPhone" size={16} color="grey" />
         <button onClick={handleStart}>Start</button>
         <button onClick={handleStop}>Stop</button>
         <button onClick={onRequestClose}>Close</button>

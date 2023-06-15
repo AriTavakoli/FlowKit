@@ -115,7 +115,7 @@ export default function LiveGpt() {
                   setShowStorage(!showStorage);
                 }}
               >
-                <Icon id="settings" color="white" size={16} />
+                <Icon id="settings" color="grey" size={16} />
               </RippleButton>
             </div>
 
@@ -167,7 +167,7 @@ export default function LiveGpt() {
             ></FilterPrompts>
           )} */}
           <div className="bottom--toolbar" style = {{paddingBottom : '48px'}}>
-            <div className="divider"></div>
+            {/* <div className="divider"></div> */}
             <BubbleTabParent customFlags = {['Webflow', 'Default', 'Design']}>
               <BubbleSet
                 accessType='cssTemplate'

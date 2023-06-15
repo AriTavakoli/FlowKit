@@ -186,19 +186,21 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
     <>
 
       <AssetLayout>
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearchChange={handleSearchChange} />
 
-        <ControlBar
-          selectedImages={selectedImages}
-          handleSelectedDownloads={handleSelectedDownloads}
-          handleDownloadAll={handleDownloadAll}
-          handleViewTypeChange={handleViewTypeChange}
-          handleFilterTypeChange={handleFilterTypeChange}
-          viewType={viewType}
-          filterType={filterType}
 
-        ></ControlBar>
+          <ControlBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleSearchChange={handleSearchChange}
+            selectedImages={selectedImages}
+            handleSelectedDownloads={handleSelectedDownloads}
+            handleDownloadAll={handleDownloadAll}
+            handleViewTypeChange={handleViewTypeChange}
+            handleFilterTypeChange={handleFilterTypeChange}
+            viewType={viewType}
+            filterType={filterType}
 
+          ></ControlBar>
 
 
 

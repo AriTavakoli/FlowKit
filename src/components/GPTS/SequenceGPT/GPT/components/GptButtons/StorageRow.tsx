@@ -15,20 +15,20 @@ const StorageRowGroup = ({ }) => {
     <div className={styles['container']}>
       <div onClick={() => handleClick(0)}>
         <ButtonV2 color="grey" shape="square" outlineColor={"none"} text="Button 1" selected={selectedButtonIndex === 0} >
-          <Icon id="search" size={20} color="white" />
+          <Icon id="search" size={20} color="grey" />
         </ButtonV2>
       </div>
 
       <div onClick={() => handleClick(1)}>
         <ButtonV2 color="grey" shape="square" outlineColor={"grey"} text="Button 1" selected={selectedButtonIndex === 1} >
-          <Icon id="search" size={20} color="white" />
+          <Icon id="search" size={20} color="grey" />
         </ButtonV2>
       </div>
 
 
       <div onClick={() => handleClick(2)}>
         <ButtonV2 color="grey" shape="square" outlineColor={"grey"} text="Button 1" selected={selectedButtonIndex === 2} >
-          <Icon id="search" size={20} color="white" />
+          <Icon id="search" size={20} color="grey" />
         </ButtonV2>
       </div>
 

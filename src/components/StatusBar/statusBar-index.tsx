@@ -37,7 +37,7 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
 
   const iconSize = 14;
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = useCallback((e: MouseEvent) => {
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     const bottomBoundary = windowHeight * 0.95;
@@ -49,8 +49,7 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
       clearTimeout(timer);
       timer = setTimeout(() => setVisible(false), 500);
     }
-  };
-
+  }, []);
 
   async function handlePrintLocalStorage() {
     let allItems = await StorageOps.getAllStorageItems();
@@ -68,10 +67,12 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
     };
   }, []);
 
-  useOnClickOutside(barRef, () => setVisible(false));
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
-  };
+  }, [setTheme]);
+
+  useOnClickOutside(barRef, () => setVisible(false));
+
 
   return (
     <div className={`${styles['status-bar']} ${visible ? styles.visible : styles.hidden}`} style={{ zIndex: '100000000000000001' }}>

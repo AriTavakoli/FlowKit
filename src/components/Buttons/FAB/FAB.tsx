@@ -35,7 +35,7 @@ const FloatingActionButton = (props) => {
       <div id="fab1" className="round" onClick={toggleInnerFabs}>
         <div id="fabIcon" >
           <RippleButton shape="rounded" padding='12px' outlineColor='grey'>
-            <Icon id="add" size={24} color="white"></Icon>
+            <Icon id="add" size={24} color="grey"></Icon>
           </RippleButton>
         </div>
       </div>

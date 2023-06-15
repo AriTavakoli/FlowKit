@@ -8,11 +8,11 @@ export default function TopBar({ close }) {
   return (
     <div className={styles['topBar__container']}  >
       <RippleButton padding = "4px">
-        <Icon id="no" size={10} color="white" />
+        <Icon id="no" size={10} color="grey" />
       </RippleButton>
       <div onClick={close}>
         <RippleButton shape='square'   >
-          <Icon id="close" size={12} color="white" />
+          <Icon id="close" size={12} color="grey" />
         </RippleButton>
       </div>
 

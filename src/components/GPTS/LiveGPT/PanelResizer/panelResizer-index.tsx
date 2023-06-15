@@ -40,7 +40,7 @@ const PanelResizer = ({ onResize, mod }: PanelResizerProps) => {
 
   return (
     <div className={styles["resizer"]} onMouseDown={handleMouseDown} style={mod ? mod : null}   >
-      <Icon id="dots" size={16} color="white"></Icon>
+      <Icon id="dots" size={16} color="grey"></Icon>
     </div>
   )
 };

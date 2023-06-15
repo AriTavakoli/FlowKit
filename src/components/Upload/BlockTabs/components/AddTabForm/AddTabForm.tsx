@@ -21,10 +21,10 @@ const AddTabForm = ({ newTabLabel, setNewTabLabel, newTabContent, setNewTabConte
         onChange={(e) => setNewTabLabel(e.target.value)}
       />
       <RippleButton callBack={() => { setShowForm(false) }}>
-        <Icon id="close" size={14} color="white" />
+        <Icon id="close" size={14} color="grey" />
       </RippleButton>
       <RippleButton callBack={addTab}>
-        <Icon id="check" size={20} color="white" />
+        <Icon id="check" size={20} color="grey" />
       </RippleButton>
     </div>
   );

@@ -50,7 +50,7 @@ const AssetCard = ({
         />
         {selectedImages.includes(index) && (
           <div style={{ backgroundColor: currentCodeAccent }} className={styles["Image__selected"]} >
-            <Icon id="check" size={16} color="white" />
+            <Icon id="check" size={16} color="grey" />
           </div>
         )}
       </div>

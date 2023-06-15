@@ -45,7 +45,7 @@ export const SearchBar = ({ children }: SearchBarProps) => {
                         <input className={styles['search-bar-input']} onChange={(e) => { handleSearch(e.target.value) }} value={searchTerm} placeholder="Find anything..."   ></input>
                     </div>
                     <div ref={settingsRef} className={styles['ex-icon']}>
-                        <Icon onClick={() => { toggleSettings() }} id="settings" size={20} color={show ? "white" : "grey"} />
+                        <Icon onClick={() => { toggleSettings() }} id="settings" size={20} color={show ? "grey" : "grey"} />
                         <FadeWrapper show={show}>
                             <Settings></Settings>
                         </FadeWrapper>

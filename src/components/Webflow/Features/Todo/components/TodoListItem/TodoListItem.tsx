@@ -22,7 +22,7 @@ function TodoListItem({ todoItem, onDelete, onEdit, onToggleCompletion }: TodoLi
     {
       title: 'Delete Item',
       ariaLabel: `Delete Item "${todoItem.todo}"`,
-      Icon: < Icon id="trash" size={16} color="white" />,
+      Icon: < Icon id="trash" size={16} color="grey" />,
       onClick: onDelete,
     },
   ];

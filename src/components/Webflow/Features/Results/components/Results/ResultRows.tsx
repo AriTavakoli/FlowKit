@@ -1,16 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
-import Icon from '@IconWrapper/Icon'
-import CodeV2 from '@CodeEditor/CodeV2'
-import { FadeWrapper } from '@Utils/FadeWrapper/fade-wrapper'
-import { HighlightedTextProps, SuggestionWrapperProps, BottomBarProps, SuggestionsRowRightProps, SuggestionsRowLeftProps, TagBubbleProps, ResultSubWrapperProps, ResultRowProps } from './ResultRowTypes'
-import { FC } from 'react'
-import './results.css'
-import styles from './ResultRow.module.scss'
-import Live from '@src/components/Webflow/Features/Live/live-index'
-import Snippet from '@src/components/Webflow/Features/Snippet/snippet-index'
-import ParserTest from '@Utils/Parser/ParserTest'
-import LiveResults from './components/Live/liveResults'
 import { useGlobalContext } from '@Context/Global/GlobalProvider'
+import Icon from '@IconWrapper/Icon'
+import { FadeWrapper } from '@Utils/FadeWrapper/fade-wrapper'
+import React, { useEffect, useRef, useState } from 'react'
+import styles from './ResultRow.module.scss'
+import { BottomBarProps, HighlightedTextProps, ResultRowProps, ResultSubWrapperProps, SuggestionWrapperProps, SuggestionsRowLeftProps, SuggestionsRowRightProps, TagBubbleProps } from './ResultRowTypes'
+import LiveResults from './components/Live/liveResults'
+import './results.css'
 
 
 const ResultRow = React.memo(
@@ -80,7 +75,7 @@ const ResultRow = React.memo(
             <span >{query.replace('screen and ', '').replace('max-width: ', '').replace(/\(/g, '').replace(/\)/g, '')}</span>
           </div>
         </div>
-      );
+      );1
     });
 
     const handleExpand = () => {

@@ -14,10 +14,10 @@ import { useWebflowGptContext } from "@Context/Ai/WebflowGPTProvider";
 
 export default function LiveTree({ controlPosition }) {
 
-  const {
-    retrieveSetting,
-    theme = 'light',
-  } = useGlobalContext();
+  // const {
+  //   // retrieveSetting,
+  //   // theme = 'light',
+  // } = useGlobalContext();
 
 
   const {
@@ -29,17 +29,17 @@ export default function LiveTree({ controlPosition }) {
   const [currentCodeAccent, setCurrentCodeAccent] = useState('');
 
 
-  useEffect(() => {
-    const fetchColorValue = async () => {
-      const userSettings = await retrieveSetting('accentColor');
-      // console.log('%cretrievedColor', 'color: lightblue; font-size: 14px', userSettings);
-      if (userSettings) {
-        setCurrentCodeAccent(userSettings.accentColor);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchColorValue = async () => {
+  //     const userSettings = await retrieveSetting('accentColor');
+  //     // console.log('%cretrievedColor', 'color: lightblue; font-size: 14px', userSettings);
+  //     if (userSettings) {
+  //       setCurrentCodeAccent(userSettings.accentColor);
+  //     }
+  //   };
 
-    fetchColorValue();
-  }, [retrieveSetting]);
+  //   fetchColorValue();
+  // }, [retrieveSetting]);
 
 
 
@@ -186,12 +186,12 @@ export default function LiveTree({ controlPosition }) {
 
 
   return (
-    <div className="treeContainer" style={themes[theme]}>
+    <div className="treeContainer" style={themes.light}>
 
 
       <div className="controlOutput" style={{ right: controlPosition, top: '40px', zIndex: '100' }}>
         <RippleButton padding="2px">
-          <Icon id="clipboard" size={16} color="white" transitionId="check" onClick={() => { copyCssToClipboard(currentNodeAnalysisRef.current.cssData) }} />
+          <Icon id="clipboard" size={16} color="grey" transitionId="check" onClick={() => { copyCssToClipboard(currentNodeAnalysisRef.current.cssData) }} />
         </RippleButton>
 
 

@@ -115,7 +115,7 @@ export default function QueryBuilderGpt({ sequenceRef, executeCurrentSequence })
                   setShowStorage(!showStorage);
                 }}
               >
-                <Icon id="settings" color="white" size={16} />
+                <Icon id="settings" color="grey" size={16} />
               </RippleButton>
             </div>
 
@@ -179,7 +179,7 @@ export default function QueryBuilderGpt({ sequenceRef, executeCurrentSequence })
             ></FilterPrompts>
           )}
           <div className="bottom--toolbar">
-            <div className="divider"></div>
+            {/* <div className="divider"></div> */}
 
             <div className="bubble__container">
               <BubbleGroup accessType='cssTemplate' handleQuery={handleQuery} sequenceRef={sequenceRef}/>
@@ -190,7 +190,7 @@ export default function QueryBuilderGpt({ sequenceRef, executeCurrentSequence })
                   }}
                 >
                   <RippleButton shape="square" outlineColor="grey" callBack={() => {setActiveTab('dTab')}} padding='12px'>
-                    <Icon id="add" size={16} color="white"></Icon>
+                    <Icon id="add" size={16} color="grey"></Icon>
                   </RippleButton>
                 </div>
 
@@ -200,7 +200,7 @@ export default function QueryBuilderGpt({ sequenceRef, executeCurrentSequence })
                   }}
                 >
                   <RippleButton shape="square" outlineColor="grey" padding='12px'>
-                    <Icon id="edit" size={16} color="white"></Icon>
+                    <Icon id="edit" size={16} color="grey"></Icon>
                   </RippleButton>
                 </div>
               </div>

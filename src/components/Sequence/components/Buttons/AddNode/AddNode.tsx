@@ -7,7 +7,7 @@ export default function AddNode({ handleAddNode }) {
 
   return (
     <div onClick={handleAddNode} className={styles['AddNode__container']}>
-        <Icon id="plus" size={32} color="white" />
+        <Icon id="plus" size={32} color="grey" />
     </div>
   )
 

@@ -5,13 +5,9 @@ import SearchProvider from '@Context/SearchProvider';
 import parseHTMLString from '@src/components/Webflow/Features/TreeView/Algo';
 import './Popup.css';
 import { GlobalProvider } from '@Context/Global/GlobalProvider';
+import { ThemeProvider } from '@Context/Global/ThemeProvider';
 
 const Popup = () => {
-
-  let str2 = '<img src="https://uploads-ssl.webflow.com/62434fa732124a0fb112aab4/62434fa732124a55c612aae2_portfolio%202%20-%20wide.svg" loading="lazy" data-wf-id="[&quot;12afc27f-411c-f77d-8ec6-31c195e062ca&quot;]" data-w-id="12afc27f-411c-f77d-8ec6-31c195e062ca" alt="" class="team-member-image"> parsedEvent'
-
-
-  let html = parseHTMLString(str2);
 
   const [isIconClickPopup, setIsIconClickPopup] = useState(false);
 
@@ -56,11 +52,7 @@ const Popup = () => {
   return (
     <div className={isIconClickPopup ? "cornerWidget" : ""}>
       <SearchProvider>
-        <GlobalProvider>
-
-          <App styleSheet={styleSheet} css={css} ></App>
-        </GlobalProvider>
-
+        <App styleSheet={styleSheet} css={css} ></App>
       </SearchProvider>
     </div>
   );

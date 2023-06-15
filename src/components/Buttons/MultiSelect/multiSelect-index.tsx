@@ -18,7 +18,7 @@ export default function MultiSelect({ handleModeChange }) {
     <div>
       <div className={styles['multiSelect__container']} onClick={handleChangeMode}>
         <RippleButton shape="rounded" color="grey" outlineColor="grey" padding = '8px'>
-          <Icon id="edit" size={iconSize} color="white" />
+          <Icon id="edit" size={iconSize} color="grey" />
         </RippleButton>
       </div>
     </div>

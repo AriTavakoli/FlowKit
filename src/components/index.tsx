@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { GlobalProvider, useGlobalContext } from '@Context/Global/GlobalProvider';
+import { GlobalProvider } from '@Context/Global/GlobalProvider';
 import SearchProvider from '@Context/SearchProvider';
 import FeatureFlagOps from '@src/Utils/LocalStorage/FeatureFlags';
 import { FeatureFlags } from '@Types/Settings/settings.types';
@@ -9,78 +9,31 @@ import StatusBar from './StatusBar/statusBar-index';
 import { TabParent } from './Tabs/tabs-index';
 import StatusBarModal from './StatusBar/components/Modal/StatusBarModal';
 
+const StyleGuide = lazy(() => import(/* webpackChunkName: "StyleGuide" */'./StyleGuide/StyleGuide-index'));
+const TODOAPP = lazy(() => import(/* webpackChunkName: "TODOAPP" */'@src/components/Webflow/Features/Todo/App'));
+const SearchResults = lazy(() => import(/* webpackChunkName: "Search" */'./Webflow/Features/Results/SearchResults'));
+const EditorMain = lazy(() => import(/* webpackChunkName: "EditorMain" */'@src/components/MarkDownEditor/markdown-index'));
+const GPT = lazy(() => import(/* webpackChunkName: "GPT" */'./GPTS/GPT/GPT-index'));
+const Tava = lazy(() => import(/* webpackChunkName: "Tava" */'./GPTS/LiveGPT/liveGPT-index'));
+const AssetManager = lazy(() => import(/* webpackChunkName: "AssetManager" */'./Webflow/AssetManager/assetManager-index'));
+const IdeaExplorer = lazy(() => import(/* webpackChunkName: "IdeaExplorer" */'./SplitScreens/IdeaExplorer/IdeaExplorer'));
+
 
 
 const App = ({ styleSheet, css }) => {
 
   const [featureFlags, setFeatureFlags] = useState<FeatureFlags>({
+
     searchResults: true,
-    // todoApp: true,
+    todoApp: true,
     editorMain: true,
+    gpt: true,
     StyleGuide: true,
     liveGPT: true,
     assetManager: true,
     componentLibrary: true,
     ideaExplorer: true,
-
   });
-
-  const { theme } = useGlobalContext();
-
-  const SearchResults = lazy(() => import(/* webpackChunkName: "SearchResults" */'./Webflow/Features/Results/SearchResults'));
-
-
-  const tabConfig = [
-    {
-      key: 'aTab',
-      icon: 'drop',
-      flag: 'StyleGuide',
-      component: lazy(() => import(/* webpackChunkName: "StyleGuide" */'./StyleGuide/StyleGuide-index')),
-    },
-    {
-      key: 'bTab',
-      icon: 'search',
-      flag: 'searchResults',
-      component: () => (
-        <SearchProvider>
-          <SearchResults styleSheet={styleSheet} />
-        </SearchProvider>
-      ),
-    },
-    // {
-    //   key: 'cTab',
-    //   icon: 'todo',
-    //   flag: 'todoApp',
-    //   component: lazy(() => import(/* webpackChunkName: "TODOAPP" */'@src/components/Webflow/Features/Todo/App')),
-    // },
-    {
-      key: 'dTab',
-      icon: 'builder',
-      flag: 'editorMain',
-      component: lazy(() => import(/* webpackChunkName: "EditorMain" */'@src/components/MarkDownEditor/markdown-index')),
-    },
-    {
-      key: 'eTab',
-      icon: 'component',
-      flag: 'liveGPT',
-      component: lazy(() => import(/* webpackChunkName: "Tava" */'./GPTS/LiveGPT/liveGPT-index')),
-    },
-    {
-      key: 'fTab',
-      icon: 'tree',
-      flag: 'ideaExplorer',
-      component: lazy(() => import(/* webpackChunkName: "IdeaExplorer" */'./SplitScreens/IdeaExplorer/IdeaExplorer')),
-    },
-    {
-      key: 'gTab',
-      icon: 'assetManager',
-      flag: 'assetManager',
-      component: lazy(() => import(/* webpackChunkName: "AssetManager" */'./Webflow/AssetManager/assetManager-index')),
-    },
-  ];
-
-
-
 
   const [activeModal, setActiveModal] = useState<'timer' | 'calculator' | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -95,41 +48,68 @@ const App = ({ styleSheet, css }) => {
     const featureFlagOps = new FeatureFlagOps();
     featureFlagOps.loadFeatureFlags().then((loadedFlags) => {
       if (loadedFlags) {
-        console.log('%cloadedFlags', 'color: orange; font-size: 54px', loadedFlags);
         setFeatureFlags(loadedFlags as FeatureFlags);
-      } else {
-        // Initialize flags when they are not in local storage
-        featureFlagOps.initializeFeatureFlags(tabConfig).then(() => {
-          // Load again after initialization
-          featureFlagOps.loadFeatureFlags().then((initializedFlags) => {
-            setFeatureFlags(initializedFlags as FeatureFlags);
-          });
-        });
       }
     });
   }, []);
 
-
-
-
   return (
     <>
+      <GlobalProvider>
 
-      <div className={`${styles[`SearchContainer`]}`}>
-        <TabParent featureFlags={featureFlags} tabConfig={tabConfig}>
-          {tabConfig.map(tab => (
-            featureFlags[tab.flag] && (
-              <Suspense fallback={<div>Loading {tab.flag}...</div>}>
-                <tab.component />
+        <div className={styles['SearchContainer']}>
+          <TabParent featureFlags={featureFlags}>
+            {featureFlags.StyleGuide && (
+              <Suspense fallback={<div>Loading StyleGuide</div>}>
+                <StyleGuide></StyleGuide>
               </Suspense>
-            )
-          ))}
-        </TabParent>
-        <StatusBar message="Example Message" options={statusBarOptions} setActiveModal={setActiveModal} showModal={showModal} setShowModal={setShowModal} />
+            )}
 
-        {activeModal && <StatusBarModal featureType={activeModal} showModal={showModal} setShowModal={setShowModal} />}
+            {featureFlags.searchResults && (
+              <SearchProvider>
+                <SearchResults styleSheet={styleSheet} />
+              </SearchProvider>
+            )}
+            {featureFlags.todoApp && (
+              <Suspense fallback={<div>Loading TODOAPP...</div>}>
+                <TODOAPP />
+              </Suspense>
+            )}
+            {featureFlags.editorMain && (
+              <Suspense fallback={<div>Loading EditorMain...</div>}>
+                <EditorMain />
+              </Suspense>
+            )}
+            {featureFlags.gpt && (
+              <Suspense fallback={<div>Loading GPT...</div>}>
+                <GPT />
+              </Suspense>
+            )}
+            {featureFlags.liveGPT && (
+              <Suspense fallback={<div>Loading AssetManager</div>}>
+                <Tava></Tava>
+              </Suspense>
+            )}
 
-      </div>
+
+            {featureFlags.assetManager && (
+              <Suspense fallback={<div>Loading AssetManager</div>}>
+                <AssetManager></AssetManager>
+              </Suspense>
+            )}
+            {featureFlags.ideaExplorer && (
+              <Suspense fallback={<div>Loading idea Explorer</div>}>
+                <IdeaExplorer></IdeaExplorer>
+              </Suspense>
+            )}
+          </TabParent>
+          <StatusBar message="Example Message" options={statusBarOptions} setActiveModal={setActiveModal} showModal={showModal} setShowModal={setShowModal} />
+
+          {activeModal && <StatusBarModal featureType={activeModal} showModal={showModal} setShowModal={setShowModal} />}
+
+        </div>
+      </GlobalProvider>
+
     </>
   )
 

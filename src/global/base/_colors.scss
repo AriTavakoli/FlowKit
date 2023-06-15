@@ -6,8 +6,8 @@ $themes: (
     tertiary-bg: #ccc,
     primary-text: #000,
     secondary-text: #545454,
-    track-color : #e5e5e5,
-    thumb-color : #68686889,
+    track-color: #e5e5e5,
+    thumb-color: #68686889,
     tertiary-text: #666,
     link-color: #0000ff,
     link-hover-color: #ff0000,
@@ -18,45 +18,55 @@ $themes: (
     border-color: #e5e5e5,
     border-color2: #c3c3c3,
     border-radius: 3px,
-    box-shadow: 6px 10px 30px 0px rgba(0,0,0,0.1),
-    shadow: 0 1px 3px rgba(0, 0, 0, .1),
+    box-shadow: 6px 10px 30px 0px rgba(0, 0, 0, 0.1),
+    shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
     rgba-primary-bg: rgba(255, 255, 255, 0.32),
     rgba-secondary-bg: rgba(255, 255, 255, 0.19),
+    bubble-color: #fff,
 
+    chat-bg: #fff,
+    chat-border: #e5e5e5,
 
-    tab-container : #efefef,
+    tab-container: #efefef,
 
     live-bg: #f3f3f3,
     live-class: #e4e4e4,
     live-border: #d4d4d4,
     live-arrow: #252525a3,
 
-
-
-
+    addNode-border: #6e6e6e,
+    addNode-border-left: #6e6e6e,
 
     fieldsManager-bg: #fff,
 
+    assetManager-bg: #e5e5e5,
+    assetManager-border : #e7e7e7,
+    assetManager-border2 : #d2d2d2,
+    assetManager-card-bg2: #f2f2f2,
+    assetManager-row-bg: #fff,
+
+    search-bg: #fff,
+    search-block: #bbbbbb,
+
+    divider: #e5e5e5,
 
     command-bg: #fff,
     command-bg2: #f8f8f8,
     command-text: #000,
     command-border: #e5e5e5,
     command-border2: #c3c3c3,
-    command-shadow: 0 1px 3px rgba(0, 0, 0, .1),
-
-
-
+    command-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
+    resizer: #d9d9d9,
   ),
 
   dark: (
     primary-bg: rgb(16, 16, 16),
     primary2-bg: rgb(25, 25, 25),
-    secondary-bg: #2b2b2b,
+    secondary-bg: rgb(43, 43, 43),
     secondary2-bg: #1b1b1b,
     tertiary-bg: #666,
-    track-color : #2b2b2b,
-    thumb-color : #68686889,
+    track-color: #2b2b2b,
+    thumb-color: #68686889,
     primary-text: #fff,
     secondary-text: #ccc,
     tertiary-text: #999,
@@ -68,35 +78,77 @@ $themes: (
     line-height: 1.5,
     border-color: #555,
     border-color2: #333,
-    box-shadow : 0 1px 3px rgba(0, 0, 0, .3),
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
     border-radius: 3px,
-    shadow: 0 1px 3px rgba(0, 0, 0, .3),
+    shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
     rgba-primary-bg: rgba(16, 16, 16, 0.32),
     rgba-secondary-bg: rgba(43, 43, 43, 0.19),
+    tab-container: #161616,
 
-    tab-container : #161616,
+    bubble-color: #2b2a2a,
+
+    chat-bg: #101010,
+    chat-border: #55555589,
 
     live-bg: #161616,
     live-class: #161616,
-    live-border:#555555a3,
+    live-border: #555555a3,
     live-arrow: #f2f2f2a3,
-
 
     fieldsManager-bg: #131313,
 
+    divider: #55555589,
 
+    addNode-border: #606060,
+    addNode-border-left: #606060,
+
+    assetManager-bg: #282828,
+    assetManager-bg2: #161616,
+    assetManager-border : #8686865e,
+    assetManager-border2 : #8c8c8c89,
+    assetManager-row-bg: rgba(48, 48, 48, 0.538),
+    assetManager-card-bg: rgba(59, 59, 59, 0.7),
+
+
+    search-bg: #181818,
+    search-block: #2b2b2b,
 
     command-bg: #161616,
     command-bg2: #1b1b1b,
     command-text: #fff,
     command-border: #55555534,
     command-border2: #333,
-    command-shadow: 0 1px 3px rgba(0, 0, 0, .3),
-
-
-
-
-
-
-  )
+    command-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
+    resizer: #2a2a2a,
+  ),
 );
+
+.sg-nav-container {
+  width: 240px;
+  height: 100vh;
+  background-color: var(--swatch_c5324afb);
+}
+.sg-menu-brand {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  margin-left: 30px;
+  padding-left: 0px;
+}
+.sg-menu {
+  width: 100%;
+}
+.sg-menu-link {
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 27px;
+  border-left: 4px solid transparent;
+  transition-property: background-color, color;
+  transition-duration: 200ms, 200ms;
+  transition-timing-function: ease, ease;
+  color: var(--swatch_6738ab97);
+}
+.sg-menu-button {
+}
+.sg-menu-icon {
+}

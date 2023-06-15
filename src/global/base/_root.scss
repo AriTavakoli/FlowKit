@@ -59,7 +59,7 @@
 
   p {
     font-size: 0.75rem;
-    color: var(--primary-color);
+    color: var(--primary-text);
   }
 
   li {
@@ -83,7 +83,6 @@
     margin: 0;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-top-left-radius: 0px !important;
     border: 1px solid #716e6e59;
   }
 }

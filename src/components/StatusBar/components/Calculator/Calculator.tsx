@@ -19,7 +19,7 @@ const PxToRemCalculator: React.FC = () => {
           <input className={styles['input']} id="px-input"  value={px} onChange={handlePxChange} />
           <div className={styles['PX']}>px</div>
         </div>
-        <Icon id="switch" size={16} color="white"></Icon>
+        <Icon id="switch" size={16} color="grey"></Icon>
         <div>
           <div className={styles['text']}>{rem.toFixed(2)}rem</div>
         </div>

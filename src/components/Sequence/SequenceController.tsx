@@ -13,7 +13,7 @@ import { SequenceTabsParent } from './components/Tabs/SequenceTabs-index';
 import { useSequenceLoader } from './hooks/useSequenceLoader';
 import { useSequenceOperations } from './hooks/useSequenceOperations';
 
-
+import { useGlobalContext } from '@Context/Global/GlobalProvider';
 
 type TreeNode = {
   id: string;
@@ -33,6 +33,10 @@ const SequenceControllerComponent = () => {
 
   } = useSequenceController();
 
+
+
+
+
   const [currentSequenceId, setCurrentSequenceId] = useState<string | null>(null);
   const [currentSelectedNodeId, setCurrentSelectedNodeId] = useState(null);
   const [currentName, setCurrentName] = useState(null);
@@ -48,7 +52,10 @@ const SequenceControllerComponent = () => {
 
   const [size, setSize] = useState({ width: 600, height: 700 });
 
-
+  const {
+    currentTemplate,
+    theme = 'light', // Set the default theme to 'light'
+  } = useGlobalContext();
 
   const [treeData, setTreeData] = useState<TreeNode>({
     id: 'root',
@@ -273,6 +280,15 @@ const SequenceControllerComponent = () => {
     console.log(`Mouseout of node ${data.name}`);
   };
 
+  const themes = {
+    light: {
+      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(105, 105, 105, 0.80), rgba(169, 169, 169, 0.19) 1px, transparent 1px, transparent 100%)`
+    },
+    dark: {
+      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%)`
+
+    }
+  }
 
 
 
@@ -283,7 +299,7 @@ const SequenceControllerComponent = () => {
 
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div style={{ width: '100vw', height: '100vh',  }}>
 
 
       <TreeControlBar
@@ -299,13 +315,14 @@ const SequenceControllerComponent = () => {
       ></TreeControlBar>
 
 
-      <div style={{ width: '100%', height: '100vh' }}>
+      <div style={{ width: '100%', height: '100vh', backgroundColor: theme, }}>
         <div
           className='treeWrapper'
           style={{
             width: "100%",
             height: "100%",
-            transform: inverted ? "scaleY(-1)" : "none"
+            transform: inverted ? "scaleY(-1)" : "none",
+            backgroundImage: themes[theme].backgroundImage
           }}
         >
           <Tree

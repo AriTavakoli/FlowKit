@@ -362,7 +362,7 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
           <input ref={fileInputRef} type="file" onChange={handleFileUpload} style={{ display: 'none' }} />
         </div>
 
-        <div>
+        <div className={styles['Workspace__content']}>
           <Tabs
             active={active}
             onChange={handleTabChange}
@@ -373,6 +373,7 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
 
           >
+
             {Array.isArray(tabs) && tabs.map((tab) => (
               <div key={tab.key}>
                 {tab.label}
@@ -384,6 +385,7 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
                 )}
               </div>
             ))}
+
           </Tabs>
 
 
@@ -399,33 +401,33 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
               currentTab={tabs.find(tab => tab.key === editingTabKey)}
             />
           )}
+            {workspaceData.tabs.find((tab) => tab.key === active) && (
+              <TabContent
+                tabKey={active}
+                content={workspaceData.tabs.find((tab) => tab.key === active).content}
+                onUpload={onUpload}
+                initialState={initialState}
+              />
+            )}
+        </div>
 
-          {workspaceData.tabs.find((tab) => tab.key === active) && (
-            <TabContent
-              tabKey={active}
-              content={workspaceData.tabs.find((tab) => tab.key === active).content}
-              onUpload={onUpload}
-              initialState={initialState}
-            />
-          )}
-          <div className={styles['Workspace__bottom--wrapper']} >
-            <div className={styles["Workspace__bottom--wrapperInner"]}>
+        <div className={styles['Workspace__bottom--wrapper']} >
+          <div className={styles["Workspace__bottom--wrapperInner"]}>
 
-              <div className={styles["Workspace__upload"]} onClick={handleButtonClick}>
-                <span className={styles['Workspace__name']}> Upload Workspace </span>
+            <div className={styles["Workspace__upload"]} onClick={handleButtonClick}>
+              <span className={styles['Workspace__name']}> Upload Workspace </span>
 
-                <Icon id='upload' size={20} color="grey" />
-              </div>
-
-
-
+              <Icon id='upload' size={20} color="grey" />
             </div>
 
 
-            <RippleButton shape="square" padding='12px' callBack={() => { deleteWorkspace(workspaceData.name) }} outlineColor='grey' >
-              <Icon id='trash' size={20} color="grey" />
-            </RippleButton>
+
           </div>
+
+
+          <RippleButton shape="square" padding='12px' callBack={() => { deleteWorkspace(workspaceData.name) }} outlineColor='grey' >
+            <Icon id='trash' size={20} color="grey" />
+          </RippleButton>
         </div>
       </div>
 

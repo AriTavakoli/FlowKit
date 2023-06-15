@@ -55,7 +55,7 @@ export default function AssetRow({
             />
             {selectedImages.includes(index) && (
               <div style={{ backgroundColor: currentCodeAccent }} className={styles["Image__selected"]} >
-                <Icon id="check" size={16} color="white" />
+                <Icon id="check" size={16} color="grey" />
               </div>
             )}
           </div>
@@ -74,7 +74,7 @@ export default function AssetRow({
                 ></div>
               </div>
               <RippleButton callBack={() => handleDownload(image.cdnUrl, index)}>
-                <Icon id="download" size={16}></Icon>
+                <Icon id="download" size={24} color = "grey"></Icon>
               </RippleButton>
             </div>
           </div>

@@ -220,7 +220,7 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
 
             <div className="css__container--inner" ref={syntaxHighlighterRef}>
               <div class="copy" onClick={handleIconClick}>
-                <Icon id={iconId} size={12} color="white" transitionId='check'></Icon>
+                <Icon id={iconId} size={12} color="grey" transitionId='check'></Icon>
               </div>
 
               {loadingNewStyleSheet ?
