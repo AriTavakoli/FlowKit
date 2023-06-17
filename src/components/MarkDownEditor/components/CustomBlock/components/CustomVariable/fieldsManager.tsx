@@ -237,10 +237,8 @@ const FieldsManager = ({
   return (
     <div className={styles["block__container"]}>
       <div className={styles['block__buttonContainer']}>
-        <VoiceInput onTranscribe={handleTranscribe} padding='4px'>
-          <Icon id="microPhoneOn" size={16} color="grey" />
-        </VoiceInput>
-        <RippleButton padding='4px'>
+
+        <RippleButton padding='4px' callBack={() => { handleShowFieldsManager(true, null) }}>
           <Icon id="source" size={16} color="grey" />
         </RippleButton>
         <RippleButton callBack={() => { handleAddField(block.id) }} padding='4px'>
