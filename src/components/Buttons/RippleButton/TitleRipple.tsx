@@ -6,10 +6,7 @@ import styles from './bubble.module.scss'
 import autoAnimate from '@formkit/auto-animate'
 
 
-
-
 interface ButtonProps {
-  // available colors = {'red' ,'orange', 'blue'}
   color: string;
   children?: React.ReactNode;
   icon?: boolean;

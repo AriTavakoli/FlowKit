@@ -12,28 +12,25 @@ const ResultRow = React.memo(
   React.forwardRef<HTMLDivElement, ResultRowProps>((props, ref) => {
 
 
-
-    console.log(props
-    );
-
     const {
       retrieveSetting,
+      theme,
     } = useGlobalContext();
 
     const [currentCodeAccent, setCurrentCodeAccent] = useState('');
 
     const { setCurrentRow, searchTerm, currentRowIndex, index, className, css, } = props;
 
-    console.log(css, 'css');
     const rowRef = useRef(null)
     const [isExpanded, setIsExpanded] = useState(false)
     const toggleExpand = () => { setIsExpanded(!isExpanded) }
     const [show, setShow] = useState(false);
 
-    const [ogCss, setOgCss] = useState(css.default || '');
     const [cssPass, setCssPass] = useState(css.default || '');
 
     const [mediaQuery, setMediaQuery] = useState();
+
+
 
 
   useEffect(() => {
@@ -75,7 +72,7 @@ const ResultRow = React.memo(
             <span >{query.replace('screen and ', '').replace('max-width: ', '').replace(/\(/g, '').replace(/\)/g, '')}</span>
           </div>
         </div>
-      );1
+      );
     });
 
     const handleExpand = () => {
@@ -151,9 +148,6 @@ const ResultRow = React.memo(
     );
   }), areEqual
 );
-
-
-
 
 
 

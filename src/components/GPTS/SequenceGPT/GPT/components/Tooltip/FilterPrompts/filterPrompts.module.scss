@@ -9,8 +9,9 @@
   height: 400px;
   border-radius: 8px;
   border: 1px solid #73737389;
-  background-color: rgb(23, 23, 23);
+  background-color: var(--primary2-bg);
   overflow: hidden;
+  color : var(--primary-text);
 
 
 }

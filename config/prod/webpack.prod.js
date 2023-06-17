@@ -51,6 +51,7 @@ const alias = {
   '@Mocks': path.resolve(__dirname, '../../Mocks/'),
   "@src": path.resolve(__dirname, '../../src/'),
   "@Global": path.resolve(__dirname, '../../src/global/'),
+  "@Theme": path.resolve(__dirname, '../../src/global/theme'),
 };
 
 

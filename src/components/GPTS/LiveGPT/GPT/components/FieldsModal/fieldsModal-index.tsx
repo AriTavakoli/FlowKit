@@ -6,6 +6,7 @@ import useOnClickOutside from "@src/components/hooks/useOnClickOutside";
 import React, { useEffect, useRef, useState } from "react";
 import { NodeAnalysis } from "../../../classes/NodeAnalysis";
 import styles from './fieldModal.module.scss';
+import MarkdownRenderer from "@src/components/GPTS/GPT/components/Renderer/MarkDownRenderer";
 
 const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible, sequenceRef }) => {
   const [inputValues, setInputValues] = useState({});
@@ -50,7 +51,7 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible,
 
         switch (element.type) {
           case 'P':
-            return element.textContent || '';
+            return (element.textContent || '').replace(/&nbsp;/g, ' ');
 
           case 'DIV':
             const fieldId = element.attributes?.fieldId;
@@ -73,8 +74,8 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible,
 
             // Check for inputType 'webflow' and set value to the corresponding value
             const webflowField = element.fieldInfo && Array.isArray(element.fieldInfo)
-            ? element.fieldInfo.find((field) => field.inputType === 'webflow')
-            : null;
+              ? element.fieldInfo.find((field) => field.inputType === 'webflow')
+              : null;
 
             if (webflowField) {
               // Set the default value for inputType 'webflow'
@@ -92,7 +93,8 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible,
         }
       })
       .join('');
-
+    const cleanedOutput = outputString.replace(/&nbsp;/g, ' ');  // Replace `&nbsp;` with a space
+    setPreviewContent(cleanedOutput);
     setPreviewContent(outputString);
   }, [data, inputValues, styles]);
 
@@ -173,8 +175,8 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible,
             // Check for inputType 'webflow' and set value to '10'
 
             const webflowField = element.fieldInfo && Array.isArray(element.fieldInfo)
-            ? element.fieldInfo.find((field) => field.inputType === 'webflow')
-            : null;
+              ? element.fieldInfo.find((field) => field.inputType === 'webflow')
+              : null;
 
 
             if (webflowField) {
@@ -269,18 +271,18 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible,
 
 
         <div className={styles["Field__fieldManager"]} >
-            <div className={styles["Field__checkBox--container"]} >
-              <label htmlFor="myCheckbox">Use Default Values</label>
-              <input
-                type="checkbox"
-                id="myCheckbox"
-                className={styles["Field__checkBox"]}
-                checked={useDefaults} // Set the checkbox state
-                onChange={handleCheckboxChange} //event handler for checkbox changes
-              />
-            </div>
+          <div className={styles["Field__checkBox--container"]} >
+            <label htmlFor="myCheckbox">Use Default Values</label>
+            <input
+              type="checkbox"
+              id="myCheckbox"
+              className={styles["Field__checkBox"]}
+              checked={useDefaults} // Set the checkbox state
+              onChange={handleCheckboxChange} //event handler for checkbox changes
+            />
+          </div>
 
-            {data.map(renderElement)}
+          {data.map(renderElement)}
         </div>
 
 
@@ -289,11 +291,10 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible,
           <button className={styles["Field__copyButton"]} onClick={handleCopy}>
             <Icon id={copyIcon} size={16} color="grey"></Icon>
           </button>
-          <div dangerouslySetInnerHTML={{ __html: previewContent }}></div>
+          {/* {previewContent} */}
+          <MarkdownRenderer htmlString={previewContent} />
+          {/* <div dangerouslySetInnerHTML={{ __html: previewContent }}>M</div> */}
         </div>
-
-
-
 
 
       </div>
@@ -305,9 +306,7 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible,
 
       <div className={styles["Field__buttonParent"]}>
         <div className={styles["Launch"]} onClick={handleClick} ref={goButtonRef}>
-
           <span className={styles["Launch__text"]}>Go</span>
-
           <RippleButton shape="square " color="grey">
             <Icon id="launch" size={20} color="grey"></Icon>
           </RippleButton>

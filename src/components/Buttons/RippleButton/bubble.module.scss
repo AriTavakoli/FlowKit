@@ -214,6 +214,7 @@ $transition: all 0.9s ease-in-out;
     overflow: hidden;
     background: linear-gradient(to left, rgba(255, 255, 255, 0.523), rgb(255, 255, 255) 70%);
     -webkit-background-clip: text;
+    font-weight: var(--font-weight);
     // -webkit-text-fill-color: transparent;
     color : var(--primary-text);
 

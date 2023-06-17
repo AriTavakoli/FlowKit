@@ -97,13 +97,13 @@ export default function StorageRow({ item, callBack, itemBody, isActive }: Props
           <div>
             <div className={styles['storage__button']}>
               <div onClick={() => { handleNameChange(newName); }}>
-                <RippleButton shape="square" outlineColor="grey">
+              <RippleButton shape="square" outlineColor="grey" padding= "8px">
                   <Icon id="save" size={iconSize} color="grey"></Icon>
                 </RippleButton>
               </div>
 
               <div onClick={handleCancel}>
-                <RippleButton shape="square" outlineColor="grey">
+              <RippleButton shape="square" outlineColor="grey" padding= "8px">
                   <Icon id="close" size={iconSize} color="grey"></Icon>
                 </RippleButton>
               </div>

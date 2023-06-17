@@ -5,10 +5,10 @@ export default class FeatureFlagOps {
     this.featureFlags = featureFlags || {
       StyleGuide: true,
       treeView: true,
-      searchResults: true,
+      // searchResults: true,
       // todoApp: true,
-      editorMain: true,
-      assetManager: true,
+      Template_Editor: true,
+      Asset_Manager: true,
     };
   }
 

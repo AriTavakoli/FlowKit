@@ -97,13 +97,13 @@ export default function StorageRow({ item, callBack, itemBody, isActive }: Props
           <div>
             <div className={styles['storage__button']}>
               <div onClick={() => { handleNameChange(newName); }}>
-                <RippleButton shape="square" outlineColor="grey">
+                <RippleButton shape="square" outlineColor="grey" padding="8px">
                   <Icon id="save" size={iconSize} color="grey"></Icon>
                 </RippleButton>
               </div>
 
               <div onClick={handleCancel}>
-                <RippleButton shape="square" outlineColor="grey">
+                <RippleButton shape="square" outlineColor="grey" padding="8px">
                   <Icon id="close" size={iconSize} color="grey"></Icon>
                 </RippleButton>
               </div>
@@ -122,12 +122,12 @@ export default function StorageRow({ item, callBack, itemBody, isActive }: Props
 
           <div className={styles['storage__button']}>
             <div onClick={handleDelete}>
-              <RippleButton shape="square" outlineColor="grey">
+            <RippleButton shape="square" outlineColor="grey" padding="8px">
                 <Icon id="trash" size={iconSize} color="grey"></Icon>
               </RippleButton>
             </div>
             <div onClick={handleEdit}>
-              <RippleButton shape="square" outlineColor="grey">
+            <RippleButton shape="square" outlineColor="grey" padding="8px">
                 <Icon id="edit" size={iconSize} color="grey"></Icon>
               </RippleButton></div>
           </div>
@@ -144,13 +144,13 @@ export default function StorageRow({ item, callBack, itemBody, isActive }: Props
         <div className={styles['storage__button']}>
 
           <div onClick={() => { handleConfirmDelete() }}>
-            <RippleButton shape="square" outlineColor="grey">
+          <RippleButton shape="square" outlineColor="grey" padding="8px">
               <Icon id="check" size={iconSize} color="grey"></Icon>
             </RippleButton>
           </div>
 
           <div onClick={() => { handleCancelDelete() }}>
-            <RippleButton shape="square" outlineColor="grey">
+          <RippleButton shape="square" outlineColor="grey" padding="8px">
               <Icon id="close" size={iconSize} color="grey"></Icon>
             </RippleButton>
           </div>

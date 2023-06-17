@@ -28,6 +28,36 @@
 
 
 
+.mediaQueryTextSelected {
+  background-color: var(--live-class);
+  border-radius: 4px;
+  color: var(--text-color);
+  margin-top: 6px;
+  border: 1px solid var(--live-border);
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-weight: lighter;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: auto;
+  margin-bottom: 8px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), var(--live-class) 70%);
+  -webkit-background-clip: text;
+
+  &.faded {
+    opacity: 0.3;
+  }
+
+  span {
+    color: var(--primary-text);
+  }
+
+}
 
 .copy {
   position: absolute;
@@ -142,6 +172,35 @@
 
 }
 
+
+.mediaQueryTextSelected {
+  border-radius: 4px;
+  color: var(--text-color);
+  margin-top: 6px;
+  border: 1px solid var(--live-border);
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-weight: lighter;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: auto;
+  margin-bottom: 8px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), var(--live-class2) 70%);
+
+  &.faded {
+    opacity: 0.3;
+  }
+
+  span {
+    color: var(--primary-text);
+  }
+
+}
 
 
 .codeBlock {

@@ -221,17 +221,42 @@ export default class SettingOps {
     });
   }
 
-  static async getTheme() {
+  static getTheme() {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(['theme'], (result) => {
-        let template = result['theme'];
-        resolve(template);
+        let currentTheme = result['theme'];
+        resolve(currentTheme);
       });
     });
   }
 
-  static async changeTheme(newTheme: string) {
+  // This method sets the theme, checking if there is one already
+  static setTheme(newTheme: string) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['theme'], (result) => {
+        let currentTheme = result['theme'];
 
+        if(currentTheme && currentTheme !== newTheme) {
+          // Here, you can also add some logic to unload the current theme if necessary
+
+          // Switch to new theme
+          chrome.storage.local.set({ theme: newTheme }, () => {
+            console.log(`Switched theme from |${currentTheme}| to |${newTheme}|`);
+            resolve('success');
+          });
+        } else {
+          // Set new theme
+          chrome.storage.local.set({ theme: newTheme }, () => {
+            console.log(`Set theme to |${newTheme}|`);
+            resolve('success');
+          });
+        }
+      });
+    });
+  }
+
+
+  static async changeTheme(newTheme: string) {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(['theme'], (result) => {
         let item = result['theme'];

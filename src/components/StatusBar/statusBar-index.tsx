@@ -5,6 +5,7 @@ import Icon from '../IconWrapper/Icon';
 import Browser from "webextension-polyfill";
 import MessageFactory from '@src/Utils/MessageFactory';
 import useStatusBarActions from './hooks/useStatusBarActions';
+import SettingOps from '@Context/Global/classes/SettingsOps';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import StorageOps from '../../Utils/LocalStorage/StorageOps';
 import { useGlobalContext } from '@Context/Global/GlobalProvider';
@@ -27,9 +28,6 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
     theme,
     setTheme
   } = useGlobalContext();
-
-
-
 
   const barRef = useRef(null)
 
@@ -57,7 +55,6 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
   }
 
 
-
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);
 
@@ -67,8 +64,14 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
     };
   }, []);
 
-  const toggleTheme = useCallback(() => {
+  const toggleTheme = useCallback(async () => {
     setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+
+    const currentTheme = await SettingOps.getTheme();
+
+
+    await SettingOps.setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+
   }, [setTheme]);
 
   useOnClickOutside(barRef, () => setVisible(false));

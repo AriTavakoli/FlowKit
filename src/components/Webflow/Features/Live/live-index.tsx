@@ -115,10 +115,13 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
       if (hasValue) {
         // Add a condition to change the style of the selected media query
         const isSelected = mediaQuery === selectedMediaQuery;
+
+        // Use a new CSS class when isSelected is true, else use the existing one
+        const buttonClassName = isSelected ? 'mediaQueryTextSelected' : 'mediaQueryText';
         const buttonStyle = isSelected ? { borderColor: '#8f8f8f59' } : {};
 
         return (
-          <div onClick={() => setSelectedMediaQuery(mediaQuery)} className='mediaQueryText' style={buttonStyle}>
+          <div onClick={() => setSelectedMediaQuery(mediaQuery)} className={buttonClassName} style={buttonStyle}>
             <span className="mediaQueryContent">{mediaQuery.replace('screen and ', '').replace('max-width: ', '').replace(/\(/g, '').replace(/\)/g, '')}</span>
           </div>
         );
@@ -126,6 +129,7 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
       return null;
     }).filter(Boolean); // Filter out any null elements from the array
   };
+
 
   useEffect(() => {
     if (syntaxHighlighterRef.current) {

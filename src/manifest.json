@@ -22,9 +22,7 @@
     "*://*.webflow.com/*",
     "https://*.openai.com/"
   ],
-  "chrome_url_overrides": {
-    "newtab": "newtab.html"
-  },
+
   "action": {
     "default_popup": "popup.html"
   },
@@ -42,6 +40,9 @@
     }
 
   ],
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
   "web_accessible_resources": [
     {
       "resources": [

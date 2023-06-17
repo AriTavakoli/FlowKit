@@ -18,6 +18,7 @@ import { NodeAnalysis } from "../classes/NodeAnalysis";
 import { useWebflowGptContext } from "@Context/Ai/WebflowGPTProvider";
 import { BubbleTabParent } from "../../SequenceGPT/GPT/components/BubbleTabs/BubbleTabs-index";
 import BubbleSet from "../../SequenceGPT/GPT/components/BubbleSets/BubbleSet-index";
+import SettingOps from "@Context/Global/classes/SettingsOps";
 
 export default function LiveGpt() {
 
@@ -49,6 +50,15 @@ export default function LiveGpt() {
   const [selectedModel, setSelectedModel] = useState("Default");
   const [currentModel, setCurrentModel] = useState('Default');
 
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    SettingOps.getTheme().then((res) => {
+      setTheme(res);
+    }
+    );
+  });
+
 
   useEffect(() => {
     (async () => {
@@ -57,6 +67,8 @@ export default function LiveGpt() {
     }
     )();
   });
+
+
 
 
   const handleRenderChange = (event) => {
@@ -144,8 +156,8 @@ export default function LiveGpt() {
           {/* Suggestion Container */}
 
           <div className="suggestion-container">
-            <div className="chat-gpt-container gpt-dark">
-              <div className="chat-gpt-card gpt-dark">
+            <div className={`chat-gpt-container gpt-${theme}`}>
+              <div className="chat-gpt-card ">
                 <ChatGPTCard
                   question={currentQuery ? currentQuery : Frag}
                   triggerMode={TriggerMode.Always}
@@ -158,31 +170,23 @@ export default function LiveGpt() {
 
           {/*  Bottom bar */}
 
-          {/* {showActiveTemplates && (
-            <FilterPrompts
-              accessType={'cssTemplate'}
-              close={() => {
-                setShowActiveTemplates((prev) => !prev);
-              }}
-            ></FilterPrompts>
-          )} */}
-          <div className="bottom--toolbar" style = {{paddingBottom : '48px'}}>
+          <div className="bottom--toolbar" style={{ paddingBottom: '48px' }}>
             {/* <div className="divider"></div> */}
-            <BubbleTabParent customFlags = {['Webflow', 'Default', 'Design']}>
+            <BubbleTabParent customFlags={['Webflow', 'Default', 'Design']}>
               <BubbleSet
                 accessType='cssTemplate'
                 handleQuery={handleQuery}
                 handleSwitchTab={switchTab}
                 setShowTemplateGenerator={setShowTemplateGenerator}
               />
-               <BubbleSet
+              <BubbleSet
                 accessType='default'
                 handleQuery={handleQuery}
                 handleSwitchTab={switchTab}
                 setShowTemplateGenerator={setShowTemplateGenerator}
 
               />
-               <BubbleSet
+              <BubbleSet
                 accessType='design'
                 handleQuery={handleQuery}
                 handleSwitchTab={switchTab}

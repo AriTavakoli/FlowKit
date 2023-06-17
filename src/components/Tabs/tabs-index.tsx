@@ -50,13 +50,13 @@ export const TabParent = (props) => {
 
   const tabList = [
     { key: "aTab", icon: "drop", flag: "StyleGuide" },
-    { key: "bTab", icon: "search", flag: "searchResults" },
-    { key: "cTab", icon: "todo", flag: "todoApp" },
-    { key: "dTab", icon: "builder", flag: "editorMain" },
-    { key: "eTab", icon: "component", flag: "gpt" },
-    { key: "fTab", icon: "component", flag: "liveGPT" },
-    { key: "gTab", icon: "assetManager", flag: "assetManager" },
-    { key: "hTab", icon: "tree", flag: "ideaExplorer" },
+    // { key: "bTab", icon: "search", flag: "searchResults" },
+    // { key: "cTab", icon: "todo", flag: "todoApp" },
+    { key: "dTab", icon: "builder", flag: "Template_Editor" },
+    // { key: "eTab", icon: "component", flag: "gpt" },
+    { key: "fTab", icon: "component", flag: "Webflow_GPT" },
+    { key: "gTab", icon: "assetManager", flag: "Asset_Manager" },
+    // { key: "hTab", icon: "tree", flag: "ideaExplorer" },
   ];
 
   const filteredTabs = tabList.filter(tab => props.featureFlags[tab.flag]);

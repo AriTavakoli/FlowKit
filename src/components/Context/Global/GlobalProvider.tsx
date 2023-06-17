@@ -36,7 +36,6 @@ export function GlobalProvider({ children }) {
 
   useEffect(() => {
 
-    console.log('%ctheme', 'color: lightblue; font-size: 64px', theme);
 
 
     SettingOps.getTheme().then((theme) => {

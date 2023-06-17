@@ -5,7 +5,7 @@
     font-size: 12px;
     font-weight: 300;
     padding-right: 16px;
-    color: #fff;
+    color : var(--primary-text);
     display: flex;
     align-items: center;
   }
@@ -30,7 +30,7 @@
   }
 
   &__input {
-    background-color: #1f1f1f;
+    background-color: var(--primary2-bg);
     border-radius: 3px;
     padding: 2px;
     border: .5px solid #3c5d77;
@@ -54,7 +54,7 @@
     height: fit-content;
     max-height: 60vh;
     transform: translate(-50%, -50%);
-    background-color: #171717;
+    background-color: var(--primary-bg);
     padding: 24px;
     flex-direction: column;
     align-items: center;
@@ -63,6 +63,7 @@
     z-index: 100;
     border-radius: 8px;
     overflow: auto;
+    color : var(--primary-text);
     border: 1px solid #3c5d77;
   }
 
@@ -133,10 +134,9 @@
     gap: 12px;
     flex-direction: column;
     width: 100%;
-    background-color: #171717;
     border-radius: 8px;
     cursor: pointer;
-    background-color: #1f1f1f;
+    background-color: var(--primary2-bg);
     padding: 24px;
     top: 0;
     left: 0;
@@ -147,17 +147,20 @@
     word-break: break-word;
     position: relative;
     max-height: 40vh;
+    font-size: 16px;
+
 
   }
 
   &__highlightedInput {
-    background-color: rgb(39, 83, 112);
+    background-color: rgb(61, 124, 155);
     border-radius: 3px;
     padding: 2px;
     display: inline-block;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
+    color : var(--primary-text);
   }
 
   &__fileData {

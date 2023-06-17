@@ -91,7 +91,6 @@ var options = {
     popup: path.join(__dirname, '../../src', 'pages', 'Popup', 'index.tsx'),
     background: path.join(__dirname, '../../src', 'pages', 'Background', 'index.ts'),
     contentScript: path.join(__dirname, '../../src', 'pages', 'Content', 'index.tsx'),
-    playground : path.join(__dirname, '../../src', 'pages', 'Playground', 'index.tsx'),
     // devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
     // panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.jsx'),
   },

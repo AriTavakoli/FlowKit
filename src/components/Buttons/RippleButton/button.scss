@@ -148,7 +148,7 @@
 .c-button--outline-grey {
   color: #363535;
   border: 1px solid #89898953;
-  background: transparent;
+  background: var(--primary-bg);
 
   &:hover {
     border-color: #6d6d6d;

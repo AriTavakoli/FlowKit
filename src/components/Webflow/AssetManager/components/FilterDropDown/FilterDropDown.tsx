@@ -27,7 +27,6 @@ const Dropdown = ({ options, label, onChange, customStyles, icon }: DropdownProp
   };
 
 
-
   return (
     <div className={styles["dropdown"]}>
       <div className={styles["dropdown-button"]} onClick={handleToggle}>

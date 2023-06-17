@@ -24,14 +24,12 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
   const [workspaces, setWorkspaces] = useState([]);
   const isMounted = useRef(false);
-
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-
   const [isEditingTab, setIsEditingTab] = useState(false);
   const [editingTabKey, setEditingTabKey] = useState(null);
   const [isEditEnabled, setIsEditEnabled] = useState(false);
+
+
   const {
     workspaceData
   } = useWorkspaceContext();
@@ -489,6 +487,9 @@ function TabContent({ content, onUpload, initialState, tabKey }) {
     }
     onUpload(newData);
   }
+
+
+
   const handleDeleteBlock = (blockId) => {
     dispatch({ type: 'DELETE_BLOCK', payload: { tabKey: tabKey, blockId } });
   };
