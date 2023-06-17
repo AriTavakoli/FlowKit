@@ -1,20 +1,7 @@
 import { Image, WebsiteData } from "@Types/ExportedWebsiteAssets/ExportedAssets";
 import React, { useEffect, useState } from "react";
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
-import CustomSpinner from "../utilComponents/CustomSpinner/customSpinner-index";
 import StyleGuideReference from "./components/StyleGuideReference";
-
-// AssetManager is the parent component for the AssetDownloader component.
-// StorageOps is used to get the website data from the chrome storage.
-// AssetDownloader is responsible for downloading the assets and presenting them to the user.
-
-
-/*
-1. user initiaties FlowKit --> network requests are made to get the exported website data --> the website data is temporarily stored in chrome storage
-2. user clicks on the asset manager --> the asset manager gets the imageData from the response of the export data.
-Example export response:  @Types/ExportedWebsiteAssets/ExportedAssets.ts
-
-*/
 
 
 function StyleGuide() {

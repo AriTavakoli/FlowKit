@@ -129,7 +129,6 @@ function Tabs(props) {
         </div>
         {props.addButton}
         {/* {props.saveButton} */}
-        {props.editButton}
 
         {/* <div className={styles['Tabs-scroll-btn--right']}>
         <div className= {styles["Add__controls"]}>

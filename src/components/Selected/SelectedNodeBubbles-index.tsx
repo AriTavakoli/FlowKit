@@ -172,7 +172,7 @@ export default function SelectedNodeTemplates({ accessType, sequenceRef, handleS
                 // switchTab('dTab');
 
               }}>
-                <Icon id="edit" color="white" size={iconSize} />
+                <Icon id="edit" color="grey" size={iconSize} />
               </div>
               <div className={'edit'} onClick={
                 (e) => {
@@ -180,7 +180,7 @@ export default function SelectedNodeTemplates({ accessType, sequenceRef, handleS
                   console.log('yooo');
                 }
               }>
-                <Icon id="trash" color="white" size={iconSize} />
+                <Icon id="trash" color="grey" size={iconSize} />
               </div>
             </div>
           </>
@@ -191,7 +191,7 @@ export default function SelectedNodeTemplates({ accessType, sequenceRef, handleS
             <div className={'icon--container'}>
               <div className={'add'} onClick={(e) => {
               }}>
-                <Icon id="add" color="white" size={iconSize} />
+                <Icon id="add" color="grey" size={iconSize} />
               </div>
 
             </div>
@@ -206,10 +206,10 @@ export default function SelectedNodeTemplates({ accessType, sequenceRef, handleS
 
                 handleModeChange('normal');
               }}>
-                <Icon id="close" color="white" size={iconSize} />
+                <Icon id="close" color="grey" size={iconSize} />
               </div>
               <div className={'check'} onClick={(e) => handleModeChange('normal')}>
-                <Icon id="check" color="white" size={iconSize} />
+                <Icon id="check" color="grey" size={iconSize} />
               </div>
             </div>
           </>
@@ -219,10 +219,10 @@ export default function SelectedNodeTemplates({ accessType, sequenceRef, handleS
           <>
             <div className={'icon--container'}>
               <div className={'edit'} onClick={(e) => handleModeChange('normal')}>
-                <Icon id="close" color="white" size={iconSize} />
+                <Icon id="close" color="grey" size={iconSize} />
               </div>
               <div className={'check'} onClick={(e) => handleDelete(queryName)}>
-                <Icon id="check" color="white" size={iconSize} />
+                <Icon id="check" color="grey" size={iconSize} />
               </div>
             </div>
           </>

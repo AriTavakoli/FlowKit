@@ -4,21 +4,26 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 100vw;
-    height: 100vh;
-    padding-bottom: 5vh;
-    overflow: auto;
+
+    margin-bottom: 10vh;
+    overflow-y: scroll;
   }
 
   &__rowView {
     display: flex;
+    padding-top: 4vh;
+    gap: 8px;
     flex-direction: column;
-    width: 100%;
+    // width: 100%;
     overflow: auto;
     padding-left: 2em;
     padding-right: 2em;
-    justify-content: center;
-    padding-bottom: 10vh;
+    overflow: auto;
+    width: 100vw;
+    height: 100vh;
+    padding-bottom: 40vh;
+
+
   }
   &__columnView {
     display: grid;
@@ -29,7 +34,10 @@
     padding-left: 2em;
     padding-right: 2em;
     justify-content: center;
-    padding-bottom: 10vh;
+    padding-bottom: 20vh;
+    height: 100vh;
+    background-color: var(--assetManager-bg2);
+    padding-top: 3vh;
   }
   &__item {
     width: 80%;
@@ -55,11 +63,21 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    padding-left: 4vw;
     padding-right: 4vw;
-    padding-bottom: 2vh;
-    padding-top: 2vh;
+    padding-bottom: 4px;
+    padding-top: 4px;
     gap: 8px;
+    color: var(--primary-text);
+    background-color: var(--assetManager-bg);
+  }
+  &__controlBar--wrapper {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+
+    z-index: 1000;
   }
 }
 
@@ -100,6 +118,8 @@
 
   &__highlighted {
     background-color: rgba(93, 160, 232, 0.471);
+    color: var(--primary-text);
+
   }
 
   &__details {
@@ -129,6 +149,7 @@
     overflow: hidden;
     background: linear-gradient(to left, rgba(255, 255, 255, 0.523), rgb(255, 255, 255) 70%);
     -webkit-background-clip: text;
+    color: var(--primary-text);
     -webkit-text-fill-color: transparent;
 
     &.faded {
@@ -157,7 +178,7 @@
 
 .download-all {
   border: none;
-  color: white;
+  color: var(--primary-text);
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -181,6 +202,7 @@
 
 .className__container {
   max-width: 200px;
+  color: var(--primary-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -194,6 +216,7 @@
   top: 0;
   right: 0;
   width: 20px;
+  color: var(--primary-text);
   height: 100%;
   background: linear-gradient(to right, transparent, white);
   pointer-events: none;
@@ -271,7 +294,7 @@
   height: 35px;
   font-size: 13px;
   border-radius: 20px;
-  color: rgb(235, 235, 235);
+  color: var(--primary-text);
   background: #181818;
   border-width: 1px;
   border-color: rgb(33, 33, 33);
@@ -288,7 +311,7 @@
   justify-content: center;
   height: 24px;
   width: 24px;
-  color: rgb(239, 239, 239);
+  color: var(--primary-text);
 }
 
 .settings-icon.active {

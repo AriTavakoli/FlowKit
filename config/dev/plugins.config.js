@@ -189,12 +189,7 @@ module.exports = [
     cache: false,
   }),
 
-  new HtmlWebpackPlugin({
-    template: path.join(__dirname, '../../src', 'pages', 'Playground', 'index.html'),
-    filename: 'playground.html',
-    chunks: ['playground'],
-    cache: false,
-  }),
+
 
   new HtmlWebpackPlugin({
     template: path.join(__dirname, '../../src', 'pages', 'Options', 'index.html'),

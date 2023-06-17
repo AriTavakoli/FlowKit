@@ -67,6 +67,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       text: ({ children, ...props }) => (
         <span {...props}>{children}</span>
       ),
+      // span : ({ children, ...props }) => (
+      //   <RippleButton shape='rounded' outlineColor='blue' padding='2px' {...props}>{children}</RippleButton>
+      // ),
 
 
       h1: ({ children }) => <h1>{children}</h1>,

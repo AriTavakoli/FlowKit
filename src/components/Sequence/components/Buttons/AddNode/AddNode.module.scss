@@ -8,10 +8,13 @@
     width: 100%;
     justify-content: center;
     padding : 4px;
-    background-color: rgb(21, 21, 21);
+    background-color: var(--primary-bg);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    border-bottom: 1px solid rgb(244, 244, 244);
+    border-left: 1px solid var(--addNode-border-left);
+    border-right: 1px solid var(--addNode-border-left);
+    border-bottom: 1px solid var(--addNode-border);
+
     flex-direction: row;
     z-index: 40000;
   }

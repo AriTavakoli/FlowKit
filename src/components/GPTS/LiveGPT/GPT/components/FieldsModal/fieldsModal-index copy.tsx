@@ -481,7 +481,7 @@ function LaunchButton({ onClick, goButtonRef }) {
     <div className={Launch} onClick={onClick} ref={goButtonRef}>
       <span className={Launch__text}>Go</span>
       <RippleButton shape="square" color="grey">
-        <Icon id="launch" size={20} color="white"></Icon>
+        <Icon id="launch" size={20} color="grey"></Icon>
       </RippleButton>
     </div>
   );

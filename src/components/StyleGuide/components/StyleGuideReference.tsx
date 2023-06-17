@@ -5,15 +5,10 @@ import styles from './StyleGuide.module.scss';
 import Dropdown from '@src/components/Util/DropDown/DropDown';
 
 const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
-  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [html, setHtml] = useState<string>('');
   const [css, setCss] = useState<string>('');
-  const [currentCodeAccent, setCurrentCodeAccent] = useState<string>('');
-  const [activeModal, setActiveModal] = useState<'timer' | 'calculator' | null>(null);
-  const [showModal, setShowModal] = useState(false);
+
   const [selectedPageIndex, setSelectedPageIndex] = useState<number>(0);
-  const [hoverColor, setHoverColor] = useState('#0000FF'); // Default blue
-  const [clickColor, setClickColor] = useState('#00FF00'); // Default green
 
   const dropdownOptions = websiteData?.websiteData.websiteData['data'].pages.map((page, index) => ({
     value: index,
@@ -21,15 +16,6 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
     icon: 'none' // use a static icon for all options, or map from data if available
   }));
 
-
-  // Update these color state when color pickers change
-  const handleHoverColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setHoverColor(event.target.value);
-  };
-
-  const handleClickColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setClickColor(event.target.value);
-  };
 
   const [initialized, setInitialized] = useState<boolean>(false);
 
@@ -44,41 +30,15 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
   }, [websiteData, initialized]);
 
 
-  const statusBarOptions = {
-    activation: 'click', // or 'hover'
-    deactivation: 'click', // or 'timeout'
-  };
-
-
-  const {
-    retrieveSetting
-  } = useGlobalContext();
-
-  useEffect(() => {
-    const fetchColorValue = async () => {
-      const userSettings = await retrieveSetting('accentColor');
-      console.log('%cretrievedColor', 'color: lightblue; font-size: 14px', userSettings);
-      if (userSettings) {
-        setCurrentCodeAccent(userSettings.accentColor);
-      }
-    };
-
-    fetchColorValue();
-  }, [retrieveSetting]);
 
   useEffect(() => {
     if (websiteData) {
-      console.log('%cwebsiteData', 'color: orange; font-size: 64px', websiteData);
-      console.log('%cwebsiteData', 'color: orange; font-size: 64px',);
-      console.log('%c data', 'color: orange; font-size: 64px', websiteData.websiteData['data']);
       setHtml(websiteData.websiteData.websiteData['data'].pages[0].html);
       setCss(websiteData.websiteData.websiteData['data'].css);
     }
   }, [websiteData]);
 
-  useEffect(() => {
-    console.log('%chtml ,css ', 'color: lightblue; font-size: 74px', html, css);
-  }, [html, css]);
+
 
   useEffect(() => {
     if (websiteData) {
@@ -95,13 +55,7 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
 
   return (
     <>
-
-      <div style={{ position: 'fixed', top: '2px', right: '32px', zIndex: '9999' }}>
-        {/* <label>Hover color:</label> */}
-        {/* <input type="color" value={hoverColor} onChange={handleHoverColorChange} />
-
-        <label>Click color:</label>
-        <input type="color" value={clickColor} onChange={handleClickColorChange} /> */}
+      <div style={{ position: 'fixed', top: '55px', right: '32px', zIndex: '9999' }}>
         <Dropdown
           options={dropdownOptions}
           label="Select a page"
@@ -109,11 +63,7 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
           customStyles={{}}
           icon={true}
         />
-
       </div>
-
-
-
       <StyleGuideFrame websiteData={websiteData} selectedPageIndex={selectedPageIndex} clickColor={"lightblue"} hoverColor={"blue"}></StyleGuideFrame>
       <div className={styles['StatusBar']} style={{ position: 'fixed', bottom: 0, height: '50px', width: '100vw', backgroundColor: 'transparent', zIndex: '4500000000000000000000000' }} />
 

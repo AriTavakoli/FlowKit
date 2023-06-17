@@ -229,19 +229,11 @@ const FeatureFlagToggleButtons = ({ featureName, onFeatureToggle, featureFlags }
 
   const [isEnabled, setIsEnabled] = useState(featureFlags[featureName]);
 
-
-
   useEffect(() => {
     setIsEnabled(featureFlags[featureName]);
   }, [featureFlags, featureName]);
 
 
-  const handleChange = (value) => {
-    setIsEnabled(value);
-    if (onFeatureToggle) {
-      onFeatureToggle(featureName, value);
-    }
-  };
 
   return (
     <div className={styles["Options__toggleRow"]}>
@@ -258,12 +250,12 @@ const FeatureFlagToggleButtons = ({ featureName, onFeatureToggle, featureFlags }
 const ParentComponent = () => {
   const [featureFlags, setFeatureFlags] = useState({
     StyleGuide: false,
-    searchResults: false,
-    todoApp: false,
-    editorMain: false,
-    liveGPT: false,
-    assetManager: false,
-    ideaExplorer: false,
+    // searchResults: false,
+    // todoApp: false,
+    Template_Editor: false,
+    Webflow_GPT: false,
+    Asset_Manager: false,
+    // ideaExplorer: false,
   });
 
   const featureFlagOps = new FeatureFlagOps(featureFlags);
@@ -274,6 +266,19 @@ const ParentComponent = () => {
         setFeatureFlags({ ...featureFlags, ...loadedFlags });
       }
     });
+  }, []);
+
+
+  useEffect(() => {
+
+    const featureFlagOps = new FeatureFlagOps();
+
+
+    featureFlagOps.loadFeatureFlags();
+
+    // featureFlagOps.removeFeatureFlag('todoApp');
+
+
   }, []);
 
 

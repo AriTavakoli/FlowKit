@@ -174,9 +174,9 @@
   width: 100%;
   height: 40px;
   z-index: 20;
-  background-color: #101010;
+  background-color:  var(--live-background);
   margin-bottom: 8px;
-  border-bottom: 1px solid #55555589;
+  border-bottom: 1px solid var(--chat-border);
   padding-left: 12px;
   padding-right: 12px;
   border-top-left-radius: 16px;

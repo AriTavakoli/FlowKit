@@ -50,7 +50,7 @@ export default function BubbleSet({ setShowTemplateGenerator, sequenceRef, seque
               }}
               padding='12px'>
 
-              <Icon id="add" size={16} color="white"></Icon>
+              <Icon id="add" size={16} color="grey"></Icon>
             </RippleButton>
           </div>
 
@@ -60,7 +60,7 @@ export default function BubbleSet({ setShowTemplateGenerator, sequenceRef, seque
             }}
           >
             <RippleButton shape="square" outlineColor="grey" padding='12px'>
-              <Icon id="edit" size={16} color="white"></Icon>
+              <Icon id="edit" size={16} color="grey"></Icon>
             </RippleButton>
           </div>
         </div>

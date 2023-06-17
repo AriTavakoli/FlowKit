@@ -10,28 +10,21 @@ module.exports =
       test: /\.(css|scss)$/,
       exclude: /\.module\.scss$/,
       use: [
-        {
-          loader: 'style-loader',
-        },
-        {
-          loader: 'css-loader',
-        },
+        'style-loader',
+        'css-loader',
         {
           loader: 'sass-loader',
           options: {
+            implementation: require('sass'),  // use Dart Sass
             sourceMap: true,
           },
         },
       ],
     },
-
-    // new rule for SCSS modules with localized class names
     {
       test: /\.module\.scss$/,
       use: [
-        {
-          loader: 'style-loader',
-        },
+        'style-loader',
         {
           loader: 'css-loader',
           options: {
@@ -43,6 +36,7 @@ module.exports =
         {
           loader: 'sass-loader',
           options: {
+            implementation: require('sass'),  // use Dart Sass
             sourceMap: true,
           },
         },

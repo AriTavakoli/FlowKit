@@ -17,7 +17,7 @@ export const FilterButton: React.FC<FilterButtonProps> = ({ }) => {
             <div key={category.id} className="filter-button" onClick={() => toggleCategory(category)}>
                 <span>{category.name}</span>
                 <svg onClick={() => toggleCategory(category)} width="12" height="12" style={{ alignItems: 'center' }}>
-                    <path fill="white" d="M2 2L10 10M10 2L2 10" stroke="white" stroke-width="2" />
+                    <path fill="white" d="M2 2L10 10M10 2L2 10" stroke="grey" stroke-width="2" />
                 </svg>
             </div>
         )

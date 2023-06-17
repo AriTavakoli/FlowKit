@@ -5,7 +5,7 @@ import useKeyboardEvent from "./hooks/useKeyboardEvent";
 import useOnClickOutside from "../TextEditor/hooks/useClickOutside";
 import Fuse from "fuse.js";
 import Icon from "@src/components/IconWrapper/Icon";
-
+import { useGlobalContext } from "@Context/Global/GlobalProvider";
 function Command({ editableRowRef, onCommandSelected, status, onClose }) {
 
   const commandMenuRef = useRef();
@@ -13,6 +13,7 @@ function Command({ editableRowRef, onCommandSelected, status, onClose }) {
   const [slashCount, setSlashCount] = useState(0);
   const [searchValue, setSearchValue] = useState("");
   const inputRef = useRef();
+  const { theme } = useGlobalContext();
 
 
 
@@ -183,11 +184,11 @@ function Command({ editableRowRef, onCommandSelected, status, onClose }) {
       className={styles["Command__container"]}
     >
 
-      <div className={styles['search-bar-container']}>
+      <div className={styles[`search-bar-container`]}>
         <div className={styles['search-bar']}>
 
           <div className={styles['search-icon-container']}>
-            <Icon id="search" size={18} color={"white"} />
+            <Icon id="search" size={18} color="grey" />
           </div>
 
           <div className={styles['filter-holder']}>

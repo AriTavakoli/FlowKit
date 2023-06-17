@@ -110,7 +110,7 @@ export default function StyleGpt({ refs }) {
                   setShowStorage(!showStorage);
                 }}
               >
-                <Icon id="settings" color="white" size={16} />
+                <Icon id="settings" color="grey" size={16} />
               </RippleButton>
             </div>
 
@@ -160,7 +160,7 @@ export default function StyleGpt({ refs }) {
                   }}
                 >
                   <RippleButton shape="square" outlineColor="grey" callBack={handleAddTemplate}>
-                    <Icon id="add" size={16} color="white"></Icon>
+                    <Icon id="add" size={16} color="grey"></Icon>
                   </RippleButton>
                 </div>
 
@@ -170,7 +170,7 @@ export default function StyleGpt({ refs }) {
                   }}
                 >
                   <RippleButton shape="square" outlineColor="grey">
-                    <Icon id="edit" size={16} color="white"></Icon>
+                    <Icon id="edit" size={16} color="grey"></Icon>
                   </RippleButton>
                 </div>
               </div>

@@ -1,69 +1,19 @@
-import React, { useState, memo, useTransition, useEffect, useRef } from 'react';
-import Tabs from './Tabs';
+import StorageOps from '@src/Utils/LocalStorage/StorageOps';
+import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
 import Icon from '@src/components/IconWrapper/Icon';
-import { SkeletonRow } from '@src/components/Webflow/Features/Results/components/Loading/Skeleton';
-import { Accordion, AccordionItem as Item } from "@szhsin/react-accordion";
-import styles from './blocks.module.scss'
-import chevronDown from "../chevron-down.svg";
-import output32 from '../Custom/output32.json';
+import { useQueryBuilderContext } from '@src/components/MarkDownEditor/context/QueryBuilderContext';
+import { Accordion } from "@szhsin/react-accordion";
+import React, { useEffect, useRef, useState, useTransition } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useWorkspaceContext, useWorkspaceDispatch } from '../Context/WorkspaceContext';
-import { useQueryBuilderContext } from '@src/components/MarkDownEditor/context/QueryBuilderContext';
 import { deepCloneWithNewIds } from '../utils/DeepClone';
-import StorageOps from '@src/Utils/LocalStorage/StorageOps';
-import Block from './components/Block';
-import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
+import Tabs from './Tabs';
+import styles from './blocks.module.scss';
 import AddTabForm from './components/AddTabForm/AddTabForm';
-import Dropdown from '@src/components/Util/DropDown/DropDown';
+import Block from './components/Block';
 import WorkspaceDropDown from './components/WorkspaceDropDown/WorkspaceDropDown';
+import WorkspaceModal from './components/Modal/WorkspaceModal';
 
-function TabContent({ content, onUpload, initialState, tabKey }) {
-
-  const dispatch = useWorkspaceDispatch();
-  const {
-    workspaceData
-  } = useWorkspaceContext();
-
-
-
-  function findJsonData(jsonDataKey) {
-    const jsonDataItem = initialState.jsonData.find(
-      (item) => item.key === jsonDataKey
-    );
-    return jsonDataItem ? jsonDataItem.payload : null;
-  }
-
-  function transform(data) {
-    const newData = deepCloneWithNewIds(data);
-    if (!newData) {
-      console.error('Unable to transform data:', data);
-      return;
-    }
-    onUpload(newData);
-  }
-  const handleDeleteBlock = (blockId) => {
-    dispatch({ type: 'DELETE_BLOCK', payload: { tabKey: tabKey, blockId } });
-  };
-
-  return (
-    <div className={styles.app}>
-      <Accordion transition transitionTimeout={200}>
-        <div className={styles['accordian__container']}>
-          {(content.blocks || [])?.map((block) => (
-            <Block
-              key={block.id}
-              block={block}
-              tabKey={tabKey}
-              findJsonData={findJsonData}
-              transform={transform}
-              handleDeleteBlock={handleDeleteBlock}
-            />
-          ))}
-        </div>
-      </Accordion>
-    </div>
-  );
-}
 
 
 export const BlockTabsParent = ({ initialState, onUpload }) => {
@@ -73,6 +23,11 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   // }, [initialState]);
 
   const [workspaces, setWorkspaces] = useState([]);
+  const isMounted = useRef(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditingTab, setIsEditingTab] = useState(false);
+  const [editingTabKey, setEditingTabKey] = useState(null);
+  const [isEditEnabled, setIsEditEnabled] = useState(false);
 
 
   const {
@@ -85,16 +40,7 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     setNewBlockJsonData,
   } = useQueryBuilderContext();
 
-  const isMounted = useRef(false);
-
-  const dispatch = useWorkspaceDispatch();
-  const [tabs, setTabs] = useState(Array.isArray(workspaceData?.tabs) ? workspaceData.tabs : []);
-
-  const deleteTab = (tabKey) => {
-    dispatch({ type: 'DELETE_TAB', payload: { key: tabKey } });
-  };
-
-  const [workSpaceName, setWorkSpaceName] = useState(workspaceData?.workSpaceName || '');
+  const [workSpaceName, setWorkSpaceName] = useState(workspaceData?.tabId || '');
 
   const [blockInfo, setBlockInfo] = useState({
     name: '',
@@ -104,23 +50,11 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     fileFormat: '',
   });
 
+  const dispatch = useWorkspaceDispatch();
 
+  const [tabs, setTabs] = useState(Array.isArray(workspaceData?.tabs) ? workspaceData.tabs : []);
 
-  const [isEditingTab, setIsEditingTab] = useState(false);
-  const [editingTabKey, setEditingTabKey] = useState(null);
-  const [isEditEnabled, setIsEditEnabled] = useState(false);
-
-  const startEditTab = (tabKey) => {
-    setIsEditingTab(true);
-    setEditingTabKey(tabKey);
-    setShowForm(true);
-  };
-
-  const stopEditTab = () => {
-    setIsEditingTab(false);
-    setEditingTabKey(null);
-  };
-
+  const [workspaceId, setWorkspaceId] = useState(null);
   const [newBlockName, setNewBlockName] = useState("");
   const [newBlockDescription, setNewBlockDescription] = useState("");
   const [newBlockJsonDataKey, setNewBlockJsonDataKey] = useState("");
@@ -136,6 +70,54 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   const [newTabContent, setNewTabContent] = useState('');
 
 
+
+
+  useEffect(() => {
+    // Retrieve the workspace ID from localStorage when the component mounts
+    const recentWorkspace = localStorage.getItem('recentWorkspace');
+    if (recentWorkspace) {
+      setWorkspaceId(recentWorkspace);
+    }
+    else {
+      // If there is no saved workspace ID, use a default one
+      setWorkspaceId('defaultWorkspaceId');
+    }
+  }, []);  // Empty array means this effect runs once on mount and not on updates
+
+  useEffect(() => {
+    StorageOps.getRecentlyUsedWorkspaceId().then((workspaceId) => {
+      let recentlyUsedWorkspace = findJsonData(workspaces, workspaceId[0]);
+      if (recentlyUsedWorkspace) handleWorkspaceChange(recentlyUsedWorkspace);
+    });
+
+  }, [workspaces]);
+
+
+  function findJsonData(arr, tabId) {
+    // Use the find() method to locate the object with the matching tabId
+    const matchedObject = arr.find((obj) => obj.value.tabId === tabId);
+    // If a match was found, return its jsonData; otherwise, return null
+    return matchedObject ? matchedObject : null;
+  }
+
+  const deleteTab = (tabKey) => {
+    dispatch({ type: 'DELETE_TAB', payload: { key: tabKey } });
+  };
+
+
+  const startEditTab = (tabKey) => {
+    setIsEditingTab(true);
+    setEditingTabKey(tabKey);
+    setShowForm(true);
+  };
+
+  const stopEditTab = () => {
+    setIsEditingTab(false);
+    setEditingTabKey(null);
+  };
+
+
+
   useEffect(() => {
     if (isMounted.current && newBlockJsonData) {
       handleAddJsonData({ key: newBlockJsonDataKey, payload: newBlockJsonData });
@@ -144,10 +126,10 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
 
   useEffect(() => {
-    if (Array.isArray(workspaceData.tabs)) {
-      setTabs(workspaceData.tabs);
+    if (Array.isArray(workspaceData?.tabs)) {
+      setTabs(workspaceData?.tabs);
     }
-  }, [workspaceData.tabs]);
+  }, [workspaceData]);
 
 
   const handleAddJsonData = (jsonData) => {
@@ -177,6 +159,34 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
     setNewBlockFileFormat("");
   };
 
+  const createWorkspace = async (workspaceName) => {
+
+    console.log('%cworkspaceName', 'color: lightblue; font-size: 44px', workspaceName);
+
+    const newWorkspaceData = {
+      tabId: uuid(),
+      tabs: [{
+        key: uuid(),
+        label: 'Default Tab',
+        description: 'This is a default tab',
+        tabIcon: 'drop', // add your default icon
+        active: true,
+        index: 0,
+        content: {
+          blocks: [], // you can put default blocks here if you want
+        },
+      }],
+      name: workspaceName,
+    };
+
+    await StorageOps.addWorkSpaceToStorage(workspaceName, newWorkspaceData);
+    dispatch({ type: 'SET_WORKSPACE', payload: newWorkspaceData });
+    setWorkSpaceName(workspaceName);
+
+    setWorkspaces([...workspaces, { label: workspaceName, value: newWorkspaceData }]);
+  };
+
+
 
   useEffect(() => {
     isMounted.current = true;
@@ -197,25 +207,6 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   };
 
 
-
-  const addBlock = () => {
-    const newBlock = {
-      blockName: newBlockName,
-      description: newBlockDescription,
-      jsonDataKey: newBlockJsonDataKey,
-      tokens: newBlockTokens,
-      fileFormat: newBlockFileFormat,
-    };
-
-    dispatch({ type: "ADD_BLOCK_TO_TAB", payload: { tabKey: active, ...newBlock } });
-
-    // Clear the input fields
-    setNewBlockName("");
-    setNewBlockDescription("");
-    setNewBlockJsonDataKey("");
-    setNewBlockTokens("");
-    setNewBlockFileFormat("");
-  };
 
 
   const handleTabChange = (newActiveTab) => {
@@ -239,8 +230,13 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
     setActive(newKey);
     setShowForm(false);
+    setNewTabLabel('');
   };
 
+  function onWorkspaceChange(workspaceId) {
+    // Save the new workspace ID in localStorage
+    localStorage.setItem('recentWorkspace', workspaceId);
+  }
 
   const saveWorkspace = async (workspaceData) => {
     // console.log('%cworkspaceData', 'color: red; font-size: 14px', workspaceData);
@@ -308,10 +304,10 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
   const handleWorkspaceChange = (selectedWorkspace) => {
     const { value } = selectedWorkspace;
+    console.log('%cselectedWorkspace', 'color: lightblue; font-size: 94px', selectedWorkspace, value);
     // assuming value contains the tab data
     dispatch({ type: 'SET_WORKSPACE', payload: value });
   };
-
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
@@ -323,12 +319,12 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
   const deleteWorkspace = async (workSpaceId) => {
     // Show a confirmation dialog before deleting the workspace
     const confirmDelete = window.confirm('Are you sure you want to delete this workspace?');
-
     if (confirmDelete) {
-      StorageOps.removeWorkspaceFromStorageByName(workSpaceId)
+      StorageOps.removeWorkspaceByTabId(workSpaceId)
         .then(() => {
           // Clear workspace state
-          // dispatch({ type: 'CLEAR_WORKSPACE' });
+          dispatch({ type: "SET_WORKSPACE", payload: {} })
+
         })
         .catch(err => console.log(err));
     }
@@ -337,89 +333,118 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
   return (
     <>
-      <div className={styles['WorkspaceName__wrapper']}>
-        <input
-          type="text"
-          placeholder='Workspace Name'
-          name="workSpaceName"
-          className={styles["WorkspaceName"]}
-          value={workspaceData.name}
-          onChange={handleWorkspaceNameChange}
-        />
-        <WorkspaceDropDown
-          options={workspaces}
-          label={workspaceData.name}
-          onChange={handleWorkspaceChange}
-          customStyles={styles}
-          icon={true}
-        />
-        <RippleButton outlineColor="grey" shape='square' padding='6px' callBack={() => saveWorkspace(workspaceData)}>
-          <Icon id="save" size={16} color="grey" />
-        </RippleButton>
+      <div className={styles["Workspace__wrapper"]}>
+        <div className={styles['WorkspaceName__wrapper']}>
 
+          <WorkspaceModal
+            isOpen={isModalOpen}
+            closeModal={() => setIsModalOpen(false)}
+            createWorkspace={createWorkspace}
+          />
 
-
-        <input ref={fileInputRef} type="file" onChange={handleFileUpload} style={{ display: 'none' }} />
-      </div>
-
-
-      <Tabs
-        active={active}
-        onChange={handleTabChange}
-        addButton={<RippleButton padding='4px' callBack={() => setShowForm(!showForm)}><Icon id="add" size={16} color="white" /></RippleButton>}
-        // saveButton={}
-        uploadButton={<RippleButton padding='4px' callBack={() => document.getElementById('fileUpload').click()}><Icon id="upload" size={16} color="white" /></RippleButton>}
-        editButton={<RippleButton padding='4px' callBack={() => setIsEditEnabled(!isEditEnabled)}><Icon id="edit" size={16} color="white" /></RippleButton>}
-      >
-        {Array.isArray(tabs) && tabs.map((tab) => (
-          <div key={tab.key}>
-            {tab.label}
-            {isEditEnabled && (
-              <>
-                <button onClick={() => startEditTab(tab.key)}>Edit</button>
-                <button onClick={() => deleteTab(tab.key)}>Delete</button>
-              </>
-            )}
-          </div>
-        ))}
-      </Tabs>
-
-
-      {showForm && (
-        <AddTabForm
-          setShowForm={setShowForm}
-          newTabLabel={newTabLabel}
-          setNewTabLabel={setNewTabLabel}
-          newTabContent={newTabContent}
-          setNewTabContent={setNewTabContent}
-          addTab={isEditingTab ? updateTab : addTab}
-          isEditing={isEditingTab}
-          currentTab={tabs.find(tab => tab.key === editingTabKey)}
-        />
-      )}
-
-      {workspaceData.tabs.find((tab) => tab.key === active) && (
-        <TabContent
-          tabKey={active}
-          content={workspaceData.tabs.find((tab) => tab.key === active).content}
-          onUpload={onUpload}
-          initialState={initialState}
-        />
-      )}
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingTop: '12px', gap: '8px' }} >
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center',  gap: '8px'  }}>
-          <span> Upload Workspace </span>
-          <RippleButton shape="square" padding="6px" callBack={handleButtonClick} outlineColor='grey' >
-            <Icon id='upload' size={16} color="grey" />
+          <WorkspaceDropDown
+            initialState={initialState}
+            onWorkspaceChange={onWorkspaceChange}
+            workspaceData={workspaceData}
+            handleWorkspaceNameChange={handleWorkspaceNameChange}
+            options={workspaces}
+            label={workspaceData?.name}
+            onChange={handleWorkspaceChange}
+            customStyles={styles}
+            icon={true}
+          />
+          <RippleButton
+            outlineColor="grey"
+            shape='square'
+            padding='12px'
+            callBack={() => saveWorkspace(workspaceData)}>
+            <Icon id="save" size={16} color="grey" />
           </RippleButton>
+
+          <RippleButton
+            outlineColor="grey"
+            shape='square'
+            padding='12px'
+            callBack={() => setIsModalOpen(true)}
+          >
+            <Icon id="builder" size={16} color="grey" />
+          </RippleButton>
+
+
+          <input ref={fileInputRef} type="file" onChange={handleFileUpload} style={{ display: 'none' }} />
         </div>
 
+        <div className={styles['Workspace__content']}>
+          <Tabs
+            active={active}
+            onChange={handleTabChange}
+            addButton={<RippleButton padding='4px' outlineColor="grey" shape='square' padding='12px' callBack={() => setShowForm(!showForm)}><Icon id="add" size={16} color="grey" /></RippleButton>}
+            // saveButton={}
+            uploadButton={<RippleButton padding='4px' callBack={() => document.getElementById('fileUpload').click()}><Icon id="upload" size={16} color="grey" /></RippleButton>}
+            editButton={<RippleButton padding='4px' callBack={() => setIsEditEnabled(!isEditEnabled)}><Icon id="edit" size={16} color="grey" /></RippleButton>}
 
-        <RippleButton shape="square" padding='6px' callBack={() => { deleteWorkspace(workspaceData.name) }} outlineColor='grey' >
-          <Icon id='trash' size={16} color="grey" />
-        </RippleButton>
+
+          >
+
+            {Array.isArray(tabs) && tabs.map((tab) => (
+              <div key={tab.key}>
+                {tab.label}
+                {isEditEnabled && (
+                  <>
+                    <button onClick={() => startEditTab(tab.key)}>Edit</button>
+                    <button onClick={() => deleteTab(tab.key)}>Delete</button>
+                  </>
+                )}
+              </div>
+            ))}
+
+          </Tabs>
+
+
+          {showForm && (
+            <AddTabForm
+              setShowForm={setShowForm}
+              newTabLabel={newTabLabel}
+              setNewTabLabel={setNewTabLabel}
+              newTabContent={newTabContent}
+              setNewTabContent={setNewTabContent}
+              addTab={isEditingTab ? updateTab : addTab}
+              isEditing={isEditingTab}
+              currentTab={tabs.find(tab => tab?.key === editingTabKey)}
+            />
+          )}
+          {workspaceData?.tabs?.find((tab) => tab?.key === active) && (
+            <TabContent
+              tabKey={active}
+              content={workspaceData.tabs.find((tab) => tab.key === active).content}
+              onUpload={onUpload}
+              initialState={initialState}
+            />
+          )}
+        </div>
+
+        <div className={styles['Workspace__bottom--wrapper']} >
+          <div className={styles["Workspace__bottom--wrapperInner"]}>
+
+            <div className={styles["Workspace__upload"]} onClick={handleButtonClick}>
+              <span className={styles['Workspace__name']}> Upload Workspace </span>
+
+              <Icon id='upload' size={20} color="grey" />
+            </div>
+
+
+
+          </div>
+
+          <RippleButton outlineColor="grey" shape='square' padding='12px' callBack={() => setIsEditEnabled(!isEditEnabled)}>
+            <Icon id="edit" size={16} color="grey" />
+          </RippleButton>
+
+          <RippleButton shape="square" padding='12px' callBack={() => { deleteWorkspace(workspaceData?.tabId) }} outlineColor='grey' >
+            <Icon id='trash' size={16} color="grey" />
+          </RippleButton>
+        </div>
       </div>
-
 
     </>
   );
@@ -427,31 +452,95 @@ export const BlockTabsParent = ({ initialState, onUpload }) => {
 
 
 
-const WorkspaceList = () => {
-  const [workspaces, setWorkspaces] = useState([]);
 
-  useEffect(() => {
-    StorageOps.getAllWorkSpaces()
-      .then((data) => {
-        if (data && typeof data === 'object' && Object.keys(data).length > 0) {
-          setWorkspaces(Object.keys(data));
-        } else {
-          console.error('No data available or data is not an object');
-        }
-      })
-      .catch(error => console.error('Error:', error));
-  }, []);
+
+
+
+
+
+
+
+
+
+function TabContent({ content, onUpload, initialState, tabKey }) {
+
+  const dispatch = useWorkspaceDispatch();
+
+  const {
+    workspaceData
+  } = useWorkspaceContext();
+
+
+
+  function findJsonData(jsonDataKey) {
+    const jsonDataItem = initialState.jsonData.find(
+      (item) => item.key === jsonDataKey
+    );
+    return jsonDataItem ? jsonDataItem.payload : null;
+  }
+
+  function transform(data) {
+    const newData = deepCloneWithNewIds(data);
+    if (!newData) {
+      console.error('Unable to transform data:', data);
+      return;
+    }
+    onUpload(newData);
+  }
+
+
+
+  const handleDeleteBlock = (blockId) => {
+    dispatch({ type: 'DELETE_BLOCK', payload: { tabKey: tabKey, blockId } });
+  };
 
   return (
-    <div>
-      <h1>Available Workspaces</h1>
-      <ul>
-        {workspaces.map(workspace => (
-          <li key={workspace}>{workspace}</li>
-        ))}
-      </ul>
+    <div className={styles.app}>
+      <Accordion transition transitionTimeout={200}>
+        <div className={styles['accordian__container']}>
+          {(content.blocks || [])?.map((block) => (
+            <Block
+              key={block.id}
+              block={block}
+              tabKey={tabKey}
+              findJsonData={findJsonData}
+              transform={transform}
+              handleDeleteBlock={handleDeleteBlock}
+            />
+          ))}
+        </div>
+      </Accordion>
     </div>
   );
-};
+}
 
-export default WorkspaceList;
+
+
+// const WorkspaceList = () => {
+//   const [workspaces, setWorkspaces] = useState([]);
+
+//   useEffect(() => {
+//     StorageOps.getAllWorkSpaces()
+//       .then((data) => {
+//         if (data && typeof data === 'object' && Object.keys(data).length > 0) {
+//           setWorkspaces(Object.keys(data));
+//         } else {
+//           console.error('No data available or data is not an object');
+//         }
+//       })
+//       .catch(error => console.error('Error:', error));
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1>Available Workspaces</h1>
+//       <ul>
+//         {workspaces.map(workspace => (
+//           <li key={workspace}>{workspace}</li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// };
+
+// export default WorkspaceList;

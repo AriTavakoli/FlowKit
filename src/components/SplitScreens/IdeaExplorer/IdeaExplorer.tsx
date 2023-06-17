@@ -39,7 +39,7 @@ function IdeaExplorer() {
 
         <div className={styles['SizeControl__wrapper']}>
           <RippleButton callBack={handleToggleCollapse} padding="12px" >
-            <Icon id={isCollapsed ? 'expandRight' : 'collapseLeft'} size={16} color="white"></Icon>
+            <Icon id={isCollapsed ? 'expandRight' : 'collapseLeft'} size={16} color="grey"></Icon>
           </RippleButton>
         </div>
 

@@ -74,7 +74,7 @@ export default function Storage({ setShowStorage }) {
 
         <div onClick={() => { setShowStorage(false) }}>
           <RippleButton>
-            <Icon id="close" size={16} color="white" />
+            <Icon id="close" size={16} color="grey" />
           </RippleButton>
         </div>
 

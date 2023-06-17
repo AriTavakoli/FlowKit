@@ -39,6 +39,13 @@ export default class SettingOps {
 
     this.checkKeyInit().then(() => {
       switch (accessType) {
+
+
+        case 'theme':
+          this.accessType = 'theme';
+          break;
+
+
         case 'accentColor':
           this.accessType = 'accentColor';
           break;
@@ -96,7 +103,7 @@ export default class SettingOps {
     });
   }
 
-   static async getSetting(key: string) {
+  static async getSetting(key: string) {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(['userSettings'], (result) => {
         let template = result['userSettings'];
@@ -126,7 +133,7 @@ export default class SettingOps {
   }
 
 
-static addStorageItem(itemKey: string, accessType: string, payload: any) {
+  static addStorageItem(itemKey: string, accessType: string, payload: any) {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get([accessType], (result) => {
         let template = result[accessType];
@@ -171,6 +178,16 @@ static addStorageItem(itemKey: string, accessType: string, payload: any) {
               });
             });
 
+          case 'theme':
+            return new Promise((resolve, reject) => {
+              chrome.storage.local.set({ [this.accessType]: this.payload }, () => {
+                console.log(`Added |${this.accessType}| in storage with value |${this.payload}|`);
+                resolve('success');
+              });
+            });
+
+
+
 
 
           default:
@@ -188,6 +205,80 @@ static addStorageItem(itemKey: string, accessType: string, payload: any) {
       }
     });
   }
+
+
+  async changeTheme(newTheme: string) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get([this.accessType], (result) => {
+        let item = result[this.accessType][this.itemKey];
+        delete result[this.accessType][this.itemKey];
+        result[this.accessType] = { ...result[this.accessType], [newTheme]: item };
+        chrome.storage.local.set({ [this.accessType]: result[this.accessType] }, () => {
+          console.log(`Changed |${this.itemKey}| to |${newTheme}|`);
+          resolve('success');
+        });
+      });
+    });
+  }
+
+  static getTheme() {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['theme'], (result) => {
+        let currentTheme = result['theme'];
+        resolve(currentTheme);
+      });
+    });
+  }
+
+  // This method sets the theme, checking if there is one already
+  static setTheme(newTheme: string) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['theme'], (result) => {
+        let currentTheme = result['theme'];
+
+        if(currentTheme && currentTheme !== newTheme) {
+          // Here, you can also add some logic to unload the current theme if necessary
+
+          // Switch to new theme
+          chrome.storage.local.set({ theme: newTheme }, () => {
+            console.log(`Switched theme from |${currentTheme}| to |${newTheme}|`);
+            resolve('success');
+          });
+        } else {
+          // Set new theme
+          chrome.storage.local.set({ theme: newTheme }, () => {
+            console.log(`Set theme to |${newTheme}|`);
+            resolve('success');
+          });
+        }
+      });
+    });
+  }
+
+
+  static async changeTheme(newTheme: string) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['theme'], (result) => {
+        let item = result['theme'];
+        delete result['theme'];
+        result['theme'] = { ...result['theme'], [newTheme]: item };
+        chrome.storage.local.set({ 'theme': result['theme'] }, () => {
+          console.log(`Changed |theme| to |${newTheme}|`);
+          resolve('success');
+
+        });
+      });
+
+    });
+
+  }
+
+
+
+
+
+
+
 
 
 

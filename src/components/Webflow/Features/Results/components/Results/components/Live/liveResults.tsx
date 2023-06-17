@@ -66,7 +66,7 @@ const LiveResults = React.memo(({ cssString, node, isFirst,  }: { cssString: any
         <div className="css__container">
           <div className="css__container--inner">
             <div class="copy" onClick={handleIconClick}>
-              <Icon id={iconId} size={16} color="white"></Icon>
+              <Icon id={iconId} size={16} color="grey"></Icon>
             </div>
             <SyntaxHighlighter
               language={'css'}

@@ -110,14 +110,15 @@
 .divider {
   width: 100%;
   height: 1px;
-  background-color: #ffffff47;
+  background-color: var(--divider);
   margin: 4px 0;
 }
 
 .filter__title {
   font-size: 12px;
   font-weight: 200;
-  color: #ffffff;
+  color: var(--primary-text);
+  font-weight: var(--font-weight);
 }
 
 

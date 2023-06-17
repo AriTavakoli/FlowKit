@@ -47,6 +47,9 @@ export default class StorageOps {
           this.accessType = 'StyleGuidePage';
           break;
 
+
+
+
         case 'nodeTemplates':
           this.accessType = 'nodeTemplates';
           break;
@@ -362,6 +365,42 @@ export default class StorageOps {
   }
 
 
+  static addRecentlyUsedWorkspaceId(workspaceId: string) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['recentlyUsedWorkspaceIds'], (result) => {
+        let recentlyUsedWorkspaceIds = result['recentlyUsedWorkspaceIds'] || [];
+
+        // Remove the workspaceId if it already exists
+
+        recentlyUsedWorkspaceIds = recentlyUsedWorkspaceIds.filter((id) => id !== workspaceId);
+
+        // Add the workspaceId to the beginning of the array
+
+        recentlyUsedWorkspaceIds.unshift(workspaceId);
+        // Remove the last item if the array length is greater than 5
+
+        if (recentlyUsedWorkspaceIds.length > 5) {
+          recentlyUsedWorkspaceIds.pop();
+        }
+        chrome.storage.local.set({ 'recentlyUsedWorkspaceIds': recentlyUsedWorkspaceIds }, () => {
+          console.log(`Added ${workspaceId} in storage`);
+          resolve('success');
+        });
+      });
+    });
+  }
+
+
+  static getRecentlyUsedWorkspaceId() {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['recentlyUsedWorkspaceIds'], (result) => {
+        const recentlyUsedWorkspaceIds = result['recentlyUsedWorkspaceIds'] || [];
+        resolve(recentlyUsedWorkspaceIds);
+      });
+    });
+  }
+
+
   static addBatchTemplateItems(payload: any) {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(['template'], (result) => {
@@ -551,15 +590,56 @@ export default class StorageOps {
       });
     });
 
+  }
 
+
+  static removeWorkspaceByTabId(tabId) {
+
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['workSpaces'], (result) => {
+        let workSpaces = result['workSpaces'] || {};
+        const workSpaceId = Object.keys(workSpaces).find((id) => workSpaces[id].tabId === tabId);
+        if (workSpaceId) {
+          delete workSpaces[workSpaceId];
+          chrome.storage.local.set({ 'workSpaces': workSpaces }, () => {
+            console.log(`Deleted |${workSpaceId}| with access type 'workSpaces' in storage`);
+            resolve('success');
+          });
+        } else {
+          reject(`WorkSpace |${tabId}| not found in 'workSpaces'`);
+        }
+      });
+    });
 
 
   }
+
+
+  static getWorkspaceByTabId(tabId) {
+
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(['workSpaces'], (result) => {
+        let workSpaces = result['workSpaces'] || {};
+        const workSpaceId = Object.keys(workSpaces).find((id) => workSpaces[id].tabId === tabId);
+        if (workSpaceId) {
+          resolve(workSpaces[workSpaceId]);
+        } else {
+          reject(`WorkSpace |${tabId}| not found in 'workSpaces'`);
+        }
+      });
+    });
+
+
+  }
+
+
+
 
   static removeWorkspaceFromStorage(workSpaceId) {
     return new Promise((resolve, reject) => {
       chrome.storage.local.get(['workSpaces'], (result) => {
         let workSpaces = result['workSpaces'] || {};
+
         if (workSpaces[workSpaceId]) {
           delete workSpaces[workSpaceId];
           chrome.storage.local.set({ 'workSpaces': workSpaces }, () => {

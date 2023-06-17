@@ -116,7 +116,7 @@ export default function SequenceGpt({ sequenceRef }) {
                   setShowStorage(!showStorage);
                 }}
               >
-                <Icon id="settings" color="white" size={16} />
+                <Icon id="settings" color="grey" size={16} />
               </RippleButton>
             </div>
 

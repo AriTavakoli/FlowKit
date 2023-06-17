@@ -1,10 +1,14 @@
+@import "@Theme/_theme.scss";
+
+
 .Tabs {
   position: relative;
   display: inline-block;
   margin-bottom: 0px;
   margin-top: 0px;
-  background-color: #181818;
+  background-color: var(--primary-bg);
   margin-left: 8px;
+  color : var(--primary-text);
 
 }
 
@@ -12,8 +16,8 @@
 .Tabs-container {
   width: 100%;
 
-  background-color: #181818;
-  border-bottom: #181818;
+  background-color: var(--primary-bg);
+  border-bottom:  1px solid var(--border-color);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -28,8 +32,8 @@
   display: inline-block;
   padding: 1em;
   padding-bottom: 5px;
-  background: hsla(0, 0%, 0%, 0);
-  color: rgb(255, 255, 255);
+  // background: hsla(0, 0%, 0%, 0);
+  color: var(--primary-text);
   cursor: pointer;
 }
 
@@ -37,7 +41,7 @@
   display: inline-block;
   padding: 2em;
   background: hsl(0, 0%, 93%);
-  color: rgb(255, 255, 255);
+  color:  var(--primary-text);
   cursor: pointer;
 }
 
@@ -49,7 +53,7 @@
 .Tabs__Tab:hover,
 .Tabs__Tab--active {
   background: rgba(255, 105, 180, 0);
-  color: white;
+  color:  var(--primary-text);
 }
 
 .Tabs__Underline {

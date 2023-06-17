@@ -11,7 +11,7 @@ export default function TopBar({ close }) {
       </RippleButton>
       <div onClick={close}>
         <RippleButton shape='square'  padding = "12px" >
-          <Icon id="close" size={12} color="white" />
+          <Icon id="close" size={12} color="grey" />
         </RippleButton>
       </div>
 

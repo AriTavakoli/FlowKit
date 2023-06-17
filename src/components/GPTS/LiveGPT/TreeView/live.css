@@ -7,7 +7,7 @@
   -ms-user-select: none;
   /* IE 10+ */
   user-select: none;
-  color: #fafafa;
+  color: var(--live-arrow);
   font-size: 11pt;
 
 }
@@ -15,12 +15,14 @@
 
 .nodeName {
   position: relative;
-  background-color: rgb(25, 25, 25);
+  /* background-color: var(--live-class); */
   border-radius: 4px;
-  color: white;
-  border: 1px solid #716e6e59 !important;
+  color: var(--primary-text);
+  border: 1px solid var(--live-border);
   padding-left: 8px;
   padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   font-size: 12px;
   display: flex;
   justify-content: center;
@@ -32,7 +34,8 @@
 .nodeName::before {
   content: '';
   display: block;
-  padding-top: 100%; /* This will make the height equal to the width */
+  padding-top: 100%;
+  /* This will make the height equal to the width */
 }
 
 .mediaQueryButtons {
@@ -77,7 +80,7 @@
   right: 0;
   width: 100px;
   height: 100%;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), #131313);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--live-bg));
 }
 
 .className__container::-webkit-scrollbar {
@@ -108,12 +111,11 @@
 
 
 
-.mediaQueryText {
-  background-color: rgb(25, 25, 25);
+.mediaQueryTextSelected {
   border-radius: 4px;
-  color: white;
-  margin-top : 6px;
-  border: 1px solid #716e6e59;
+  color: var(--text-color);
+  margin-top: 6px;
+  border: 1px solid var(--live-border);
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 4px;
@@ -126,12 +128,44 @@
   overflow: hidden;
   width: auto;
   margin-bottom: 8px;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 70%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), var(--live-class2) 70%);
 
   &.faded {
     opacity: 0.3;
+  }
+
+  span {
+    color: var(--primary-text);
+  }
+
+}
+.mediaQueryText {
+  background-color: var(--live-class);
+  border-radius: 4px;
+  color: var(--text-color);
+  margin-top: 6px;
+  border: 1px solid var(--live-border);
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-weight: lighter;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: auto;
+  margin-bottom: 8px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), var(--live-class) 70%);
+  -webkit-background-clip: text;
+
+  &.faded {
+    opacity: 0.3;
+  }
+
+  span {
+    color: var(--primary-text);
   }
 
 }
@@ -180,12 +214,13 @@
 }
 
 .code__container {
-  background-color: #131313;
-  color: #fff;
+  background-color: var(--live-bg);
+  color: var(--text-color);
   /* padding: 5px; */
   border-radius: 5px;
-  width: 70%;
-  left: 30px;
+  padding: 4px;
+  width: 100%;
+  /* left: 30px; */
   height: auto;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -193,15 +228,26 @@
   /* margin: 5px; */
   overflow: auto;
   object-fit: contain;
-  border: 1px solid;
+  border-radius: 5px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-image: linear-gradient(to right, rgba(169, 113, 195, 0.678), rgba(177, 151, 218, 0.481)) 1;
+}
+
+.code__wrapper {
+  left: 30px;
+  margin-left: 40px;
+  background-image: linear-gradient(to bottom, rgb(140, 61, 185), rgba(136, 167, 184, 0.219));
+  width: 70%;
+  padding: 1px;
+  border-radius: 6px;
+  overflow: auto;
+  object-fit: contain;
+
 }
 
 
 .first__container {
-  width: 80%;
+  /* width: 80%; */
   height: auto;
   border-image: linear-gradient(to bottom, rgb(140, 61, 185), rgba(136, 167, 184, 0.219)) 1;
   backdrop-filter: blur(5px);
@@ -221,7 +267,7 @@
   overflow: hidden;
   /* border-left: solid 1px #515151; */
   border-width: 0 0 0 1px;
-  border-image: linear-gradient(to top, rgba(81, 81, 81, 0) 0%, rgba(81, 81, 81, 1) 100%) 1 100%;
+  /* border-image: linear-gradient(to top, rgba(81, 81, 81, 0) 0%, rgb(36, 36, 36) 100%) 1 100% 30 round; */
 
 
 
@@ -276,7 +322,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  border: 1px solid #716e6ed6;
+  border: 1px solid var(--border-color);
   margin-right: 20px;
   margin-top: 8px;
   padding-left: 8px;
@@ -286,7 +332,6 @@
   top: 0;
   right: 0;
   z-index: 100;
-  background-color: #1c1c1c;
 }
 
 .controlOutputDepth {
@@ -341,7 +386,7 @@
   /* border-left: solid 1px #515151; */
   border-style: solid;
   border-width: 0 0 0 1px;
-  border-image: linear-gradient(to top, rgba(81, 81, 81, 0.335) 0%, rgb(168, 97, 223) 100%) 1 100%;
+  /* border-image: linear-gradient(to top, rgba(81, 81, 81, 0.335) 0%, rgb(168, 97, 223) 100%) 1 100%; */
 
 }
 
@@ -456,7 +501,7 @@
 
 .treeContainer {
   overflow: hidden;
-  background-color: #111;
+  background-color: var(--primary-bg);
   outline-color: transparent;
   outline-offset: 0px;
   outline-style: none;
@@ -471,7 +516,7 @@
   width: auto;
   height: 100vh;
   padding-bottom: 60vh;
-  background-image: -webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%);
+  /* background-image: -webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%); */
   background-size: 64px 64px;
   min-height: calc(100vh - 49px);
   z-index: 0;
@@ -532,7 +577,7 @@ ul.tree li {
   margin: 0;
   padding: 0 8px;
   line-height: 20px;
-  color: rgb(228, 228, 228);
+  color:  var(--primary-text);
   font-weight: bold;
   /* border-left: 1px solid #4d4d4d; */
 }
@@ -597,7 +642,7 @@ ul.tree ul li:first-child {
 
 ul.tree li:last-child:before {
 
-  border-left: 1px solid rgb(77, 77, 77);
+  /* border-left: 1px solid rgb(77, 77, 77); */
 }
 
 .tree .aircraft-wrapper .title-text {

@@ -14,9 +14,10 @@ import { useWebflowGptContext } from "@Context/Ai/WebflowGPTProvider";
 
 export default function LiveTree({ controlPosition }) {
 
-  const {
-    retrieveSetting,
-  } = useGlobalContext();
+  // const {
+  //   // retrieveSetting,
+  //   // theme = 'light',
+  // } = useGlobalContext();
 
 
   const {
@@ -28,17 +29,17 @@ export default function LiveTree({ controlPosition }) {
   const [currentCodeAccent, setCurrentCodeAccent] = useState('');
 
 
-  useEffect(() => {
-    const fetchColorValue = async () => {
-      const userSettings = await retrieveSetting('accentColor');
-      // console.log('%cretrievedColor', 'color: lightblue; font-size: 14px', userSettings);
-      if (userSettings) {
-        setCurrentCodeAccent(userSettings.accentColor);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchColorValue = async () => {
+  //     const userSettings = await retrieveSetting('accentColor');
+  //     // console.log('%cretrievedColor', 'color: lightblue; font-size: 14px', userSettings);
+  //     if (userSettings) {
+  //       setCurrentCodeAccent(userSettings.accentColor);
+  //     }
+  //   };
 
-    fetchColorValue();
-  }, [retrieveSetting]);
+  //   fetchColorValue();
+  // }, [retrieveSetting]);
 
 
 
@@ -160,6 +161,14 @@ export default function LiveTree({ controlPosition }) {
   // }, [data]);
 
 
+  const themes = {
+    light: {
+      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(105, 105, 105, 0.80), rgba(169, 169, 169, 0.19) 1px, transparent 1px, transparent 100%)`
+    },
+    dark: {
+      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%)`
+    }
+  }
 
   if (!dataParsed) {
     return <div className="emptyMessage">Please Select an Element on Webflow </div>;
@@ -177,12 +186,12 @@ export default function LiveTree({ controlPosition }) {
 
 
   return (
-    <div className="treeContainer">
+    <div className="treeContainer" style={themes.light}>
 
 
       <div className="controlOutput" style={{ right: controlPosition, top: '40px', zIndex: '100' }}>
         <RippleButton padding="2px">
-          <Icon id="clipboard" size={16} color="white" transitionId="check" onClick={() => { copyCssToClipboard(currentNodeAnalysisRef.current.cssData) }} />
+          <Icon id="clipboard" size={16} color="grey" transitionId="check" onClick={() => { copyCssToClipboard(currentNodeAnalysisRef.current.cssData) }} />
         </RippleButton>
 
 
@@ -344,13 +353,16 @@ function TreeViewNode({ css, passDownCss, node, activeItems, setActiveItems, lev
           />
         )}
         <div className="codeParent" style={{ borderImage: `linear-gradient(to bottom, ${currentCodeAccent}, rgba(136, 167, 184, 0.219)) 1` }}>
-          <div className="code__container" style={{ borderImage: `linear-gradient(to bottom, ${currentCodeAccent}, rgba(136, 167, 184, 0.219)) 1` }}>
-            <Live
-              loadingNewStyleSheet={loadingNewStyleSheet}
-              node={node}
-              cssString={nodeCss}
-              isFirst={level === 0} // this prop is to determine if it's the first element should be open
-            />
+
+          <div className= "code__wrapper" style={{ backgroundImage: `linear-gradient(to bottom, ${currentCodeAccent}, rgba(136, 167, 184, 0.219))` }}>
+            <div className="code__container" >
+              <Live
+                loadingNewStyleSheet={loadingNewStyleSheet}
+                node={node}
+                cssString={nodeCss}
+                isFirst={level === 0} // this prop is to determine if it's the first element should be open
+              />
+            </div>
           </div>
           {/* {node.class && <span className="class">.{node.class}</span>} */}
         </div>

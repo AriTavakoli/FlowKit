@@ -7,9 +7,8 @@
     height: 100%;
     border : 1px solid #3c5d77;
     border-radius: 8px;
-    background: #0f0f0f;
 
-
+    background: var(--primary-bg);
   }
 
   &__live {
@@ -19,13 +18,11 @@
     background-size: 48px 48px;
     min-height: calc(100vh - 49px);
     z-index: 0;
-
   }
 
   &__GPT {
     width: 50%;
     height: 60vh;
-
   }
 
 

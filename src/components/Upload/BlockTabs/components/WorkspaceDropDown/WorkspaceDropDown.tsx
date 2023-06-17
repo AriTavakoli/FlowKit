@@ -1,8 +1,8 @@
 // src/Dropdown.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './WorkspaceDropDown.module.scss'
 import Icon from '@src/components/IconWrapper/Icon';
-
+import StorageOps from '@src/Utils/LocalStorage/StorageOps';
 
 interface DropdownProps {
   options: any[]
@@ -12,7 +12,8 @@ interface DropdownProps {
   icon?: boolean
 }
 
-const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon }: DropdownProps) => {
+const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon, workspaceData, handleWorkspaceNameChange, initialState, downloadButton, deleteButton, onWorkspaceChange }: DropdownProps) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -24,14 +25,31 @@ const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon }: Dro
     setSelectedOption(option);
     setIsOpen(false);
     onChange(option);
+
+    console.log('%coption', 'color: orange; font-size: 64px', option);
+    console.log(option.tabId, 'option.tabId');
+    StorageOps.addRecentlyUsedWorkspaceId(option.value.tabId);
+
   };
 
+
+  useEffect(() => {
+    console.log('%cselectedOption', 'color: lightblue; font-size: 54px', initialState);
+  }, [selectedOption]);
 
 
   return (
     <div className={styles["dropdown"]}>
       <div className={styles["dropdown-button"]} onClick={handleToggle}>
-        {selectedOption ? selectedOption.label : label}
+        <input
+          type="text"
+          placeholder={selectedOption?.label ? selectedOption.label : initialState?.tabId}
+          name="workSpaceName"
+          className={`${styles['WorkspaceName']} ${styles['transparent-input']}`}
+          value={workspaceData?.name}
+          onChange={handleWorkspaceNameChange}
+        />
+        {/* {selectedOption ? selectedOption.label : label} */}
 
         {icon && <Icon id={'downChevron'} size={20} color="grey" ></Icon>}
       </div>
@@ -50,8 +68,10 @@ const WorkspaceDropDown = ({ options, label, onChange, customStyles, icon }: Dro
                 </div>
 
                 <div className={styles["icon__container"]}>
-                  <Icon id={option.icon} size={16} color="grey" ></Icon>
+                  <Icon id={option.icon} size={24} color="grey" ></Icon>
                 </div>
+
+
               </div>
             </>
           ))}

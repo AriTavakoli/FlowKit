@@ -27,7 +27,7 @@ export const SearchBar = ({ children }: SearchBarProps) => {
                 <div className={styles['search-bar']}>
 
                     <div className={styles['search-icon-container']}>
-                        <Icon id="search" size={18} color={"white"} />
+                        <Icon id="search" size={18} color={"grey"} />
                     </div>
 
                     <div className={styles['filter-holder']}>
@@ -36,7 +36,7 @@ export const SearchBar = ({ children }: SearchBarProps) => {
                                 return (
                                     <div key={category.id} className="filter-button" onClick={() => toggleCategory(category)}>
                                         {/* <span>{category.name}</span> */}
-                                        <Icon id={category.icon} size={20} color={'white'}></Icon>
+                                        <Icon id={category.icon} size={20} color={'grey'}></Icon>
 
                                     </div>
                                 )
@@ -45,7 +45,7 @@ export const SearchBar = ({ children }: SearchBarProps) => {
                         <input className={styles['search-bar-input']} onChange={(e) => { handleSearch(e.target.value) }} value={searchTerm} placeholder="Find anything..."   ></input>
                     </div>
                     <div ref={settingsRef} className={styles['ex-icon']}>
-                        <Icon onClick={() => { toggleSettings() }} id="settings" size={20} color={show ? "white" : "grey"} />
+                        <Icon onClick={() => { toggleSettings() }} id="settings" size={20} color={show ? "grey" : "grey"} />
                         <FadeWrapper show={show}>
                             <Settings></Settings>
                         </FadeWrapper>

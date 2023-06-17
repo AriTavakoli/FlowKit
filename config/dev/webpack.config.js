@@ -49,6 +49,7 @@ const alias = {
   "@src": path.resolve(__dirname, '../../src/'),
   "@Global": path.resolve(__dirname, '../../src/global/'),
   "@Types": path.resolve(__dirname, '../../src/types/'),
+  "@Theme": path.resolve(__dirname, '../../src/global/theme'),
 
 
 };
@@ -90,7 +91,6 @@ var options = {
     popup: path.join(__dirname, '../../src', 'pages', 'Popup', 'index.tsx'),
     background: path.join(__dirname, '../../src', 'pages', 'Background', 'index.ts'),
     contentScript: path.join(__dirname, '../../src', 'pages', 'Content', 'index.tsx'),
-    playground : path.join(__dirname, '../../src', 'pages', 'Playground', 'index.tsx'),
     // devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
     // panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.jsx'),
   },
@@ -134,33 +134,25 @@ var options = {
         ]
       },
 
-
       {
         test: /\.(css|scss)$/,
         exclude: /\.module\.scss$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
+          'style-loader',
+          'css-loader',
           {
             loader: 'sass-loader',
             options: {
+              implementation: require('sass'),  // use Dart Sass
               sourceMap: true,
             },
           },
         ],
       },
-
-      // new rule for SCSS modules with localized class names
       {
         test: /\.module\.scss$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -172,6 +164,7 @@ var options = {
           {
             loader: 'sass-loader',
             options: {
+              implementation: require('sass'),  // use Dart Sass
               sourceMap: true,
             },
           },

@@ -1,12 +1,11 @@
 
 .Asset {
-
   &__container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 100vw;
+    // width: 100vw;
     gap: 4px;
   }
 
@@ -39,15 +38,18 @@
     align-items: center;
     gap: 4px;
     justify-content: flex-start;
-    background-color: rgba(42, 42, 42, 0.7);
     padding: 8px;
-    border: 1px solid rgba(82, 82, 82, 0.5);
+    padding-right: 32px;
+    border: 1px solid var(--assetManager-border);
     backdrop-filter: blur(10px);
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--assetManager-row-bg);
     animation: fadeIn 0.7s ease-out forwards;
     opacity: 0;
     transition: all 0.4s ease-out;
+
+
   }
 
   &__controlBar {
@@ -56,7 +58,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    padding-left: 4vw;
     padding-right: 4vw;
     padding-bottom: 2vh;
     padding-top: 2vh;
@@ -80,8 +81,6 @@
 }
 
 .Image {
-
-
   &__details {
     display: flex;
     flex-direction: column;
@@ -90,20 +89,18 @@
     gap: 4px;
     padding-left: 8px;
     padding-right: 8px;
-
   }
 
   &__image {
     width: 60px;
-    height:  60px;
+    height: 60px;
     object-fit: scale-down;
     aspect-ratio: 1;
     border-radius: 12px;
-    border: 1px solid rgba(82, 82, 82, 0.5);
+    border: 1px solid var(--assetManager-border);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.4s ease-out;
   }
-
 
   &__selected {
     position: absolute;
@@ -123,8 +120,9 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-around;
   gap: 4px;
+  width: 100%;
   padding-left: 8px;
   padding-right: 8px;
 }

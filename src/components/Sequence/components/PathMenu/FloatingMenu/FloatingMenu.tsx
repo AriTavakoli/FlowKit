@@ -32,7 +32,7 @@ const FloatingMenu: React.FC<FloatingMenuProps> = ({ items }) => {
                 style={{ color: isOpen ? item.colorOnHover : 'inherit' }}
               >
                 <div className= {styles.iconContainer}>
-                  <Icon id="add" size={16} color="white"></Icon>
+                  <Icon id="add" size={16} color="grey"></Icon>
                 </div>
               </div>
               <div className={styles.cardText}>

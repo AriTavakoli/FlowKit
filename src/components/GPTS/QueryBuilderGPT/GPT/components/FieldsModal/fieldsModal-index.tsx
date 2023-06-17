@@ -295,7 +295,7 @@ const FieldsModal = ({ data, handleQuery, templateData, setIsVisible, isVisible,
           <span className={styles["Launch__text"]}>Go</span>
 
           <RippleButton shape="square " color="grey">
-            <Icon id="launch" size={20} color="white"></Icon>
+            <Icon id="launch" size={20} color="grey"></Icon>
           </RippleButton>
         </div>
       </div>

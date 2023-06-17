@@ -79,7 +79,7 @@ function AddTodoBox() {
           disabled={(todoText.trim()).length === 0}
           onClick={onSubmit}
         >
-          <Icon id = "plus" size = {16} color = "white"></Icon>
+          <Icon id = "plus" size = {16} color = "grey"></Icon>
         </button>
       </div>
     </div>

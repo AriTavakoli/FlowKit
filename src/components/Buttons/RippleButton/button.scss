@@ -32,7 +32,7 @@
   gap: 8px;
   vertical-align: middle;
   overflow: visible;
-  color: #fff;
+  color:  var(--text-color);
   font: inherit;
   font-size: 10px;
   line-height: 20px;
@@ -41,6 +41,7 @@
   text-align: center;
   letter-spacing: 1px;
   background: transparent;
+  font-weight: 400;
   border: 0;
   // border-radius: 40px;
   user-select: none;
@@ -115,7 +116,18 @@
 
   @include button-selected(#FFB64D);
 }
+.c-button--outline-greyWhite {
+  color: #363535;
+  border: 1px solid #89898953;
+  background: transparent;
 
+  &:hover {
+    border-color: #6d6d6d;
+    background: #25212156;
+  }
+
+  @include button-selected(#4746466c);
+}
 
 
 .c-button--outline-orange {
@@ -136,7 +148,7 @@
 .c-button--outline-grey {
   color: #363535;
   border: 1px solid #89898953;
-  background: transparent;
+  background: var(--primary-bg);
 
   &:hover {
     border-color: #6d6d6d;
@@ -267,6 +279,7 @@
 @include button-modifier(#fff, "rainbow");
 
 
+@include button-modifier(#fff, "greyWhite");
 
 
 

@@ -61,6 +61,10 @@ img {
 }
 
 
+.SuggestionWrapper{
+  background-color: var(--primary2-color) !important;
+}
+
 
 
 

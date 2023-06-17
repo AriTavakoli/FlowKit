@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useRef, useState, useEffect } from 'react';
 import { useTabOperations } from './hooks/useTab';
-import SettingOps from './classes/settingsOps';
+import SettingOps from './classes/SettingsOps';
 import { Settings, Setting, RenderOptions } from '@Types/Settings/settings.types';
 
 
@@ -31,6 +31,25 @@ export function GlobalProvider({ children }) {
   const [currentTemplate, setCurrentTemplate] = useState<string | null>(null);
   const [currentRenderer, setCurrentRenderer] = useState<"Custom" | "Default">('Default');
   const [currentNodeAnalysis, setCurrentNodeAnalysis] = useState(null);
+
+  const [theme, setTheme] = useState<Settings['theme']>('light');
+
+  useEffect(() => {
+
+
+
+    SettingOps.getTheme().then((theme) => {
+      setTheme(theme);
+    }
+    );
+  }, []);
+
+
+  useEffect(() => {
+    console.log('%ctheme', 'color: lightblue; font-size: 54px', theme);
+  }, [theme]);
+
+
 
   const [activeTab, setActiveTab] = useState<'aTab' | 'bTab' | 'cTab' | 'dTab' | 'eTab' | 'fTab'>('dTab');
 
@@ -73,35 +92,37 @@ export function GlobalProvider({ children }) {
 
   useEffect(() => {
     console.log(currentRenderer, 'currentrendermehtod');
-});
+  });
 
 
-  const handleChangeRenderer = (rendererName: RenderOptions ) => {
-    setCurrentRenderer( rendererName );
+  const handleChangeRenderer = (rendererName: RenderOptions) => {
+    setCurrentRenderer(rendererName);
   };
 
   const ctx: GlobalContextProps = {
+    theme,
     tabRefs,
-    activeTab,
-    setActiveTab,
-    setTabrefs,
+    setTheme,
     switchTab,
-    currentNodeAnalysis,
-    setCurrentNodeAnalysis,
+    activeTab,
+    setTabrefs,
+    setActiveTab,
     currentTemplate,
     currentRenderer,
     retrieveSetting,
     setCurrentTemplate,
     handleEditTemplate,
+    currentNodeAnalysis,
     printAllStorageItems,
     handleChangeRenderer,
+    setCurrentNodeAnalysis,
     handleAccentColorChange,
     handleUserSettingsChange,
   };
 
   return (
     <GlobalContext.Provider value={ctx}>
-        {children}
+      <div className={`theme--${theme === 'dark' ? 'dark' : 'light'}`}>{children}</div>
     </GlobalContext.Provider>
   );
 }
