@@ -3,14 +3,31 @@ import React, { useEffect, useState } from "react";
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
 import StyleGuideReference from "./components/StyleGuideReference";
 import WebflowSideBar from "./components/TreeView/Treeview";
-
+import PanelResizer from "../GPTS/LiveGPT/PanelResizer/panelResizer-index";
+import styles from "./StyleGuide.module.scss";
+import { useStyleguideContext } from "./context/StyleguideReferenceContext";
 
 function StyleGuide() {
 
   const [websiteData, setWebsiteData] = useState<WebsiteData>();
   const [imageData, setImageData] = useState<Image[] | null>(null);
+  const [size, setSize] = useState(50); // Set the initial size in percentage
 
 
+  const {
+    position,
+    setPosition,
+  } = useStyleguideContext();
+
+
+
+
+
+
+  const handleResize = (clientX) => {
+    const newSize = (clientX / window.innerWidth) * 100;
+    setSize(newSize);
+  };
 
   useEffect(() => {
     StorageOps.watchForStorageUpdate().then((res) => {
@@ -49,12 +66,32 @@ function StyleGuide() {
 
 
   return (
-    <div>
-      <WebflowSideBar websiteData = {websiteData as WebsiteData} />
+    <>
+      <div className={styles['Container']}>
 
-      {imageData && <StyleGuideReference images={imageData as Image[]}  websiteData={websiteData as WebsiteData}/>}
+        <div
+        // className={styles["LiveGPT__live"]}
+        // style={{ flexBasis: `${size}%`, maxWidth: `${size}%` }}
 
-    </div>
+        >
+          <WebflowSideBar websiteData={websiteData as WebsiteData} />
+        </div>
+
+        {/* <PanelResizer onResize={handleResize} /> */}
+
+
+        <div
+        // className={styles["LiveGPT__GPT"]}
+        // style={{ flexBasis: `${100 - size}%`, maxWidth: `${100 - size}%` }}
+
+        >
+          {imageData && <StyleGuideReference images={imageData as Image[]} websiteData={websiteData as WebsiteData} />}
+        </div>
+
+
+      </div>
+
+    </>
   )
 
 

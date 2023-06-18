@@ -3,15 +3,34 @@ import { useEffect, useState } from "react";
 import WebflowNode from "./Live/WebflowNode-index";
 import "./WebflowSideBar.css";
 import { useHighlight } from "../../hooks/useHighlight";
+import { useStyleguideContext } from "../../context/StyleguideReferenceContext";
+import Icon from "@src/components/IconWrapper/Icon";
+import NavigatorBar from "../NavigatorBar/NavigatorBar";
 
-export default function WebflowSideBar({ websiteData }) {
+
+export default function WebflowSideBar({ websiteData,}) {
 
 
   const [activeItems, setActiveItems] = useState([]);
-  const [dataParsed, setDataParsed] = useState(null);
   const [cssQuery, setCssQuery] = useState(null);
 
+
+  const [allNodesInactive, setAllNodesInactive] = useState(true);
+  const [maxDepth, setMaxDepth] = useState(10);
+
   const [zoomLevel, setZoomLevel] = useState(1);
+
+  const {
+    currentPageIndex,
+    position,
+    setCurrentPageIndex,
+  } = useStyleguideContext();
+
+
+  useEffect(() => {
+    console.log('%ccurrentPageIndexTree', 'color: lightblue; font-size: 54px', currentPageIndex);
+  }, [currentPageIndex]);
+
 
 
   const [html, setHtml] = useState<string>('');
@@ -20,15 +39,12 @@ export default function WebflowSideBar({ websiteData }) {
 
   useEffect(() => {
     if (websiteData) {
-      setHtml(websiteData.websiteData.websiteData['data'].pages[0].html);
+      setHtml(websiteData.websiteData.websiteData['data'].pages[currentPageIndex].html);
       setCss(websiteData.websiteData.websiteData['data'].css);
     }
-  }, [websiteData]);
+  }, [websiteData, currentPageIndex]);
 
 
-
-  const [allNodesInactive, setAllNodesInactive] = useState(false);
-  const [maxDepth, setMaxDepth] = useState(10);
 
   const [loadingNewStyleSheet, setLoadingNewStyleSheet] = useState(false);
 
@@ -39,53 +55,50 @@ export default function WebflowSideBar({ websiteData }) {
   }, [domStructure]);
 
   useEffect(() => {
-
     if (html) {
       const htmlString = html;
       var parser = new DOMParser();
       var doc = parser.parseFromString(htmlString, 'text/html');
-      const domStructure = doc.body;
+      let domStructure = cleanDOM(doc.body);
       console.log('%cdomStructure', 'color: lightblue; font-size: 44px', domStructure);
       setDomStructure(domStructure);
-
     }
+  }, [websiteData, html]);
 
-  }, [html]);
 
+  function cleanDOM(node) {
+    let newNode = node.cloneNode();
+    Array.from(node.childNodes).forEach(child => {
+      if (child.nodeType === Node.ELEMENT_NODE && !['style', 'script'].includes(child.tagName.toLowerCase())) {
+        newNode.appendChild(cleanDOM(child));
+      }
+    });
+    return newNode;
+  }
 
   const handleAllNodesInactive = () => {
     setAllNodesInactive(!allNodesInactive);
   };
 
 
+  // // Select the first .sd element
+  // React.useEffect(() => {
+  //   const codeContainersEls = document.querySelectorAll(".code__container-w");
+  //   if (codeContainersEls.length > 0) {
+  //     codeContainersEls[0].classList.add("first__container-w");
+  //   }
+
+  //   const cssContainersEls = document.querySelectorAll(".css__container-w");
+  //   if (cssContainersEls.length > 0) {
+  //     cssContainersEls[0].classList.remove("css__container-w");
+  //     cssContainersEls[0].classList.add("firstCss__container-w");
+  //   }
 
 
-  // Select the first .sd element
-  React.useEffect(() => {
-    const codeContainersEls = document.querySelectorAll(".code__container-w");
-    if (codeContainersEls.length > 0) {
-      codeContainersEls[0].classList.add("first__container-w");
-    }
-
-    const cssContainersEls = document.querySelectorAll(".css__container-w");
-    if (cssContainersEls.length > 0) {
-      cssContainersEls[0].classList.remove("css__container-w");
-      cssContainersEls[0].classList.add("firstCss__container-w");
-    }
-
-
-  }, [dataParsed]);
+  // }, [dataParsed]);
 
 
 
-  const themes = {
-    light: {
-      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(105, 105, 105, 0.80), rgba(169, 169, 169, 0.19) 1px, transparent 1px, transparent 100%)`
-    },
-    dark: {
-      backgroundImage: `-webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%)`
-    }
-  }
 
   // if (!dataParsed) {
   //   return <div className="emptyMessage">Please Select an Element on Webflow </div>;
@@ -97,35 +110,42 @@ export default function WebflowSideBar({ websiteData }) {
 
 
   return (
-    <div className="treeContainer-w" style={themes.light}>
-      <div
-        className="treeElements-w"
-        style={{
-          transform: `scale(${zoomLevel})`,
-          transformOrigin: "top left",
-        }}
-      >
+    <div className="treeWrapper-w" style= {{position: `${position}`}} >
 
-        <ul className="tree-w root-w">
-          {Array.from(domStructure?.children || []).map((child, index) => (
-            <TreeViewNode
-              loadingNewStyleSheet={loadingNewStyleSheet}
-              allNodesInactive={allNodesInactive}
-              node={child}
-              css={cssQuery}
-              // transformedTree={transformedTree}
-              activeItems={activeItems}
-              setActiveItems={setActiveItems}
-              level={0}
-              isActive={index === 0}
-              passDownCss={cssQuery}
-              zoomLevel={zoomLevel}
-              maxDepth={maxDepth}
-            />
-          ))}
-        </ul>
-      </div>
-    </div >
+      <NavigatorBar handleAllNodesInactive={handleAllNodesInactive}   />
+
+      {/* <button onClick={handleAllNodesInactive}>Collapse All</button> */}
+
+      <div className="treeContainer-w" >
+        <div
+          className="treeElements-w"
+          style={{
+            transform: `scale(${zoomLevel})`,
+            transformOrigin: "top left",
+          }}
+        >
+
+          <ul className="tree-w root-w">
+            {Array.from(domStructure?.children || []).map((child, index) => (
+              <TreeViewNode
+                loadingNewStyleSheet={loadingNewStyleSheet}
+                allNodesInactive={allNodesInactive}
+                node={child}
+                css={cssQuery}
+                // transformedTree={transformedTree}
+                activeItems={activeItems}
+                setActiveItems={setActiveItems}
+                level={0}
+                isActive={index === 0}
+                passDownCss={cssQuery}
+                zoomLevel={zoomLevel}
+                maxDepth={maxDepth}
+              />
+            ))}
+          </ul>
+        </div>
+      </div >
+    </div>
   );
 }
 
@@ -134,9 +154,6 @@ export default function WebflowSideBar({ websiteData }) {
 function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesInactive, maxDepth }) {
 
   const [isActive, setIsActive] = useState(level === 0 && !allNodesInactive);
-
-
-  const highlightProps = useHighlight();
 
 
   useEffect(() => {
@@ -160,7 +177,7 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
     }
   };
 
-  const hasChildren = node.children && node.children.length > 0;
+  const hasChildren = node.children && Array.from(node.children).some(child => child.childNodes.length > 0);
 
 
 
@@ -169,11 +186,10 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
       <li
         className={`flow-down-animated-w`}
       >
-
         {hasChildren && (
           <span
             className={`arrow-w ${isActive ? "arrow-down-w" : "arrow-up-w"}`}
-            onClick={handleItemClick}
+            onClick={hasChildren ? handleItemClick : null}
           />
         )}
         <div className="codeParent-w">
@@ -181,18 +197,17 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
             <div className="code__container-w">
               <WebflowNode
                 node={node}
-                isFirst={level === 0} // this prop is to determine if it's the first element should be open
+                isFirst={level === 0}
               />
             </div>
           </div>
-          {/* {node.class && <span className="class">.{node.class}</span>} */}
         </div>
         {hasChildren && isActive && level < maxDepth && (
           <ul className={`tree-w ${level === 0 ? "root-w" : ""}`}>
             {Array.from(node.children).map((child, index) => {
               return (
                 <TreeViewNode
-                  key={index}  // Don't forget to include unique key when you render an array of components
+                  key={index}
                   allNodesInactive={allNodesInactive}
                   node={child}
                   activeItems={activeItems}
@@ -205,11 +220,9 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
             })}
 
           </ul>
-        )
-        }
+        )}
       </li >
     </div>
-
   );
 }
 

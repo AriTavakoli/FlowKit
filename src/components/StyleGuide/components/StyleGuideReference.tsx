@@ -1,8 +1,11 @@
 import { useGlobalContext } from '@Context/Global/GlobalProvider';
 import { AssetDownloaderProps } from '@Types/ExportedWebsiteAssets/ExportedAssets';
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './StyleGuide.module.scss';
+import styles from '../StyleGuide.module.scss';
 import Dropdown from '@src/components/Util/DropDown/DropDown';
+import { useStyleguideContext } from '../context/StyleguideReferenceContext';
+
+
 
 const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
   const [html, setHtml] = useState<string>('');
@@ -16,6 +19,11 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
     icon: 'none' // use a static icon for all options, or map from data if available
   }));
 
+
+  const {
+    currentPageIndex,
+    setCurrentPageIndex,
+  } = useStyleguideContext();
 
   const [initialized, setInitialized] = useState<boolean>(false);
 
@@ -50,23 +58,26 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
   }, [websiteData, selectedPageIndex]);
 
   const handleDropdownChange = (option) => {
+    setCurrentPageIndex(option.value)
     setSelectedPageIndex(option.value);
   };
 
   return (
     <>
-      <div style={{ position: 'fixed', top: '55px', right: '32px', zIndex: '9999' }}>
-        <Dropdown
-          options={dropdownOptions}
-          label="Select a page"
-          onChange={handleDropdownChange}
-          customStyles={{}}
-          icon={true}
-        />
-      </div>
-      <StyleGuideFrame websiteData={websiteData} selectedPageIndex={selectedPageIndex} clickColor={"lightblue"} hoverColor={"blue"}></StyleGuideFrame>
-      <div className={styles['StatusBar']} style={{ position: 'fixed', bottom: 0, height: '50px', width: '100vw', backgroundColor: 'transparent', zIndex: '4500000000000000000000000' }} />
+      <div className={styles['Styleguide__container']}>
 
+        <div style={{ position: 'fixed', top: '55px', right: '32px', zIndex: '9999' }}>
+          <Dropdown
+            options={dropdownOptions}
+            label="Select a page"
+            onChange={handleDropdownChange}
+            customStyles={{}}
+            icon={true}
+          />
+        </div>
+        <StyleGuideFrame websiteData={websiteData} selectedPageIndex={selectedPageIndex} clickColor={"#0084ff"} hoverColor={"#0084ff"}></StyleGuideFrame>
+        <div className={styles['StatusBar']} style={{ position: 'fixed', bottom: 0, height: '50px', width: '100vw', backgroundColor: 'transparent', zIndex: '4500000000000000000000000' }} />
+      </div>
     </>
   );
 };
@@ -75,6 +86,11 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
 const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColor }) => {
 
   const iframeRef = useRef(null);
+
+
+  const {
+    position,
+  } = useStyleguideContext();
 
   useEffect(() => {
     const iframe = iframeRef.current;
@@ -237,7 +253,7 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
         ref={iframeRef}
         title="My iframe"
         style={{
-          width: '100%',
+          width: `${position==='relative' ? '100%' : 'calc(100vw - 0px)'}`, // Subtracting the width of the Sidebar div
           height: 'calc(100vh - 0px)', // Subtracting the height of the StatusBar div
           border: 0
         }}

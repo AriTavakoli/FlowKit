@@ -24,8 +24,15 @@ $themes: (
     rgba-secondary-bg: rgba(255, 255, 255, 0.19),
     bubble-color: #fff,
 
+
+    //  NavBar
+    nav-bg: #fff,
+    nav-bg2: #e1e1e1,
+
+
+
     chat-bg: #fff,
-    chat-border: #e5e5e5,
+    chat-border: #f2f2f2,
 
     tab-container: #efefef,
 
@@ -107,6 +114,12 @@ $themes: (
 
     chat-bg: #101010,
     chat-border: #55555589,
+
+    // NavBar
+    nav-bg: #161616,
+    nav-bg2: #2f2f2f,
+
+
 
     // FAB
     fab-bg: rgba(39, 39, 39, 0.9),

@@ -15,8 +15,6 @@ interface LiveProps {
 }
 const Node = ({ node }) => {
 
-  console.log(node, 'NODE');
-
 
   return (
     <div>
@@ -25,7 +23,6 @@ const Node = ({ node }) => {
     </div>
   );
 }
-
 
 
 SyntaxHighlighter.registerLanguage('css', css);
@@ -37,8 +34,6 @@ const WebflowNode = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet
   }, [node]);
 
   const highlightProps = useHighlight();
-
-
 
   const [selectedMediaQuery, setSelectedMediaQuery] = useState('all');
   const [currentCssString, setCurrentCssString] = useState();
@@ -118,7 +113,7 @@ const WebflowNode = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet
   return (
     <>
       <div className="code__topBar-w" >
-        <div className="className__container-w" highlightProps={highlightProps}>
+        <div className="className__container-w" {...highlightProps}>
           {node && <Node node={node} />}
 
         </div>
