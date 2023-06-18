@@ -24,6 +24,7 @@ import atomOneDarkReasonable from 'react-syntax-highlighter/dist/cjs/styles/hljs
 import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
 import SkeletonCode from './Loading/Skeleton';
 import { CssString, Tree } from '@Types/Tree/Tree.type';
+import { useHighlight } from '@src/components/StyleGuide/hooks/useHighlight';
 const themeMapping = {
   //dark
   'nord': nord,
@@ -60,6 +61,9 @@ const Node = ({ node }) => {
     </div>
   );
 }
+
+
+
 SyntaxHighlighter.registerLanguage('css', css);
 
 const WebflowNode = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: LiveProps) => {
@@ -68,19 +72,12 @@ const WebflowNode = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet
     console.log(node);
   }, [node]);
 
+  const highlightProps = useHighlight();
 
 
-  const {
-    retrieveSetting,
-    printAllStorageItems
-  } = useGlobalContext();
 
-
-  const [currentTheme, setCurrentTheme] = useState(nord);
   const [selectedMediaQuery, setSelectedMediaQuery] = useState('all');
   const [currentCssString, setCurrentCssString] = useState();
-  const syntaxHighlighterRef = useRef(null);
-  const [syntaxLineHeight, setSyntaxLineHeight] = useState(0);
   const [isOpen, setIsOpen] = useState(isFirst); // initial value of isOpen based on isFirst
   const [iconId, setIconId] = useState('clipboard');
   const [selectedClassname, setSelectedClassname] = useState();
@@ -157,7 +154,7 @@ const WebflowNode = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet
   return (
     <>
       <div className="code__topBar" >
-        <div className="className__container">
+        <div className="className__container" {...highlightProps}>
           {node && <Node node={node} />}
 
         </div>

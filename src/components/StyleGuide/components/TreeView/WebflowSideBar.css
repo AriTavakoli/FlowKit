@@ -63,8 +63,8 @@
 }
 
 .className__container {
-  overflow-y: hidden;
-  overflow-x: auto;
+  /* overflow-y: hidden;
+  overflow-x: auto; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -131,7 +131,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
+  /* overflow: hidden; */
   width: auto;
   margin-bottom: 8px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--live-class2) 70%);
@@ -197,6 +197,7 @@
   animation-name: flowingDown;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
+  overflow: hidden;
   border-left: #dddddd6d 1px solid;
   /* animation-iteration-count: infinite; */
 }
@@ -239,7 +240,7 @@
   /* left: 30px; */
   margin-left: 0px;
   border-radius: 6px;
-  overflow: auto;
+  /* overflow: auto; */
   object-fit: contain;
 
 }
@@ -375,11 +376,6 @@
 
 .codeParent {
   position: relative;
-  /* padding-bottom: 10px; */
-  /* padding-top: 10px; */
-  /* padding-bottom: 40px; */
-  /* margin-bottom: 4px; */
-  /* margin-left: 16px; */
   margin-top: -40px;
   width: fit-content;
   height: fit-content;
@@ -504,7 +500,6 @@
 
 
 .treeContainer {
-  overflow: hidden;
   background-color: var(--primary-bg);
   outline-color: transparent;
   outline-offset: 0px;
@@ -516,7 +511,6 @@
   line-height: 14px;
   background-size: 35px 30px;
   overflow: auto;
-  overflow-y: auto;
   width: 30vw;
   height: 100vh;
   /* background-image: -webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%); */
@@ -526,7 +520,13 @@
   position: relative;
 }
 
-
+.highlight {
+  background-color: green;
+}
+.selected {
+  background-color: green;
+  /* other styles */
+}
 
 /* .treeContainer .tree > li > .sd:first-of-type {
 
@@ -578,7 +578,7 @@
 
 .tree .active {
   display: block;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 ul.tree,
