@@ -6,6 +6,7 @@ import { useHighlight } from "../../hooks/useHighlight";
 
 export default function WebflowSideBar({ websiteData }) {
 
+
   const [activeItems, setActiveItems] = useState([]);
   const [dataParsed, setDataParsed] = useState(null);
   const [cssQuery, setCssQuery] = useState(null);
@@ -61,15 +62,15 @@ export default function WebflowSideBar({ websiteData }) {
 
   // Select the first .sd element
   React.useEffect(() => {
-    const codeContainersEls = document.querySelectorAll(".code__container");
+    const codeContainersEls = document.querySelectorAll(".code__container-w");
     if (codeContainersEls.length > 0) {
-      codeContainersEls[0].classList.add("first__container");
+      codeContainersEls[0].classList.add("first__container-w");
     }
 
-    const cssContainersEls = document.querySelectorAll(".css__container");
+    const cssContainersEls = document.querySelectorAll(".css__container-w");
     if (cssContainersEls.length > 0) {
-      cssContainersEls[0].classList.remove("css__container");
-      cssContainersEls[0].classList.add("firstCss__container");
+      cssContainersEls[0].classList.remove("css__container-w");
+      cssContainersEls[0].classList.add("firstCss__container-w");
     }
 
 
@@ -96,16 +97,16 @@ export default function WebflowSideBar({ websiteData }) {
 
 
   return (
-    <div className="treeContainer" style={themes.light}>
+    <div className="treeContainer-w" style={themes.light}>
       <div
-        className="treeElements"
+        className="treeElements-w"
         style={{
           transform: `scale(${zoomLevel})`,
           transformOrigin: "top left",
         }}
       >
 
-        <ul className="tree root">
+        <ul className="tree-w root-w">
           {Array.from(domStructure?.children || []).map((child, index) => (
             <TreeViewNode
               loadingNewStyleSheet={loadingNewStyleSheet}
@@ -164,20 +165,20 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
 
 
   return (
-    <div className={`flow-down`}>
+    <div className={`flow-down-w`}>
       <li
-        className={`flow-down-animated`}
+        className={`flow-down-animated-w`}
       >
 
         {hasChildren && (
           <span
-            className={`arrow ${isActive ? "arrow-down" : "arrow-up"}`}
+            className={`arrow-w ${isActive ? "arrow-down-w" : "arrow-up-w"}`}
             onClick={handleItemClick}
           />
         )}
-        <div className="codeParent">
-          <div className="code__wrapper" >
-            <div className="code__container">
+        <div className="codeParent-w">
+          <div className="code__wrapper-w" >
+            <div className="code__container-w">
               <WebflowNode
                 node={node}
                 isFirst={level === 0} // this prop is to determine if it's the first element should be open
@@ -187,7 +188,7 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
           {/* {node.class && <span className="class">.{node.class}</span>} */}
         </div>
         {hasChildren && isActive && level < maxDepth && (
-          <ul className={`tree ${level === 0 ? "root" : ""}`}>
+          <ul className={`tree-w ${level === 0 ? "root-w" : ""}`}>
             {Array.from(node.children).map((child, index) => {
               return (
                 <TreeViewNode

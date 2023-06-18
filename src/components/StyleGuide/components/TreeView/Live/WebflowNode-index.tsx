@@ -1,47 +1,11 @@
 //@ts-nocheck
-import React, { FC, useEffect, useRef, useState } from 'react';
-import styles from './Live.module.scss'
-import cssbeautify from 'cssbeautify';
-import nord from 'react-syntax-highlighter/dist/cjs/styles/hljs/nord';
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import atomOneDark from 'react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark';
-import github from 'react-syntax-highlighter/dist/cjs/styles/hljs/github';
-import colorBrewer from 'react-syntax-highlighter/dist/cjs/styles/hljs/color-brewer';
-import docco from 'react-syntax-highlighter/dist/cjs/styles/hljs/docco';
-import dracula from 'react-syntax-highlighter/dist/cjs/styles/hljs/dracula';
-import far from 'react-syntax-highlighter/dist/cjs/styles/hljs/far';
-import foundation from 'react-syntax-highlighter/dist/cjs/styles/hljs/foundation';
-import githubGist from 'react-syntax-highlighter/dist/cjs/styles/hljs/github-gist';
-import googlecode from 'react-syntax-highlighter/dist/cjs/styles/hljs/googlecode';
-import hybrid from 'react-syntax-highlighter/dist/cjs/styles/hljs/hybrid';
-import idea from 'react-syntax-highlighter/dist/cjs/styles/hljs/idea';
-import irBlack from 'react-syntax-highlighter/dist/cjs/styles/hljs/ir-black';
-import { useGlobalContext } from '@Context/Global/GlobalProvider';
-import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css';
-import Icon from '@src/components/IconWrapper/Icon';
-import atomOneLight from 'react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light';
-import atomOneDarkReasonable from 'react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark-reasonable';
-import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
-import SkeletonCode from './Loading/Skeleton';
 import { CssString, Tree } from '@Types/Tree/Tree.type';
 import { useHighlight } from '@src/components/StyleGuide/hooks/useHighlight';
-const themeMapping = {
-  //dark
-  'nord': nord,
-  'dracula': dracula,
-  'irBlack': irBlack,
-  'hybrid': hybrid,
-  'atomOneDarkReasonable': atomOneDarkReasonable,
-
-  //light
-  'github': github, //works  //
-  'atomOneDark': atomOneDark,
-  'colorBrewer': colorBrewer,
-  'docco': docco,
-  'foundation': foundation,
-  'githubGist': githubGist,
-
-};
+import cssbeautify from 'cssbeautify';
+import React, { useEffect, useState } from 'react';
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css';
+import styles from './Live.module.scss';
 
 interface LiveProps {
   cssString: CssString,
@@ -56,7 +20,7 @@ const Node = ({ node }) => {
 
   return (
     <div>
-      <div className = "nodeText">{node.classList}</div>
+      <div className = "nodeText-w">{node.classList}</div>
       {Array.isArray(node.children) && node.children.map(child => <Node node={child} />)}
     </div>
   );
@@ -153,8 +117,8 @@ const WebflowNode = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet
 
   return (
     <>
-      <div className="code__topBar" >
-        <div className="className__container" {...highlightProps}>
+      <div className="code__topBar-w" >
+        <div className="className__container-w" highlightProps={highlightProps}>
           {node && <Node node={node} />}
 
         </div>
