@@ -48,11 +48,21 @@ interface LiveProps {
   isFirst: boolean,
   loadingNewStyleSheet: boolean
 }
+const Node = ({ node }) => {
+
+  console.log(node, 'NODE');
 
 
+  return (
+    <div>
+      <div className = "nodeText">{node.classList}</div>
+      {Array.isArray(node.children) && node.children.map(child => <Node node={child} />)}
+    </div>
+  );
+}
 SyntaxHighlighter.registerLanguage('css', css);
 
-const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: LiveProps) => {
+const WebflowNode = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: LiveProps) => {
 
   useEffect(() => {
     console.log(node);
@@ -110,78 +120,10 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
     }
   }, [selectedMediaQuery, cssString, selectedClassname]);
 
-  const renderMediaQueryButtons = () => {
-    if (!cssString || !cssString.classData || !Array.isArray(cssString.classData)) {
-      return null;
-    }
-
-    return cssString.classData.map((mediaQueryObj, index) => {
-      const mediaQuery = Object.keys(mediaQueryObj)[0];
-      const hasValue = !!mediaQueryObj[mediaQuery][cssString.className];
-
-      // Only render buttons for media queries with a value
-      if (hasValue) {
-        // Add a condition to change the style of the selected media query
-        const isSelected = mediaQuery === selectedMediaQuery;
-
-        // Use a new CSS class when isSelected is true, else use the existing one
-        const buttonClassName = isSelected ? 'mediaQueryTextSelected' : 'mediaQueryText';
-        const buttonStyle = isSelected ? { borderColor: '#8f8f8f59' } : {};
-
-        return (
-          <div onClick={() => setSelectedMediaQuery(mediaQuery)} className={buttonClassName} style={buttonStyle}>
-            <span className="mediaQueryContent">{mediaQuery.replace('screen and ', '').replace('max-width: ', '').replace(/\(/g, '').replace(/\)/g, '')}</span>
-          </div>
-        );
-      }
-      return null;
-    }).filter(Boolean); // Filter out any null elements from the array
-  };
-
-
-  useEffect(() => {
-    if (syntaxHighlighterRef.current) {
-      const lineHeight = window.getComputedStyle(syntaxHighlighterRef.current).getPropertyValue('height');
-      console.log('%clineHeight', 'color: lightblue; font-size: 14px', lineHeight);
-      setSyntaxLineHeight(parseFloat(lineHeight));
-    }
-  }, [syntaxHighlighterRef.current]);
 
 
 
-  useEffect(() => {
-    const fetchColorValue = async () => {
-      const userSettings = await retrieveSetting('accentColor');
 
-      if (userSettings) {
-        setCurrentCodeAccent(userSettings.accentColor);
-      }
-      if (userSettings && themeMapping[userSettings.codeTheme]) {
-        setCurrentTheme(themeMapping[userSettings.codeTheme]);
-      }
-    };
-
-    fetchColorValue();
-  }, [retrieveSetting]);
-
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-
-  useEffect(() => {
-    const codeContainersEls = document.querySelectorAll(".code__container");
-    if (isFirst && codeContainersEls.length > 0) {
-      codeContainersEls[0].classList.add("first__container");
-    }
-
-    const cssContainersEls = document.querySelectorAll(".css__container");
-    if (isFirst && cssContainersEls.length > 0) {
-      cssContainersEls[0].classList.remove("css__container");
-      cssContainersEls[0].classList.add("firstCss__container");
-    }
-  }, [isFirst]);
 
 
   const handleIconClick = async (e: React.MouseEvent) => {
@@ -214,59 +156,19 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
 
   return (
     <>
-      <div className="code__topBar" onClick={toggleDropdown}>
+      <div className="code__topBar" >
         <div className="className__container">
-          {renderSplitClassnameButtons()}
+          {node && <Node node={node} />}
+
         </div>
-        {node ? <span className="nodeName">{node.tag}</span> : null}
       </div>
 
-      {isOpen && (
-        <>
 
-          <div className="css__container">
-            <div className="mediaQueryContainer">
-              {renderMediaQueryButtons()}
-
-            </div>
-
-            <div className="css__container--inner" ref={syntaxHighlighterRef}>
-              <div class="copy" onClick={handleIconClick}>
-                <Icon id={iconId} size={12} color="grey" transitionId='check'></Icon>
-              </div>
-
-              {loadingNewStyleSheet ?
-                <SkeletonCode lineHeight={syntaxLineHeight} /> :
-
-                <SyntaxHighlighter
-                  language={'css'}
-                  style={currentTheme}
-                  showLineNumbers={true}
-                  wrapLongLines={false}
-                  customStyle={{
-                    fontSize: '12px',
-                    paddingTop: '8px',
-                    fontWeight: 'light',
-                    font: 'monospace',
-                    borderRadius: '8px',
-                    position: 'relative'
-                  }}
-                >
-                  {currentCssString ? currentCssString : 'No CSS Found'}
-                </SyntaxHighlighter>
-
-              }
-
-            </div>
-          </div>
-        </>
-
-      )}
     </>
   );
 });
 
-export default Live;
+export default WebflowNode;
 
 
 function splitSelectors(selector) {

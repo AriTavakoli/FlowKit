@@ -177,9 +177,9 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
       // Exclude 'hover-highlighted' and 'click-highlighted' class names from tooltip
       const classNames = targetElement.className.split(' ').filter(name => name !== 'hover-highlighted' && name !== 'click-highlighted').join(' ');
 
-      navigator.clipboard.writeText(classNames).then(function() {
+      navigator.clipboard.writeText(classNames).then(function () {
         console.log('Copying to clipboard was successful!');
-      }, function(err) {
+      }, function (err) {
         console.warn('Could not copy text: ', err);
       });
 

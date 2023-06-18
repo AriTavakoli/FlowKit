@@ -51,6 +51,11 @@ $themes: (
     assetManager-card-bg2: #f2f2f2,
     assetManager-row-bg: #fff,
 
+
+    // FAB
+    fab-bg: #fff,
+
+
     search-bg: #fff,
     search-block: #bbbbbb,
     font-weight: 400,
@@ -99,6 +104,9 @@ $themes: (
     chat-bg: #101010,
     chat-border: #55555589,
 
+    // FAB
+    fab-bg: rgba(39, 39, 39, 0.9),
+
     live-bg: #0f0f0f,
     live-class: #161616,
     live-class2: #262626,
@@ -132,6 +140,19 @@ $themes: (
     command-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
     resizer: #2a2a2a,
   ),
+
+
+
+
+
+
+
+
+
+
+
+
+
 );
 
 .sg-nav-container {

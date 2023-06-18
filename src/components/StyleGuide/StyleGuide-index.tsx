@@ -2,6 +2,7 @@ import { Image, WebsiteData } from "@Types/ExportedWebsiteAssets/ExportedAssets"
 import React, { useEffect, useState } from "react";
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
 import StyleGuideReference from "./components/StyleGuideReference";
+import WebflowSideBar from "./components/TreeView/Treeview";
 
 
 function StyleGuide() {
@@ -49,8 +50,10 @@ function StyleGuide() {
 
   return (
     <div>
-      {imageData && <StyleGuideReference images={imageData as Image[]}  websiteData={websiteData as WebsiteData}
-      />}
+      <WebflowSideBar websiteData = {websiteData as WebsiteData} />
+
+      {imageData && <StyleGuideReference images={imageData as Image[]}  websiteData={websiteData as WebsiteData}/>}
+
     </div>
   )
 
