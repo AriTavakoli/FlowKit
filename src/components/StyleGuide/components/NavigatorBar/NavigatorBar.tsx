@@ -6,7 +6,6 @@ import React, { useEffect, useRef, useState } from 'react';
 
 export default function NavigatorBar({ handleAllNodesInactive, }) {
 
-
   const {
     position,
     setPosition,
@@ -15,14 +14,13 @@ export default function NavigatorBar({ handleAllNodesInactive, }) {
   } = useStyleguideContext();
 
 
-
-function handleSideBar () {
-  if (position === 'fixed') {
-    setPosition('relative');
-  } else {
-    setPosition('fixed');
+  function handleSideBar() {
+    if (position === 'fixed') {
+      setPosition('relative');
+    } else {
+      setPosition('fixed');
+    }
   }
-}
 
 
   return (
@@ -30,7 +28,7 @@ function handleSideBar () {
 
       <span className={styles['NavigationBar-text']}>Navigator </span>
 
-      <div className= {styles['NavigationBar-icon-wrapper']}>
+      <div className={styles['NavigationBar-icon-wrapper']}>
         <Icon id="collapseTree" size={14} color="grey" onClick={handleAllNodesInactive} ></Icon>
         <Icon id="treeLeft" size={14} color="grey" onClick={handleSideBar} ></Icon>
       </div>

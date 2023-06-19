@@ -1,0 +1,15 @@
+
+
+.CodeWindow{
+
+&-wrapper {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  background-color: rgb(252, 252, 252);
+  height: 200px;
+  z-index: 1000;
+}
+
+}

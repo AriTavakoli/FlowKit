@@ -8,51 +8,41 @@ import Icon from "@src/components/IconWrapper/Icon";
 import NavigatorBar from "../NavigatorBar/NavigatorBar";
 
 
-export default function WebflowSideBar({ websiteData,}) {
+export default function WebflowSideBar({ websiteData, }) {
 
 
   const [activeItems, setActiveItems] = useState([]);
   const [cssQuery, setCssQuery] = useState(null);
-
-
   const [allNodesInactive, setAllNodesInactive] = useState(true);
   const [maxDepth, setMaxDepth] = useState(10);
-
   const [zoomLevel, setZoomLevel] = useState(1);
-
-  const {
-    currentPageIndex,
-    position,
-    setCurrentPageIndex,
-    setCurrentNode,
-  } = useStyleguideContext();
-
-  useEffect(() => {
-    console.log('%ccurrentPageIndexTree', 'color: lightblue; font-size: 54px', currentPageIndex);
-  }, [currentPageIndex]);
-
-
-
   const [html, setHtml] = useState<string>('');
   const [css, setCss] = useState<string>('');
+  const [loadingNewStyleSheet, setLoadingNewStyleSheet] = useState(false);
+  const [domStructure, setDomStructure] = useState(null);
+
+  const {
+    position,
+    setCurrentNode,
+    currentPageIndex,
+    setCurrentPageIndex,
+  } = useStyleguideContext();
 
 
   useEffect(() => {
     if (websiteData) {
-      setHtml(websiteData.websiteData.websiteData['data'].pages[currentPageIndex].html);
-      setCss(websiteData.websiteData.websiteData['data'].css);
+      const data = websiteData.websiteData?.websiteData?.data;
+      if (data) {
+        setHtml(data.pages?.[currentPageIndex]?.html ?? '');
+        setCss(data.css ?? '');
+      } else {
+        console.error("Error: websiteData.websiteData.websiteData['data'] is undefined");
+      }
+    } else {
+      console.error("Error: websiteData is undefined");
     }
   }, [websiteData, currentPageIndex]);
 
-
-
-  const [loadingNewStyleSheet, setLoadingNewStyleSheet] = useState(false);
-
-  const [domStructure, setDomStructure] = useState(null);
-
-  useEffect(() => {
-    console.log('%cdomStructure', 'color: lightblue; font-size: 44px', domStructure);
-  }, [domStructure]);
 
   useEffect(() => {
     if (html) {
@@ -81,40 +71,11 @@ export default function WebflowSideBar({ websiteData,}) {
   };
 
 
-  // // Select the first .sd element
-  // React.useEffect(() => {
-  //   const codeContainersEls = document.querySelectorAll(".code__container-w");
-  //   if (codeContainersEls.length > 0) {
-  //     codeContainersEls[0].classList.add("first__container-w");
-  //   }
-
-  //   const cssContainersEls = document.querySelectorAll(".css__container-w");
-  //   if (cssContainersEls.length > 0) {
-  //     cssContainersEls[0].classList.remove("css__container-w");
-  //     cssContainersEls[0].classList.add("firstCss__container-w");
-  //   }
-
-
-  // }, [dataParsed]);
-
-
-
-
-  // if (!dataParsed) {
-  //   return <div className="emptyMessage">Please Select an Element on Webflow </div>;
-  // }
-
-
-  // console.log('%ctransformedTree', 'color: lightblue; font-size: 14px', transformedTree);
-
 
 
   return (
-    <div className="treeWrapper-w" style= {{position: `${position}`}} >
-
-      <NavigatorBar handleAllNodesInactive={handleAllNodesInactive}   />
-
-      {/* <button onClick={handleAllNodesInactive}>Collapse All</button> */}
+    <div className="treeWrapper-w" style={{ position: `${position}` }} >
+      <NavigatorBar handleAllNodesInactive={handleAllNodesInactive} />
 
       <div className="treeContainer-w" >
         <div
@@ -156,9 +117,6 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
   const [isActive, setIsActive] = useState(level === 0 && !allNodesInactive);
 
   const {
-    currentPageIndex,
-    position,
-    setCurrentPageIndex,
     setCurrentNode,
   } = useStyleguideContext();
 
@@ -176,9 +134,9 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
 
     setIsActive(!isActive);
     if (!isActive) {
-        setActiveItems([...activeItems, node.tag]);
+      setActiveItems([...activeItems, node.tag]);
     } else {
-        setActiveItems(activeItems.filter((item) => item !== node.tag));
+      setActiveItems(activeItems.filter((item) => item !== node.tag));
     }
 
     // Get the nodeText inner HTML
@@ -186,48 +144,49 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
 
     // Add error handling here
     if (nodeTextElement && nodeTextElement.innerHTML) {
-        const nodeText = nodeTextElement.innerHTML;
-        console.log(nodeText, 'nodeText');
+      const nodeText = nodeTextElement.innerHTML;
+      console.log(nodeText, 'nodeText');
 
-        // Assuming the iframe id is 'your-iframe-id'
-        const iframe = document.getElementById('your-iframe-id') as HTMLIFrameElement;
+      // Copy nodeText to clipboard
+      navigator.clipboard.writeText(nodeText).then(() => {
+        console.log("Copied to clipboard: ", nodeText);
+      }).catch((error) => {
+        console.error("Error copying to clipboard: ", error);
+      });
 
-        if (iframe) {
-            const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
+      // Assuming the iframe id is 'your-iframe-id'
+      const iframe = document.getElementById('your-iframe-id') as HTMLIFrameElement;
 
-            if (iframeDocument) {
-                // Select the element in the iframe with the same class name
-                const iframeElement = iframeDocument.querySelector(`.${nodeText}`);
+      if (iframe) {
+        const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
 
-                // Deactivate all links in the iframe
-                const iframeLinks = iframeDocument.querySelectorAll('a');
-                iframeLinks.forEach(link => {
-                    link.addEventListener('click', (event) => {
-                        event.preventDefault();
-                    });
-                });
+        if (iframeDocument) {
+          // Select the element in the iframe with the same class name
+          const iframeElement = iframeDocument.querySelector(`.${nodeText}`);
 
-                if (iframeElement) {
-                    // Handle selected element here
-                    console.log(iframeElement);
-                }
-            }
+          // Deactivate all links in the iframe
+          const iframeLinks = iframeDocument.querySelectorAll('a');
+          iframeLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+              event.preventDefault();
+            });
+          });
+
+          if (iframeElement) {
+            // Handle selected element here
+            console.log(iframeElement);
+          }
         }
+      }
 
-        // Set the current clicked node in the StyleguideContext
-        setCurrentNode(nodeText);
+      // Set the current clicked node in the StyleguideContext
+      setCurrentNode(nodeText);
     }
-
-
-
-
-
-};
+  };
 
 
 
   const hasChildren = node.children && Array.from(node.children).some(child => child.childNodes.length > 0);
-
 
 
   return (

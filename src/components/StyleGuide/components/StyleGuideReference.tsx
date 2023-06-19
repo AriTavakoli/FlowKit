@@ -8,6 +8,8 @@ import { useStyleguideContext } from '../context/StyleguideReferenceContext';
 
 
 const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
+
+
   const [html, setHtml] = useState<string>('');
   const [css, setCss] = useState<string>('');
 
@@ -26,6 +28,8 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
     currentPageIndex,
     setCurrentPageIndex,
     currentNode,
+    currentStyleSheet,
+    setCurrentStyleSheet
 
   } = useStyleguideContext();
 
@@ -56,6 +60,7 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
     if (websiteData) {
       setHtml(websiteData.websiteData.websiteData['data'].pages[0].html);
       setCss(websiteData.websiteData.websiteData['data'].css);
+      setCurrentStyleSheet(websiteData.websiteData.websiteData['data'].css);
     }
   }, [websiteData]);
 
@@ -107,6 +112,7 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
     currentNode,
     setCurrentPageIndex,
     setCurrentNode,
+    setCurrentCss
   } = useStyleguideContext();
 
 
@@ -264,6 +270,11 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
 
       clickTooltip.textContent = `${targetElement.tagName.toLowerCase()}   ` + classNames;
 
+      setCurrentNode(classNames);
+      setCurrentCss(classNames);
+
+
+
       clickTooltip.style.left = `${boundingRect.left + iframe.contentWindow.pageXOffset}px`;
       clickTooltip.style.top = `${boundingRect.top + iframe.contentWindow.pageYOffset}px`;
     };
@@ -278,11 +289,6 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
         hoveredElement.classList.remove('hover-highlighted');
       }
     });
-
-    const options = [
-      { value: 'Default', label: 'Default', icon: 'none' },
-      { value: 'Custom', label: 'Custom', icon: 'info' },
-    ];
 
 
 
