@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Handle, Position } from 'reactflow';
-import { useStyleguideContext } from '../../context/StyleguideReferenceContext';
-import StyleGuideReference from '../../components/StyleGuideReference';
+import { useStyleguideContext } from '../../../context/StyleguideReferenceContext';
+import StyleGuideReference from '../../StyleGuideReference';
 
 const FrameNode = memo(({ data, isConnectable }) => {
 

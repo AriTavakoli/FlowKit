@@ -4,10 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./StyleGuide.module.scss";
 import StyleGuideReference from "./components/StyleGuideReference";
 import WebflowSideBar from "./components/TreeView/Treeview";
-import CodeWindow from "./components/CodeWindow/CodeWindow";
-import OverviewFlow from "./Canvas/FlowCanvas-index";
-import App from "..";
-import CustomNodeFlow from "./Canvas/FlowCanvas-index";
+import CustomNodeFlow from "./components/Canvas/FlowCanvas-index";
 import { useStyleguideContext } from "./context/StyleguideReferenceContext";
 
 function StyleGuide() {
