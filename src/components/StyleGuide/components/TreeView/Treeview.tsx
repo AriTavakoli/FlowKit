@@ -154,7 +154,6 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
         console.error("Error copying to clipboard: ", error);
       });
 
-      // Assuming the iframe id is 'your-iframe-id'
       const iframe = document.getElementById('your-iframe-id') as HTMLIFrameElement;
 
       if (iframe) {

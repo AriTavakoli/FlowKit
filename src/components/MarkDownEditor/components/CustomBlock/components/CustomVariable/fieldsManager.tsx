@@ -10,7 +10,6 @@ import RippleButton from "@src/components/Buttons/RippleButton/rippleButton-inde
 import Icon from "@src/components/IconWrapper/Icon";
 import styles from "./fieldsManager.module.scss";
 import React from "react";
-import VoiceInput from "../../../TextEditor/components/EditableTextArea/components/VoiceInput/VoiceInput-index";
 
 type Field = {
   id: number;
@@ -136,20 +135,6 @@ const FieldsManager = ({
     return uniqueFields;
   }
 
-  const handleTranscribe = (transcript: string) => {
-    if (!editableRowRef.current) return;
-
-    const selection = window.getSelection();
-    const range = selection?.getRangeAt(0);
-
-    if (range) {
-      range.deleteContents();
-      range.insertNode(document.createTextNode(transcript));
-      range.collapse(false);
-      selection?.removeAllRanges();
-      selection?.addRange(range);
-    }
-  };
 
 
   // useEffect(() => {
@@ -248,23 +233,6 @@ const FieldsManager = ({
       </div>
 
       <div className={styles["block"]}>
-
-        {/* <MarkDownRenderer htmlString={markDown}></MarkDownRenderer> */}
-
-        {/* <button
-          style={{ position: "absolute", right: "0px", pointerEvents: "auto" }}
-          onClick={handleAddField}
-        >
-          Add Field
-        </button> */}
-
-        {/* <TextEditor textAreaRef={textAreaRef} handleMarkDownChange={handleMarkDownChange} /> */}
-        {/* <textarea
-          ref={textAreaRef}
-          value={markDown}
-        onChange={(e) => setMarkDown(e.target.value)}
-        /> */}
-
         {showFieldsManager ? (
           <div ref={fieldsManagerRef} className={styles["Variable__container"]}>
             {fieldsMapped}

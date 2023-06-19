@@ -116,8 +116,6 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
   } = useStyleguideContext();
 
 
-  const previouslyHighlightedRef = useRef(null);
-
   useEffect(() => {
     const iframe = iframeRef.current;
     const doc = iframe && iframe.contentDocument;

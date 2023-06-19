@@ -25,9 +25,7 @@ export default function NavigatorBar({ handleAllNodesInactive, }) {
 
   return (
     <div className={styles['NavigationBar-wrapper']}>
-
       <span className={styles['NavigationBar-text']}>Navigator </span>
-
       <div className={styles['NavigationBar-icon-wrapper']}>
         <Icon id="collapseTree" size={14} color="grey" onClick={handleAllNodesInactive} ></Icon>
         <Icon id="treeLeft" size={14} color="grey" onClick={handleSideBar} ></Icon>
