@@ -3,18 +3,18 @@ import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Ba
 import { v4 as uuid } from 'uuid';
 import 'reactflow/dist/style.css';
 import 'reactflow/dist/style.css';
-import './overview.css';
+import './styles/overview.css';
 
-import ColorSelectorNode from './ColorSelectorNode';
+import FrameNode from './components/FrameNode';
 
-import './index.css';
+import './styles/index.css';
 
 const initBgColor = '#fff';
 
 const connectionLineStyle = { stroke: '#fff' };
 const snapGrid = [20, 20];
 const nodeTypes = {
-  selectorNode: ColorSelectorNode,
+  selectorNode: FrameNode,
 };
 
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
@@ -35,7 +35,7 @@ const CustomNodeFlow = forwardRef((props, ref) => {
     // set the new node's position to be next to the rightmost node
     const newNode = {
       id,
-      type: 'selectorNode',
+      type: 'FrameNode',
       data: { color: initBgColor },
       style: { border: '1px solid #777', padding: 10 },
       position: { x: maxX + nodeWidth, y: 50 }, // adjust nodeWidth based on your actual node size

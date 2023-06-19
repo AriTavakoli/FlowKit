@@ -3,7 +3,7 @@ import { Handle, Position } from 'reactflow';
 import { useStyleguideContext } from '../../context/StyleguideReferenceContext';
 import StyleGuideReference from '../../components/StyleGuideReference';
 
-const ColorSelectorNode = memo(({ data, isConnectable }) => {
+const FrameNode = memo(({ data, isConnectable }) => {
 
   const {
     websiteData,
@@ -45,4 +45,4 @@ const ColorSelectorNode = memo(({ data, isConnectable }) => {
     </>
   );
 });
-export default ColorSelectorNode;
+export default FrameNode;
