@@ -14,20 +14,6 @@ function StyleGuide() {
   const [size, setSize] = useState(50); // Set the initial size in percentage
 
 
-  const {
-    position,
-    setPosition,
-  } = useStyleguideContext();
-
-
-
-
-
-
-  const handleResize = (clientX) => {
-    const newSize = (clientX / window.innerWidth) * 100;
-    setSize(newSize);
-  };
 
   useEffect(() => {
     StorageOps.watchForStorageUpdate().then((res) => {
@@ -69,24 +55,9 @@ function StyleGuide() {
     <>
       <div className={styles['Container']}>
 
-        <div
-        // className={styles["LiveGPT__live"]}
-        // style={{ flexBasis: `${size}%`, maxWidth: `${size}%` }}
-
-        >
           <WebflowSideBar websiteData={websiteData as WebsiteData} />
-        </div>
 
-        {/* <PanelResizer onResize={handleResize} /> */}
-
-
-        <div
-        // className={styles["LiveGPT__GPT"]}
-        // style={{ flexBasis: `${100 - size}%`, maxWidth: `${100 - size}%` }}
-
-        >
           {imageData && <StyleGuideReference images={imageData as Image[]} websiteData={websiteData as WebsiteData} />}
-        </div>
 
 
       </div>

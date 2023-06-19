@@ -493,6 +493,7 @@
 
 }
 
+
 .code-w {
   padding-left: 40px;
   background-color: #e3e3e3;
@@ -519,6 +520,8 @@
   z-index: 0;
   position: relative;
   left: 0px;
+  padding-bottom: 40vh;
+
   z-index: 1000000;
 
 }

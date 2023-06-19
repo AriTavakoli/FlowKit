@@ -24,8 +24,8 @@ export default function WebflowSideBar({ websiteData,}) {
     currentPageIndex,
     position,
     setCurrentPageIndex,
+    setCurrentNode,
   } = useStyleguideContext();
-
 
   useEffect(() => {
     console.log('%ccurrentPageIndexTree', 'color: lightblue; font-size: 54px', currentPageIndex);
@@ -155,6 +155,12 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
 
   const [isActive, setIsActive] = useState(level === 0 && !allNodesInactive);
 
+  const {
+    currentPageIndex,
+    position,
+    setCurrentPageIndex,
+    setCurrentNode,
+  } = useStyleguideContext();
 
   useEffect(() => {
     if (level === 0) {
@@ -165,17 +171,60 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
   }, [allNodesInactive]);
 
 
-  const handleItemClick = () => {
-    // if (level === 0) {
-    //   return;
-    // }
+  const handleItemClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
     setIsActive(!isActive);
     if (!isActive) {
-      setActiveItems([...activeItems, node.tag]);
+        setActiveItems([...activeItems, node.tag]);
     } else {
-      setActiveItems(activeItems.filter((item) => item !== node.tag));
+        setActiveItems(activeItems.filter((item) => item !== node.tag));
     }
-  };
+
+    // Get the nodeText inner HTML
+    const nodeTextElement = e.currentTarget.querySelector('.nodeText-w') as HTMLElement;
+
+    // Add error handling here
+    if (nodeTextElement && nodeTextElement.innerHTML) {
+        const nodeText = nodeTextElement.innerHTML;
+        console.log(nodeText, 'nodeText');
+
+        // Assuming the iframe id is 'your-iframe-id'
+        const iframe = document.getElementById('your-iframe-id') as HTMLIFrameElement;
+
+        if (iframe) {
+            const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
+
+            if (iframeDocument) {
+                // Select the element in the iframe with the same class name
+                const iframeElement = iframeDocument.querySelector(`.${nodeText}`);
+
+                // Deactivate all links in the iframe
+                const iframeLinks = iframeDocument.querySelectorAll('a');
+                iframeLinks.forEach(link => {
+                    link.addEventListener('click', (event) => {
+                        event.preventDefault();
+                    });
+                });
+
+                if (iframeElement) {
+                    // Handle selected element here
+                    console.log(iframeElement);
+                }
+            }
+        }
+
+        // Set the current clicked node in the StyleguideContext
+        setCurrentNode(nodeText);
+    }
+
+
+
+
+
+};
+
+
 
   const hasChildren = node.children && Array.from(node.children).some(child => child.childNodes.length > 0);
 
@@ -185,6 +234,7 @@ function TreeViewNode({ node, activeItems, setActiveItems, level = 0, allNodesIn
     <div className={`flow-down-w`}>
       <li
         className={`flow-down-animated-w`}
+        onClick={handleItemClick}
       >
         {hasChildren && (
           <span

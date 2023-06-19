@@ -7,9 +7,11 @@ import { useStyleguideContext } from '../context/StyleguideReferenceContext';
 
 
 
-const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
+const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
   const [html, setHtml] = useState<string>('');
   const [css, setCss] = useState<string>('');
+
+
 
   const [selectedPageIndex, setSelectedPageIndex] = useState<number>(0);
 
@@ -23,7 +25,18 @@ const StyleGuideReference = ({ images, websiteData }: AssetDownloaderProps) => {
   const {
     currentPageIndex,
     setCurrentPageIndex,
+    currentNode,
+
   } = useStyleguideContext();
+
+  useEffect(() => {
+    // Use currentNode here
+    if (currentNode) {
+        console.log(currentNode);  // For testing
+        // your code here
+    }
+}, [currentNode]);
+
 
   const [initialized, setInitialized] = useState<boolean>(false);
 
@@ -89,8 +102,38 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
 
 
   const {
+    currentPageIndex,
     position,
+    currentNode,
+    setCurrentPageIndex,
+    setCurrentNode,
   } = useStyleguideContext();
+
+
+  const previouslyHighlightedRef = useRef(null);
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    const doc = iframe && iframe.contentDocument;
+
+    if(doc) {
+      // Remove outline from previously highlighted element, if any
+      const previousHighlighted = doc.querySelector('.click-highlighted');
+      if (previousHighlighted) {
+        previousHighlighted.classList.remove('click-highlighted');
+      }
+
+      // Check if currentNode is set, then find the new element and add the outline
+      if (currentNode) {
+        const correspondingElement = doc.querySelector(`.${currentNode}`);
+        if (correspondingElement) {
+          correspondingElement.classList.add('click-highlighted');
+        }
+      }
+    }
+
+  }, [currentNode]);
+
 
   useEffect(() => {
     const iframe = iframeRef.current;
@@ -146,6 +189,17 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
     doc.addEventListener('mousemove', function (e) {
       window.parent.postMessage({ mouseX: e.clientX, mouseY: e.clientY }, '*');
     });
+
+    const correspondingElement = doc.querySelector(`.${currentNode}`);
+    // If it's multiple classes
+    // const correspondingElement = doc.querySelector(currentNode.split(' ').map(cn => `.${cn}`).join(''));
+
+    if (correspondingElement) {
+      correspondingElement.classList.add('click-highlighted');
+    }
+
+
+
 
     // Create the hover tooltip element
     const hoverTooltip = doc.createElement('div');
@@ -253,7 +307,7 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
         ref={iframeRef}
         title="My iframe"
         style={{
-          width: `${position==='relative' ? '100%' : 'calc(100vw - 0px)'}`, // Subtracting the width of the Sidebar div
+          width: `${position === 'relative' ? '80vw' : '100vw'}`, // Subtracting the width of the Sidebar div
           height: 'calc(100vh - 0px)', // Subtracting the height of the StatusBar div
           border: 0
         }}
@@ -261,11 +315,6 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
     </>
   );
 };
-
-
-
-
-
 
 
 

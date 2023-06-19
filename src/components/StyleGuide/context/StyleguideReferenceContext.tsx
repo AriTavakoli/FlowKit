@@ -7,11 +7,12 @@ const StyleguideContext = createContext({})
 export function StyleguideProvider({children}) {
 
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
-
-
   const [position, setPosition] = useState< 'relative' | 'fixed'>('fixed');
-
   const [currentNode, setCurrentNode] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    console.log('%ccurrentNode', 'color: orange; font-size: 44px', currentNode);
+  }, [currentNode]);
 
 
   const ctx = {
