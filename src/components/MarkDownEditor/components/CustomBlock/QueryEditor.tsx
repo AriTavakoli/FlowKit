@@ -235,6 +235,7 @@ export default function QueryEditor({ onFileChange, fileInput }) {
     }
 
     if (saveLocation === 'cssTemplate') {
+      console.log('%cstoragePayload', 'color: lightblue; font-size: 44px', storagePayload);
       await new StorageOps(currentTemplateName, saveLocation, storagePayload).addStorageItem();
     }
 
