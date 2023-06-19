@@ -1,5 +1,5 @@
 import React, { useEffect, createContext, useContext, useReducer, useState, useRef, Dispatch } from 'react';
-
+import { WebsiteData } from '@src/types/ExportedWebsiteAssets/ExportedAssets';
 const StyleguideContext = createContext({})
 
 
@@ -11,6 +11,11 @@ export function StyleguideProvider({children}) {
   const [currentNode, setCurrentNode] = useState<HTMLElement | null>(null);
   const [currentCss , setCurrentCss] = useState<string>('');
   const [currentStyleSheet, setCurrentStyleSheet] = useState<CSSStyleSheet | null>(null);
+  const [websiteData, setWebsiteData] = useState<WebsiteData>();
+
+  const [mode, setMode] = useState<'code' | 'flow'>('code');
+
+  const [currentNodeData, setCurrentNodeData] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     console.log('%ccurrentNode', 'color: orange; font-size: 44px', currentNode);
@@ -23,11 +28,17 @@ export function StyleguideProvider({children}) {
     position,
     currentCss,
     currentStyleSheet,
+    currentNodeData,
+    setCurrentNodeData,
+    mode,
+    setMode,
     setCurrentStyleSheet,
     setCurrentCss,
     setPosition,
     currentNode,
     setCurrentNode,
+    websiteData,
+    setWebsiteData
   };
 
   return (

@@ -66,7 +66,7 @@
   background-color: var(--nav-bg);
   /* position: fixed; */
   object-fit: contain;
-  width: 300px;
+  /* width: 300px; */
 }
 
 
@@ -305,7 +305,7 @@
 
 .treeElements-w {
   overflow: auto;
-  width: 300px;
+  width: 20vw;
 }
 
 .zoomControls {

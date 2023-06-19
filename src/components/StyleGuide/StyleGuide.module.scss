@@ -1,5 +1,7 @@
 .Container {
   display: flex;
+  width: 100vw;
+  height: 100vh;
   flex-direction: row;
 }
 
@@ -36,10 +38,29 @@
   }
   &-icon-wrapper {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     flex-direction: row;
   }
 
 
 }
 
+
+.flow-container {
+  display: flex;
+  width: 80vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+.sidebar-container{
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
