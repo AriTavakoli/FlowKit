@@ -4,7 +4,7 @@ export default class FeatureFlagOps {
   constructor(featureFlags?: any) {
     this.featureFlags = featureFlags || {
       StyleGuide: true,
-      treeView: true,
+      Webflow_GPT: true,
       // searchResults: true,
       // todoApp: true,
       Template_Editor: true,

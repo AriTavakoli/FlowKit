@@ -249,12 +249,12 @@ const FeatureFlagToggleButtons = ({ featureName, onFeatureToggle, featureFlags }
 };
 const ParentComponent = () => {
   const [featureFlags, setFeatureFlags] = useState({
-    StyleGuide: false,
+    StyleGuide: true,
     // searchResults: false,
     // todoApp: false,
-    Template_Editor: false,
-    Webflow_GPT: false,
-    Asset_Manager: false,
+    Template_Editor: true,
+    Webflow_GPT: true,
+    Asset_Manager: true,
     // ideaExplorer: false,
   });
 
