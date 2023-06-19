@@ -69,7 +69,11 @@ function StyleGuide() {
   }, [websiteData]);
 
 
-
+  if (!websiteData) {
+    return (
+      <span> Exporting WebflowData...</span>
+    )
+  }
 
   return (
     <>
@@ -85,8 +89,6 @@ function StyleGuide() {
           </div>
         )}
 
-
-        {/* <StyleGuideReference websiteData={websiteData as WebsiteData} /> */}
       </div>
 
     </>
