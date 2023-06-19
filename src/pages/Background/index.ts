@@ -12,13 +12,29 @@ import StorageOps from "@src/Utils/LocalStorage/StorageOps";
 
 
 
-console.log("background loaded");
-
-console.log("This is the background page.");
-console.log("Yup!");
-
 let p;
 const requestUrls = [];
+
+
+
+
+
+
+chrome.runtime.onInstalled.addListener(function(details) {
+  if (details.reason === 'install') {
+    // This is a first install!
+    console.log('This is a first install!');
+  } else if (details.reason === 'update') {
+    // This is an update!
+    console.log('This is an update!');
+  }
+});
+
+
+
+
+
+
 
 chrome.runtime.onConnect.addListener(function (port) {
   console.log("Connection established: ", port);

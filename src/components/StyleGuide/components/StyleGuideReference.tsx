@@ -17,11 +17,12 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
   const [selectedPageIndex, setSelectedPageIndex] = useState<number>(0);
 
-  const dropdownOptions = websiteData?.websiteData.websiteData['data'].pages.map((page, index) => ({
+  const dropdownOptions = websiteData?.websiteData?.websiteData?.['data']?.pages.map((page, index) => ({
     value: index,
     label: page.page.title,
     icon: 'none' // use a static icon for all options, or map from data if available
-  }));
+  })) || [];
+
 
 
   const {

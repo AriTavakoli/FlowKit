@@ -82,7 +82,6 @@ const App = ({ styleSheet, css }) => {
               </Suspense>
             )}
 
-
             {featureFlags.Asset_Manager && (
               <Suspense fallback={<div>Loading AssetManager</div>}>
                 <AssetManager></AssetManager>

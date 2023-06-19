@@ -13,7 +13,8 @@ import CustomMutation from '@Utils/MutationObservers';
 import parseHTMLString from './TreeParser';
 import useWeb from './Service/hooks/useWorkersV2';
 import '@Global/styles/dark.scss';
-console.log('Content script ggworks!');
+
+
 console.log('Must reload extension for modifications to take effect.');
 
 
