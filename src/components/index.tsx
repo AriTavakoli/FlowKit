@@ -31,6 +31,7 @@ const App = ({ styleSheet, css }) => {
     Editor_Main: true,
     StyleGuide: true,
     Webflow_GPT: true,
+    Template_Editor: true,
     Asset_Manager: true,
     // componentLibrary: true,
     // ideaExplorer: true,
