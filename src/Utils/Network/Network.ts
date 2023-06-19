@@ -35,17 +35,7 @@ class Network {
     window.URL.revokeObjectURL(url2);
     a.remove();
 
-
-
   }
-
-
-
-
-
-
-
-
 }
 
 

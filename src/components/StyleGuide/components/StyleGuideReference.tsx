@@ -36,10 +36,10 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
   useEffect(() => {
     // Use currentNode here
     if (currentNode) {
-        console.log(currentNode);  // For testing
-        // your code here
+      console.log(currentNode);  // For testing
+      // your code here
     }
-}, [currentNode]);
+  }, [currentNode]);
 
 
   const [initialized, setInitialized] = useState<boolean>(false);
@@ -101,28 +101,29 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 };
 
 
-const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColor }) => {
+const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColor  }) => {
 
   const iframeRef = useRef(null);
 
 
   const {
-    currentPageIndex,
+    // currentPageIndex,
     position,
     currentNode,
     setCurrentPageIndex,
     setCurrentNode,
-    setCurrentCss
+    setCurrentCss,
   } = useStyleguideContext();
 
 
-  const previouslyHighlightedRef = useRef(null);
 
   useEffect(() => {
     const iframe = iframeRef.current;
     const doc = iframe && iframe.contentDocument;
 
-    if(doc) {
+    setCurrentPageIndex(selectedPageIndex);
+
+    if (doc) {
       // Remove outline from previously highlighted element, if any
       const previousHighlighted = doc.querySelector('.click-highlighted');
       if (previousHighlighted) {
@@ -142,6 +143,8 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
 
 
   useEffect(() => {
+    if (!websiteData) return;
+    setCurrentPageIndex(selectedPageIndex);
     const iframe = iframeRef.current;
     const doc = iframe.contentDocument;
     const html = websiteData.websiteData.websiteData['data'].pages[selectedPageIndex].html;
@@ -221,6 +224,7 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
     let clickedElement;
 
     const updateHoverTooltip = (event) => {
+      setCurrentPageIndex(selectedPageIndex);
       const targetElement = event.target;
 
       if (hoveredElement) {

@@ -8,7 +8,7 @@ import Icon from "@src/components/IconWrapper/Icon";
 import NavigatorBar from "../NavigatorBar/NavigatorBar";
 
 
-export default function WebflowSideBar({ websiteData, }) {
+export default function WebflowSideBar({ websiteData,handleAddNode }) {
 
 
   const [activeItems, setActiveItems] = useState([]);
@@ -26,6 +26,8 @@ export default function WebflowSideBar({ websiteData, }) {
     setCurrentNode,
     currentPageIndex,
     setCurrentPageIndex,
+    setMode,
+    mode,
   } = useStyleguideContext();
 
 
@@ -75,7 +77,7 @@ export default function WebflowSideBar({ websiteData, }) {
 
   return (
     <div className="treeWrapper-w" style={{ position: `${position}` }} >
-      <NavigatorBar handleAllNodesInactive={handleAllNodesInactive} />
+      <NavigatorBar handleAllNodesInactive={handleAllNodesInactive} mode={mode} setMode={setMode} handleAddNode={handleAddNode} />
 
       <div className="treeContainer-w" >
         <div
