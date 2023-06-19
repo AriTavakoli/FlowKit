@@ -27,6 +27,7 @@ export default function LiveGpt() {
 
   const {
     switchTab,
+    theme,
 
     handleChangeRenderer,
   } = useGlobalContext();
@@ -50,14 +51,14 @@ export default function LiveGpt() {
   const [selectedModel, setSelectedModel] = useState("Default");
   const [currentModel, setCurrentModel] = useState('Default');
 
-  const [theme, setTheme] = useState("light");
+  // const [theme, setTheme] = useState("light");
 
-  useEffect(() => {
-    SettingOps.getTheme().then((res) => {
-      setTheme(res);
-    }
-    );
-  });
+  // useEffect(() => {
+  //   SettingOps.getTheme().then((res) => {
+  //     setTheme(res);
+  //   }
+  //   );
+  // });
 
 
   useEffect(() => {

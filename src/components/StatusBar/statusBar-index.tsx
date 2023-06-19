@@ -95,12 +95,13 @@ const StatusBar: React.FC<StatusBarProps> = ({ options, setActiveModal, setShowM
         <RippleButton callBack={() => { setActiveModal('calculator'); setShowModal(!showModal) }} padding='4px'>
           <Icon id="calculator" size={iconSize} color="grey"></Icon>
         </RippleButton>
+        <RippleButton callBack={toggleTheme} padding='4px'>
+          <Icon id="themeToggle" size={iconSize} color="grey" ></Icon>
+        </RippleButton>
         <RippleButton callBack={() => { openOptionsPage() }} padding='4px'>
           <Icon id="settings" size={iconSize} color="grey" ></Icon>
         </RippleButton>
-        <RippleButton callBack={toggleTheme} padding='4px'>
-          <Icon id="settings" size={iconSize} color="grey" ></Icon>
-        </RippleButton>
+
       </div>
     </div>
   );

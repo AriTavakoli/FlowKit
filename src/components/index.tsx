@@ -7,6 +7,7 @@ import styles from './Search.module.scss';
 import StatusBar from './StatusBar/statusBar-index';
 import { TabParent } from './Tabs/tabs-index';
 import StatusBarModal from './StatusBar/components/Modal/StatusBarModal';
+import { StyleguideProvider } from './StyleGuide/context/StyleguideReferenceContext';
 
 const StyleGuide = lazy(() => import(/* webpackChunkName: "StyleGuide" */'./StyleGuide/StyleGuide-index'));
 const EditorMain = lazy(() => import(/* webpackChunkName: "EditorMain" */'@src/components/MarkDownEditor/markdown-index'));
@@ -64,7 +65,9 @@ const App = ({ styleSheet, css }) => {
           <TabParent featureFlags={featureFlags}>
             {featureFlags.StyleGuide && (
               <Suspense fallback={<div>Loading StyleGuide</div>}>
-                <StyleGuide></StyleGuide>
+                <StyleguideProvider>
+                  <StyleGuide></StyleGuide>
+                </StyleguideProvider>
               </Suspense>
             )}
             {featureFlags.Template_Editor && (
@@ -113,8 +116,8 @@ const App = ({ styleSheet, css }) => {
 
           {activeModal && <StatusBarModal featureType={activeModal} showModal={showModal} setShowModal={setShowModal} />}
 
-        </div>
-      </GlobalProvider>
+        </div >
+      </GlobalProvider >
 
     </>
   )

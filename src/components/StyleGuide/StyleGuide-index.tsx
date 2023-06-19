@@ -1,21 +1,20 @@
 import { Image, WebsiteData } from "@Types/ExportedWebsiteAssets/ExportedAssets";
-import React, { useEffect, useState } from "react";
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
+import React, { useEffect, useState } from "react";
+import styles from "./StyleGuide.module.scss";
 import StyleGuideReference from "./components/StyleGuideReference";
-
+import WebflowSideBar from "./components/TreeView/Treeview";
+import CodeWindow from "./components/CodeWindow/CodeWindow";
 
 function StyleGuide() {
 
   const [websiteData, setWebsiteData] = useState<WebsiteData>();
   const [imageData, setImageData] = useState<Image[] | null>(null);
 
-
-
   useEffect(() => {
     StorageOps.watchForStorageUpdate().then((res) => {
       console.log('res', res);
       console.log('watcbibng');
-
       (async () => {
         let webData = await StorageOps.getWebsiteData();
         if (webData) {
@@ -24,8 +23,6 @@ function StyleGuide() {
       })();
     });
   }, []);
-
-
 
   useEffect(() => {
     (async () => {
@@ -48,10 +45,15 @@ function StyleGuide() {
 
 
   return (
-    <div>
-      {imageData && <StyleGuideReference images={imageData as Image[]}  websiteData={websiteData as WebsiteData}
-      />}
-    </div>
+    <>
+      <div className={styles['Container']}>
+
+          <WebflowSideBar websiteData={websiteData as WebsiteData} />
+
+          {imageData && <StyleGuideReference images={imageData as Image[]} websiteData={websiteData as WebsiteData} />}
+      </div>
+
+    </>
   )
 
 

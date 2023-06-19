@@ -6,8 +6,8 @@ $themes: (
     tertiary-bg: #ccc,
     primary-text: #000,
     secondary-text: #545454,
-    track-color: #e5e5e5,
-    thumb-color: #68686889,
+    track-color: #c4c4c4,
+    thumb-color: #e1e1e189,
     tertiary-text: #666,
     link-color: #0000ff,
     link-hover-color: #ff0000,
@@ -24,8 +24,15 @@ $themes: (
     rgba-secondary-bg: rgba(255, 255, 255, 0.19),
     bubble-color: #fff,
 
+
+    //  NavBar
+    nav-bg: #fff,
+    nav-bg2: #e1e1e1,
+
+
+
     chat-bg: #fff,
-    chat-border: #e5e5e5,
+    chat-border: #f2f2f2,
 
     tab-container: #efefef,
 
@@ -50,6 +57,15 @@ $themes: (
     assetManager-border2: #d2d2d2,
     assetManager-card-bg2: #f2f2f2,
     assetManager-row-bg: #fff,
+
+
+    highlight: blue,
+    selected: #e5e5e5,
+
+
+    // FAB
+    fab-bg: #fff,
+
 
     search-bg: #fff,
     search-block: #bbbbbb,
@@ -99,6 +115,15 @@ $themes: (
     chat-bg: #101010,
     chat-border: #55555589,
 
+    // NavBar
+    nav-bg: #161616,
+    nav-bg2: #2f2f2f,
+
+
+
+    // FAB
+    fab-bg: rgba(39, 39, 39, 0.9),
+
     live-bg: #0f0f0f,
     live-class: #161616,
     live-class2: #262626,
@@ -132,6 +157,19 @@ $themes: (
     command-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
     resizer: #2a2a2a,
   ),
+
+
+
+
+
+
+
+
+
+
+
+
+
 );
 
 .sg-nav-container {

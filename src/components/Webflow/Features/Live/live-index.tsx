@@ -54,6 +54,12 @@ SyntaxHighlighter.registerLanguage('css', css);
 
 const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: LiveProps) => {
 
+  useEffect(() => {
+    console.log(node);
+  }, [node]);
+
+
+
   const {
     retrieveSetting,
     printAllStorageItems
@@ -80,23 +86,25 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
 
 
   useEffect(() => {
-    for (let i = 0; i < cssString.classData.length; i++) {
-      if (cssString.classData[i][selectedMediaQuery]) {
-        const extractedCssString = cssString.classData[i][selectedMediaQuery][selectedClassname ? selectedClassname : cssString.className];
+    if (cssString && cssString.classData) {
+      for (let i = 0; i < cssString.classData.length; i++) {
+        if (cssString.classData[i][selectedMediaQuery]) {
+          const extractedCssString = cssString.classData[i][selectedMediaQuery][selectedClassname ? selectedClassname : cssString.className];
 
-        // Check if extractedCssString is not undefined or null
-        if (extractedCssString) {
-          let cssWithMediaQuery = extractedCssString;
+          // Check if extractedCssString is not undefined or null
+          if (extractedCssString) {
+            let cssWithMediaQuery = extractedCssString;
 
-          // If the selected media query is not "all", wrap the CSS in the media query
-          if (selectedMediaQuery !== 'all') {
-            cssWithMediaQuery = `@media ${selectedMediaQuery} {\n  ${extractedCssString}\n}`;
+            // If the selected media query is not "all", wrap the CSS in the media query
+            if (selectedMediaQuery !== 'all') {
+              cssWithMediaQuery = `@media ${selectedMediaQuery} {\n  ${extractedCssString}\n}`;
+            }
+
+            const beautifiedCssString = cssbeautify(cssWithMediaQuery, { indent: '  ' });
+            setCurrentCssString(beautifiedCssString);
+          } else {
+            setCurrentCssString(''); // Set an empty string if extractedCssString is undefined or null
           }
-
-          const beautifiedCssString = cssbeautify(cssWithMediaQuery, { indent: '  ' });
-          setCurrentCssString(beautifiedCssString);
-        } else {
-          setCurrentCssString(''); // Set an empty string if extractedCssString is undefined or null
         }
       }
     }

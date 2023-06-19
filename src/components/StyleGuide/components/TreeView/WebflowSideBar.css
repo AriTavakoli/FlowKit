@@ -1,7 +1,8 @@
-.tree .arrow {
+.tree-w .arrow-w {
   cursor: pointer;
   -webkit-user-select: none;
   /* Safari 3.1+ */
+  position: relative;
   -moz-user-select: none;
   /* Firefox 2+ */
   -ms-user-select: none;
@@ -9,11 +10,13 @@
   user-select: none;
   color: var(--live-arrow);
   font-size: 11pt;
+  margin-left: 50px;
+  z-index: 1000;
 
 }
 
 
-.nodeName {
+.nodeName-w {
   position: relative;
   /* background-color: var(--live-class); */
   border-radius: 4px;
@@ -31,14 +34,14 @@
   font-weight: lighter !important;
 }
 
-.nodeName::before {
+.nodeName-w::before {
   content: '';
   display: block;
   padding-top: 100%;
   /* This will make the height equal to the width */
 }
 
-.mediaQueryButtons {
+.mediaQueryButtons-w {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -46,7 +49,7 @@
 
 }
 
-.mediaQueryContainer {
+.mediaQueryContainer-w {
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -56,40 +59,51 @@
   }
 
 
-
 }
 
-.className__container {
-  overflow-y: hidden;
-  overflow-x: auto;
+.treeWrapper-w {
+
+  background-color: var(--nav-bg);
+  /* position: fixed; */
+  object-fit: contain;
+  width: 300px;
+}
+
+
+
+.className__container-w {
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
+  font-weight: 200;
+  padding-left: 4px;
   text-overflow: ellipsis;
   white-space: nowrap;
   position: relative;
   width: 100%;
 }
 
-.className__container::after {
+.className__container-w::after {
   content: '';
   position: absolute;
   top: 0;
   right: 0;
   width: 100px;
   height: 100%;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--live-bg));
+  font-weight: 200;
+  /* background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--live-bg)); */
 }
 
-.className__container::-webkit-scrollbar {
+.className__container-w::-webkit-scrollbar {
   width: 4px;
   padding-top: 4px;
   height: 1px;
 }
 
-.className__container::-webkit-scrollbar-thumb {
+.className__container-w::-webkit-scrollbar-thumb {
   background-color: #2a2a2a;
   border-radius: 2px;
 }
@@ -99,19 +113,19 @@
 }
 
 /* Apply thin scrollbar to Firefox */
-.className__container {
+.className__container-w {
   scrollbar-width: thin;
 }
 
 
-.className__container::-moz-scrollbar {
+.className__container-w::-moz-scrollbar {
   width: 4px;
   height: 4px;
 }
 
 
 
-.mediaQueryTextSelected {
+.mediaQueryTextSelected-w {
   border-radius: 4px;
   color: var(--text-color);
   margin-top: 6px;
@@ -125,7 +139,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
+  /* overflow: hidden; */
   width: auto;
   margin-bottom: 8px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--live-class2) 70%);
@@ -139,7 +153,8 @@
   }
 
 }
-.mediaQueryText {
+
+.mediaQueryText-w {
   background-color: var(--live-class);
   border-radius: 4px;
   color: var(--text-color);
@@ -154,7 +169,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
   width: auto;
   margin-bottom: 8px;
   background: linear-gradient(to top, rgba(255, 255, 255, 0), var(--live-class) 70%);
@@ -185,11 +199,12 @@
   }
 }
 
-.flow-down {
+.flow-down-w {
   will-change: transform, opacity;
-  animation-name: flowingDown;
+  /* animation-name: flowingDown; */
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
+  border-left: #dddddd6d 1px solid;
   /* animation-iteration-count: infinite; */
 }
 
@@ -198,7 +213,7 @@
 
 
 
-.selection-box {
+.selection-box-w {
   position: absolute;
   border: 1px dashed #333;
   background-color: rgba(0, 0, 255, 0.1);
@@ -206,57 +221,46 @@
 }
 
 
-.copy {
+.copy-w {
   position: absolute;
   right: 0;
   padding: 8px;
   z-index: 20;
 }
 
-.code__container {
-  background-color: var(--live-bg);
+.code__container-w {
   color: var(--text-color);
   /* padding: 5px; */
   border-radius: 5px;
-  padding: 4px;
   width: 100%;
   /* left: 30px; */
   height: auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
   position: relative;
   /* margin: 5px; */
-  overflow: auto;
   object-fit: contain;
   border-radius: 5px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
 
-.code__wrapper {
-  left: 30px;
-  margin-left: 40px;
-  background-image: linear-gradient(to bottom, rgb(140, 61, 185), rgba(136, 167, 184, 0.219));
-  width: 70%;
-  padding: 1px;
+.code__wrapper-w {
+  /* left: 30px; */
+  margin-left: 0px;
   border-radius: 6px;
-  overflow: auto;
+  /* overflow: auto; */
   object-fit: contain;
 
 }
 
 
-.first__container {
+.first__container-w {
   /* width: 80%; */
   height: auto;
-  border-image: linear-gradient(to bottom, rgb(140, 61, 185), rgba(136, 167, 184, 0.219)) 1;
   backdrop-filter: blur(5px);
   overflow: hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
-.firstCss__container {
+.firstCss__container-w {
   position: relative;
   /* padding-bottom: 10px; */
   /* padding-bottom: 40px; */
@@ -274,7 +278,7 @@
 }
 
 
-.emptyMessage {
+.emptyMessage-w {
   position: relative;
   top: 50%;
   left: 50%;
@@ -293,15 +297,15 @@
   pointer-events: none;
 }
 
-.scaled {
+.scaled-w {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
 
-.treeElements {
+.treeElements-w {
   overflow: auto;
-  width: 100%;
+  width: 300px;
 }
 
 .zoomControls {
@@ -314,7 +318,7 @@
   z-index: 100;
 }
 
-.controlOutput {
+.controlOutput-w {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
@@ -334,7 +338,7 @@
   z-index: 100;
 }
 
-.controlOutputDepth {
+.controlOutputDepth-w {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
@@ -356,7 +360,7 @@
 }
 
 
-.zoomDisplay {
+.zoomDisplay-w {
   padding: 4px
 }
 
@@ -375,22 +379,19 @@
 
 
 
-.codeParent {
+.codeParent-w {
   position: relative;
-  /* padding-bottom: 10px; */
-  /* padding-top: 10px; */
-  /* padding-bottom: 40px; */
-  /* margin-bottom: 4px; */
-  margin-left: 16px;
-  height: auto;
+  margin-top: -40px;
+  width: fit-content;
+  height: fit-content;
   /* border-left: solid 1px #515151; */
-  border-style: solid;
+  /* border-style: solid; */
   border-width: 0 0 0 1px;
   /* border-image: linear-gradient(to top, rgba(81, 81, 81, 0.335) 0%, rgb(168, 97, 223) 100%) 1 100%; */
 
 }
 
-.css__container {
+.css__container-w {
   position: relative;
   /* padding-bottom: 10px; */
   /* padding-bottom: 40px; */
@@ -398,10 +399,8 @@
   height: auto;
   padding: 12px;
   padding-top: 4px;
-  overflow: hidden;
   /* border-left: solid 1px #515151; */
   border-width: 0 0 0 1px;
-  border-image: linear-gradient(to top, rgba(81, 81, 81, 0) 0%, rgba(81, 81, 81, 1) 100%) 1 100%;
 
 
 }
@@ -426,10 +425,9 @@
 
 
 
-.css__container--inner {
+.css__container--inner-w {
   border-radius: 8px;
   position: relative;
-  overflow: hidden;
   border: .75px solid rgba(121, 121, 121, 0.741);
 
   /* border-image: linear-gradient(to right, rgb(61, 115, 185), rgba(81, 109, 195, 0.43)) 2; */
@@ -437,21 +435,26 @@
 
 }
 
+.nodeText-w {
+  font-size: 12px;
+  font-weight: 100 !important;
+  font-family: 'Roboto Mono', monospace;
+}
 
 
-.codeBlock {
+.codeBlock-w {
   height: 100%;
   margin-left: -20px;
   font-size: 12px;
 }
 
 
-.code__topBar {
+.code__topBar-w {
   display: flex;
   position: relative;
-  height: 20px;
+  height: 5px;
   width: 100%;
-  padding: 24px;
+  padding: 12px;
   padding-left: 12px;
   align-items: center;
   font-weight: lighter;
@@ -466,7 +469,7 @@
 }
 
 
-.first__topBar {
+.first__topBar-w{
   display: flex;
   position: relative;
   height: 20px;
@@ -483,24 +486,21 @@
 
 
 
-.tree.root {
+.tree-w.root-w {
   line-height: 0px;
-  padding-right: 20px;
-  height: auto;
-  padding-bottom: 60vh;
+  padding-right: 0px;
 
 
 }
 
-.code {
-  height: px;
+
+.code-w {
   padding-left: 40px;
   background-color: #e3e3e3;
 }
 
 
-.treeContainer {
-  overflow: hidden;
+.treeContainer-w {
   background-color: var(--primary-bg);
   outline-color: transparent;
   outline-offset: 0px;
@@ -509,86 +509,147 @@
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 14px;
   background-size: 35px 30px;
-  overflow: auto;
-  overflow-y: auto;
-  width: auto;
+  overflow: scroll;
+  width: 100%;
   height: 100vh;
-  padding-bottom: 60vh;
   /* background-image: -webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.19) 1px, transparent 1px, transparent 100%); */
   background-size: 64px 64px;
   min-height: calc(100vh - 49px);
   z-index: 0;
   position: relative;
-  mask-image: linear-gradient(to right, transparent, rgb(255, 255, 255));
+  left: 0px;
+  padding-bottom: 40vh;
+
+  z-index: 1000000;
+
+
+  overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px var(--track-color);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--thumb-color);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: grey;
+  }
+
+
+
+
+
+
 }
-
-
+.highlight {
+  background-color: #0084ff;
+}
+.selected {
+  background-color: #0084ff;
+  /* other styles */
+}
 
 /* .treeContainer .tree > li > .sd:first-of-type {
 
   width: 400px;
 } */
-.tree .arrow::before {
+.tree-w .arrow-w::before {
   content: "\25B6";
   /* color: linear-gradient(to bottom, rgb(149, 71, 194), rgba(47, 137, 185, 0)) 1; */
   display: inline-block;
-  margin-right: 6px;
-  margin-left: 0px;
-  font-size: 0.7em;
+  font-size: 8px;
+  z-index: 1000;
+  margin-top: -20px;
+  z-index: 1000;
+  position: absolute;
+  left: -26px;
+  top:1px;
+  margin-left: -35px;
   /* set the font-size to 80% of the parent font-size */
 }
 
-.tree .arrow-down::before {
+.tree-w .arrow-w:last-child::before {
+  display: none;
+}
+
+.tree-w .arrow-down-w::before {
   -ms-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
-  margin-bottom: 12px;
+  /* margin-bottom: 8px; */
+  position: absolute;
+  left: -26px;
+  top:1px;
+  margin-left: -35px;
+  z-index: 1000;
 }
 
-.tree .nested {
+.tree-w .arrow-up-w::before {
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(0deg);
+  position: absolute;
+  left: -26px;
+  top:1px;
+  margin-left: -35px;
+  z-index: 1000;
+}
+
+.tree-w .nested-w {
   position: relative;
 
   display: none;
   transition: all 0.5s ease-in-out;
 }
 
-.tree .active {
+.tree-w .active-w {
   display: block;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
-ul.tree,
-ul.tree ul {
+ul.tree-w,
+ul.tree-w ul {
 
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-ul.tree ul {
-  line-height: 20px;
+ul.tree-w ul {
+  line-height: 14px;
 
-  margin-left: 16px;
+  margin-left: 4px;
 }
 
-ul.tree li {
+ul.tree-w li {
   margin: 0;
   padding: 0 8px;
-  line-height: 20px;
-  color:  var(--primary-text);
+  line-height: 14px;
+  color: var(--primary-text);
   font-weight: bold;
   /* border-left: 1px solid #4d4d4d; */
 }
 
-ul.tree li:last-child {
+ul.tree-w li:last-child {
   border-left: none;
-  padding-bottom: 2vh;
+  padding-left: 10px;
+  /* padding-bottom: 2vh; */
 }
 
-.tree>li:first-child .arrow {
-  margin-left: 4px;
+.tree-w>li:first-child .arrow {
+  margin-left: -20px;
+  margin-top: -20px;
+  z-index: 1000;
 }
 
 
@@ -596,9 +657,9 @@ ul.tree li:last-child {
 this controls the lineheight
 */
 
-ul.tree li:before {
+ul.tree-w li:before {
   position: relative;
-  top: -0.3em;
+  top: 2px;
   height: auto;
   width: 12px;
   color: rgba(223, 223, 223, 0);
@@ -614,9 +675,9 @@ ul.tree li:before {
 
 
 
-ul.tree li:first-child:before {
+ul.tree-w li:first-child:before {
   position: relative;
-  top: -0.3em;
+  top: 2px;
   height: 50px;
   width: 12px;
   color: rgba(207, 207, 207, 0);
@@ -630,17 +691,17 @@ ul.tree li:first-child:before {
 }
 
 
-ul.tree>li:first-child,
-ul.tree ul li:first-child {
+ul.tree-w>li:first-child,
+ul.tree-w ul li:first-child {
   border-left: none;
-  line-height: 20px;
+  line-height: 14px;
   /* padding-bottom: 4px; */
 
 }
 
 
 
-ul.tree li:last-child:before {
+ul.tree-w li:last-child:before {
 
   /* border-left: 1px solid rgb(77, 77, 77); */
 }
@@ -656,7 +717,7 @@ ul.tree li:last-child:before {
   display: flex;
 }
 
-.tree .red-dot {
+.tree-w .red-dot {
   height: 10px;
   width: 10px;
   background-color: #ff0000;
