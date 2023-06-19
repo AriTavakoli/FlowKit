@@ -101,19 +101,25 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
 
       <ParentComponent />
 
+
+
+
       <div className={styles["Options__colorContainer"]}>
         <span className={styles["Options__title"]}>FlowKit Custom Color:</span>
         <input
           className={styles["Options__colorPicker"]}
           value={colorValue}
           type="color"
-          onChange={(e) => { handleUserSettingsChange({ type: 'accentColor', value: e.target.value }); setColorValue(e.target.value); }}
+          onChange={(e) => { handleUserSettingsChange({ type: 'theme', value: e.target.value }); setColorValue(e.target.value); }}
         />
       </div>
 
 
+
+
+
       <div className={styles["Options__colorContainer"]}>
-      <span className={styles["Options__title"]}>Code Theme:</span>
+        <span className={styles["Options__title"]}>Code Theme:</span>
         <select
           value={colorValue}
           onChange={(e) => {
@@ -141,7 +147,7 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
       <ProviderSelect></ProviderSelect>
 
 
-      <div className= {styles["Options__triggerContainer"]}>
+      <div className={styles["Options__triggerContainer"]}>
         <main className={styles["Options__triggerMode"]}>
           <h3>Trigger Mode</h3>
           <div>
@@ -182,7 +188,7 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
             options={languageOptions}
             label={"Language"}
             onChange={(option) => onLanguageChange(option.value)}
-            menuPosition={{maxHeight : '200px', overflow: 'auto'}}
+            menuPosition={{ maxHeight: '200px', overflow: 'auto' }}
           />
           <h3>AI Provider</h3>
           {/* Add your ProviderSelect component here */}
@@ -193,7 +199,7 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
           </div>
         </main>
       </div>
-    </div>
+    </div >
 
 
   )
@@ -249,12 +255,12 @@ const FeatureFlagToggleButtons = ({ featureName, onFeatureToggle, featureFlags }
 };
 const ParentComponent = () => {
   const [featureFlags, setFeatureFlags] = useState({
-    StyleGuide: false,
+    StyleGuide: true,
     // searchResults: false,
     // todoApp: false,
-    Template_Editor: false,
-    Webflow_GPT: false,
-    Asset_Manager: false,
+    Template_Editor: true,
+    Webflow_GPT: true,
+    Asset_Manager: true,
     // ideaExplorer: false,
   });
 

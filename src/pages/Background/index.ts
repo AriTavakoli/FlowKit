@@ -9,16 +9,94 @@ import {
 import { OpenAIProvider } from "./providers/openai";
 import { Provider } from "./GPT-Background/types";
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
+import Bem from './Templates/BemMain.json'
+import Pallete from './Templates/Palette.json';
+import Webflow from './Templates/Webflow.json';
+import SettingOps from "@Context/Global/classes/SettingsOps";
 
-
-
-console.log("background loaded");
-
-console.log("This is the background page.");
-console.log("Yup!");
 
 let p;
 const requestUrls = [];
+
+
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+chrome.runtime.onInstalled.addListener(function (details) {
+  if (details.reason === 'install') {
+    const initTemplates = [
+      {
+        currentTemplateName: 'BEM',
+        saveLocation: 'cssTemplate',
+        storagePayload: {
+          active: 'true',
+          bubbleColor: '#FE8BFA',
+          template: JSON.stringify(Bem),
+          templateName: 'BEM',
+        },
+      },
+      {
+        currentTemplateName: 'Palette',
+        saveLocation: 'cssTemplate',
+        storagePayload: {
+          active: 'true',
+          bubbleColor: '#CD71FE',
+          template: JSON.stringify(Pallete),
+          templateName: 'Palette',
+        },
+      },
+      {
+        currentTemplateName: 'Webflow',
+        saveLocation: 'cssTemplate',
+        storagePayload: {
+          active: 'true',
+          bubbleColor: '#8BD8FE',
+          template: JSON.stringify(Webflow),
+          templateName: 'Webflow',
+        },
+      },
+    ];
+
+
+    (async () => {
+      await SettingOps.addStorageItem('accentColor', 'userSettings', '#68BCFD');
+
+    })();
+
+    const addTemplatePromises = initTemplates.map(async (template, index) => {
+      const { currentTemplateName, saveLocation, storagePayload } = template;
+      console.log('%cstoragePayload', 'color: orange; font-size: 54px', storagePayload);
+
+      // delay to prevent hitting the limit
+      await delay(index * 1000);  // delay for each storage operation by 1 sec (increase if needed)
+
+      return new StorageOps(currentTemplateName, saveLocation, storagePayload).addStorageItem();
+    });
+
+    // Use Promise.all to wait for all the promises to resolve
+    Promise.all(addTemplatePromises)
+      .then(() => console.log('All templates added to storage'))
+      .catch(err => console.error('Error while adding templates to storage: ', err));
+
+    console.log('This is a first install!');
+  } else if (details.reason === 'update') {
+    console.log('This is an update!');
+  }
+});
+
+
+
+Browser.runtime.onInstalled.addListener((details) => {
+  if (details.reason === "install") {
+    Browser.runtime.openOptionsPage();
+  }
+});
+
+
+
 
 chrome.runtime.onConnect.addListener(function (port) {
   console.log("Connection established: ", port);
@@ -214,11 +292,7 @@ Browser.runtime.onMessage.addListener(async (message) => {
   }
 });
 
-Browser.runtime.onInstalled.addListener((details) => {
-  if (details.reason === "install") {
-    Browser.runtime.openOptionsPage();
-  }
-});
+
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type === "saveChat") {

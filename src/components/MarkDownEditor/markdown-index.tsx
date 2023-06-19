@@ -14,7 +14,7 @@ import { TemplateProvider } from './components/CustomBlock/context/TemplateConte
 import { TextEditorProvider } from './components/TextEditor/Context/TextEditorContext';
 import { EditorProvider } from './context/EditorContext';
 import { QueryBuilderProvider } from "./context/QueryBuilderContext";
-import output32 from './output32.json';
+import WebflowWorkspace from './template/Webflow.json';
 
 
 function EditorMain() {
@@ -184,44 +184,6 @@ export default React.memo((props) => (
   </QueryBuilderGptProvider>
 ));
 
-const initialState = {
-  "workSpaceName": "WorkSpace 1",
-  "tabs": [
-    {
-      "key": "aTab",
-      "label": "Tab A",
-      "description": "Tab A description",
-      "tabIcon": "drop",
-      "active": true,
-      "index": 0,
-      "content": {
-        "blocks": [
-          {
-            "blockName": "block1",
-            "id": "block1",
-            "description": "block1 description",
-            "jsonDataKey": "output32",
-            "tokens": '23k',
-            "fileFormat": "json"
-          },
-          {
-            "blockName": "block2",
-            "id": "block2",
-            "description": "block2 description",
-            "jsonDataKey": "output32",
-            "tokens": '23k',
-            "fileFormat": "json"
-          }
-        ]
-      }
-    },
-
-  ],
-
-  "jsonData": [
-    { key: 'output32', payload: output32 }]
-
-
-};
+const initialState = WebflowWorkspace
 
 

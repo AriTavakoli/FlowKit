@@ -14,14 +14,14 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
   const [css, setCss] = useState<string>('');
 
 
-
   const [selectedPageIndex, setSelectedPageIndex] = useState<number>(0);
 
-  const dropdownOptions = websiteData?.websiteData.websiteData['data'].pages.map((page, index) => ({
+  const dropdownOptions = websiteData?.websiteData?.websiteData?.['data']?.pages.map((page, index) => ({
     value: index,
     label: page.page.title,
     icon: 'none' // use a static icon for all options, or map from data if available
-  }));
+  })) || [];
+
 
 
   const {
@@ -46,7 +46,7 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
   useEffect(() => {
     if (websiteData && !initialized) {
-      const styleGuideIndex = websiteData.websiteData.websiteData['data'].pages.findIndex(page => page.page.title === 'StyleGuide');
+      const styleGuideIndex = websiteData?.websiteData?.websiteData['data'].pages.findIndex(page => page.page.title === 'StyleGuide');
       if (styleGuideIndex !== -1) {
         setSelectedPageIndex(styleGuideIndex);
       }
@@ -58,9 +58,9 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
   useEffect(() => {
     if (websiteData) {
-      setHtml(websiteData.websiteData.websiteData['data'].pages[0].html);
-      setCss(websiteData.websiteData.websiteData['data'].css);
-      setCurrentStyleSheet(websiteData.websiteData.websiteData['data'].css);
+      setHtml(websiteData?.websiteData?.websiteData['data'].pages[0].html);
+      setCss(websiteData?.websiteData?.websiteData['data'].css);
+      setCurrentStyleSheet(websiteData?.websiteData?.websiteData['data'].css);
     }
   }, [websiteData]);
 
@@ -68,7 +68,7 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
   useEffect(() => {
     if (websiteData) {
-      const numOfPages = websiteData.websiteData.websiteData['data'].pages.length;
+      const numOfPages = websiteData?.websiteData?.websiteData['data'].pages.length;
       if (selectedPageIndex >= numOfPages) {
         setSelectedPageIndex(numOfPages - 1);
       }
@@ -79,6 +79,8 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
     setCurrentPageIndex(option.value)
     setSelectedPageIndex(option.value);
   };
+
+  if(!websiteData) return (<div> Webflow Data is Exporting...</div>)
 
   return (
     <>
@@ -118,6 +120,10 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
 
 
   useEffect(() => {
+
+
+    if(!websiteData) return;
+
     const iframe = iframeRef.current;
     const doc = iframe && iframe.contentDocument;
 
@@ -147,8 +153,8 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
     setCurrentPageIndex(selectedPageIndex);
     const iframe = iframeRef.current;
     const doc = iframe.contentDocument;
-    const html = websiteData.websiteData.websiteData['data'].pages[selectedPageIndex].html;
-    const css = websiteData.websiteData.websiteData['data'].css;
+    const html = websiteData?.websiteData?.websiteData['data'].pages[selectedPageIndex].html;
+    const css = websiteData?.websiteData?.websiteData['data'].css;
 
     const tooltipCss = `
       .tooltip {
