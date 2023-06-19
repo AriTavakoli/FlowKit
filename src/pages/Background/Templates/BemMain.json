@@ -1,0 +1,430 @@
+{
+  "templateName": "BEM",
+  "templateLayout": {
+    "f768131c-6642-4734-8df6-5852870634bc": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " I want you to act as a world class professional css architect.",
+          "attributes": {}
+        }
+      ]
+    ],
+    "16b94ba7-a2e7-4bd6-bf84-8395be72a65e": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " I want you to take this following code and give me professional advice on how I can improve the classnames. ",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " After analyzing the code I want you to give me suggestions on how I can improve the classnames using BEM naming methodologies. ",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " Here is the data : ",
+          "attributes": {}
+        },
+        {
+          "type": "DIV",
+          "textContent": "Webflow",
+          "attributes": {
+            "fieldId": "4b5e23b7-f698-4a59-ad62-c26e68a6b6e9",
+            "componentType": "formField",
+            "inputtype": "balagoo"
+          }
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        }
+      ]
+    ],
+    "f1730ff5-3166-4c51-96d7-c370694334f9": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " I want you to only response in html using only tags that are seen in a blog like h3-h6 , p, li. Along with my custom tags like <class-name> ",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " Here is an example output i want from you for my naming suggestions . The goal is to make it readable and consumable. ",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " <class-name className1 = \"my curretn classname\" className2 = \"className suggestion you give me to improve\" />",
+          "attributes": {}
+        }
+      ]
+    ],
+    "ff829be3-e4d0-41e3-b187-06938171a2bc": [
+      [
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "<class-name className1=\"hero__section wf-section\" className2=\"hero-section\" />",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "\"circle-wrap\" can be improved to:",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "<class-name className1=\"circle-wrap\" className2=\"circle-wrap\" />",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "\"circle-outer-outer\" can be improved to:",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": " ",
+          "attributes": {}
+        },
+        {
+          "type": "P",
+          "textContent": "<class-name className1=\"circle-outer-outer\" className2=\"circle-outer-outer\" />",
+          "attributes": {}
+        }
+      ],
+      [
+        {
+          "type": "P",
+          "textContent": " make sure every single thing you respond with is in html syntax.",
+          "attributes": {}
+        }
+      ]
+    ]
+  },
+  "blocks": [
+    {
+      "blockName": "Context",
+      "id": "f768131c-6642-4734-8df6-5852870634bc",
+      "fields": {}
+    },
+    {
+      "blockName": "Bem classname suggestion",
+      "id": "16b94ba7-a2e7-4bd6-bf84-8395be72a65e",
+      "fields": {
+        "4b5e23b7-f698-4a59-ad62-c26e68a6b6e9": {
+          "name": "Webflow",
+          "value": [
+            {
+              "inputType": "webflow",
+              "name": "webflow",
+              "value": ""
+            }
+          ],
+          "fieldId": "4b5e23b7-f698-4a59-ad62-c26e68a6b6e9"
+        }
+      }
+    },
+    {
+      "blockName": "HTML",
+      "id": "f1730ff5-3166-4c51-96d7-c370694334f9",
+      "fields": {}
+    },
+    {
+      "blockName": "Example input and output",
+      "id": "ff829be3-e4d0-41e3-b187-06938171a2bc",
+      "fields": {}
+    }
+  ],
+  "templateColor": "#ed94ff"
+}

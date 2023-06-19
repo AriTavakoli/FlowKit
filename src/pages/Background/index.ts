@@ -9,6 +9,7 @@ import {
 import { OpenAIProvider } from "./providers/openai";
 import { Provider } from "./GPT-Background/types";
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
+import Bem from './Templates/BemMain.json'
 
 
 
@@ -20,8 +21,27 @@ const requestUrls = [];
 
 
 
-chrome.runtime.onInstalled.addListener(function(details) {
+chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason === 'install') {
+
+    const currentTemplateName = 'BEM';
+    const saveLocation = 'cssTemplate';
+    const templateJson = JSON.stringify(Bem);
+    const storagePayload = {
+      active: 'true',
+      bubbleColor: '#000000',
+      template: templateJson,
+      templateName: 'BEM',
+    }
+
+    console.log('%cstoragePayload', 'color: orange; font-size: 54px', storagePayload);
+
+
+
+      (async () => {
+        await new StorageOps(currentTemplateName, saveLocation, storagePayload).addStorageItem();
+      })();
+
     // This is a first install!
     console.log('This is a first install!');
   } else if (details.reason === 'update') {
@@ -31,7 +51,11 @@ chrome.runtime.onInstalled.addListener(function(details) {
 });
 
 
-
+Browser.runtime.onInstalled.addListener((details) => {
+  if (details.reason === "install") {
+    Browser.runtime.openOptionsPage();
+  }
+});
 
 
 
@@ -230,11 +254,7 @@ Browser.runtime.onMessage.addListener(async (message) => {
   }
 });
 
-Browser.runtime.onInstalled.addListener((details) => {
-  if (details.reason === "install") {
-    Browser.runtime.openOptionsPage();
-  }
-});
+
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type === "saveChat") {
