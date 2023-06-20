@@ -10,6 +10,7 @@
     "*://webflow.com/*",
     "webRequest",
     "storage",
+    "unlimitedStorage",
     "activeTab",
     "<all_urls>"
   ],
@@ -29,6 +30,9 @@
   "icons": {
     "129": "icon-129.png"
   },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -40,9 +44,7 @@
     }
 
   ],
-  "chrome_url_overrides": {
-    "newtab": "newtab.html"
-  },
+
   "web_accessible_resources": [
     {
       "resources": [

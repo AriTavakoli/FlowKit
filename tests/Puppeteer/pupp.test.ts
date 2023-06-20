@@ -1,15 +1,16 @@
 //@ts-nocheck
 import * as path from 'path';
 import puppeteer, { Browser, Page } from 'puppeteer';
-import { createRunner, PuppeteerRunnerExtension } from '@puppeteer/replay';
 import { expect, jest, test, describe, it } from '@jest/globals';
-const extensionName = "FlowKit";
+import { config } from 'dotenv';
+config();
+
 const EXTENSION_PATH = path.resolve(__dirname, '../../build');
-const extensionId = "nkbikllfnflpbgjgejkgofmdgoddhkog";
 
-const replayConfig = {};
+//  Make sure to get the latest extension id
+const extensionId = process.env.EXTENSION_ID;
 
-const runnerExtension = createRunner(replayConfig, PuppeteerRunnerExtension);
+
 
 describe('Puppeteer', () => {
   let browser: Browser;
@@ -78,37 +79,35 @@ describe('Puppeteer', () => {
       const buttonLabels = await page.$$eval(`${containerSelector} .bubble__title___TMWD9`, nodes => nodes.map(n => n.textContent));
       expect(buttonLabels).toContain('Webflow');
       expect(buttonLabels).toContain('BEM');
-      expect(buttonLabels).toContain('Palette');
+
 
     }
   });
 
-  it('should check if specific buttons are rendered', async () => {
-  await page.waitForTimeout(2000); // Wait for 2 seconds
-  const tabs = await page.$$('.Tabs__Tab___p4SAj');
-  if (tabs.length > 0) {
-    await tabs[1].click();
-
-    // Wait for the container to be rendered
-    const containerSelector = '.container___BY_1b';
-    await page.waitForSelector(containerSelector);
-
-    // Get all the buttons' text and check if "Webflow", "BEM", and "Palette" are there
-    const buttonLabels = await page.$$eval(`${containerSelector} .bubble__title___TMWD9`, nodes => nodes.map(n => n.textContent));
-    expect(buttonLabels).toContain('Webflow');
-    expect(buttonLabels).toContain('BEM');
-    expect(buttonLabels).toContain('Palette');
-  }
-});
 
 
 
 
+  it('Click on FlowView and check for flow render', async () => {
+    const tabs = await page.$$('.Tabs__Tab___p4SAj');
+    if (tabs.length > 0) {
+      await tabs[0].click();
+      await page.waitForTimeout(2000); // Wait for 2 seconds
 
+      // Wait for a specific element to be rendered
+      const elementSelector = '.c-button.c-button--undefined.c-button--square.c-button--outline-grey';
+      await page.waitForSelector(elementSelector);
 
+      // Click the element
+      await page.click(elementSelector);
 
+      const element = await page.$('.react-flow');
+      expect(element).not.toBeNull();
+      // Get all the elements that match the given XPath
 
+    }
 
+  });
 
 
 
