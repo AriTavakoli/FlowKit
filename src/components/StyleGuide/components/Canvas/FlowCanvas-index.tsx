@@ -7,12 +7,10 @@ import Icon from '@src/components/IconWrapper/Icon';
 import 'reactflow/dist/style.css';
 import 'reactflow/dist/style.css';
 import './styles/overview.css';
-
 import FrameNode from './components/FrameNode';
-
 import './styles/index.css';
+import { useGlobalContext } from '@Context/Global/GlobalProvider';
 
-const initBgColor = '#fff';
 
 const connectionLineStyle = { stroke: '#fff' };
 const snapGrid = [20, 20];
@@ -25,8 +23,15 @@ const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 const CustomNodeFlow = forwardRef((props, ref) => {
 
   const {
+    theme
+  } = useGlobalContext()
+
+  const {
     setMode
   } = useStyleguideContext();
+
+
+  const [initBgColor, setInitBgColor] = useState(theme === 'light' ? '#ffffff' : '#808080');
 
 
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -57,7 +62,19 @@ const CustomNodeFlow = forwardRef((props, ref) => {
     addNode,
   }));
 
+  useEffect(() => {
+    setInitBgColor(theme === 'light' ? '#fff' : '#000');
+    setBgColor(theme === 'light' ? '#fff' : '#000');
+  }, [theme]);
 
+  useEffect(() => {
+    const element = document.querySelector(".react-flow__attribution");
+
+    if (element) {
+      element.parentNode.removeChild(element);
+    }
+
+  }, []);
 
   useEffect(() => {
     const onChange = (event) => {
@@ -91,11 +108,7 @@ const CustomNodeFlow = forwardRef((props, ref) => {
         style: { border: '1px solid #777', padding: 10 },
         position: { x: 300, y: 50 },
       },
-
-
     ]);
-
-
   }, []);
 
   const onConnect = useCallback(
@@ -110,8 +123,6 @@ const CustomNodeFlow = forwardRef((props, ref) => {
 
   return (
     <>
-
-
       <ReactFlow
         minZoom={0.2}
         nodes={nodes}
@@ -128,14 +139,15 @@ const CustomNodeFlow = forwardRef((props, ref) => {
         fitView
         attributionPosition="bottom-left"
       >
+        <FlowNav addNode={addNode} />
 
-        <FlowNav addNode = {addNode} />
+        <div style = {{marginBottom :'20px'}}>
+          <MiniMap style={minimapStyle} zoomable pannable />
+          <Controls />
 
+        </div>
 
-
-        <MiniMap style={minimapStyle} zoomable pannable />
         <Background color="#aaa" gap={16} />
-        <Controls />
       </ReactFlow>
     </>
   );

@@ -91,7 +91,7 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
         <div style={{ position: 'fixed', top: '55px', right: '32px', zIndex: '9999', display: 'flex', flexDirection: 'row', gap: '12px' }}>
 
           <RippleButton outlineColor='grey' shape="square" padding="8px" callBack={() => { setMode('flow') }}>
-            <Icon id="tree" size={12}color="grey" ></Icon>
+            <Icon id="tree" size={12} color="grey" ></Icon>
           </RippleButton>
 
           <Dropdown
@@ -101,7 +101,6 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
             customStyles={{}}
             icon={true}
           />
-
 
         </div>
         <StyleGuideFrame websiteData={websiteData} selectedPageIndex={selectedPageIndex} clickColor={"#0084ff"} hoverColor={"#0084ff"}></StyleGuideFrame>
@@ -366,7 +365,7 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
         ref={iframeRef}
         title="My iframe"
         style={{
-          width: '80vw',
+          width: '78vw',
           height: 'calc(100vh - 0px)', // Subtracting the height of the StatusBar div
           border: 0
         }}
