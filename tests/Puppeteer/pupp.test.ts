@@ -42,8 +42,6 @@ describe('Puppeteer', () => {
       const element = await page.$(selector);
       expect(element).not.toBeNull();
 
-
-
       // Wait for the main template element to be rendered
       const mainTemplateSelector = '.template___iDsXo';
       await page.waitForSelector(mainTemplateSelector);
@@ -62,9 +60,6 @@ describe('Puppeteer', () => {
 
     }
   });
-
-
-
 
 
 
@@ -87,6 +82,27 @@ describe('Puppeteer', () => {
 
     }
   });
+
+  it('should check if specific buttons are rendered', async () => {
+  await page.waitForTimeout(2000); // Wait for 2 seconds
+  const tabs = await page.$$('.Tabs__Tab___p4SAj');
+  if (tabs.length > 0) {
+    await tabs[1].click();
+
+    // Wait for the container to be rendered
+    const containerSelector = '.container___BY_1b';
+    await page.waitForSelector(containerSelector);
+
+    // Get all the buttons' text and check if "Webflow", "BEM", and "Palette" are there
+    const buttonLabels = await page.$$eval(`${containerSelector} .bubble__title___TMWD9`, nodes => nodes.map(n => n.textContent));
+    expect(buttonLabels).toContain('Webflow');
+    expect(buttonLabels).toContain('BEM');
+    expect(buttonLabels).toContain('Palette');
+  }
+});
+
+
+
 
 
 
