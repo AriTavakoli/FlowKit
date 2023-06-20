@@ -13,6 +13,7 @@ export function StyleguideProvider({children}) {
   const [currentStyleSheet, setCurrentStyleSheet] = useState<CSSStyleSheet | null>(null);
   const [websiteData, setWebsiteData] = useState<WebsiteData>();
   const [mode, setMode] = useState<'code' | 'flow'>('code');
+
   const [currentNodeData, setCurrentNodeData] = useState<HTMLElement | null>(null);
 
   useEffect(() => {

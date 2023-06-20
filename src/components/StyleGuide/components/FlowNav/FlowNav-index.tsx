@@ -8,11 +8,15 @@ import RippleButton from "@src/components/Buttons/RippleButton/rippleButton-inde
 export default function FlowNav({ addNode, }) {
 
   const {
-    setMode
+    scale,
+    setMode,
+    setScale,
   } = useStyleguideContext();
 
   return (
     <div className={styles['FlowNav-wrapper']}>
+
+
       <RippleButton callBack={() => { setMode('code') }} padding="12px" outlineColor="grey" shape="square">
         <Icon id="code" size={16} color="grey" />
       </RippleButton>

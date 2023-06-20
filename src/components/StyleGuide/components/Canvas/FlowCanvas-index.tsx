@@ -139,7 +139,7 @@ const CustomNodeFlow = forwardRef((props, ref) => {
 
       >
 
-        <FlowNav addNode={addNode} />
+        <FlowNav addNode={addNode}  />
 
         <div style={{ marginBottom: '20px' }}>
           <MiniMap style={minimapStyle} zoomable pannable />

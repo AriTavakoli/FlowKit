@@ -76,7 +76,7 @@ export default function WebflowSideBar({ websiteData,handleAddNode }) {
 
 
   return (
-    <div className="treeWrapper-w" style={{ position: `${position}` }} >
+    <div className="treeWrapper-w" >
       <NavigatorBar handleAllNodesInactive={handleAllNodesInactive} mode={mode} setMode={setMode} handleAddNode={handleAddNode} />
 
       <div className="treeContainer-w" >

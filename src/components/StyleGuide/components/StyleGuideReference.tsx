@@ -17,12 +17,16 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
 
   const [selectedPageIndex, setSelectedPageIndex] = useState<number>(0);
-
-  const dropdownOptions = websiteData?.websiteData?.websiteData?.['data']?.pages.map((page, index) => ({
-    value: index,
-    label: page.page.title,
-    icon: 'none' // use a static icon for all options, or map from data if available
-  })) || [];
+  let dropdownOptions = [];
+  if (
+    websiteData?.websiteData?.websiteData?.['data']?.pages
+  ) {
+    dropdownOptions = websiteData.websiteData.websiteData['data'].pages.map((page, index) => ({
+      value: index,
+      label: page.page.title,
+      icon: 'none'
+    }));
+  }
 
 
 
@@ -48,7 +52,7 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
   useEffect(() => {
     if (websiteData && !initialized) {
-      const styleGuideIndex = websiteData?.websiteData?.websiteData['data'].pages.findIndex(page => page.page.title === 'StyleGuide');
+      const styleGuideIndex = websiteData?.websiteData?.websiteData['data']?.pages?.findIndex(page => page.page.title === 'StyleGuide') ?? undefined;
       if (styleGuideIndex !== -1) {
         setSelectedPageIndex(styleGuideIndex);
       }
@@ -60,9 +64,9 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
   useEffect(() => {
     if (websiteData) {
-      setHtml(websiteData?.websiteData?.websiteData['data'].pages[0].html);
-      setCss(websiteData?.websiteData?.websiteData['data'].css);
-      setCurrentStyleSheet(websiteData?.websiteData?.websiteData['data'].css);
+      setHtml(websiteData?.websiteData?.websiteData['data']?.pages[0]?.html);
+      setCss(websiteData?.websiteData?.websiteData['data']?.css);
+      setCurrentStyleSheet(websiteData?.websiteData?.websiteData['data']?.css);
     }
   }, [websiteData]);
 
@@ -70,7 +74,7 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
   useEffect(() => {
     if (websiteData) {
-      const numOfPages = websiteData?.websiteData?.websiteData['data'].pages.length;
+      const numOfPages = websiteData?.websiteData?.websiteData['data']?.pages?.length ?? undefined;
       if (selectedPageIndex >= numOfPages) {
         setSelectedPageIndex(numOfPages - 1);
       }
@@ -114,10 +118,11 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColor }) => {
 
   const iframeRef = useRef(null);
-
+  const [scale, setScale] = useState(1);
 
   const {
     // currentPageIndex,
+    mode,
     position,
     currentNode,
     setCurrentPageIndex,
@@ -161,8 +166,9 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
     setCurrentPageIndex(selectedPageIndex);
     const iframe = iframeRef.current;
     const doc = iframe.contentDocument;
-    const html = websiteData?.websiteData?.websiteData['data'].pages[selectedPageIndex].html;
-    const css = websiteData?.websiteData?.websiteData['data'].css;
+    const html = websiteData?.websiteData?.websiteData?.['data']?.pages?.[selectedPageIndex]?.html || '';
+    const css = websiteData?.websiteData?.websiteData?.['data']?.css || '';
+
 
 
     const scrollbarCss = `
@@ -361,15 +367,35 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
 
   return (
     <>
-      <iframe
-        ref={iframeRef}
-        title="My iframe"
-        style={{
-          width: '78vw',
-          height: 'calc(100vh - 0px)', // Subtracting the height of the StatusBar div
-          border: 0
-        }}
-      />
+      <div style={{ width: '78vw', position: 'relative' }} >
+        {mode === 'code' &&
+          (<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: '12px', position: 'absolute', bottom: '4px', left: '8px', zIndex: '200000000000000', gap: '12px' }}>
+            <RippleButton callBack={() => setScale(scale => Math.min(1, scale - 0.1))} padding="12px" outlineColor='grey' shape="square">
+              <Icon id="minus" color="grey" size={16} onClick={() => setScale(scale => Math.min(1, scale - 0.1))} />
+            </RippleButton>
+
+            <RippleButton callBack={() => setScale(scale => Math.min(1, scale + 0.1))} padding="12px" outlineColor='grey' shape="square">
+              <Icon id="add" color="grey" size={16} onClick={() => setScale(scale => Math.min(1, scale + 0.1))} />
+            </RippleButton>
+
+          </div>
+          )}
+
+
+        <iframe
+          ref={iframeRef}
+          title="FlowKit Styleguide Reference"
+          style={{
+            width: mode === 'flow' ? '78vw' : '1280px',
+            height: 'calc(100vh - 50px)', // Subtracting the height of the StatusBar div
+            border: 0,
+            transformOrigin: 'top left',
+            transform:  `scale(${scale})`,
+            overflowY: 'auto', // Enable vertical scrolling
+          }}
+        />
+      </div>
+
     </>
   );
 };

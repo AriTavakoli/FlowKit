@@ -64,7 +64,7 @@
 .treeWrapper-w {
 
   background-color: var(--nav-bg);
-  /* position: fixed; */
+  position: relative;
   object-fit: contain;
   /* width: 300px; */
 }

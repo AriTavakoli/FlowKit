@@ -102,8 +102,12 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
   // get the currently selected nodes corresponding information.
   useEffect(() => {
     StorageOps.getNodeAnalysis().then((res) => {
-      const imageUrls = extractImageUrls(res.nodeAnalysis.htmlRepresentation);
-      setImageUrls(imageUrls);
+      let imageUrls = [];
+
+      if (res && res.nodeAnalysis && res.nodeAnalysis.htmlRepresentation) {
+        imageUrls = extractImageUrls(res.nodeAnalysis.htmlRepresentation);
+        setImageUrls(imageUrls);
+      }
     })
   }, []);
 
@@ -188,19 +192,19 @@ const AssetDownloader = ({ images, websiteData }: AssetDownloaderProps) => {
       <AssetLayout>
 
 
-          <ControlBar
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            handleSearchChange={handleSearchChange}
-            selectedImages={selectedImages}
-            handleSelectedDownloads={handleSelectedDownloads}
-            handleDownloadAll={handleDownloadAll}
-            handleViewTypeChange={handleViewTypeChange}
-            handleFilterTypeChange={handleFilterTypeChange}
-            viewType={viewType}
-            filterType={filterType}
+        <ControlBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          handleSearchChange={handleSearchChange}
+          selectedImages={selectedImages}
+          handleSelectedDownloads={handleSelectedDownloads}
+          handleDownloadAll={handleDownloadAll}
+          handleViewTypeChange={handleViewTypeChange}
+          handleFilterTypeChange={handleFilterTypeChange}
+          viewType={viewType}
+          filterType={filterType}
 
-          ></ControlBar>
+        ></ControlBar>
 
 
 
