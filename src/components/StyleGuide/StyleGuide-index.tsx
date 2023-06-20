@@ -31,7 +31,6 @@ function StyleGuide() {
   }
 
 
-
   const [imageData, setImageData] = useState<Image[] | null>(null);
 
   useEffect(() => {

@@ -40,12 +40,10 @@ const CustomNodeFlow = forwardRef((props, ref) => {
 
 
   const addNode = () => {
-    const id = uuid(); // generating a unique id for the new node
-    // calculate the maximum X position from the current nodes
+    const id = uuid();
     let maxX = Math.max(...nodes.map(n => n.position.x), 0);
 
-    const nodeWidth = 2000; // replace this with the actual width of your nodes
-
+    const nodeWidth = 250;
     // set the new node's position to be next to the rightmost node
     const newNode = {
       id,
@@ -138,10 +136,12 @@ const CustomNodeFlow = forwardRef((props, ref) => {
         defaultViewport={defaultViewport}
         fitView
         attributionPosition="bottom-left"
+
       >
+
         <FlowNav addNode={addNode} />
 
-        <div style = {{marginBottom :'20px'}}>
+        <div style={{ marginBottom: '20px' }}>
           <MiniMap style={minimapStyle} zoomable pannable />
           <Controls />
 

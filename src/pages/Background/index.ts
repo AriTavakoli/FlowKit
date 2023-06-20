@@ -94,8 +94,8 @@ chrome.runtime.onInstalled.addListener((details) => {
     chrome.windows.create({
       url: chrome.runtime.getURL("popup.html"),  // replace popup.html with your HTML file
       type: "popup",
-      width: 400,
-      height: 400,
+      width: 800,
+      height: 500,
     });
   }
 });
@@ -132,8 +132,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       {
         url: "popup.html",
         type: "popup",
-        width: 700,
-        height: 400,
+        width: 900,
+        height: 725,
         left: 50,
         top: 50,
         focused: true,

@@ -5,7 +5,7 @@ import styles from './FlowNav.module.scss'
 import RippleButton from "@src/components/Buttons/RippleButton/rippleButton-index";
 
 
-export default function FlowNav({ addNode }) {
+export default function FlowNav({ addNode, }) {
 
   const {
     setMode
@@ -13,11 +13,11 @@ export default function FlowNav({ addNode }) {
 
   return (
     <div className={styles['FlowNav-wrapper']}>
-      <RippleButton  callBack={() => { setMode('code') }} padding="12px" outlineColor="grey" shape = "square">
+      <RippleButton callBack={() => { setMode('code') }} padding="12px" outlineColor="grey" shape="square">
         <Icon id="code" size={16} color="grey" />
       </RippleButton>
 
-      <RippleButton callBack={addNode} padding="12px" outlineColor="grey" shape = "square">
+      <RippleButton callBack={addNode} padding="12px" outlineColor="grey" shape="square">
         <Icon id="add" size={16} color="grey" />
       </RippleButton>
     </div>
