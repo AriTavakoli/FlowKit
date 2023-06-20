@@ -2,23 +2,22 @@ import { Image, WebsiteData } from "@Types/ExportedWebsiteAssets/ExportedAssets"
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./StyleGuide.module.scss";
+import CustomNodeFlow from "./components/Canvas/FlowCanvas-index";
 import StyleGuideReference from "./components/StyleGuideReference";
 import WebflowSideBar from "./components/TreeView/Treeview";
-import CustomNodeFlow from "./components/Canvas/FlowCanvas-index";
 import { useStyleguideContext } from "./context/StyleguideReferenceContext";
 
 function StyleGuide() {
 
   const {
-    websiteData,
-    setWebsiteData,
     mode,
     setMode,
+    websiteData,
+    setWebsiteData,
 
   } = useStyleguideContext();
 
   const flowRef = useRef(null);
-
 
   useEffect(() => {
     console.log('%cmode', 'color: lightblue; font-size: 14px', mode);
@@ -29,7 +28,6 @@ function StyleGuide() {
       flowRef.current.addNode();
     }
   }
-
 
   const [imageData, setImageData] = useState<Image[] | null>(null);
 
@@ -45,7 +43,6 @@ function StyleGuide() {
       })();
     });
   }, []);
-
 
 
   useEffect(() => {
@@ -87,9 +84,7 @@ function StyleGuide() {
             <CustomNodeFlow websiteData={websiteData as WebsiteData} ref={flowRef} />
           </div>
         )}
-
       </div>
-
     </>
   )
 

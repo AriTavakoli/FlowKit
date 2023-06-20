@@ -102,9 +102,6 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 
 
-
-
-
 chrome.runtime.onConnect.addListener(function (port) {
   console.log("Connection established: ", port);
   if (port.name === "myConnectionName") {
