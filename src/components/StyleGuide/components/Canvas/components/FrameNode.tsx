@@ -14,7 +14,6 @@ const FrameNode = memo(({ data, isConnectable }) => {
 
   return (
     <>
-
       <Handle
         type="target"
         position={Position.Left}
@@ -23,7 +22,7 @@ const FrameNode = memo(({ data, isConnectable }) => {
         isConnectable={isConnectable}
       />
       <div>
-        Custom Color Picker Node: <strong>{data.color}</strong>
+        <br/>
       </div>
       <Handle
         type="source"

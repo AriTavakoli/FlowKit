@@ -12,9 +12,7 @@ export function StyleguideProvider({children}) {
   const [currentCss , setCurrentCss] = useState<string>('');
   const [currentStyleSheet, setCurrentStyleSheet] = useState<CSSStyleSheet | null>(null);
   const [websiteData, setWebsiteData] = useState<WebsiteData>();
-
   const [mode, setMode] = useState<'code' | 'flow'>('code');
-
   const [currentNodeData, setCurrentNodeData] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -23,22 +21,22 @@ export function StyleguideProvider({children}) {
 
 
   const ctx = {
-    currentPageIndex,
-    setCurrentPageIndex,
-    position,
-    currentCss,
-    currentStyleSheet,
-    currentNodeData,
-    setCurrentNodeData,
     mode,
     setMode,
-    setCurrentStyleSheet,
-    setCurrentCss,
+    position,
+    currentCss,
     setPosition,
     currentNode,
-    setCurrentNode,
     websiteData,
-    setWebsiteData
+    setCurrentCss,
+    setCurrentNode,
+    setWebsiteData,
+    currentNodeData,
+    currentPageIndex,
+    currentStyleSheet,
+    setCurrentNodeData,
+    setCurrentPageIndex,
+    setCurrentStyleSheet,
   };
 
   return (

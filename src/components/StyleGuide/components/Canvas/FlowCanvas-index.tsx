@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback, useImperativeHandle, forwardRef } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Controls, Background, } from 'reactflow';
 import { v4 as uuid } from 'uuid';
+import FlowNav from '../FlowNav/FlowNav-index';
+import { useStyleguideContext } from '../../context/StyleguideReferenceContext';
+import Icon from '@src/components/IconWrapper/Icon';
 import 'reactflow/dist/style.css';
 import 'reactflow/dist/style.css';
 import './styles/overview.css';
@@ -20,6 +23,12 @@ const nodeTypes = {
 const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
 
 const CustomNodeFlow = forwardRef((props, ref) => {
+
+  const {
+    setMode
+  } = useStyleguideContext();
+
+
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [bgColor, setBgColor] = useState(initBgColor);
@@ -35,10 +44,10 @@ const CustomNodeFlow = forwardRef((props, ref) => {
     // set the new node's position to be next to the rightmost node
     const newNode = {
       id,
-      type: 'FrameNode',
+      type: 'selectorNode',
       data: { color: initBgColor },
       style: { border: '1px solid #777', padding: 10 },
-      position: { x: maxX + nodeWidth, y: 50 }, // adjust nodeWidth based on your actual node size
+      position: { x: maxX + nodeWidth, y: 25 },
     };
 
     setNodes((ns) => ns.concat([newNode]));
@@ -119,6 +128,11 @@ const CustomNodeFlow = forwardRef((props, ref) => {
         fitView
         attributionPosition="bottom-left"
       >
+
+        <FlowNav addNode = {addNode} />
+
+
+
         <MiniMap style={minimapStyle} zoomable pannable />
         <Background color="#aaa" gap={16} />
         <Controls />

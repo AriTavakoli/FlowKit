@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from '../StyleGuide.module.scss';
 import Dropdown from '@src/components/Util/DropDown/DropDown';
 import { useStyleguideContext } from '../context/StyleguideReferenceContext';
+import Icon from '@src/components/IconWrapper/Icon';
+import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
 
 
 
@@ -25,10 +27,10 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
 
   const {
-    currentPageIndex,
-    setCurrentPageIndex,
+    setMode,
     currentNode,
     currentStyleSheet,
+    setCurrentPageIndex,
     setCurrentStyleSheet
 
   } = useStyleguideContext();
@@ -80,13 +82,18 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
     setSelectedPageIndex(option.value);
   };
 
-  if(!websiteData) return (<div> Webflow Data is Exporting...</div>)
+  if (!websiteData) return (<div> Webflow Data is Exporting...</div>)
 
   return (
     <>
       <div className={styles['Styleguide__container']}>
 
-        <div style={{ position: 'fixed', top: '55px', right: '32px', zIndex: '9999' }}>
+        <div style={{ position: 'fixed', top: '55px', right: '32px', zIndex: '9999', display: 'flex', flexDirection: 'row', gap: '12px' }}>
+
+          <RippleButton outlineColor='grey' shape="square" padding="8px" callBack={() => { setMode('flow') }}>
+            <Icon id="tree" size={12}color="grey" ></Icon>
+          </RippleButton>
+
           <Dropdown
             options={dropdownOptions}
             label="Select a page"
@@ -94,16 +101,18 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
             customStyles={{}}
             icon={true}
           />
+
+
         </div>
         <StyleGuideFrame websiteData={websiteData} selectedPageIndex={selectedPageIndex} clickColor={"#0084ff"} hoverColor={"#0084ff"}></StyleGuideFrame>
         <div className={styles['StatusBar']} style={{ position: 'fixed', bottom: 0, height: '50px', width: '100vw', backgroundColor: 'transparent', zIndex: '4500000000000000000000000' }} />
-      </div>
+      </div >
     </>
   );
 };
 
 
-const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColor  }) => {
+const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColor }) => {
 
   const iframeRef = useRef(null);
 
@@ -122,7 +131,7 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
   useEffect(() => {
 
 
-    if(!websiteData) return;
+    if (!websiteData) return;
 
     const iframe = iframeRef.current;
     const doc = iframe && iframe.contentDocument;
@@ -155,6 +164,39 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
     const doc = iframe.contentDocument;
     const html = websiteData?.websiteData?.websiteData['data'].pages[selectedPageIndex].html;
     const css = websiteData?.websiteData?.websiteData['data'].css;
+
+
+    const scrollbarCss = `
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    ::-webkit-scrollbar-thumb::before {
+      content: "";
+      display: block;
+      height: 10px;
+      background: transparent;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  `;
+
+
+
 
     const tooltipCss = `
       .tooltip {
@@ -189,8 +231,9 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
       <html>
       <head>
         <style>
-          ${css}
-          ${tooltipCss}
+        ${css}
+        ${tooltipCss}
+        ${scrollbarCss}
         </style>
       </head>
       <body>
@@ -323,7 +366,7 @@ const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColo
         ref={iframeRef}
         title="My iframe"
         style={{
-          width: `${position === 'relative' ? '80vw' : '100vw'}`, // Subtracting the width of the Sidebar div
+          width: '80vw',
           height: 'calc(100vh - 0px)', // Subtracting the height of the StatusBar div
           border: 0
         }}

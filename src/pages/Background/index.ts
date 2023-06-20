@@ -89,11 +89,18 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 
 
-Browser.runtime.onInstalled.addListener((details) => {
+chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") {
-    Browser.runtime.openOptionsPage();
+    chrome.windows.create({
+      url: chrome.runtime.getURL("popup.html"),  // replace popup.html with your HTML file
+      type: "popup",
+      width: 400,
+      height: 400,
+    });
   }
 });
+
+
 
 
 

@@ -102,7 +102,6 @@ var options = {
   },
 
 
-
   // ---------------------------------------------------------
   //  Output Files
   // ---------------------------------------------------------
@@ -227,6 +226,24 @@ var options = {
     extensions: fileExtensions
       .map((extension) => '.' + extension)
       .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
+    fallback: {
+      "fs": false,
+      "net": false,
+      "tls": false
+    }
+  },
+  externals: {
+    'ws': 'commonjs ws',
+    'fs': 'commonjs fs',
+    'tls': 'commonjs tls',
+    'net': 'commonjs net',
+    'path': 'commonjs path',
+    'zlib': 'commonjs zlib',
+    'http': 'commonjs http',
+    'https': 'commonjs https',
+    'stream': 'commonjs stream',
+    'crypto': 'commonjs crypto',
+    'url': 'commonjs url',
   },
 
 

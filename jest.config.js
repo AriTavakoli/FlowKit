@@ -1,7 +1,7 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'jsdom',
+  // testEnvironment: 'jsdom',
   coverageDirectory: 'coverage',
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
   collectCoverage: true,

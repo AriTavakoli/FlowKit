@@ -200,6 +200,7 @@
 }
 
 .flow-down-w {
+  width: 100%;
   will-change: transform, opacity;
   /* animation-name: flowingDown; */
   animation-duration: 0.5s;
@@ -305,7 +306,6 @@
 
 .treeElements-w {
   overflow: auto;
-  width: 20vw;
 }
 
 .zoomControls {
@@ -469,7 +469,7 @@
 }
 
 
-.first__topBar-w{
+.first__topBar-w {
   display: flex;
   position: relative;
   height: 20px;
@@ -489,7 +489,6 @@
 .tree-w.root-w {
   line-height: 0px;
   padding-right: 0px;
-
 
 }
 
@@ -524,7 +523,7 @@
 
   z-index: 1000000;
 
-
+width: 20vw;
   overflow: auto;
 
   ::-webkit-scrollbar {
@@ -551,9 +550,11 @@
 
 
 }
+
 .highlight {
   background-color: #0084ff;
 }
+
 .selected {
   background-color: #0084ff;
   /* other styles */
@@ -573,7 +574,7 @@
   z-index: 1000;
   position: absolute;
   left: -26px;
-  top:1px;
+  top: 1px;
   margin-left: -35px;
   /* set the font-size to 80% of the parent font-size */
 }
@@ -589,7 +590,7 @@
   /* margin-bottom: 8px; */
   position: absolute;
   left: -26px;
-  top:1px;
+  top: 1px;
   margin-left: -35px;
   z-index: 1000;
 }
@@ -600,7 +601,7 @@
   transform: rotate(0deg);
   position: absolute;
   left: -26px;
-  top:1px;
+  top: 1px;
   margin-left: -35px;
   z-index: 1000;
 }

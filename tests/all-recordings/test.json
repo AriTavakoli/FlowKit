@@ -1,0 +1,122 @@
+{
+    "title": "Recording 6/19/2023 at 3:36:57 PM",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 1172,
+            "height": 720,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "chrome-extension://nkbikllfnflpbgjgejkgofmdgoddhkog/popup.html",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "chrome-extension://nkbikllfnflpbgjgejkgofmdgoddhkog/popup.html",
+                    "title": "FlowKit"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div.Tabs-container___qrCif > div > div:nth-of-type(2)"
+                ],
+                [
+                    "xpath///*[@id=\"app-container\"]/div/div/div/div[1]/div[1]/div/div[2]"
+                ],
+                [
+                    "pierce/div.Tabs-container___qrCif > div > div:nth-of-type(2)"
+                ]
+            ],
+            "offsetY": 24,
+            "offsetX": 10
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Webflow Chevron Down[role=\"button\"]"
+                ],
+                [
+                    "#\\:r0\\:"
+                ],
+                [
+                    "xpath///*[@id=\":r0:\"]"
+                ],
+                [
+                    "pierce/#\\:r0\\:"
+                ]
+            ],
+            "offsetY": 31.21875,
+            "offsetX": 199.5625
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/BEM Chevron Down[role=\"button\"]"
+                ],
+                [
+                    "#\\:r1\\:"
+                ],
+                [
+                    "xpath///*[@id=\":r1:\"]"
+                ],
+                [
+                    "pierce/#\\:r1\\:"
+                ],
+                [
+                    "text/BEM"
+                ]
+            ],
+            "offsetY": 42.21875,
+            "offsetX": 211.5625
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div.szh-accordion__item--status-entered div:nth-of-type(3) > svg"
+                ],
+                [
+                    "xpath///*[@id=\":r1:-\"]/div[2]/div[3]/svg"
+                ],
+                [
+                    "pierce/div.szh-accordion__item--status-entered div:nth-of-type(3) > svg"
+                ]
+            ],
+            "offsetY": 13.21875,
+            "offsetX": 2.78125
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div:nth-of-type(4) input"
+                ],
+                [
+                    "xpath///*[@id=\"app-container\"]/div/div/div/div[1]/div[2]/div/div/div[2]/div[1]/div[2]/div/div[4]/div/div[1]/input"
+                ],
+                [
+                    "pierce/div:nth-of-type(4) input"
+                ],
+                [
+                    "text/Example input"
+                ]
+            ],
+            "offsetY": 0.609375,
+            "offsetX": 407.203125
+        }
+    ]
+}
