@@ -22,19 +22,23 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
     desktop: '1024px',
   };
 
+  const {
+    mode,
+    position,
+    setMode,
+    currentNode,
+    currentStyleSheet,
+    setCurrentPageIndex,
+    setCurrentStyleSheet
+
+  } = useStyleguideContext();
+
+
+
   const frameRef = useRef(null);
-
-  const handleDelete = () => {
-    frameRef.current.deleteElement();
-  };
-
-  const handleUndoDelete = () => {
-    frameRef.current.undoDelete();
-  };
 
 
   const [viewport, setViewport] = useState(viewportWidths.desktop);
-
 
   // Handle viewport change
   const handleViewportChange = (newViewport) => {
@@ -55,17 +59,14 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
   }
 
 
+  const handleDelete = () => {
+    frameRef.current.deleteElement();
+  };
 
-  const {
-    mode,
-    position,
-    setMode,
-    currentNode,
-    currentStyleSheet,
-    setCurrentPageIndex,
-    setCurrentStyleSheet
+  const handleUndoDelete = () => {
+    frameRef.current.undoDelete();
+  };
 
-  } = useStyleguideContext();
 
   useEffect(() => {
     // Use currentNode here
