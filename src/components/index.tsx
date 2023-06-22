@@ -8,6 +8,8 @@ import StatusBar from './StatusBar/statusBar-index';
 import { TabParent } from './Tabs/tabs-index';
 import StatusBarModal from './StatusBar/components/Modal/StatusBarModal';
 import { StyleguideProvider } from './StyleGuide/context/StyleguideReferenceContext';
+import ErrorBoundary from '@src/Utils/ErrorBoundary/ErrorBoundary';
+
 
 const StyleGuide = lazy(() => import(/* webpackChunkName: "StyleGuide" */'./StyleGuide/StyleGuide-index'));
 const EditorMain = lazy(() => import(/* webpackChunkName: "EditorMain" */'@src/components/MarkDownEditor/markdown-index'));
@@ -60,39 +62,53 @@ const App = ({ styleSheet, css }) => {
   }, []);
 
 
-
-
   return (
-    <>
+    <ErrorBoundary>
       <GlobalProvider>
-
         <div className={styles['SearchContainer']}>
           <TabParent featureFlags={featureFlags}>
             {featureFlags.StyleGuide && (
-              <Suspense fallback={<div>Loading StyleGuide</div>}>
-                <StyleguideProvider>
-                  <StyleGuide></StyleGuide>
-                </StyleguideProvider>
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<div>Loading StyleGuide</div>}>
+                  <StyleguideProvider>
+                    <StyleGuide></StyleGuide>
+                  </StyleguideProvider>
+                </Suspense>
+              </ErrorBoundary>
             )}
             {featureFlags.Template_Editor && (
-              <Suspense fallback={<div>Loading EditorMain...</div>}>
-                <EditorMain />
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<div>Loading EditorMain...</div>}>
+                  <EditorMain />
+                </Suspense>
+              </ErrorBoundary>
             )}
 
             {featureFlags.Webflow_GPT && (
-              <Suspense fallback={<div>Loading Editor</div>}>
-                <Tava></Tava>
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<div>Loading Editor</div>}>
+                  <Tava></Tava>
+                </Suspense>
+              </ErrorBoundary>
             )}
 
             {featureFlags.Asset_Manager && (
-              <Suspense fallback={<div>Loading AssetManager</div>}>
-                <AssetManager></AssetManager>
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<div>Loading AssetManager</div>}>
+                  <AssetManager></AssetManager>
+                </Suspense>
+              </ErrorBoundary>
             )}
-            {/*
+            {/* ...more code... */}
+          </TabParent>
+          {/* ...more code... */}
+        </div >
+      </GlobalProvider>
+    </ErrorBoundary>
+  );
+};
+
+  {/*
             {featureFlags.searchResults && (
               <SearchProvider>
                 <SearchResults styleSheet={styleSheet} />
@@ -115,18 +131,4 @@ const App = ({ styleSheet, css }) => {
                 <IdeaExplorer></IdeaExplorer>
               </Suspense>
             )} */}
-          </TabParent>
-          <StatusBar message="Example Message" options={statusBarOptions} setActiveModal={setActiveModal} showModal={showModal} setShowModal={setShowModal} />
-
-          {activeModal && <StatusBarModal featureType={activeModal} showModal={showModal} setShowModal={setShowModal} />}
-
-        </div >
-      </GlobalProvider >
-
-    </>
-  )
-
-}
-
-
 export default App;
