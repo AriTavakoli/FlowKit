@@ -14,7 +14,6 @@ import Pallete from './Templates/Palette.json';
 import Webflow from './Templates/Webflow.json';
 import SettingOps from "@Context/Global/classes/SettingsOps";
 
-
 let p;
 const requestUrls = [];
 
@@ -91,12 +90,19 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") {
-    chrome.windows.create({
-      url: chrome.runtime.getURL("popup.html"),  // replace popup.html with your HTML file
-      type: "popup",
-      width: 800,
-      height: 500,
-    });
+
+      Browser.runtime.openOptionsPage();
+      return;
+
+    // if (process.env.NODE_ENV === 'test') {
+    //   chrome.windows.create({
+    //     url: chrome.runtime.getURL("popup.html"),  // replace popup.html with your HTML file
+    //     type: "popup",
+    //     width: 800,
+    //     height: 500,
+    //   });
+    // }
+
   }
 });
 

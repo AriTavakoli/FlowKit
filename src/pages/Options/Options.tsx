@@ -117,7 +117,7 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
 
 
 
-
+{/*
       <div className={styles["Options__colorContainer"]}>
         <span className={styles["Options__title"]}>Code Theme:</span>
         <select
@@ -139,7 +139,7 @@ function OptionsPage(props: { theme: Theme; onThemeChange: (theme: Theme) => voi
 
 
         </select>
-      </div>
+      </div> */}
 
 
       <Toaster></Toaster>
