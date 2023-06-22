@@ -181,6 +181,14 @@ const Live = React.memo(({ cssString, node, isFirst, loadingNewStyleSheet }: Liv
       cssContainersEls[0].classList.remove("css__container");
       cssContainersEls[0].classList.add("firstCss__container");
     }
+
+    const nodeNameContainersEls = document.querySelectorAll(".nodeName");
+    if (isFirst && nodeNameContainersEls.length > 0) {
+      nodeNameContainersEls[0].classList.remove("nodeName");
+      nodeNameContainersEls[0].classList.add("firstNodeName");
+    }
+
+
   }, [isFirst]);
 
 

@@ -499,6 +499,26 @@
 }
 
 
+.firstNodeName {
+  position: relative;
+  /* background-color: var(--live-class); */
+  border-radius: 4px;
+  color: var(--primary-text);
+  border: 1px solid var(--live-border);
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: fill;
+  font-weight: lighter !important;
+}
+
+
+
 .treeContainer {
   overflow: hidden;
   background-color: var(--primary-bg);
