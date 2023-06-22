@@ -278,9 +278,26 @@ Browser.runtime.onConnect.addListener((port) => {
     console.debug("received msg", msg);
     try {
       await generateAnswers(port, msg.question);
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
-      port.postMessage({ error: err.message });
+      let errorMessage = err.message;
+
+      // Attempt to parse the error message as JSON, and handle potential parsing errors
+      let errorDetails;
+      try {
+        errorDetails = JSON.parse(errorMessage);
+      } catch (parseErr) {
+        console.error('Failed to parse error message:', parseErr);
+        port.postMessage({ error: errorMessage });
+        return;
+      }
+
+      // Check if the error details match the specific error about a missing model field
+      if (errorDetails.detail && errorDetails.detail.some(d => d.loc.includes("model") && d.msg === "field required")) {
+        port.postMessage({ error: '  Please select a model in the settings. Hover the bottom right corner to access Tool Bar' });
+      } else {
+        port.postMessage({ error: errorMessage });
+      }
     }
   });
 });
