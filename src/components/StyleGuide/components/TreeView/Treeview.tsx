@@ -22,12 +22,12 @@ export default function WebflowSideBar({ websiteData,handleAddNode }) {
   const [domStructure, setDomStructure] = useState(null);
 
   const {
+    mode,
+    setMode,
     position,
     setCurrentNode,
     currentPageIndex,
     setCurrentPageIndex,
-    setMode,
-    mode,
   } = useStyleguideContext();
 
 
@@ -46,6 +46,26 @@ export default function WebflowSideBar({ websiteData,handleAddNode }) {
   }, [websiteData, currentPageIndex]);
 
 
+  function cleanDOM(node) {
+    let newNode = node.cloneNode(false); // clone node without children
+    Array.from(node.childNodes).forEach(child => {
+      if (
+        child.nodeType === Node.ELEMENT_NODE &&
+        !['style', 'script'].includes(child.tagName.toLowerCase()) &&
+        (child instanceof HTMLElement && child.className.trim() !== "") // Exclude nodes with empty or whitespace-only classnames
+      ) {
+        if(child.className.includes("wf-section")) {
+          // Remove 'wf-section' from the classname
+          child.className = child.className.replace('wf-section', '').trim();
+        }
+        newNode.appendChild(cleanDOM(child));
+      }
+    });
+    return newNode;
+  }
+
+
+
   useEffect(() => {
     if (html) {
       const htmlString = html;
@@ -58,15 +78,6 @@ export default function WebflowSideBar({ websiteData,handleAddNode }) {
   }, [websiteData, html]);
 
 
-  function cleanDOM(node) {
-    let newNode = node.cloneNode();
-    Array.from(node.childNodes).forEach(child => {
-      if (child.nodeType === Node.ELEMENT_NODE && !['style', 'script'].includes(child.tagName.toLowerCase())) {
-        newNode.appendChild(cleanDOM(child));
-      }
-    });
-    return newNode;
-  }
 
   const handleAllNodesInactive = () => {
     setAllNodesInactive(!allNodesInactive);
