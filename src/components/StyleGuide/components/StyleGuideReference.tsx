@@ -6,7 +6,7 @@ import Dropdown from '@src/components/Util/DropDown/DropDown';
 import { useStyleguideContext } from '../context/StyleguideReferenceContext';
 import Icon from '@src/components/IconWrapper/Icon';
 import RippleButton from '@src/components/Buttons/RippleButton/rippleButton-index';
-
+import classnames from 'classnames';
 
 
 const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
@@ -199,7 +199,10 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
     <>
       <div className={styles['Styleguide__container']} ref={scaleRef}>
 
-        <div style={{ position: 'fixed', top: '40px', right: '32px', zIndex: '9999', display: 'flex', flexDirection: 'row', gap: '12px', alignItems: 'center', justifyContent: 'center' }}>
+        <div className={classnames(styles['Nav__container'], {
+          [styles['Nav__container-flow']]: mode === 'flow',
+          [styles['Nav__container-code']]: mode === 'code',
+        })}>
           <Nav />
 
           <Dropdown
