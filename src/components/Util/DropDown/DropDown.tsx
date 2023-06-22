@@ -1,5 +1,5 @@
 // src/Dropdown.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './dropdown.module.scss'
 import Icon from '@src/components/IconWrapper/Icon';
 
@@ -25,6 +25,14 @@ const Dropdown = ({ options, label, onChange, customStyles, icon }: DropdownProp
     setIsOpen(false);
     onChange(option);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
 
 
 

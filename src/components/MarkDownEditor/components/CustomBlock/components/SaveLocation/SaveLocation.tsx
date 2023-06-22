@@ -4,13 +4,11 @@ import React, { useState } from 'react';
 
 
 const options: SaveLocations[] = [
+  { value: 'localFiles', label: 'Local Files', icon: 'none' },
+  { value: 'workspaceTemplates', label: 'Workspace Block', icon: 'none' },
+  { value: 'cssTemplate', label: 'Webflow', icon: 'none' },
   { value: 'default', label: 'Default', icon: 'none' },
   { value: 'template', label: 'Global Templates', icon: 'none' },
-  { value: 'localFiles', label: 'Local Files', icon: 'none' },
-  { value: 'nodeTemplates', label: 'Current Node', icon: 'none' },
-  { value: 'cssTemplate', label: 'cssTemplate', icon: 'none' },
-  { value: 'webflow', label: 'Webflow', icon: 'none' },
-  { value: 'workspaceTemplates', label: 'Workspace Templates', icon: 'none' },
   { value: 'design', label: 'Design', icon: 'none' }
 ];
 
