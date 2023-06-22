@@ -19,6 +19,7 @@
     "replay": "replay recording.json",
     "test:WebflowExporter": "jest ./tests/Export/exporter.test.ts",
     "test:CssParser": "ts-node ./tests/Parser/cssParser.test.ts",
+    "test:Styleguide": "jest ./tests/StyleGuide/Styleguide.test.tsx",
     "test:Blob:BlobGenerator": "jest ./tests/Blob/blobGenerator.test.ts",
     "test:Puppeteer": "jest ./tests/Puppeteer/pupp.test.ts --config=jest.config.js",
     "test:Recordings": "npx @puppeteer/replay tests/all-recordings --headless=true"

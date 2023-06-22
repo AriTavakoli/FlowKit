@@ -1,6 +1,11 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   preset: 'ts-jest',
+  globals: {
+    'ts-jest': {
+      isolatedModules: true,
+    },
+  },
   // testEnvironment: 'jsdom',
   coverageDirectory: 'coverage',
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
@@ -15,6 +20,4 @@ module.exports = {
       statements: 80,
     },
   },
-
 };
-
