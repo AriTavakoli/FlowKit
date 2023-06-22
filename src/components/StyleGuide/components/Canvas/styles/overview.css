@@ -59,3 +59,8 @@
   margin-top: 5px;
   font-size: 10px;
 }
+
+
+.react-flow__node.selected {
+  background-color: var(--primary-bg);
+}

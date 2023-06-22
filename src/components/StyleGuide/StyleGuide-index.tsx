@@ -75,6 +75,7 @@ function StyleGuide() {
     <>
       <div className={styles['Container']}>
         <div className={styles['sidebar-container']}>
+
           <WebflowSideBar websiteData={websiteData as WebsiteData} handleAddNode={handleAddNode} />
         </div>
         {mode === 'code' ? (

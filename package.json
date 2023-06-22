@@ -68,6 +68,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
     "react-hot-toast": "^2.4.0",
     "react-loader-spinner": "^5.3.4",
     "react-loading-skeleton": "^3.1.1",

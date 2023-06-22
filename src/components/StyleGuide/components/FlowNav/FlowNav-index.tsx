@@ -15,8 +15,6 @@ export default function FlowNav({ addNode, }) {
 
   return (
     <div className={styles['FlowNav-wrapper']}>
-
-
       <RippleButton callBack={() => { setMode('code') }} padding="12px" outlineColor="grey" shape="square">
         <Icon id="code" size={16} color="grey" />
       </RippleButton>

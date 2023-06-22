@@ -1,6 +1,6 @@
 import { useGlobalContext } from '@Context/Global/GlobalProvider';
 import { AssetDownloaderProps } from '@Types/ExportedWebsiteAssets/ExportedAssets';
-import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from '../StyleGuide.module.scss';
 import Dropdown from '@src/components/Util/DropDown/DropDown';
 import { useStyleguideContext } from '../context/StyleguideReferenceContext';
@@ -14,32 +14,6 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
   const [html, setHtml] = useState<string>('');
   const [css, setCss] = useState<string>('');
-  const [scale, setScale] = useState(1);
-  const scaleRef = useRef(scale);
-  const viewportWidths = {
-    phone: '375px',
-    tablet: '768px',
-    desktop: '1024px',
-  };
-
-  const frameRef = useRef(null);
-
-  const handleDelete = () => {
-    frameRef.current.deleteElement();
-  };
-
-  const handleUndoDelete = () => {
-    frameRef.current.undoDelete();
-  };
-
-
-  const [viewport, setViewport] = useState(viewportWidths.desktop);
-
-
-  // Handle viewport change
-  const handleViewportChange = (newViewport) => {
-    setViewport(viewportWidths[newViewport]);
-  };
 
 
   const [selectedPageIndex, setSelectedPageIndex] = useState<number>(0);
@@ -57,9 +31,8 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 
 
   const {
-    mode,
-    position,
     setMode,
+    mode,
     currentNode,
     currentStyleSheet,
     setCurrentPageIndex,
@@ -99,36 +72,6 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
   }, [websiteData]);
 
 
-  useEffect(() => {
-    // ...existing code
-
-
-    const handleWheel = (e) => {
-      if (mode === 'flow') { return; }
-
-      if (e.deltaY < 0) {
-        setScale(prevScale => {
-          let newScale = Math.min(1, prevScale + 0.05);
-          scaleRef.current = newScale;
-          return newScale;
-        });
-      } else {
-        setScale(prevScale => {
-          let newScale = Math.max(0.1, prevScale - 0.05);
-          scaleRef.current = newScale;
-          return newScale;
-        });
-      }
-    }
-
-    window.addEventListener('wheel', handleWheel);
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-    };
-  }, [websiteData, selectedPageIndex]);
-
-
 
   useEffect(() => {
     if (websiteData) {
@@ -143,64 +86,21 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
     setCurrentPageIndex(option.value)
     setSelectedPageIndex(option.value);
   };
-  function Nav() {
-    return useMemo(() => (
-      <>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', zIndex: '200000000000000', gap: '12px' }}>
-
-          <RippleButton callBack={() => handleDelete()} padding="8px" outlineColor='grey' shape="square">
-            <Icon id="remove" color="grey" size={16} onClick={() => handleDelete()} />
-          </RippleButton>
-
-          <RippleButton callBack={() => handleUndoDelete()} padding="8px" outlineColor='grey' shape="square">
-            <Icon id="refresh" color="grey" size={16} onClick={() => handleUndoDelete()} />
-          </RippleButton>
-
-          <div className={styles['mediaquery-container']}>
-            <RippleButton callBack={() => setScale(scale => Math.min(1, scale - 0.05))} padding="8px">
-              <Icon id="minus" color="grey" size={16} onClick={() => setScale(scale => Math.min(1, scale - 0.05))} />
-            </RippleButton>
-            <div className={styles['divider']} />
-            <RippleButton callBack={() => setScale(scale => Math.min(1, scale + 0.05))} padding="8px" >
-              <Icon id="add" color="grey" size={16} onClick={() => setScale(scale => Math.min(1, scale + 0.05))} />
-            </RippleButton>
-          </div>
-
-          <div className={styles['mediaquery-container']}>
-            <RippleButton callBack={() => handleViewportChange('desktop')} padding="8px" >
-              <Icon id="XL" color="grey" size={16} />
-            </RippleButton>
-            <div className={styles['divider']} />
-
-            <RippleButton callBack={() => handleViewportChange('tablet')} padding="8px" >
-              <Icon id="tablet" color="grey" size={16} />
-            </RippleButton>
-            <div className={styles['divider']} />
-
-            <RippleButton callBack={() => handleViewportChange('phone')} padding="8px">
-              <Icon id="phone" color="grey" size={16} />
-            </RippleButton>
-          </div>
-
-          {mode === 'code' && (
-            <RippleButton outlineColor='grey' shape="square" padding="8px" callBack={() => { setMode('flow') }}>
-              <Icon id="canvas" size={16} color="grey" ></Icon>
-            </RippleButton>
-          )}
-        </div>
-      </>
-
-    ), [])
-  }
 
   if (!websiteData) return (<div> Webflow Data is Exporting...</div>)
 
   return (
     <>
-      <div className={styles['Styleguide__container']} ref={scaleRef}>
+      <div
+        className={styles['Styleguide__container']}
+        style={{ width: mode === 'flow' ? '100%' : undefined, height: mode === 'flow' ? '100%' : undefined }}
+      >
 
-        <div style={{ position: 'fixed', top: '40px', right: '32px', zIndex: '9999', display: 'flex', flexDirection: 'row', gap: '12px', alignItems: 'center', justifyContent: 'center' }}>
-          <Nav />
+        <div style={{ position: 'fixed', top: '55px', right: '32px', zIndex: '9999', display: 'flex', flexDirection: 'row', gap: '12px' }}>
+
+          <RippleButton outlineColor='grey' shape="square" padding="8px" callBack={() => { setMode('flow') }}>
+            <Icon id="tree" size={12} color="grey" ></Icon>
+          </RippleButton>
 
           <Dropdown
             options={dropdownOptions}
@@ -211,7 +111,7 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
           />
 
         </div>
-        <StyleGuideFrame websiteData={websiteData} selectedPageIndex={selectedPageIndex} clickColor={"#0084ff"} hoverColor={"#0084ff"} scale={scale} viewport={viewport} ref={frameRef} />
+        <StyleGuideFrame websiteData={websiteData} selectedPageIndex={selectedPageIndex} clickColor={"#0084ff"} hoverColor={"#0084ff"}></StyleGuideFrame>
         <div className={styles['StatusBar']} style={{ position: 'fixed', bottom: 0, height: '50px', width: '100vw', backgroundColor: 'transparent', zIndex: '4500000000000000000000000' }} />
       </div >
     </>
@@ -219,44 +119,10 @@ const StyleGuideReference = ({ websiteData }: AssetDownloaderProps) => {
 };
 
 
-const StyleGuideFrame = forwardRef(({ websiteData, selectedPageIndex, hoverColor, clickColor, scale, viewport }, ref) => {
+const StyleGuideFrame = ({ websiteData, selectedPageIndex, hoverColor, clickColor }) => {
 
   const iframeRef = useRef(null);
-
-  const deletedNodesStack = useRef([]);
-
-
-  useImperativeHandle(ref, () => ({
-    deleteElement,
-    undoDelete
-  }));
-
-
-  const deleteElement = () => {
-    if (!currentNode) {
-      return;
-    }
-
-    const iframe = iframeRef.current;
-    const doc = iframe.contentDocument;
-    const targetElement = doc.querySelector(`.${currentNode}`);
-
-    if (targetElement) {
-      deletedNodesStack.current.push({ element: targetElement.outerHTML, parent: targetElement.parentNode });
-      targetElement.remove();
-    } else {
-    }
-  };
-
-  const undoDelete = () => {
-    if (deletedNodesStack.current.length === 0) {
-      return;
-    }
-
-    const lastDeletedNodeInfo = deletedNodesStack.current.pop();
-    lastDeletedNodeInfo.parent.insertAdjacentHTML('beforeend', lastDeletedNodeInfo.element);
-  };
-
+  const [scale, setScale] = useState(1);
 
   const {
     // currentPageIndex,
@@ -297,29 +163,6 @@ const StyleGuideFrame = forwardRef(({ websiteData, selectedPageIndex, hoverColor
     }
 
   }, [currentNode]);
-
-
-  useEffect(() => {
-    // ...existing code
-
-    const handleKeyDown = (e) => {
-      if (e.key === 'Delete') {
-        deleteElement();
-      } else if (e.key === 'z' && (e.ctrlKey || e.metaKey)) {
-        undoDelete();
-      }
-    }
-
-
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [websiteData, selectedPageIndex]);
-
-
 
 
   useEffect(() => {
@@ -458,9 +301,6 @@ const StyleGuideFrame = forwardRef(({ websiteData, selectedPageIndex, hoverColor
       hoverTooltip.style.top = `${boundingRect.top + iframe.contentWindow.pageYOffset}px`;
     };
 
-
-
-
     const updateClickTooltip = (event) => {
       const targetElement = event.target;
 
@@ -480,8 +320,6 @@ const StyleGuideFrame = forwardRef(({ websiteData, selectedPageIndex, hoverColor
       }, function (err) {
         console.warn('Could not copy text: ', err);
       });
-
-
 
 
       clickTooltip.style.display = 'flex';
@@ -516,11 +354,6 @@ const StyleGuideFrame = forwardRef(({ websiteData, selectedPageIndex, hoverColor
 
 
 
-
-
-
-
-
     return () => {
       if (iframe && iframe.contentWindow) {
         iframe.contentWindow.removeEventListener('mousemove', updateHoverTooltip);
@@ -535,53 +368,75 @@ const StyleGuideFrame = forwardRef(({ websiteData, selectedPageIndex, hoverColor
 
   }, [websiteData, selectedPageIndex]);
 
+  const containerStyle = {
+    code: {
+      width: '78vw',
+      height: '100vh',
+      position: 'relative',
 
+    },
+    flow: {
+      width: '100%',
+      height: '100%',
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    }
 
+  }
+
+  const iframeStyle = {
+    code: {
+      width: '1280px',
+      height: `calc((100% - 50px) / ${scale})`
+    },
+    flow: {
+      width: '100%',
+      height: '100%'
+    }
+  }
+
+  const currentStyle = containerStyle[mode] || containerStyle['code'];
+  const iframeStyleCurrent = iframeStyle[mode] || iframeStyle['code'];
 
 
 
   return (
     <>
+      <div style={{ ...currentStyle }} >
+        {mode === 'code' &&
+          (<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: '12px', position: 'absolute', top: '4px', left: '8px', zIndex: '200000000000000', gap: '12px', height: '100%' }}>
+            <RippleButton callBack={() => setScale(scale => Math.min(1, scale - 0.05))} padding="12px" outlineColor='grey' shape="square">
+              <Icon id="minus" color="grey" size={16} onClick={() => setScale(scale => Math.min(1, scale - 0.1))} />
+            </RippleButton>
+
+            <RippleButton callBack={() => setScale(scale => Math.min(1, scale + 0.05))} padding="12px" outlineColor='grey' shape="square">
+              <Icon id="add" color="grey" size={16} onClick={() => setScale(scale => Math.min(1, scale + 0.1))} />
+            </RippleButton>
+
+          </div>
+          )}
 
 
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        marginTop: '10px',
-        width: mode === 'flow' ? 'auto' : '78vw',
-        overflow: 'auto'
-      }}
-      >
-        <div className={styles['Styleguide__container']}
+        <iframe
+          ref={iframeRef}
+          title="FlowKit Styleguide Reference"
           style={{
-            width: viewport,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'relative'
+
+            height: `calc((100% - 50px) / ${scale})`, // Adjust the height based on scale
+            transformOrigin: 'center',
+            ...iframeStyleCurrent,
+
+            transform: `scale(${scale})`,
+            overflowY: 'auto', // Enable vertical scrolling
           }}
-        >
-          <iframe
-            ref={iframeRef}
-            title="FlowKit Styleguide Reference"
-            style={{
-              width: viewport,
-              height: `calc((100% - 50px) / ${scale})`,
-              position: 'absolute', // Position iframe absolutely to ensure it stays centered
-              top: '50%',
-              left: '50%',
-              transform: `translate(-50%, -50%) scale(${scale})`,
-              overflowY: 'auto', // Enable vertical scrolling
-            }}
-          />
-        </div>
+        />
       </div>
+
     </>
   );
-
-});
+};
 
 
 

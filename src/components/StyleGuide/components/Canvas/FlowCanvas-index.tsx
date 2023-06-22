@@ -84,7 +84,7 @@ const CustomNodeFlow = forwardRef((props, ref) => {
 
           const color = event.target.value;
 
-          setBgColor(color);
+          // setBgColor(color);
 
           return {
             ...node,
