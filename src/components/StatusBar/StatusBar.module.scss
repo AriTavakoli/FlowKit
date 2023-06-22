@@ -28,6 +28,7 @@
 
 .statusBar__container {
   display: flex;
+  background-color: var(--primary-bg);
   flex-direction: row;
   gap: 4px;
   position: relative;
