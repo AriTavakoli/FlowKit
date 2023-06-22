@@ -1,7 +1,6 @@
 import { Image, WebsiteData } from "@Types/ExportedWebsiteAssets/ExportedAssets";
 import React, { useEffect, useState } from "react";
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
-import CustomSpinner from "../utilComponents/CustomSpinner/customSpinner-index";
 import AssetDownloader from "./components/AssetDownloader";
 
 
@@ -59,6 +58,9 @@ function AssetManager() {
       }
     }
   }, [websiteData]);
+
+
+  if (!imageData) return (<div>Webflow export loading...</div>);
 
 
   return (

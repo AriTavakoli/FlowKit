@@ -104,7 +104,6 @@ const App = ({ styleSheet, css }) => {
               )}
             </TabParent>
             <StatusBar message="Example Message" options={statusBarOptions} setActiveModal={setActiveModal} showModal={showModal} setShowModal={setShowModal} />
-
             {activeModal && <StatusBarModal featureType={activeModal} showModal={showModal} setShowModal={setShowModal} />}
 
           </div >
