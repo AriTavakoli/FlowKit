@@ -1,0 +1,23 @@
+
+
+
+.FlowNav {
+
+  &-wrapper {
+    display: flex;
+    width: 100px;
+    height: auto;
+    gap:8px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    z-index: 1000;
+
+  }
+
+
+}

@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Handle, Position } from 'reactflow';
+import { Handle, Position, NodeResizer } from 'reactflow';
 import { useStyleguideContext } from '../../../context/StyleguideReferenceContext';
 import StyleGuideReference from '../../StyleGuideReference';
 
@@ -14,18 +14,18 @@ const FrameNode = memo(({ data, isConnectable }) => {
 
   return (
     <>
-
-      <Handle
+      {/* <NodeResizer minWidth={100} minHeight={30} /> */}
+      {/* <Handle
         type="target"
         position={Position.Left}
         style={{ background: '#555' }}
         onConnect={(params) => console.log('handle onConnect', params)}
         isConnectable={isConnectable}
-      />
-      <div>
-        Custom Color Picker Node: <strong>{data.color}</strong>
-      </div>
-      <Handle
+      /> */}
+      {/* <div>
+        <strong></strong>
+      </div> */}
+      {/* <Handle
         type="source"
         position={Position.Right}
         id="a"
@@ -39,7 +39,7 @@ const FrameNode = memo(({ data, isConnectable }) => {
         style={{ bottom: 10, top: 'auto', background: '#555' }}
         isConnectable={isConnectable}
 
-      />
+      /> */}
      <StyleGuideReference websiteData={websiteData as WebsiteData} />
 
     </>

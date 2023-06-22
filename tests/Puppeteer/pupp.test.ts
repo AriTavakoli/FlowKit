@@ -1,11 +1,14 @@
 //@ts-nocheck
-import puppeteer, { Browser, Page } from 'puppeteer';
-import { createRunner, PuppeteerRunnerExtension } from '@puppeteer/replay';
 import * as path from 'path';
+import puppeteer, { Browser, Page } from 'puppeteer';
 import { expect, jest, test, describe, it } from '@jest/globals';
+import { config } from 'dotenv';
+config();
+
 const EXTENSION_PATH = path.resolve(__dirname, '../../build');
-const extensionName = "FlowKit";
-const extensionId = "cpcmiaelekjadffdchmfifphokbblkca";
+
+//  Make sure to get the latest extension id
+const extensionId = process.env.EXTENSION_ID;
 
 
 
@@ -22,40 +25,97 @@ describe('Puppeteer', () => {
       ],
     });
     page = await browser.newPage();
-    // await page.goto('https://webflow.com/design/cwbfoundation');
-    await page.goto(`chrome://extensions//${extensionId}/popup.html`);
+    await page.goto(`chrome-extension://${extensionId}/newtab.html`);
+  });
 
+  it('should click the Editor tab and check for all rendered init elements', async () => {
+    await page.waitForTimeout(2000); // Wait for 2 seconds
+    const tabs = await page.$$('.Tabs__Tab___p4SAj');
+    if (tabs.length > 0) {
+      await tabs[1].click();
+
+      // After clicking on the tab, wait for an element on the new page to load.
+      const selector = '.dropdown-button___Eszaj';
+
+      await page.waitForSelector(selector);
+
+      // Check if the element is indeed there.
+      const element = await page.$(selector);
+      expect(element).not.toBeNull();
+
+      // Wait for the main template element to be rendered
+      const mainTemplateSelector = '.template___iDsXo';
+      await page.waitForSelector(mainTemplateSelector);
+
+      // Check if the main template is there
+      const mainTemplateElement = await page.$(mainTemplateSelector);
+      expect(mainTemplateElement).not.toBeNull();
+
+      // Check if the child element 'template__topBar___FYRoA' is there
+      const topBarElement = await page.$(`${mainTemplateSelector} .template__topBar___FYRoA`);
+      expect(topBarElement).not.toBeNull();
+
+      // Check if the child element 'control__bar___mnOyB' is there
+      const controlBarElement = await page.$(`${mainTemplateSelector} .control__bar___mnOyB`);
+      expect(controlBarElement).not.toBeNull();
+
+    }
+  });
+
+
+
+  it('should click the Editor tab and check for all rendered init elements', async () => {
+    await page.waitForTimeout(2000); // Wait for 2 seconds
+    const tabs = await page.$$('.Tabs__Tab___p4SAj');
+    if (tabs.length > 0) {
+      await tabs[2].click();
+      await page.waitForTimeout(2000); // Wait for 2 seconds
+
+      // Wait for the container to be rendered
+      const containerSelector = '.container___BY_1b';
+      await page.waitForSelector(containerSelector);
+
+      // Get all the buttons' text and check if "Webflow", "BEM", and "Palette" are there
+      const buttonLabels = await page.$$eval(`${containerSelector} .bubble__title___TMWD9`, nodes => nodes.map(n => n.textContent));
+      expect(buttonLabels).toContain('Webflow');
+      expect(buttonLabels).toContain('BEM');
+
+
+    }
   });
 
 
 
 
 
-  describe('Extension', () => {
-    it('should be installed', async () => {
-      const extension = await page.evaluate((extensionId) => {
-        return chrome.management.get(extensionId);
-      }, extensionId);
+  it('Click on FlowView and check for flow render', async () => {
+    const tabs = await page.$$('.Tabs__Tab___p4SAj');
+    if (tabs.length > 0) {
+      await tabs[0].click();
+      await page.waitForTimeout(2000); // Wait for 2 seconds
 
-      expect(extension).toBeDefined();
-    });
+      // Wait for a specific element to be rendered
+      const elementSelector = '.c-button.c-button--undefined.c-button--square.c-button--outline-grey';
+      await page.waitForSelector(elementSelector);
 
-    it('should click on the element with text "Create tab" in Webflow Designer', async () => {
-      // await page.goto('https://webflow.com/design/cwbfoundation');
-      // await page.waitForSelector('body');
+      // Click the element
+      await page.click(elementSelector);
 
-      // const createTabElement = await page.evaluateHandle(() => {
-      //   const allElements = Array.from(document.querySelectorAll('*'));
-      //   return allElements.find((element) => element.textContent === 'Create tab');
-      // });
+      const element = await page.$('.react-flow');
+      expect(element).not.toBeNull();
+      // Get all the elements that match the given XPath
 
-      // if (createTabElement) {
-      //   await createTabElement.asElement().click();
-      // } else {
-      //   throw new Error('Create tab element not found');
-      // }
+    }
 
-      // Add any necessary assertions here after clicking on the "Create tab" element
-    });
   });
+
+
+
+  afterEach(async () => {
+    // Clean up and close browser after each test
+    await page.close();
+    await browser.close();
+  });
+
+
 });

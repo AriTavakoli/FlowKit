@@ -8,22 +8,20 @@
     "url": "https://github.com/lxieyang/chrome-extension-boilerplate-react.git"
   },
   "scripts": {
+    "build:prod": "npm run build:worker && webpack --config config/prod/webpack.prod.js --mode production",
     "build": "node utils/build.js",
     "dev": "nodemon --exec ts-node server/index.ts --noEmit",
     "start": "node config/utils/webserver.js",
     "build:worker": "npm run build:typescript && npm run build:transferWorker",
     "build:typescript": "esbuild src/pages/Content/Service/worker.ts --bundle --outdir=src/internalDist --platform=node --target=es6 --loader:.js=jsx --loader:.tsx=tsx --sourcemap --define:process.env.NODE_ENV=\"production\"",
-    "build:transferWorker": "esbuild src/internalDist/worker.js --bundle --outfile=dist/workerBundle.js --minify --platform=node --target=node12 --watch",
-    "production": "webpack  --config config/prod/webpack.prod.js",
-    "build:prod": "webpack --config config/prod/webpack.prod.js --mode production",
+    "build:transferWorker": "esbuild src/internalDist/worker.js --bundle --outfile=dist/workerBundle.js --minify --platform=node --target=node12 ",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
-    "test": "jest",
     "replay": "replay recording.json",
     "test:WebflowExporter": "jest ./tests/Export/exporter.test.ts",
     "test:CssParser": "ts-node ./tests/Parser/cssParser.test.ts",
     "test:Blob:BlobGenerator": "jest ./tests/Blob/blobGenerator.test.ts",
-    "test:Puppeteer": "jest ./tests/Puppeteer/pupp.test.ts",
-    "test:Recordings": "npx @puppeteer/replay tests/all-recordings --headless=false"
+    "test:Puppeteer": "jest ./tests/Puppeteer/pupp.test.ts --config=jest.config.js",
+    "test:Recordings": "npx @puppeteer/replay tests/all-recordings --headless=true"
   },
   "dependencies": {
     "@formkit/auto-animate": "^1.0.0-beta.6",
@@ -70,6 +68,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
     "react-hot-toast": "^2.4.0",
     "react-loader-spinner": "^5.3.4",
     "react-loading-skeleton": "^3.1.1",
