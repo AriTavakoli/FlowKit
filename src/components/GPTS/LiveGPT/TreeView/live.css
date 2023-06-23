@@ -12,6 +12,26 @@
 
 }
 
+@keyframes load {
+  0% {
+    background: #ccc;
+    marginTop: 25%;
+    height: 10%;
+  }
+  50% {
+    background: #444;
+    height: 100%;
+    marginTop: 0%;
+  }
+  100% {
+    background: #ccc;
+    height: 10%;
+    marginTop: 25%;
+  }
+}
+
+
+
 
 .nodeName {
   position: relative;
