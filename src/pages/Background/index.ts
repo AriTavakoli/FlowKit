@@ -62,6 +62,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
     (async () => {
       await SettingOps.addStorageItem('accentColor', 'userSettings', '#68BCFD');
+      await SettingOps.setTheme('light');
 
     })();
 

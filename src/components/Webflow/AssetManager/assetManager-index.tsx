@@ -2,7 +2,7 @@ import { Image, WebsiteData } from "@Types/ExportedWebsiteAssets/ExportedAssets"
 import React, { useEffect, useState } from "react";
 import StorageOps from "@src/Utils/LocalStorage/StorageOps";
 import AssetDownloader from "./components/AssetDownloader";
-
+import LoaderSpinner from "@src/Utils/Loading/Loading";
 
 // AssetManager is the parent component for the AssetDownloader component.
 // StorageOps is used to get the website data from the chrome storage.
@@ -60,7 +60,12 @@ function AssetManager() {
   }, [websiteData]);
 
 
-  if (!imageData) return (<div>Webflow export loading...</div>);
+  if (!imageData) {
+    return (
+      <LoaderSpinner />
+    )
+
+  }
 
 
   return (
