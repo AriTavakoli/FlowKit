@@ -14,7 +14,6 @@ import Pallete from './Templates/Palette.json';
 import Webflow from './Templates/Webflow.json';
 import SettingOps from "@Context/Global/classes/SettingsOps";
 
-
 let p;
 const requestUrls = [];
 
@@ -63,6 +62,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
     (async () => {
       await SettingOps.addStorageItem('accentColor', 'userSettings', '#68BCFD');
+      await SettingOps.setTheme('light');
 
     })();
 
@@ -91,12 +91,19 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") {
-    chrome.windows.create({
-      url: chrome.runtime.getURL("popup.html"),  // replace popup.html with your HTML file
-      type: "popup",
-      width: 800,
-      height: 500,
-    });
+
+      Browser.runtime.openOptionsPage();
+      return;
+
+    // if (process.env.NODE_ENV === 'test') {
+    //   chrome.windows.create({
+    //     url: chrome.runtime.getURL("popup.html"),  // replace popup.html with your HTML file
+    //     type: "popup",
+    //     width: 800,
+    //     height: 500,
+    //   });
+    // }
+
   }
 });
 
@@ -278,9 +285,26 @@ Browser.runtime.onConnect.addListener((port) => {
     console.debug("received msg", msg);
     try {
       await generateAnswers(port, msg.question);
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
-      port.postMessage({ error: err.message });
+      let errorMessage = err.message;
+
+      // Attempt to parse the error message as JSON, and handle potential parsing errors
+      let errorDetails;
+      try {
+        errorDetails = JSON.parse(errorMessage);
+      } catch (parseErr) {
+        console.error('Failed to parse error message:', parseErr);
+        port.postMessage({ error: errorMessage });
+        return;
+      }
+
+      // Check if the error details match the specific error about a missing model field
+      if (errorDetails.detail && errorDetails.detail.some(d => d.loc.includes("model") && d.msg === "field required")) {
+        port.postMessage({ error: '  Please select a model in the settings. Hover the bottom right corner to access Tool Bar' });
+      } else {
+        port.postMessage({ error: errorMessage });
+      }
     }
   });
 });

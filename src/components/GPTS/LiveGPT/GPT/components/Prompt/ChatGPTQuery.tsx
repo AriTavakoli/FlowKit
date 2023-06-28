@@ -157,14 +157,14 @@ function ChatGPTQuery(props: Props) {
 
         {done && showTip && (
           <p className="italic mt-2">
-            Enjoy this extension? Give us a 5-star rating at{' '}
-            <a
+            {/* Enjoy this extension? Give us a 5-star rating at{' '} */}
+            {/* <a
               href=""
               target="_blank"
               rel="noreferrer"
             >
               Chrome Web Store
-            </a>
+            </a> */}
           </p>
         )}
       </div>

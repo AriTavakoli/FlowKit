@@ -9,10 +9,11 @@
   align-items: center;
   justify-content: center;
   z-index: 10000000000000000;
-  background-color: #1e1e1e;
+  background-color: var(--primary2-bg);
   border-radius: 10px;
-  border: 1px solid #353535;
+  border: 1px solid  var(--border-color);
   display: flex;
+  color: var(--primary-text);
   padding: 8px;
 }
 

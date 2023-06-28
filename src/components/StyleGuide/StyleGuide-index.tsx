@@ -6,6 +6,7 @@ import CustomNodeFlow from "./components/Canvas/FlowCanvas-index";
 import StyleGuideReference from "./components/StyleGuideReference";
 import WebflowSideBar from "./components/TreeView/Treeview";
 import { useStyleguideContext } from "./context/StyleguideReferenceContext";
+import LoaderSpinner from "@src/Utils/Loading/Loading";
 
 function StyleGuide() {
 
@@ -29,16 +30,24 @@ function StyleGuide() {
     }
   }
 
+
+  useEffect(() => {
+    console.log('%cwebsiteDat', 'color: lightblue; font-size: 44px', websiteData);
+  }, [websiteData]);
+
+
   const [imageData, setImageData] = useState<Image[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     StorageOps.watchForStorageUpdate().then((res) => {
       console.log('res', res);
-      console.log('watcbibng');
+      console.log('watching');
       (async () => {
         let webData = await StorageOps.getWebsiteData();
         if (webData) {
           setWebsiteData(webData as WebsiteData);
+          // setIsLoading(false);
         }
       })();
     });
@@ -50,6 +59,7 @@ function StyleGuide() {
       let webData = await StorageOps.getWebsiteData();
       if (webData) {
         setWebsiteData(webData as WebsiteData);
+        // setIsLoading(false);
       }
     })();
   }, []);
@@ -60,19 +70,21 @@ function StyleGuide() {
       const images = websiteData?.websiteData?.websiteData?.data?.images;
       if (images) {
         setImageData(images);
+        setIsLoading(false);
       }
     }
   }, [websiteData]);
 
 
-  if (!websiteData) {
+  if (isLoading) {
     return (
-      <span> Exporting WebflowData...</span>
+      <LoaderSpinner />
     )
   }
 
   return (
     <>
+
       <div className={styles['Container']}>
         <div className={styles['sidebar-container']}>
 

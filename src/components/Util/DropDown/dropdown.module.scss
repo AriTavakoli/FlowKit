@@ -26,7 +26,6 @@
   color: var(--secondary-text);
   top : 40px;
   max-height: 200px;
-  overflow : auto;
   margin-bottom: 5px;
   border-radius: 8px;
   border : 1px solid var(--border-color);
@@ -34,6 +33,7 @@
   min-width: 100px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 6000;
+  overflow-y: auto;
 }
 
 .icon__container{

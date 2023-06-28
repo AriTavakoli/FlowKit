@@ -12,6 +12,26 @@
 
 }
 
+@keyframes load {
+  0% {
+    background: #ccc;
+    marginTop: 25%;
+    height: 10%;
+  }
+  50% {
+    background: #444;
+    height: 100%;
+    marginTop: 0%;
+  }
+  100% {
+    background: #ccc;
+    height: 10%;
+    marginTop: 25%;
+  }
+}
+
+
+
 
 .nodeName {
   position: relative;
@@ -497,6 +517,26 @@
   padding-left: 40px;
   background-color: #e3e3e3;
 }
+
+
+.firstNodeName {
+  position: relative;
+  /* background-color: var(--live-class); */
+  border-radius: 4px;
+  color: var(--primary-text);
+  border: 1px solid var(--live-border);
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: fill;
+  font-weight: lighter !important;
+}
+
 
 
 .treeContainer {

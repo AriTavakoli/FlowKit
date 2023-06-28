@@ -23,8 +23,8 @@
   font-size: 24px;
   border-radius: 5px;
   border: 1px solid #353535;
-  background-color: #1e1e1e;
-  color: #fff;
+  background-color: var(--primary2-bg);
+  color: var(--primary-text);
   padding: 8px;
 }
 
@@ -43,7 +43,7 @@
   position: absolute;
   right: 10%;
   font-size: 16px;
-  color: #555555;
+  color: var(--primary-text);
 
 }
 

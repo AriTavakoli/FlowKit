@@ -78,9 +78,9 @@ export const TabParent = (props) => {
     return (
       <div className="dropdown">
         <div className="loading">
+          {/* <SkeletonRow />
           <SkeletonRow />
-          <SkeletonRow />
-          <SkeletonRow />
+          <SkeletonRow /> */}
         </div>
       </div>
     );

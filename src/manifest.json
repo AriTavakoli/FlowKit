@@ -1,4 +1,5 @@
 {
+  "version": "1.0.2",
   "manifest_version": 3,
   "name": "FlowKit",
   "description": "FlowKit",
@@ -30,9 +31,7 @@
   "icons": {
     "129": "icon-129.png"
   },
-  "chrome_url_overrides": {
-    "newtab": "newtab.html"
-  },
+
   "content_scripts": [
     {
       "matches": [
