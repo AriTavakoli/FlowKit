@@ -4,14 +4,11 @@
 Welcome to my project!
 
 ## Project Demo
+[Check out the Docs](https://flow-kit-docs.vercel.app/)
 
-<div align="center">
-  <p align="center">
-    <a href="https://www.youtube.com/watch?v=SbVq1tG4xOE">
-      <img src="https://img.youtube.com/vi/SbVq1tG4xOE/0.jpg" alt="Project Demo">
-    </a>
-  </p>
-</div>
+
+
+
 
 <!-- Rest of your README content -->
 This document provides instructions on how to set up and run the project. Please follow the steps below in order to ensure a smooth execution.
