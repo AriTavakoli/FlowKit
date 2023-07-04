@@ -1,0 +1,66 @@
+{
+  "version": "1.0.2",
+  "manifest_version": 3,
+  "name": "FlowKit",
+  "description": "FlowKit",
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.bundle.js"
+  },
+  "permissions": [
+    "*://webflow.com/*",
+    "webRequest",
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "host_permissions": [
+    "*://webflow.com/design/*",
+    "*://*.webflow.com/*",
+    "https://*.openai.com/"
+  ],
+
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "129": "icon-129.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://webflow.com/design/*"
+      ],
+      "js": [
+        "contentScript.bundle.js"
+      ]
+    }
+
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icon-34.png",
+        "Sprite.svg"
+      ],
+      "matches": []
+    },
+    {
+      "resources": [
+        "workerBundle.js"
+      ],
+      "matches": [
+        "*://webflow.com/*",
+        "*://*.webflow.com/*"
+      ]
+    }
+  ]
+
+}

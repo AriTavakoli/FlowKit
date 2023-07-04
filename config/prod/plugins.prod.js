@@ -45,12 +45,10 @@ module.exports = [
   new CopyWebpackPlugin({
     patterns: [
       {
-        from: path.resolve(__dirname, '../../src/manifest.json'),
+        from: path.resolve(__dirname, process.env.NODE_ENV === 'development' ? '../../config/dev/manifest.json' : '../../config/prod/manifest.json'),
         to: path.resolve(__dirname, '../../build'),
         force: true,
-        // noErrorOnMissing: true,
         transform: function (content, path) {
-          // generates the manifest file using the package.json informations
           return Buffer.from(
             JSON.stringify({
               description: process.env.npm_package_description,
@@ -62,6 +60,7 @@ module.exports = [
       },
     ],
   }),
+
   new CopyWebpackPlugin({
     patterns: [
       {
